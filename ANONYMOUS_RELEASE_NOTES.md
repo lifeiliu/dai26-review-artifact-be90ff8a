@@ -1,7 +1,7 @@
 # Anonymous Review Release Notes
 
 This directory is a generated release boundary. It contains source, protocols,
-tests, and saved JSON/JSONL/CSV/Markdown evidence, including E-B24--E-B27.
+tests, and saved JSON/JSONL/CSV/Markdown evidence, including E-B24--E-B28.
 
 The release builder deterministically replaces author emails, local user/home
 paths, hostnames, public IP addresses, cloud resource IDs, AWS account IDs,

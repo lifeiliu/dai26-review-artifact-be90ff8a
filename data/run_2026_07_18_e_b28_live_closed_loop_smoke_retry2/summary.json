@@ -1,0 +1,1835 @@
+{
+  "analysis": {
+    "clean_recovery_qualification": null,
+    "formal_task_run_count": 6,
+    "invalid_formal_run_ids": [],
+    "mode": "smoke",
+    "no_exposure_run_ids": [],
+    "normal_post_barrier_effect_commits": 0,
+    "recovery_qualification_count": 0,
+    "selective_post_barrier_effect_commits_by_service": {
+      "filesystem": 18,
+      "postgres": 13
+    },
+    "support_gate": "SUPPORTED_BOTH_SERVICES",
+    "valid_formal_task_run_count": 6,
+    "valid_recovery_qualification_count": 0
+  },
+  "experiment": "E-B28",
+  "finished_unix_ns": 1784392339768838000,
+  "infrastructure": {
+    "keycloak_container_id": "eccde66b81214487ae598cc94b5383a1667f9cce15bb405100cf10910f31ecda",
+    "keycloak_postgres_container_id": "9af091eba77895b24b74404ef489453559e91a1cc827e0ad500968da6a519972",
+    "mcpmark_postgres_ready": true,
+    "streams": {
+      "receiver-a": {
+        "audience": [
+          "receiver-a/dfc970eb-3abf-4681-b886-0dd5b2d98bd4"
+        ],
+        "createdAt": 1784391796,
+        "delivery": {
+          "endpoint_url": "http://host.docker.internal:19002/receiver-a",
+          "method": "urn:ietf:rfc:8935"
+        },
+        "description": "E-B28 live closed-loop stream for receiver-a",
+        "eventsDelivered": [
+          "CaepSessionRevoked"
+        ],
+        "eventsRequested": [
+          "CaepSessionRevoked"
+        ],
+        "eventsSupported": [
+          "CaepCredentialChange",
+          "CaepSessionRevoked"
+        ],
+        "managedBy": "KEYCLOAK",
+        "status": "enabled",
+        "streamId": "dfc970eb-3abf-4681-b886-0dd5b2d98bd4",
+        "updatedAt": 1784391796
+      },
+      "receiver-b": {
+        "audience": [
+          "receiver-b/c297979f-f510-415a-acec-797ff6acd9d2"
+        ],
+        "createdAt": 1784391796,
+        "delivery": {
+          "endpoint_url": "http://host.docker.internal:19002/receiver-b",
+          "method": "urn:ietf:rfc:8935"
+        },
+        "description": "E-B28 live closed-loop stream for receiver-b",
+        "eventsDelivered": [
+          "CaepSessionRevoked"
+        ],
+        "eventsRequested": [
+          "CaepSessionRevoked"
+        ],
+        "eventsSupported": [
+          "CaepCredentialChange",
+          "CaepSessionRevoked"
+        ],
+        "managedBy": "KEYCLOAK",
+        "status": "enabled",
+        "streamId": "c297979f-f510-415a-acec-797ff6acd9d2",
+        "updatedAt": 1784391796
+      }
+    }
+  },
+  "manifest_sha256": "9786f7a86f2dedc9a52ea18da56a2fa898cfa060fcad289bd9f74564e3f10885",
+  "mode": "smoke",
+  "rows": [
+    {
+      "arm": "active_sanity",
+      "command": [
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/.venv/bin/python",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/experiments/e_b28_live_closed_loop/run_task.py",
+        "--mcpmark-root",
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark",
+        "--output-dir",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_smoke_retry2/tasks/e-b28-t001-r1-active_sanity-filesystem-desktop-project_management",
+        "--target",
+        "filesystem/desktop/project_management",
+        "--arm",
+        "active_sanity",
+        "--repetition",
+        "1",
+        "--run-id",
+        "e-b28-t001-r1-active_sanity-filesystem-desktop-project_management"
+      ],
+      "finished_unix_ns": 1784391878947478000,
+      "index": 1,
+      "qualification": false,
+      "repetition": 1,
+      "returncode": 0,
+      "run_id": "e-b28-t001-r1-active_sanity-filesystem-desktop-project_management",
+      "started_unix_ns": 1784391796866189000,
+      "summary": {
+        "agent_execution_time": 79.36208319664001,
+        "agent_implementation": "unmodified MCPMarkAgent",
+        "arm": "active_sanity",
+        "benchmark_execution_result": {
+          "error_message": null,
+          "success": false,
+          "verification_error": "Verification failed with no error message",
+          "verification_output": "\ud83d\udd0d Verifying Desktop 2 Project Management Task: File Reorganization...\n\n--- Organized Projects Directory Exists ---\n\u2705 'organized_projects' directory exists\n\n--- Directory Structure ---\n\u2705 All required directory structure created correctly\n\n--- Python Files in ML Projects ---\n\u274c Missing Python files in ml_projects: ['study_notes.py', 'model.py', 'data_analysis.py', 'playlist_manager.py']\n\n--- CSV Files in Data Analysis ---\n\u274c Missing CSV files in data_analysis: ['learning_progress.csv', 'weekly_schedule.csv', 'results_record.csv', 'september_summary.csv', 'data.csv', 'favorite_songs.csv', 'travel_itinerary.csv']\n\n--- Learning Markdown Files in Resources ---\n\u274c Missing learning markdown files in resources: ['learning_roadmap.md', 'research_topics.md', 'experiment_summary.md', 'exp_record.md', 'README.md', 'analysis_report.md', 'learning_goals.md']\n\n--- Entertainment Markdown Files in Entertainment ---\n\u274c Missing entertainment markdown files in entertainment: ['entertainment_planner.md', 'travel_bucket_list.md']\n\n--- Music Collection Files in Collections ---\n\u2705 All music collection markdown files moved to personal/collections\n\n--- Progress Tracking Empty ---\n\u2705 progress_tracking directory is correctly empty\n\n--- Project Structure File Exists ---\n\u2705 'project_structure.md' file exists\n\n--- File Counts ---\n\u274c Incorrect file counts: ['experiments/ml_projects: expected 6, got 2', 'experiments/data_analysis: expected 7, got 0', 'learning/resources: expected 7, got 1', 'personal/entertainment: expected 3, got 1']\n\n==================================================\n\u274c Task verification: FAIL\n"
+        },
+        "completion_monitor": {
+          "post_barrier_vectors": 0,
+          "status": "NOT_APPLICABLE_ACTIVE_SANITY"
+        },
+        "experiment": "E-B28",
+        "exposure_status": "EXPOSED",
+        "finished_unix_ns": 1784391878514677000,
+        "infrastructure_error": false,
+        "intervention": null,
+        "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+        "messages_relative_path": "mcpmark/e-b28-t001-r1-active_sanity-filesystem-desktop-project_management/openai/gpt-4-1-mini__filesystem/run-1/desktop__project_management/messages.json",
+        "meta_relative_path": "mcpmark/e-b28-t001-r1-active_sanity-filesystem-desktop-project_management/openai/gpt-4-1-mini__filesystem/run-1/desktop__project_management/meta.json",
+        "model": "openai/gpt-4.1-mini",
+        "post_barrier_allowed_calls": 0,
+        "post_barrier_call_count": 0,
+        "post_barrier_denied_calls": 0,
+        "post_barrier_effect_commits": 0,
+        "post_barrier_mutating_attempts": 0,
+        "post_barrier_tool_switches": 9,
+        "protocol_version": "e-b28-live-closed-loop-v1",
+        "repetition": 1,
+        "run_id": "e-b28-t001-r1-active_sanity-filesystem-desktop-project_management",
+        "service": "filesystem",
+        "stop_reason": "final_role=assistant;has_tool_calls=false;content_present=true",
+        "target": "filesystem/desktop/project_management",
+        "task_success": false,
+        "token_usage": {
+          "input_tokens": 229088,
+          "output_tokens": 2335,
+          "reasoning_tokens": 0,
+          "total_tokens": 231423
+        },
+        "tool_call_count": 48,
+        "trace_sha256": "acddf4744e4a823fb34139c13c89c07f7ca443723c905b0c37be46a88643ef5c",
+        "trace_valid": true,
+        "turn_count": 38
+      },
+      "summary_present": true,
+      "target": "filesystem/desktop/project_management",
+      "timed_out": false,
+      "trace_valid": true
+    },
+    {
+      "arm": "normal_c4",
+      "command": [
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/.venv/bin/python",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/experiments/e_b28_live_closed_loop/run_task.py",
+        "--mcpmark-root",
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark",
+        "--output-dir",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_smoke_retry2/tasks/e-b28-t002-r1-normal_c4-filesystem-desktop-project_management",
+        "--target",
+        "filesystem/desktop/project_management",
+        "--arm",
+        "normal_c4",
+        "--repetition",
+        "1",
+        "--run-id",
+        "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management"
+      ],
+      "finished_unix_ns": 1784391917612131000,
+      "index": 2,
+      "qualification": false,
+      "repetition": 1,
+      "returncode": 0,
+      "run_id": "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management",
+      "started_unix_ns": 1784391878959225000,
+      "summary": {
+        "agent_execution_time": 36.25305914878845,
+        "agent_implementation": "unmodified MCPMarkAgent",
+        "arm": "normal_c4",
+        "benchmark_execution_result": {
+          "error_message": null,
+          "success": false,
+          "verification_error": "Traceback (most recent call last):\n  File \"/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/tasks/filesystem/standard/desktop/project_management/verify.py\", line 286, in <module>\n    main()\n  File \"/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/tasks/filesystem/standard/desktop/project_management/verify.py\", line 272, in main\n    if not verify_func(test_dir):\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/tasks/filesystem/standard/desktop/project_management/verify.py\", line 197, in verify_progress_tracking_empty\n    files_in_progress = list(progress_dir.iterdir())\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py\", line 931, in iterdir\n    for name in os.listdir(self):\n                ^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/.mcpmark_backups/backup_filesystem_desktop_project_management_59791/organized_projects/learning/progress_tracking'\n",
+          "verification_output": "\ud83d\udd0d Verifying Desktop 2 Project Management Task: File Reorganization...\n\n--- Organized Projects Directory Exists ---\n\u274c 'organized_projects' directory not found\n\n--- Directory Structure ---\n\u274c Missing or invalid directories: ['experiments', 'experiments/ml_projects', 'experiments/data_analysis', 'learning', 'learning/progress_tracking', 'learning/resources', 'personal', 'personal/entertainment', 'personal/collections']\n\n--- Python Files in ML Projects ---\n\u274c Missing Python files in ml_projects: ['study_notes.py', 'model.py', 'data_analysis.py', 'travel_calculator.py', 'inventory.py', 'playlist_manager.py']\n\n--- CSV Files in Data Analysis ---\n\u274c Missing CSV files in data_analysis: ['learning_progress.csv', 'weekly_schedule.csv', 'results_record.csv', 'september_summary.csv', 'data.csv', 'favorite_songs.csv', 'travel_itinerary.csv']\n\n--- Learning Markdown Files in Resources ---\n\u274c Missing learning markdown files in resources: ['learning_roadmap.md', 'research_topics.md', 'experiment_summary.md', 'exp_record.md', 'README.md', 'analysis_report.md', 'learning_goals.md']\n\n--- Entertainment Markdown Files in Entertainment ---\n\u274c Missing entertainment markdown files in entertainment: ['gaming_schedule.md', 'entertainment_planner.md', 'travel_bucket_list.md']\n\n--- Music Collection Files in Collections ---\n\u274c Missing music collection markdown files in collections: music_collection.md\n\n--- Progress Tracking Empty ---\n"
+        },
+        "completion_monitor": {
+          "complete_for_bound": true,
+          "construction": "retrospective bounded monitor over the actual post-barrier call population",
+          "contract_version": "c0-c5-bounded-v2",
+          "event_id": "9c0a1776-7f31-ebdb-37a2-578ecd76d47b",
+          "expected_gateway_ids": [
+            "g-e-b28-agent-tool"
+          ],
+          "expected_vector_ids": [
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-1",
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-2",
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-3",
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-4",
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-5",
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-6"
+          ],
+          "highest_stage": "C5_EFFECTS_PREVENTED",
+          "jti": "9c0a1776-7f31-ebdb-37a2-578ecd76d47b",
+          "missing_gateway_ids": [],
+          "missing_vector_ids": [],
+          "observed_vector_ids": [
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-1",
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-2",
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-3",
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-4",
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-5",
+            "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management:call-6"
+          ],
+          "post_barrier_vectors": 6,
+          "receipt_gateway_ids": [
+            "g-e-b28-agent-tool"
+          ],
+          "status": "COMPLETE_FOR_BOUND",
+          "violating_vector_ids": [],
+          "window_closed_at_ns": 1784391914076476000,
+          "window_deadline_ns": 1784391914076476000,
+          "window_start_ns": 1784391911860659000
+        },
+        "experiment": "E-B28",
+        "exposure_status": "EXPOSED",
+        "finished_unix_ns": 1784391917265089000,
+        "infrastructure_error": false,
+        "intervention": {
+          "arm": "normal_c4",
+          "barrier_completed_unix_ns": 1784391911849452000,
+          "barrier_started_unix_ns": 1784391885681308000,
+          "c2_transport_acknowledged": true,
+          "c3_receiver_persisted": true,
+          "c4_gateway_enforced": true,
+          "category_id": "desktop",
+          "event_jti": "9c0a1776-7f31-ebdb-37a2-578ecd76d47b",
+          "event_type": "revocation_intervention",
+          "event_unix_ns": 1784391911849552000,
+          "event_wall_time": "2026-07-18T16:25:11.849484+00:00",
+          "intervention_valid": true,
+          "logout_http_status": 204,
+          "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+          "protocol_version": "e-b28-live-closed-loop-v1",
+          "receiver_jtis": {
+            "receiver-a": "bf3e87bb-21dd-1280-dc1a-b375a635d952",
+            "receiver-b": "9c0a1776-7f31-ebdb-37a2-578ecd76d47b"
+          },
+          "receiver_state": {
+            "arm": "normal_c4",
+            "attempt_count": 2,
+            "attempts": [
+              {
+                "attempt_id": 1,
+                "authorization_valid": true,
+                "body_sha256": "4e19fd07e14022c297a54c4ecd36ea153192bf9aec23a55d1aaf6f22f26a18e2",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiJiZjNlODdiYi0yMWRkLTEyODAtZGMxYS1iMzc1YTYzNWQ5NTIiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTE4ODYsImF1ZCI6InJlY2VpdmVyLWEvZGZjOTcwZWItM2FiZi00NjgxLWI4ODYtMGRkNWIyZDk4YmQ0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkxODg2LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJHQjQyZ1l1UFE2Mjc2T0tYM3VHRnQzM0gifX0sInR4biI6IjM2OGRiODBlLWU3N2ItNDZhMC04ZjEwLTM0YTA1Nzk1OTAyOSJ9.FcoT2zou_21iW-WzgIJh5udbf3qwaDrsOBoZsLaJIg5ilc7GDuQNcPktvcFoHyFqv_06Qh40nj07UeaJHEQdmjb0MxEBCfCTKDELzBvPI9d3GBEwDR1kDTWo-Hkxq4EqM0Ke-yBSgsDKBkTD0y2a26wQlsdzvMy_Ie5jfvwVLdAa88JHrJ9hxaov-hjDC9VEs3VgZqmvPW9zpmxehmvB8Rlyw_vaB0MfYbn6ZC3GOepQsJEmSpnVsjwX5dwU2bgR2bFTAi1Ru-U0NEtg5tqCoxtRFqqZu4Oiis_tjVKG3Cpzvhb64XA68FFvGWM35DJdts3cL3GlsEtHQpq_f0PIGQ",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "bf3e87bb-21dd-1280-dc1a-b375a635d952",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784391911640407000,
+                "payload": {
+                  "aud": "receiver-a/dfc970eb-3abf-4681-b886-0dd5b2d98bd4",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784391886,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784391886,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "bf3e87bb-21dd-1280-dc1a-b375a635d952",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "GB42gYuPQ6276OKX3uGFt33H"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "368db80e-e77b-46a0-8f10-34a057959029"
+                },
+                "receiver": "receiver-a",
+                "run_id": "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management",
+                "session_id": "GB42gYuPQ6276OKX3uGFt33H"
+              },
+              {
+                "attempt_id": 2,
+                "authorization_valid": true,
+                "body_sha256": "22401f8a7fe82c3f4e15d62d2d4f22046082e7ae0bfe003aa7f47bc447061019",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiI5YzBhMTc3Ni03ZjMxLWViZGItMzdhMi01NzhlY2Q3NmQ0N2IiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTE4ODYsImF1ZCI6InJlY2VpdmVyLWIvYzI5Nzk3OWYtZjUxMC00MTVhLWFjZWMtNzk3ZmY2YWNkOWQyIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkxODg2LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJHQjQyZ1l1UFE2Mjc2T0tYM3VHRnQzM0gifX0sInR4biI6IjI3ODVjNDM5LTA2YTQtNGE2Ni1hYjRkLTU3OTE0M2ZlOTU5MiJ9.cK4cBMDgLDv95ftJN8Y6_xsz1MsID9JjxDzqcC4HPpqv0G96pAEcI8kb81g67KB0wg9zKk6nNKAPojcVFEK4vk1ph4DlCs5PrmIWDjjRdQWn7e6BL4JUOCdGvPOiBwnUWf3dwoqzzfUl8G6J7AlGKeCclN-HNJAL-syaGiajWEMAWUBxY95t3rV3LOCIIH-3N62uyYOBN5YVts756JulErtmkOGKFnMj9xbYSn0--3G8N3Lgur8te6SGqaY20MbwrCai0s-So6e_VIKDpYig46XOZP1V38RLoWpUoJVR72gYD1vjoV4faJnXkn1h21obxmjbc-hhW5W8gQ9Ac1C8sg",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "9c0a1776-7f31-ebdb-37a2-578ecd76d47b",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784391911664653000,
+                "payload": {
+                  "aud": "receiver-b/c297979f-f510-415a-acec-797ff6acd9d2",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784391886,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784391886,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "9c0a1776-7f31-ebdb-37a2-578ecd76d47b",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "GB42gYuPQ6276OKX3uGFt33H"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "2785c439-06a4-4a66-ab4d-579143fe9592"
+                },
+                "receiver": "receiver-b",
+                "run_id": "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management",
+                "session_id": "GB42gYuPQ6276OKX3uGFt33H"
+              }
+            ],
+            "matching_attempts": {
+              "receiver-a": {
+                "attempt_id": 1,
+                "authorization_valid": true,
+                "body_sha256": "4e19fd07e14022c297a54c4ecd36ea153192bf9aec23a55d1aaf6f22f26a18e2",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiJiZjNlODdiYi0yMWRkLTEyODAtZGMxYS1iMzc1YTYzNWQ5NTIiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTE4ODYsImF1ZCI6InJlY2VpdmVyLWEvZGZjOTcwZWItM2FiZi00NjgxLWI4ODYtMGRkNWIyZDk4YmQ0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkxODg2LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJHQjQyZ1l1UFE2Mjc2T0tYM3VHRnQzM0gifX0sInR4biI6IjM2OGRiODBlLWU3N2ItNDZhMC04ZjEwLTM0YTA1Nzk1OTAyOSJ9.FcoT2zou_21iW-WzgIJh5udbf3qwaDrsOBoZsLaJIg5ilc7GDuQNcPktvcFoHyFqv_06Qh40nj07UeaJHEQdmjb0MxEBCfCTKDELzBvPI9d3GBEwDR1kDTWo-Hkxq4EqM0Ke-yBSgsDKBkTD0y2a26wQlsdzvMy_Ie5jfvwVLdAa88JHrJ9hxaov-hjDC9VEs3VgZqmvPW9zpmxehmvB8Rlyw_vaB0MfYbn6ZC3GOepQsJEmSpnVsjwX5dwU2bgR2bFTAi1Ru-U0NEtg5tqCoxtRFqqZu4Oiis_tjVKG3Cpzvhb64XA68FFvGWM35DJdts3cL3GlsEtHQpq_f0PIGQ",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "bf3e87bb-21dd-1280-dc1a-b375a635d952",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784391911640407000,
+                "payload": {
+                  "aud": "receiver-a/dfc970eb-3abf-4681-b886-0dd5b2d98bd4",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784391886,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784391886,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "bf3e87bb-21dd-1280-dc1a-b375a635d952",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "GB42gYuPQ6276OKX3uGFt33H"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "368db80e-e77b-46a0-8f10-34a057959029"
+                },
+                "receiver": "receiver-a",
+                "run_id": "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management",
+                "session_id": "GB42gYuPQ6276OKX3uGFt33H"
+              },
+              "receiver-b": {
+                "attempt_id": 2,
+                "authorization_valid": true,
+                "body_sha256": "22401f8a7fe82c3f4e15d62d2d4f22046082e7ae0bfe003aa7f47bc447061019",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiI5YzBhMTc3Ni03ZjMxLWViZGItMzdhMi01NzhlY2Q3NmQ0N2IiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTE4ODYsImF1ZCI6InJlY2VpdmVyLWIvYzI5Nzk3OWYtZjUxMC00MTVhLWFjZWMtNzk3ZmY2YWNkOWQyIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkxODg2LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJHQjQyZ1l1UFE2Mjc2T0tYM3VHRnQzM0gifX0sInR4biI6IjI3ODVjNDM5LTA2YTQtNGE2Ni1hYjRkLTU3OTE0M2ZlOTU5MiJ9.cK4cBMDgLDv95ftJN8Y6_xsz1MsID9JjxDzqcC4HPpqv0G96pAEcI8kb81g67KB0wg9zKk6nNKAPojcVFEK4vk1ph4DlCs5PrmIWDjjRdQWn7e6BL4JUOCdGvPOiBwnUWf3dwoqzzfUl8G6J7AlGKeCclN-HNJAL-syaGiajWEMAWUBxY95t3rV3LOCIIH-3N62uyYOBN5YVts756JulErtmkOGKFnMj9xbYSn0--3G8N3Lgur8te6SGqaY20MbwrCai0s-So6e_VIKDpYig46XOZP1V38RLoWpUoJVR72gYD1vjoV4faJnXkn1h21obxmjbc-hhW5W8gQ9Ac1C8sg",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "9c0a1776-7f31-ebdb-37a2-578ecd76d47b",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784391911664653000,
+                "payload": {
+                  "aud": "receiver-b/c297979f-f510-415a-acec-797ff6acd9d2",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784391886,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784391886,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "9c0a1776-7f31-ebdb-37a2-578ecd76d47b",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "GB42gYuPQ6276OKX3uGFt33H"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "2785c439-06a4-4a66-ab4d-579143fe9592"
+                },
+                "receiver": "receiver-b",
+                "run_id": "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management",
+                "session_id": "GB42gYuPQ6276OKX3uGFt33H"
+              }
+            },
+            "receiver_b_action": "forward",
+            "registered_at_ns": 1784391878956904000,
+            "run_id": "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management"
+          },
+          "repetition": 1,
+          "run_id": "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management",
+          "service": "filesystem",
+          "session_id": "GB42gYuPQ6276OKX3uGFt33H",
+          "signature_verification": {
+            "receiver-a": {
+              "algorithm": "RS256",
+              "jti": "bf3e87bb-21dd-1280-dc1a-b375a635d952",
+              "key_id": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+              "verified": true
+            },
+            "receiver-b": {
+              "algorithm": "RS256",
+              "jti": "9c0a1776-7f31-ebdb-37a2-578ecd76d47b",
+              "key_id": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+              "verified": true
+            }
+          },
+          "task_id": "project_management"
+        },
+        "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+        "messages_relative_path": "mcpmark/e-b28-t002-r1-normal_c4-filesystem-desktop-project_management/openai/gpt-4-1-mini__filesystem/run-1/desktop__project_management/messages.json",
+        "meta_relative_path": "mcpmark/e-b28-t002-r1-normal_c4-filesystem-desktop-project_management/openai/gpt-4-1-mini__filesystem/run-1/desktop__project_management/meta.json",
+        "model": "openai/gpt-4.1-mini",
+        "post_barrier_allowed_calls": 0,
+        "post_barrier_call_count": 6,
+        "post_barrier_denied_calls": 6,
+        "post_barrier_effect_commits": 0,
+        "post_barrier_mutating_attempts": 5,
+        "post_barrier_tool_switches": 1,
+        "protocol_version": "e-b28-live-closed-loop-v1",
+        "repetition": 1,
+        "run_id": "e-b28-t002-r1-normal_c4-filesystem-desktop-project_management",
+        "service": "filesystem",
+        "stop_reason": "final_role=assistant;has_tool_calls=false;content_present=true",
+        "target": "filesystem/desktop/project_management",
+        "task_success": false,
+        "token_usage": {
+          "input_tokens": 6377,
+          "output_tokens": 212,
+          "reasoning_tokens": 0,
+          "total_tokens": 6589
+        },
+        "tool_call_count": 7,
+        "trace_sha256": "d1f6be4575910edda8c6d209ced3add704538e6c066105011908c057574403b7",
+        "trace_valid": true,
+        "turn_count": 3
+      },
+      "summary_present": true,
+      "target": "filesystem/desktop/project_management",
+      "timed_out": false,
+      "trace_valid": true
+    },
+    {
+      "arm": "selective_c3",
+      "command": [
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/.venv/bin/python",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/experiments/e_b28_live_closed_loop/run_task.py",
+        "--mcpmark-root",
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark",
+        "--output-dir",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_smoke_retry2/tasks/e-b28-t003-r1-selective_c3-filesystem-desktop-project_management",
+        "--target",
+        "filesystem/desktop/project_management",
+        "--arm",
+        "selective_c3",
+        "--repetition",
+        "1",
+        "--run-id",
+        "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management"
+      ],
+      "finished_unix_ns": 1784392022850535000,
+      "index": 3,
+      "qualification": false,
+      "repetition": 1,
+      "returncode": 0,
+      "run_id": "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management",
+      "started_unix_ns": 1784391917616720000,
+      "summary": {
+        "agent_execution_time": 102.88547706604004,
+        "agent_implementation": "unmodified MCPMarkAgent",
+        "arm": "selective_c3",
+        "benchmark_execution_result": {
+          "error_message": null,
+          "success": false,
+          "verification_error": "Verification failed with no error message",
+          "verification_output": "\ud83d\udd0d Verifying Desktop 2 Project Management Task: File Reorganization...\n\n--- Organized Projects Directory Exists ---\n\u2705 'organized_projects' directory exists\n\n--- Directory Structure ---\n\u2705 All required directory structure created correctly\n\n--- Python Files in ML Projects ---\n\u274c Missing Python files in ml_projects: ['study_notes.py', 'model.py', 'data_analysis.py', 'travel_calculator.py']\n\n--- CSV Files in Data Analysis ---\n\u274c Missing CSV files in data_analysis: ['learning_progress.csv', 'weekly_schedule.csv', 'results_record.csv', 'september_summary.csv', 'data.csv']\n\n--- Learning Markdown Files in Resources ---\n\u274c Missing learning markdown files in resources: ['learning_roadmap.md', 'research_topics.md', 'experiment_summary.md', 'exp_record.md', 'README.md', 'analysis_report.md']\n\n--- Entertainment Markdown Files in Entertainment ---\n\u274c Missing entertainment markdown files in entertainment: ['gaming_schedule.md', 'travel_bucket_list.md']\n\n--- Music Collection Files in Collections ---\n\u2705 All music collection markdown files moved to personal/collections\n\n--- Progress Tracking Empty ---\n\u2705 progress_tracking directory is correctly empty\n\n--- Project Structure File Exists ---\n\u2705 'project_structure.md' file exists\n\n--- File Counts ---\n\u274c Incorrect file counts: ['experiments/ml_projects: expected 6, got 2', 'experiments/data_analysis: expected 7, got 2', 'learning/resources: expected 7, got 1', 'personal/entertainment: expected 3, got 1']\n\n==================================================\n\u274c Task verification: FAIL\n"
+        },
+        "completion_monitor": {
+          "complete_for_bound": false,
+          "construction": "retrospective bounded monitor over the actual post-barrier call population",
+          "contract_version": "c0-c5-bounded-v2",
+          "event_id": "4bc9685e-1e4f-8be6-3ca5-d140ddaf9ed2",
+          "expected_gateway_ids": [
+            "g-e-b28-agent-tool"
+          ],
+          "expected_vector_ids": [
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-1",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-10",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-11",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-12",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-13",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-14",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-15",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-16",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-17",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-18",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-19",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-2",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-20",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-21",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-22",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-23",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-24",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-25",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-26",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-27",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-28",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-29",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-3",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-30",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-31",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-32",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-33",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-34",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-35",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-36",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-37",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-38",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-39",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-4",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-40",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-41",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-42",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-43",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-44",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-45",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-46",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-47",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-48",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-49",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-5",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-50",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-51",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-6",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-7",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-8",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-9"
+          ],
+          "highest_stage": "C3_RECEIVER_PERSISTED",
+          "jti": "4bc9685e-1e4f-8be6-3ca5-d140ddaf9ed2",
+          "missing_gateway_ids": [
+            "g-e-b28-agent-tool"
+          ],
+          "missing_vector_ids": [],
+          "observed_vector_ids": [
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-1",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-10",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-11",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-12",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-13",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-14",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-15",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-16",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-17",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-18",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-19",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-2",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-20",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-21",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-22",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-23",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-24",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-25",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-26",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-27",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-28",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-29",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-3",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-30",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-31",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-32",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-33",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-34",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-35",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-36",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-37",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-38",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-39",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-4",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-40",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-41",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-42",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-43",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-44",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-45",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-46",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-47",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-48",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-49",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-5",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-50",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-51",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-6",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-7",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-8",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-9"
+          ],
+          "post_barrier_vectors": 51,
+          "receipt_gateway_ids": [],
+          "status": "VIOLATED",
+          "violating_vector_ids": [
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-1",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-10",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-11",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-12",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-13",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-14",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-15",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-16",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-17",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-18",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-19",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-2",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-20",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-21",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-22",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-23",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-24",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-25",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-26",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-27",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-28",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-29",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-3",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-30",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-31",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-32",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-33",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-34",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-35",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-36",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-37",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-38",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-39",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-4",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-40",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-41",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-42",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-43",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-44",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-45",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-46",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-47",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-48",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-49",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-5",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-50",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-51",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-6",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-7",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-8",
+            "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management:call-9"
+          ],
+          "window_closed_at_ns": 1784392019604957000,
+          "window_deadline_ns": 1784392019604957000,
+          "window_start_ns": 1784391941505483000
+        },
+        "experiment": "E-B28",
+        "exposure_status": "EXPOSED",
+        "finished_unix_ns": 1784392022492357000,
+        "infrastructure_error": false,
+        "intervention": {
+          "arm": "selective_c3",
+          "barrier_completed_unix_ns": 1784391941494429000,
+          "barrier_started_unix_ns": 1784391924147522000,
+          "c2_transport_acknowledged": true,
+          "c3_receiver_persisted": true,
+          "c4_gateway_enforced": false,
+          "category_id": "desktop",
+          "event_jti": "4bc9685e-1e4f-8be6-3ca5-d140ddaf9ed2",
+          "event_type": "revocation_intervention",
+          "event_unix_ns": 1784391941494510000,
+          "event_wall_time": "2026-07-18T16:25:41.494466+00:00",
+          "intervention_valid": true,
+          "logout_http_status": 204,
+          "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+          "protocol_version": "e-b28-live-closed-loop-v1",
+          "receiver_jtis": {
+            "receiver-a": "b61cfa1f-b5ae-4ef5-dfa6-690035d63161",
+            "receiver-b": "4bc9685e-1e4f-8be6-3ca5-d140ddaf9ed2"
+          },
+          "receiver_state": {
+            "arm": "selective_c3",
+            "attempt_count": 2,
+            "attempts": [
+              {
+                "attempt_id": 3,
+                "authorization_valid": true,
+                "body_sha256": "299c8ee23f54ee669706af5cb4b9a76870da18594519a8e44529efe8759d884c",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiJiNjFjZmExZi1iNWFlLTRlZjUtZGZhNi02OTAwMzVkNjMxNjEiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTE5MjQsImF1ZCI6InJlY2VpdmVyLWEvZGZjOTcwZWItM2FiZi00NjgxLWI4ODYtMGRkNWIyZDk4YmQ0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkxOTI0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJWeXdfYUVPM1BLLURsZ1lpaFFQZXVLcFIifX0sInR4biI6IjU5ZWViMzE2LTVhMjktNGFkMC05MGJiLTdmYTc4YmMzNjAzZiJ9.RWbSxYZ8ZSgyP39RW1qHS-aVsZXyVezqtnSku4T0DoU6iMY0BFdu9Zo5VSk9xwZTzh9xYYUzuVaGGbB_YBcvGANjh9rntWeXgfR5so3lWsPIATcQWpVn2NdGsp1-F6T7fmllUJQ_uAcjF1cVVb8VU7T0C_MQufcQJvDWZ0gptkkZTJntst9BOoYn66mQ50XddY7xDWGoMQbraLipKJjSxTjj5qbePc1Jq4VTALZTZJERpWuDfoJDgp8QWlihOh4oM2btCqF0OKfThf2usXVDmHDu4ocid1SsbulkqInvyR42vMqtNwYrkNfmhT_oVzSVbDKX_Br0XZiFgfaySISrqw",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "b61cfa1f-b5ae-4ef5-dfa6-690035d63161",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784391941361838000,
+                "payload": {
+                  "aud": "receiver-a/dfc970eb-3abf-4681-b886-0dd5b2d98bd4",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784391924,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784391924,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "b61cfa1f-b5ae-4ef5-dfa6-690035d63161",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "Vyw_aEO3PK-DlgYihQPeuKpR"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "59eeb316-5a29-4ad0-90bb-7fa78bc3603f"
+                },
+                "receiver": "receiver-a",
+                "run_id": "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management",
+                "session_id": "Vyw_aEO3PK-DlgYihQPeuKpR"
+              },
+              {
+                "attempt_id": 4,
+                "authorization_valid": true,
+                "body_sha256": "d3d4d3d94cae25f4a448a6460c88be509524a1d7b747f5b101e713c42abfd9e3",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiI0YmM5Njg1ZS0xZTRmLThiZTYtM2NhNS1kMTQwZGRhZjllZDIiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTE5MjQsImF1ZCI6InJlY2VpdmVyLWIvYzI5Nzk3OWYtZjUxMC00MTVhLWFjZWMtNzk3ZmY2YWNkOWQyIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkxOTI0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJWeXdfYUVPM1BLLURsZ1lpaFFQZXVLcFIifX0sInR4biI6IjdhNGM5NGU4LWM2MGUtNDBmZi1iMGQ2LWMwMzQ4Y2NlYTkzYiJ9.YFaEkgT2yUoE9OosBVc3An9xujJRSMk6R13MeXY3b5banOn9ndPEekDDGq5XhHVL_F7cnyWcJ2Znv3LMeJ7tVB5LO00n9UkN7DAArLAqZJ9uIJPtQ_-pbY5064Tf02T6MunKykTuQel-09SzwfzvV9mJCtnfohe0q5x1uVmG8Y8O_sx0FPRarTVtcDG6CGRWDlFLMnVTEO8HR2CieF4_CdOZ7C7eePoYGpqrldAOdoB7DsZtAnFr5ZEuOBVkJUe5sB97dbKTR9ipiyq0lgs4iAC5MUxU-hv19TtFxRHGN0RmTHgm__A76h41GlTUpVUJ0GmkgchMMTmbbh1phsSeFw",
+                "forwarded": false,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "4bc9685e-1e4f-8be6-3ca5-d140ddaf9ed2",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784391941369947000,
+                "payload": {
+                  "aud": "receiver-b/c297979f-f510-415a-acec-797ff6acd9d2",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784391924,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784391924,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "4bc9685e-1e4f-8be6-3ca5-d140ddaf9ed2",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "Vyw_aEO3PK-DlgYihQPeuKpR"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "7a4c94e8-c60e-40ff-b0d6-c0348ccea93b"
+                },
+                "receiver": "receiver-b",
+                "run_id": "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management",
+                "session_id": "Vyw_aEO3PK-DlgYihQPeuKpR"
+              }
+            ],
+            "matching_attempts": {
+              "receiver-a": {
+                "attempt_id": 3,
+                "authorization_valid": true,
+                "body_sha256": "299c8ee23f54ee669706af5cb4b9a76870da18594519a8e44529efe8759d884c",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiJiNjFjZmExZi1iNWFlLTRlZjUtZGZhNi02OTAwMzVkNjMxNjEiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTE5MjQsImF1ZCI6InJlY2VpdmVyLWEvZGZjOTcwZWItM2FiZi00NjgxLWI4ODYtMGRkNWIyZDk4YmQ0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkxOTI0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJWeXdfYUVPM1BLLURsZ1lpaFFQZXVLcFIifX0sInR4biI6IjU5ZWViMzE2LTVhMjktNGFkMC05MGJiLTdmYTc4YmMzNjAzZiJ9.RWbSxYZ8ZSgyP39RW1qHS-aVsZXyVezqtnSku4T0DoU6iMY0BFdu9Zo5VSk9xwZTzh9xYYUzuVaGGbB_YBcvGANjh9rntWeXgfR5so3lWsPIATcQWpVn2NdGsp1-F6T7fmllUJQ_uAcjF1cVVb8VU7T0C_MQufcQJvDWZ0gptkkZTJntst9BOoYn66mQ50XddY7xDWGoMQbraLipKJjSxTjj5qbePc1Jq4VTALZTZJERpWuDfoJDgp8QWlihOh4oM2btCqF0OKfThf2usXVDmHDu4ocid1SsbulkqInvyR42vMqtNwYrkNfmhT_oVzSVbDKX_Br0XZiFgfaySISrqw",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "b61cfa1f-b5ae-4ef5-dfa6-690035d63161",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784391941361838000,
+                "payload": {
+                  "aud": "receiver-a/dfc970eb-3abf-4681-b886-0dd5b2d98bd4",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784391924,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784391924,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "b61cfa1f-b5ae-4ef5-dfa6-690035d63161",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "Vyw_aEO3PK-DlgYihQPeuKpR"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "59eeb316-5a29-4ad0-90bb-7fa78bc3603f"
+                },
+                "receiver": "receiver-a",
+                "run_id": "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management",
+                "session_id": "Vyw_aEO3PK-DlgYihQPeuKpR"
+              },
+              "receiver-b": {
+                "attempt_id": 4,
+                "authorization_valid": true,
+                "body_sha256": "d3d4d3d94cae25f4a448a6460c88be509524a1d7b747f5b101e713c42abfd9e3",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiI0YmM5Njg1ZS0xZTRmLThiZTYtM2NhNS1kMTQwZGRhZjllZDIiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTE5MjQsImF1ZCI6InJlY2VpdmVyLWIvYzI5Nzk3OWYtZjUxMC00MTVhLWFjZWMtNzk3ZmY2YWNkOWQyIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkxOTI0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJWeXdfYUVPM1BLLURsZ1lpaFFQZXVLcFIifX0sInR4biI6IjdhNGM5NGU4LWM2MGUtNDBmZi1iMGQ2LWMwMzQ4Y2NlYTkzYiJ9.YFaEkgT2yUoE9OosBVc3An9xujJRSMk6R13MeXY3b5banOn9ndPEekDDGq5XhHVL_F7cnyWcJ2Znv3LMeJ7tVB5LO00n9UkN7DAArLAqZJ9uIJPtQ_-pbY5064Tf02T6MunKykTuQel-09SzwfzvV9mJCtnfohe0q5x1uVmG8Y8O_sx0FPRarTVtcDG6CGRWDlFLMnVTEO8HR2CieF4_CdOZ7C7eePoYGpqrldAOdoB7DsZtAnFr5ZEuOBVkJUe5sB97dbKTR9ipiyq0lgs4iAC5MUxU-hv19TtFxRHGN0RmTHgm__A76h41GlTUpVUJ0GmkgchMMTmbbh1phsSeFw",
+                "forwarded": false,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "4bc9685e-1e4f-8be6-3ca5-d140ddaf9ed2",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784391941369947000,
+                "payload": {
+                  "aud": "receiver-b/c297979f-f510-415a-acec-797ff6acd9d2",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784391924,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784391924,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "4bc9685e-1e4f-8be6-3ca5-d140ddaf9ed2",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "Vyw_aEO3PK-DlgYihQPeuKpR"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "7a4c94e8-c60e-40ff-b0d6-c0348ccea93b"
+                },
+                "receiver": "receiver-b",
+                "run_id": "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management",
+                "session_id": "Vyw_aEO3PK-DlgYihQPeuKpR"
+              }
+            },
+            "receiver_b_action": "withhold",
+            "registered_at_ns": 1784391917615233000,
+            "run_id": "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management"
+          },
+          "repetition": 1,
+          "run_id": "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management",
+          "service": "filesystem",
+          "session_id": "Vyw_aEO3PK-DlgYihQPeuKpR",
+          "signature_verification": {
+            "receiver-a": {
+              "algorithm": "RS256",
+              "jti": "b61cfa1f-b5ae-4ef5-dfa6-690035d63161",
+              "key_id": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+              "verified": true
+            },
+            "receiver-b": {
+              "algorithm": "RS256",
+              "jti": "4bc9685e-1e4f-8be6-3ca5-d140ddaf9ed2",
+              "key_id": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+              "verified": true
+            }
+          },
+          "task_id": "project_management"
+        },
+        "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+        "messages_relative_path": "mcpmark/e-b28-t003-r1-selective_c3-filesystem-desktop-project_management/openai/gpt-4-1-mini__filesystem/run-1/desktop__project_management/messages.json",
+        "meta_relative_path": "mcpmark/e-b28-t003-r1-selective_c3-filesystem-desktop-project_management/openai/gpt-4-1-mini__filesystem/run-1/desktop__project_management/meta.json",
+        "model": "openai/gpt-4.1-mini",
+        "post_barrier_allowed_calls": 51,
+        "post_barrier_call_count": 51,
+        "post_barrier_denied_calls": 0,
+        "post_barrier_effect_commits": 18,
+        "post_barrier_mutating_attempts": 0,
+        "post_barrier_tool_switches": 9,
+        "protocol_version": "e-b28-live-closed-loop-v1",
+        "repetition": 1,
+        "run_id": "e-b28-t003-r1-selective_c3-filesystem-desktop-project_management",
+        "service": "filesystem",
+        "stop_reason": "final_role=assistant;has_tool_calls=false;content_present=true",
+        "target": "filesystem/desktop/project_management",
+        "task_success": false,
+        "token_usage": {
+          "input_tokens": 273250,
+          "output_tokens": 3677,
+          "reasoning_tokens": 0,
+          "total_tokens": 276927
+        },
+        "tool_call_count": 52,
+        "trace_sha256": "8a7c17c48d95f635127945014a59ed1d9ec8a05c6b31cf5066c36a56b31a77de",
+        "trace_valid": true,
+        "turn_count": 35
+      },
+      "summary_present": true,
+      "target": "filesystem/desktop/project_management",
+      "timed_out": false,
+      "trace_valid": true
+    },
+    {
+      "arm": "active_sanity",
+      "command": [
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/.venv/bin/python",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/experiments/e_b28_live_closed_loop/run_task.py",
+        "--mcpmark-root",
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark",
+        "--output-dir",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_smoke_retry2/tasks/e-b28-t004-r1-active_sanity-postgres-employees-executive_dashboard_automation",
+        "--target",
+        "postgres/employees/executive_dashboard_automation",
+        "--arm",
+        "active_sanity",
+        "--repetition",
+        "1",
+        "--run-id",
+        "e-b28-t004-r1-active_sanity-postgres-employees-executive_dashboard_automation"
+      ],
+      "finished_unix_ns": 1784392106884942000,
+      "index": 4,
+      "qualification": false,
+      "repetition": 1,
+      "returncode": 0,
+      "run_id": "e-b28-t004-r1-active_sanity-postgres-employees-executive_dashboard_automation",
+      "started_unix_ns": 1784392022851472000,
+      "summary": {
+        "agent_execution_time": 71.66179418563843,
+        "agent_implementation": "unmodified MCPMarkAgent",
+        "arm": "active_sanity",
+        "benchmark_execution_result": {
+          "error_message": null,
+          "success": false,
+          "verification_error": "Verification failed with no error message",
+          "verification_output": "==================================================\n\u274c Hiring trends data incorrect for year 1985: view=(1985, 17725, Decimal('53219.41'), Decimal('1.0000'), 'Development'), actual=(1985, 35316, Decimal('53010.028712198437'), Decimal('80.10816627024578094900'), 'Development')\n\n\u274c Task verification: FAIL\n"
+        },
+        "completion_monitor": {
+          "post_barrier_vectors": 0,
+          "status": "NOT_APPLICABLE_ACTIVE_SANITY"
+        },
+        "experiment": "E-B28",
+        "exposure_status": "EXPOSED",
+        "finished_unix_ns": 1784392106469571000,
+        "infrastructure_error": false,
+        "intervention": null,
+        "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+        "messages_relative_path": "mcpmark/e-b28-t004-r1-active_sanity-postgres-employees-executive_dashboard_automation/openai/gpt-4-1-mini__postgres/run-1/employees__executive_dashboard_automation/messages.json",
+        "meta_relative_path": "mcpmark/e-b28-t004-r1-active_sanity-postgres-employees-executive_dashboard_automation/openai/gpt-4-1-mini__postgres/run-1/employees__executive_dashboard_automation/meta.json",
+        "model": "openai/gpt-4.1-mini",
+        "post_barrier_allowed_calls": 0,
+        "post_barrier_call_count": 0,
+        "post_barrier_denied_calls": 0,
+        "post_barrier_effect_commits": 0,
+        "post_barrier_mutating_attempts": 0,
+        "post_barrier_tool_switches": 2,
+        "protocol_version": "e-b28-live-closed-loop-v1",
+        "repetition": 1,
+        "run_id": "e-b28-t004-r1-active_sanity-postgres-employees-executive_dashboard_automation",
+        "service": "postgres",
+        "stop_reason": "final_role=assistant;has_tool_calls=false;content_present=true",
+        "target": "postgres/employees/executive_dashboard_automation",
+        "task_success": false,
+        "token_usage": {
+          "input_tokens": 64769,
+          "output_tokens": 2531,
+          "reasoning_tokens": 0,
+          "total_tokens": 67300
+        },
+        "tool_call_count": 14,
+        "trace_sha256": "4beacb07663597a6edd4ccf2d2c92e885291e1ba8f7e1f054cb5e0ff8e491f46",
+        "trace_valid": true,
+        "turn_count": 9
+      },
+      "summary_present": true,
+      "target": "postgres/employees/executive_dashboard_automation",
+      "timed_out": false,
+      "trace_valid": true
+    },
+    {
+      "arm": "normal_c4",
+      "command": [
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/.venv/bin/python",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/experiments/e_b28_live_closed_loop/run_task.py",
+        "--mcpmark-root",
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark",
+        "--output-dir",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_smoke_retry2/tasks/e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation",
+        "--target",
+        "postgres/employees/executive_dashboard_automation",
+        "--arm",
+        "normal_c4",
+        "--repetition",
+        "1",
+        "--run-id",
+        "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation"
+      ],
+      "finished_unix_ns": 1784392155553048000,
+      "index": 5,
+      "qualification": false,
+      "repetition": 1,
+      "returncode": 0,
+      "run_id": "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation",
+      "started_unix_ns": 1784392106892424000,
+      "summary": {
+        "agent_execution_time": 42.39852499961853,
+        "agent_implementation": "unmodified MCPMarkAgent",
+        "arm": "normal_c4",
+        "benchmark_execution_result": {
+          "error_message": null,
+          "success": false,
+          "verification_error": "Verification failed with no error message",
+          "verification_output": "==================================================\n\u274c Expected views ['exec_department_summary', 'exec_hiring_trends', 'exec_salary_distribution'], found []\n\n\u274c Task verification: FAIL\n"
+        },
+        "completion_monitor": {
+          "complete_for_bound": true,
+          "construction": "retrospective bounded monitor over the actual post-barrier call population",
+          "contract_version": "c0-c5-bounded-v2",
+          "event_id": "2c69ca15-befa-207a-8260-f2b2de6cfe1f",
+          "expected_gateway_ids": [
+            "g-e-b28-agent-tool"
+          ],
+          "expected_vector_ids": [
+            "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation:call-1"
+          ],
+          "highest_stage": "C5_EFFECTS_PREVENTED",
+          "jti": "2c69ca15-befa-207a-8260-f2b2de6cfe1f",
+          "missing_gateway_ids": [],
+          "missing_vector_ids": [],
+          "observed_vector_ids": [
+            "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation:call-1"
+          ],
+          "post_barrier_vectors": 1,
+          "receipt_gateway_ids": [
+            "g-e-b28-agent-tool"
+          ],
+          "status": "COMPLETE_FOR_BOUND",
+          "violating_vector_ids": [],
+          "window_closed_at_ns": 1784392151948285000,
+          "window_deadline_ns": 1784392151948285000,
+          "window_start_ns": 1784392151948272000
+        },
+        "experiment": "E-B28",
+        "exposure_status": "EXPOSED",
+        "finished_unix_ns": 1784392155146957000,
+        "infrastructure_error": false,
+        "intervention": {
+          "arm": "normal_c4",
+          "barrier_completed_unix_ns": 1784392151616796000,
+          "barrier_started_unix_ns": 1784392123935112000,
+          "c2_transport_acknowledged": true,
+          "c3_receiver_persisted": true,
+          "c4_gateway_enforced": true,
+          "category_id": "employees",
+          "event_jti": "2c69ca15-befa-207a-8260-f2b2de6cfe1f",
+          "event_type": "revocation_intervention",
+          "event_unix_ns": 1784392151616897000,
+          "event_wall_time": "2026-07-18T16:29:11.616852+00:00",
+          "intervention_valid": true,
+          "logout_http_status": 204,
+          "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+          "protocol_version": "e-b28-live-closed-loop-v1",
+          "receiver_jtis": {
+            "receiver-a": "74059609-2828-93a3-0076-81875d0c153f",
+            "receiver-b": "2c69ca15-befa-207a-8260-f2b2de6cfe1f"
+          },
+          "receiver_state": {
+            "arm": "normal_c4",
+            "attempt_count": 2,
+            "attempts": [
+              {
+                "attempt_id": 5,
+                "authorization_valid": true,
+                "body_sha256": "4addf4274f3dfbf863be6ae50316968e5994e0abb505abd2bd212a0360ac5bb2",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiI3NDA1OTYwOS0yODI4LTkzYTMtMDA3Ni04MTg3NWQwYzE1M2YiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTIxMjQsImF1ZCI6InJlY2VpdmVyLWEvZGZjOTcwZWItM2FiZi00NjgxLWI4ODYtMGRkNWIyZDk4YmQ0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyMTI0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJBS25RUkFmQ3hocmhtX3hDRnMtRXE2SnYifX0sInR4biI6ImJmODVkZTFjLWE2N2MtNDgxYy1hZTUyLWI0NzcyOWYyMGQ2YiJ9.blCGEaXv4S766cMed3G-fGtmKOH5cGnuVdg9rthZ7HeuI19ZdHnxr0mop6TfjBCkVatdGYKlpHeEwGjOAnpAgV_kfEAgLTzTO8_7Mxgcr4xLJPivzg61c7CeqnNLWhpprANTA3v0Prp62eN1IfpW4ISNOa92GfkcptoolZEXImOyi1cZb7X5XMzP-vFpwTh8R65u-q4Vidy9ympUzQrRoB6z9_OwZL6aPylEE9UV7t8O5BMmfvcWqBDt4vS-dXm8D5U7UKJydXwxe5dBBDaJaW8HvSOe2PolooSMG0ldQmVU7FnU-3T67uE6NoU33AmRC8OGfMtl5c2-9g0Bsy3Z-A",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "74059609-2828-93a3-0076-81875d0c153f",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784392151375119000,
+                "payload": {
+                  "aud": "receiver-a/dfc970eb-3abf-4681-b886-0dd5b2d98bd4",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784392124,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784392124,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "74059609-2828-93a3-0076-81875d0c153f",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "AKnQRAfCxhrhm_xCFs-Eq6Jv"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "bf85de1c-a67c-481c-ae52-b47729f20d6b"
+                },
+                "receiver": "receiver-a",
+                "run_id": "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation",
+                "session_id": "AKnQRAfCxhrhm_xCFs-Eq6Jv"
+              },
+              {
+                "attempt_id": 6,
+                "authorization_valid": true,
+                "body_sha256": "0304ac28e2ce3b35819d031bc580caebbbe612b46d42a0a3c40035cac7bef0c5",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiIyYzY5Y2ExNS1iZWZhLTIwN2EtODI2MC1mMmIyZGU2Y2ZlMWYiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTIxMjQsImF1ZCI6InJlY2VpdmVyLWIvYzI5Nzk3OWYtZjUxMC00MTVhLWFjZWMtNzk3ZmY2YWNkOWQyIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyMTI0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJBS25RUkFmQ3hocmhtX3hDRnMtRXE2SnYifX0sInR4biI6ImU5M2QyNGRiLTJiZDctNDRiMi05ZjljLTE3NzA0NTk0ZDcwMCJ9.H36iWy6mjl6nJwa64olrnZtwpZxKc1Fr_IxbDO-qTaB8dlAPYV6kLv_S5-vJamlH8KXOePmZu5NlZsaP1k03FTaCt5jrzmkgXVLQHeEyRkYJYWrraoh0GwPE3H8rsVslG4uuM35PRLvWQtPaqmtuSno3UFvVUE55uPPx_zZ3ML4EQGXVX1X8wHT6QkEElp-qKlgtx8433iKaXJVws9_acF-EMTUidNKs4ZhQGeaemV-4Y2dIfAnzUgf2fnd1ujlc4kUoQF9C2LpSOzsBty_ICBKOZYo1QKhs0tgGzLQo1mQ_6p9xSKvMthyCU8NoJlIuC8dxr-SllO1yy_JZhY2nCw",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "2c69ca15-befa-207a-8260-f2b2de6cfe1f",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784392151399252000,
+                "payload": {
+                  "aud": "receiver-b/c297979f-f510-415a-acec-797ff6acd9d2",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784392124,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784392124,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "2c69ca15-befa-207a-8260-f2b2de6cfe1f",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "AKnQRAfCxhrhm_xCFs-Eq6Jv"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "e93d24db-2bd7-44b2-9f9c-17704594d700"
+                },
+                "receiver": "receiver-b",
+                "run_id": "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation",
+                "session_id": "AKnQRAfCxhrhm_xCFs-Eq6Jv"
+              }
+            ],
+            "matching_attempts": {
+              "receiver-a": {
+                "attempt_id": 5,
+                "authorization_valid": true,
+                "body_sha256": "4addf4274f3dfbf863be6ae50316968e5994e0abb505abd2bd212a0360ac5bb2",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiI3NDA1OTYwOS0yODI4LTkzYTMtMDA3Ni04MTg3NWQwYzE1M2YiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTIxMjQsImF1ZCI6InJlY2VpdmVyLWEvZGZjOTcwZWItM2FiZi00NjgxLWI4ODYtMGRkNWIyZDk4YmQ0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyMTI0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJBS25RUkFmQ3hocmhtX3hDRnMtRXE2SnYifX0sInR4biI6ImJmODVkZTFjLWE2N2MtNDgxYy1hZTUyLWI0NzcyOWYyMGQ2YiJ9.blCGEaXv4S766cMed3G-fGtmKOH5cGnuVdg9rthZ7HeuI19ZdHnxr0mop6TfjBCkVatdGYKlpHeEwGjOAnpAgV_kfEAgLTzTO8_7Mxgcr4xLJPivzg61c7CeqnNLWhpprANTA3v0Prp62eN1IfpW4ISNOa92GfkcptoolZEXImOyi1cZb7X5XMzP-vFpwTh8R65u-q4Vidy9ympUzQrRoB6z9_OwZL6aPylEE9UV7t8O5BMmfvcWqBDt4vS-dXm8D5U7UKJydXwxe5dBBDaJaW8HvSOe2PolooSMG0ldQmVU7FnU-3T67uE6NoU33AmRC8OGfMtl5c2-9g0Bsy3Z-A",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "74059609-2828-93a3-0076-81875d0c153f",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784392151375119000,
+                "payload": {
+                  "aud": "receiver-a/dfc970eb-3abf-4681-b886-0dd5b2d98bd4",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784392124,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784392124,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "74059609-2828-93a3-0076-81875d0c153f",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "AKnQRAfCxhrhm_xCFs-Eq6Jv"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "bf85de1c-a67c-481c-ae52-b47729f20d6b"
+                },
+                "receiver": "receiver-a",
+                "run_id": "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation",
+                "session_id": "AKnQRAfCxhrhm_xCFs-Eq6Jv"
+              },
+              "receiver-b": {
+                "attempt_id": 6,
+                "authorization_valid": true,
+                "body_sha256": "0304ac28e2ce3b35819d031bc580caebbbe612b46d42a0a3c40035cac7bef0c5",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiIyYzY5Y2ExNS1iZWZhLTIwN2EtODI2MC1mMmIyZGU2Y2ZlMWYiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTIxMjQsImF1ZCI6InJlY2VpdmVyLWIvYzI5Nzk3OWYtZjUxMC00MTVhLWFjZWMtNzk3ZmY2YWNkOWQyIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyMTI0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJBS25RUkFmQ3hocmhtX3hDRnMtRXE2SnYifX0sInR4biI6ImU5M2QyNGRiLTJiZDctNDRiMi05ZjljLTE3NzA0NTk0ZDcwMCJ9.H36iWy6mjl6nJwa64olrnZtwpZxKc1Fr_IxbDO-qTaB8dlAPYV6kLv_S5-vJamlH8KXOePmZu5NlZsaP1k03FTaCt5jrzmkgXVLQHeEyRkYJYWrraoh0GwPE3H8rsVslG4uuM35PRLvWQtPaqmtuSno3UFvVUE55uPPx_zZ3ML4EQGXVX1X8wHT6QkEElp-qKlgtx8433iKaXJVws9_acF-EMTUidNKs4ZhQGeaemV-4Y2dIfAnzUgf2fnd1ujlc4kUoQF9C2LpSOzsBty_ICBKOZYo1QKhs0tgGzLQo1mQ_6p9xSKvMthyCU8NoJlIuC8dxr-SllO1yy_JZhY2nCw",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "2c69ca15-befa-207a-8260-f2b2de6cfe1f",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784392151399252000,
+                "payload": {
+                  "aud": "receiver-b/c297979f-f510-415a-acec-797ff6acd9d2",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784392124,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784392124,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "2c69ca15-befa-207a-8260-f2b2de6cfe1f",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "AKnQRAfCxhrhm_xCFs-Eq6Jv"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "e93d24db-2bd7-44b2-9f9c-17704594d700"
+                },
+                "receiver": "receiver-b",
+                "run_id": "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation",
+                "session_id": "AKnQRAfCxhrhm_xCFs-Eq6Jv"
+              }
+            },
+            "receiver_b_action": "forward",
+            "registered_at_ns": 1784392106890399000,
+            "run_id": "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation"
+          },
+          "repetition": 1,
+          "run_id": "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation",
+          "service": "postgres",
+          "session_id": "AKnQRAfCxhrhm_xCFs-Eq6Jv",
+          "signature_verification": {
+            "receiver-a": {
+              "algorithm": "RS256",
+              "jti": "74059609-2828-93a3-0076-81875d0c153f",
+              "key_id": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+              "verified": true
+            },
+            "receiver-b": {
+              "algorithm": "RS256",
+              "jti": "2c69ca15-befa-207a-8260-f2b2de6cfe1f",
+              "key_id": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+              "verified": true
+            }
+          },
+          "task_id": "executive_dashboard_automation"
+        },
+        "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+        "messages_relative_path": "mcpmark/e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation/openai/gpt-4-1-mini__postgres/run-1/employees__executive_dashboard_automation/messages.json",
+        "meta_relative_path": "mcpmark/e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation/openai/gpt-4-1-mini__postgres/run-1/employees__executive_dashboard_automation/meta.json",
+        "model": "openai/gpt-4.1-mini",
+        "post_barrier_allowed_calls": 0,
+        "post_barrier_call_count": 1,
+        "post_barrier_denied_calls": 1,
+        "post_barrier_effect_commits": 0,
+        "post_barrier_mutating_attempts": 0,
+        "post_barrier_tool_switches": 0,
+        "protocol_version": "e-b28-live-closed-loop-v1",
+        "repetition": 1,
+        "run_id": "e-b28-t005-r1-normal_c4-postgres-employees-executive_dashboard_automation",
+        "service": "postgres",
+        "stop_reason": "final_role=assistant;has_tool_calls=false;content_present=true",
+        "target": "postgres/employees/executive_dashboard_automation",
+        "task_success": false,
+        "token_usage": {
+          "input_tokens": 3918,
+          "output_tokens": 150,
+          "reasoning_tokens": 0,
+          "total_tokens": 4068
+        },
+        "tool_call_count": 2,
+        "trace_sha256": "f1daf3b7ee4ec8546eee6b5023f731932a6addd110d952b3007f8dabf0ab4161",
+        "trace_valid": true,
+        "turn_count": 2
+      },
+      "summary_present": true,
+      "target": "postgres/employees/executive_dashboard_automation",
+      "timed_out": false,
+      "trace_valid": true
+    },
+    {
+      "arm": "selective_c3",
+      "command": [
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/.venv/bin/python",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/experiments/e_b28_live_closed_loop/run_task.py",
+        "--mcpmark-root",
+        "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark",
+        "--output-dir",
+        "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_smoke_retry2/tasks/e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation",
+        "--target",
+        "postgres/employees/executive_dashboard_automation",
+        "--arm",
+        "selective_c3",
+        "--repetition",
+        "1",
+        "--run-id",
+        "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation"
+      ],
+      "finished_unix_ns": 1784392339766406000,
+      "index": 6,
+      "qualification": false,
+      "repetition": 1,
+      "returncode": 0,
+      "run_id": "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation",
+      "started_unix_ns": 1784392155557676000,
+      "summary": {
+        "agent_execution_time": 175.36764311790466,
+        "agent_implementation": "unmodified MCPMarkAgent",
+        "arm": "selective_c3",
+        "benchmark_execution_result": {
+          "error_message": null,
+          "success": false,
+          "verification_error": "Verification failed with no error message",
+          "verification_output": "==================================================\n\u274c Hiring trends data incorrect for year 1985: view=(Decimal('1985'), 35316, Decimal('53010.028712198437'), Decimal('0.80108166270245780949'), None), actual=(1985, 35316, Decimal('53010.028712198437'), Decimal('80.10816627024578094900'), 'Development')\n\n\u274c Task verification: FAIL\n"
+        },
+        "completion_monitor": {
+          "complete_for_bound": false,
+          "construction": "retrospective bounded monitor over the actual post-barrier call population",
+          "contract_version": "c0-c5-bounded-v2",
+          "event_id": "9a881d1e-1ad0-cf54-e855-2287944b4367",
+          "expected_gateway_ids": [
+            "g-e-b28-agent-tool"
+          ],
+          "expected_vector_ids": [
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-1",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-10",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-11",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-12",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-13",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-14",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-15",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-16",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-17",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-18",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-19",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-2",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-20",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-21",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-22",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-3",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-4",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-5",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-6",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-7",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-8",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-9"
+          ],
+          "highest_stage": "C3_RECEIVER_PERSISTED",
+          "jti": "9a881d1e-1ad0-cf54-e855-2287944b4367",
+          "missing_gateway_ids": [
+            "g-e-b28-agent-tool"
+          ],
+          "missing_vector_ids": [],
+          "observed_vector_ids": [
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-1",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-10",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-11",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-12",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-13",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-14",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-15",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-16",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-17",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-18",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-19",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-2",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-20",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-21",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-22",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-3",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-4",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-5",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-6",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-7",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-8",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-9"
+          ],
+          "post_barrier_vectors": 22,
+          "receipt_gateway_ids": [],
+          "status": "VIOLATED",
+          "violating_vector_ids": [
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-1",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-10",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-11",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-12",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-13",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-14",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-15",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-16",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-17",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-18",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-19",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-2",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-20",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-21",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-22",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-3",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-4",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-5",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-6",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-7",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-8",
+            "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation:call-9"
+          ],
+          "window_closed_at_ns": 1784392334119602000,
+          "window_deadline_ns": 1784392334119602000,
+          "window_start_ns": 1784392181734161000
+        },
+        "experiment": "E-B28",
+        "exposure_status": "EXPOSED",
+        "finished_unix_ns": 1784392339355845000,
+        "infrastructure_error": false,
+        "intervention": {
+          "arm": "selective_c3",
+          "barrier_completed_unix_ns": 1784392181552488000,
+          "barrier_started_unix_ns": 1784392173253505000,
+          "c2_transport_acknowledged": true,
+          "c3_receiver_persisted": true,
+          "c4_gateway_enforced": false,
+          "category_id": "employees",
+          "event_jti": "9a881d1e-1ad0-cf54-e855-2287944b4367",
+          "event_type": "revocation_intervention",
+          "event_unix_ns": 1784392181552568000,
+          "event_wall_time": "2026-07-18T16:29:41.552513+00:00",
+          "intervention_valid": true,
+          "logout_http_status": 204,
+          "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+          "protocol_version": "e-b28-live-closed-loop-v1",
+          "receiver_jtis": {
+            "receiver-a": "0700a9e3-80f2-e2c1-157e-8d78c79ceacd",
+            "receiver-b": "9a881d1e-1ad0-cf54-e855-2287944b4367"
+          },
+          "receiver_state": {
+            "arm": "selective_c3",
+            "attempt_count": 2,
+            "attempts": [
+              {
+                "attempt_id": 7,
+                "authorization_valid": true,
+                "body_sha256": "adab99b737aaaf7ad72d040fe561d7fd9eb361cec9e0427cee5b3b76bbcb0336",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiIwNzAwYTllMy04MGYyLWUyYzEtMTU3ZS04ZDc4Yzc5Y2VhY2QiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTIxNzMsImF1ZCI6InJlY2VpdmVyLWEvZGZjOTcwZWItM2FiZi00NjgxLWI4ODYtMGRkNWIyZDk4YmQ0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyMTczLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJ5VFl5ajZmYXJSNUhSekVvVFU4b0ZxR0gifX0sInR4biI6ImQ5YjVkN2JlLTU0NDAtNDEyMS1hN2I1LWI2NmE2YWRlNzg0YSJ9.FfqJeQy6CeurKaJkbQLtDC8U-A5o37uA4xm57hOOofim8qCNGzyUJeDr8SUeg3qYBI4sG3LMIZsdjqLImbXeJhnohMIW-E6TYPISJRzhs8v0_FQTJLmxw6-kwhhoZa507hdcbi-k39brCHSWCopKKRRGDdrGeC3dXj6LtTz1FaDq9G0hVQY_Bl3B-RAyGCBW04ocv4SqsWpqfxyrOR0SKX_PRgUsDLjzpDEgHfSTo5Wt1uXoXxk8nSjZmP5qbke4iXQWj4BkFvexa92yovIqag5XzrZ0xsF_mKn0xe75x4E8MiZq3Hp5_3DNVk05ONAkXII81Vy1S-g7jT8v6xvQrg",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "0700a9e3-80f2-e2c1-157e-8d78c79ceacd",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784392181390621000,
+                "payload": {
+                  "aud": "receiver-a/dfc970eb-3abf-4681-b886-0dd5b2d98bd4",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784392173,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784392173,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "0700a9e3-80f2-e2c1-157e-8d78c79ceacd",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "yTYyj6farR5HRzEoTU8oFqGH"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "d9b5d7be-5440-4121-a7b5-b66a6ade784a"
+                },
+                "receiver": "receiver-a",
+                "run_id": "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation",
+                "session_id": "yTYyj6farR5HRzEoTU8oFqGH"
+              },
+              {
+                "attempt_id": 8,
+                "authorization_valid": true,
+                "body_sha256": "b06847d505cdac5ee1a1a5c088b95bdc224db79d5cf0a7046c11ba6b78a194d4",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiI5YTg4MWQxZS0xYWQwLWNmNTQtZTg1NS0yMjg3OTQ0YjQzNjciLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTIxNzMsImF1ZCI6InJlY2VpdmVyLWIvYzI5Nzk3OWYtZjUxMC00MTVhLWFjZWMtNzk3ZmY2YWNkOWQyIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyMTczLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJ5VFl5ajZmYXJSNUhSekVvVFU4b0ZxR0gifX0sInR4biI6IjliYjVhZTk0LTQxZjItNDZiYS1hMTUzLThiNmQ0Y2Y2NmE0NCJ9.b5UZfVL52m3QDbg2wuP60xCwd65t539sCQgjwbJpHcujTxd-Wkj8Ptltrmge3R8xmgI0Npp9AWap_q8H-YD_WZmO55rxwc0Q7FVjehJ6idpKFljMuDVu4GfDvq8UzblIP8d_kn3v5SPVsB2jo6C68rw41LR4TfnK1V95-n-Y8KszSICphtwngkarGDaQzgdiEE8qTUDX_36nYucMOzw6lKauNqqRcyy7Wfu5oudpD3eeNEpzWqiiWU26JdaG9UN8Z_5VZEXlf0ERWsGEWZL643geRMglvkWkhC3j2_851U5PzaxydDrQENjLEc6vwwyJwf3ScU9_i09BmBqmduivIA",
+                "forwarded": false,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "9a881d1e-1ad0-cf54-e855-2287944b4367",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784392181398812000,
+                "payload": {
+                  "aud": "receiver-b/c297979f-f510-415a-acec-797ff6acd9d2",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784392173,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784392173,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "9a881d1e-1ad0-cf54-e855-2287944b4367",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "yTYyj6farR5HRzEoTU8oFqGH"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "9bb5ae94-41f2-46ba-a153-8b6d4cf66a44"
+                },
+                "receiver": "receiver-b",
+                "run_id": "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation",
+                "session_id": "yTYyj6farR5HRzEoTU8oFqGH"
+              }
+            ],
+            "matching_attempts": {
+              "receiver-a": {
+                "attempt_id": 7,
+                "authorization_valid": true,
+                "body_sha256": "adab99b737aaaf7ad72d040fe561d7fd9eb361cec9e0427cee5b3b76bbcb0336",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiIwNzAwYTllMy04MGYyLWUyYzEtMTU3ZS04ZDc4Yzc5Y2VhY2QiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTIxNzMsImF1ZCI6InJlY2VpdmVyLWEvZGZjOTcwZWItM2FiZi00NjgxLWI4ODYtMGRkNWIyZDk4YmQ0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyMTczLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJ5VFl5ajZmYXJSNUhSekVvVFU4b0ZxR0gifX0sInR4biI6ImQ5YjVkN2JlLTU0NDAtNDEyMS1hN2I1LWI2NmE2YWRlNzg0YSJ9.FfqJeQy6CeurKaJkbQLtDC8U-A5o37uA4xm57hOOofim8qCNGzyUJeDr8SUeg3qYBI4sG3LMIZsdjqLImbXeJhnohMIW-E6TYPISJRzhs8v0_FQTJLmxw6-kwhhoZa507hdcbi-k39brCHSWCopKKRRGDdrGeC3dXj6LtTz1FaDq9G0hVQY_Bl3B-RAyGCBW04ocv4SqsWpqfxyrOR0SKX_PRgUsDLjzpDEgHfSTo5Wt1uXoXxk8nSjZmP5qbke4iXQWj4BkFvexa92yovIqag5XzrZ0xsF_mKn0xe75x4E8MiZq3Hp5_3DNVk05ONAkXII81Vy1S-g7jT8v6xvQrg",
+                "forwarded": true,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "0700a9e3-80f2-e2c1-157e-8d78c79ceacd",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784392181390621000,
+                "payload": {
+                  "aud": "receiver-a/dfc970eb-3abf-4681-b886-0dd5b2d98bd4",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784392173,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784392173,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "0700a9e3-80f2-e2c1-157e-8d78c79ceacd",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "yTYyj6farR5HRzEoTU8oFqGH"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "d9b5d7be-5440-4121-a7b5-b66a6ade784a"
+                },
+                "receiver": "receiver-a",
+                "run_id": "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation",
+                "session_id": "yTYyj6farR5HRzEoTU8oFqGH"
+              },
+              "receiver-b": {
+                "attempt_id": 8,
+                "authorization_valid": true,
+                "body_sha256": "b06847d505cdac5ee1a1a5c088b95bdc224db79d5cf0a7046c11ba6b78a194d4",
+                "content_type": "application/secevent+jwt",
+                "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJzb2cxQWhvSTc1TDlOQ3NEcmZuWGRKUk12V0xoVGxMLU0tc2wzQUJRNmUwIn0.eyJqdGkiOiI5YTg4MWQxZS0xYWQwLWNmNTQtZTg1NS0yMjg3OTQ0YjQzNjciLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTIxNzMsImF1ZCI6InJlY2VpdmVyLWIvYzI5Nzk3OWYtZjUxMC00MTVhLWFjZWMtNzk3ZmY2YWNkOWQyIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyMTczLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiMzc3MDhjZWYtYzYyNy00NmExLWI4MjgtZDBjODQ3YTVhYjMwIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJ5VFl5ajZmYXJSNUhSekVvVFU4b0ZxR0gifX0sInR4biI6IjliYjVhZTk0LTQxZjItNDZiYS1hMTUzLThiNmQ0Y2Y2NmE0NCJ9.b5UZfVL52m3QDbg2wuP60xCwd65t539sCQgjwbJpHcujTxd-Wkj8Ptltrmge3R8xmgI0Npp9AWap_q8H-YD_WZmO55rxwc0Q7FVjehJ6idpKFljMuDVu4GfDvq8UzblIP8d_kn3v5SPVsB2jo6C68rw41LR4TfnK1V95-n-Y8KszSICphtwngkarGDaQzgdiEE8qTUDX_36nYucMOzw6lKauNqqRcyy7Wfu5oudpD3eeNEpzWqiiWU26JdaG9UN8Z_5VZEXlf0ERWsGEWZL643geRMglvkWkhC3j2_851U5PzaxydDrQENjLEc6vwwyJwf3ScU9_i09BmBqmduivIA",
+                "forwarded": false,
+                "http_response": 202,
+                "is_session_revoked": true,
+                "jti": "9a881d1e-1ad0-cf54-e855-2287944b4367",
+                "jws_header": {
+                  "alg": "RS256",
+                  "kid": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+                  "typ": "secevent+jwt"
+                },
+                "observed_at_ns": 1784392181398812000,
+                "payload": {
+                  "aud": "receiver-b/c297979f-f510-415a-acec-797ff6acd9d2",
+                  "events": {
+                    "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                      "event_timestamp": 1784392173,
+                      "initiating_entity": "user",
+                      "reason_admin": {
+                        "en": "User logout"
+                      }
+                    }
+                  },
+                  "iat": 1784392173,
+                  "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                  "jti": "9a881d1e-1ad0-cf54-e855-2287944b4367",
+                  "sub_id": {
+                    "format": "complex",
+                    "session": {
+                      "format": "opaque",
+                      "id": "yTYyj6farR5HRzEoTU8oFqGH"
+                    },
+                    "user": {
+                      "format": "iss_sub",
+                      "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                      "sub": "37708cef-c627-46a1-b828-d0c847a5ab30"
+                    }
+                  },
+                  "txn": "9bb5ae94-41f2-46ba-a153-8b6d4cf66a44"
+                },
+                "receiver": "receiver-b",
+                "run_id": "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation",
+                "session_id": "yTYyj6farR5HRzEoTU8oFqGH"
+              }
+            },
+            "receiver_b_action": "withhold",
+            "registered_at_ns": 1784392155556402000,
+            "run_id": "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation"
+          },
+          "repetition": 1,
+          "run_id": "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation",
+          "service": "postgres",
+          "session_id": "yTYyj6farR5HRzEoTU8oFqGH",
+          "signature_verification": {
+            "receiver-a": {
+              "algorithm": "RS256",
+              "jti": "0700a9e3-80f2-e2c1-157e-8d78c79ceacd",
+              "key_id": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+              "verified": true
+            },
+            "receiver-b": {
+              "algorithm": "RS256",
+              "jti": "9a881d1e-1ad0-cf54-e855-2287944b4367",
+              "key_id": "sog1AhoI75L9NCsDrfnXdJRMvWLhTlL-M-sl3ABQ6e0",
+              "verified": true
+            }
+          },
+          "task_id": "executive_dashboard_automation"
+        },
+        "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+        "messages_relative_path": "mcpmark/e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation/openai/gpt-4-1-mini__postgres/run-1/employees__executive_dashboard_automation/messages.json",
+        "meta_relative_path": "mcpmark/e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation/openai/gpt-4-1-mini__postgres/run-1/employees__executive_dashboard_automation/meta.json",
+        "model": "openai/gpt-4.1-mini",
+        "post_barrier_allowed_calls": 22,
+        "post_barrier_call_count": 22,
+        "post_barrier_denied_calls": 0,
+        "post_barrier_effect_commits": 13,
+        "post_barrier_mutating_attempts": 13,
+        "post_barrier_tool_switches": 2,
+        "protocol_version": "e-b28-live-closed-loop-v1",
+        "repetition": 1,
+        "run_id": "e-b28-t006-r1-selective_c3-postgres-employees-executive_dashboard_automation",
+        "service": "postgres",
+        "stop_reason": "final_role=assistant;has_tool_calls=false;content_present=true",
+        "target": "postgres/employees/executive_dashboard_automation",
+        "task_success": false,
+        "token_usage": {
+          "input_tokens": 148115,
+          "output_tokens": 6606,
+          "reasoning_tokens": 0,
+          "total_tokens": 154721
+        },
+        "tool_call_count": 23,
+        "trace_sha256": "907e715fa5c7c7551de965632c3f8a9a467fa88946fe715a9126d432345cc5b3",
+        "trace_valid": true,
+        "turn_count": 14
+      },
+      "summary_present": true,
+      "target": "postgres/employees/executive_dashboard_automation",
+      "timed_out": false,
+      "trace_valid": true
+    }
+  ],
+  "schedule_sha256": "73f85aba96afd8b2e3541e572d458034dd4747351beaa4350e39fa447d468e61"
+}

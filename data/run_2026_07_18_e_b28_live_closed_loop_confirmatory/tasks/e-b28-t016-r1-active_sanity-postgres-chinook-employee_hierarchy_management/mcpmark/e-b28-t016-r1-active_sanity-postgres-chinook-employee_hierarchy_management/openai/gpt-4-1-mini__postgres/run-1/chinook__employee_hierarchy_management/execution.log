@@ -1,0 +1,45 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| execute_sql {"sql": "-- 1. INSERT: Add New Employees\nINSERT INTO \"Employee\" (\"EmployeeId\", \"FirstName\", \"LastName\", \"Title\", \"ReportsTo\", \"BirthDate\", \"HireDate\", \"Address\", \"City\", \"State\", \"Country\", \"PostalCode\", \"Phone\", \"Fax\", \"Email\") VALUES\n(9, 'Sarah', 'Johnson', 'Sales Support Agent', 2, '1985-03-15', '2009-01-10', '123 Oak Street', 'Calgary', 'AB', 'Canada', 'T2P 5G3', '+1 (403) 555-0123', '+1 (403) 555-0124', 'anon-9a91e99ce9@example.invalid'),\n(10, 'Mike', 'Chen', 'Sales Support Agent', 2, '1982-08-22', '2009-01-10', '456 Pine Ave', 'Calgary', 'AB', 'Canada', 'T2P 5G4', '+1 (403) 555-0125', '+1 (403) 555-0126', 'anon-b351a9490e@example.invalid');"}
+| execute_sql {"sql": "-- 2. UPDATE: Modify Existing Employee Information\nUPDATE \"Employee\" SET \"Title\" = 'CEO' WHERE \"EmployeeId\" = 1;\nUPDATE \"Employee\" SET \"Phone\" = '+1 (403) 555-9999' WHERE \"EmployeeId\" = 2;\nUPDATE \"Employee\" SET \"Title\" = 'IT Specialist' WHERE \"Title\" = 'IT Staff';"}
+| execute_sql {"sql": "-- 3. UPDATE: Reassign Some Customers to New Employees\nUPDATE \"Customer\" SET \"SupportRepId\" = 9 WHERE \"CustomerId\" IN (1, 2, 3);\nUPDATE \"Customer\" SET \"SupportRepId\" = 10 WHERE \"CustomerId\" IN (4, 5, 6);"}
+| execute_sql {"sql": "-- 4. UPDATE: Reorganize Reporting Structure\nUPDATE \"Employee\" SET \"ReportsTo\" = 1 WHERE \"EmployeeId\" IN (9, 10);"}
+| execute_sql {"sql": "-- 5. CREATE employee_performance table\nCREATE TABLE employee_performance (\n    employee_id INTEGER REFERENCES \"Employee\"(\"EmployeeId\"),\n    customers_assigned INTEGER,\n    performance_score DECIMAL\n);\n\n-- Calculate customers count for employees 9 and 10\nSELECT \"SupportRepId\", COUNT(*) as customer_count\nFROM \"Customer\"\nWHERE \"SupportRepId\" IN (9, 10)\nGROUP BY \"SupportRepId\";"}
+| execute_sql {"sql": "-- Insert calculated performance data\nINSERT INTO employee_performance (employee_id, customers_assigned, performance_score) VALUES\n(9, 3, 4.5),\n(10, 3, 4.2);"}
+| execute_sql {"sql": "-- Find Robert King's manager\nSELECT \"ReportsTo\" FROM \"Employee\" WHERE \"EmployeeId\" = 7;"}
+| execute_sql {"sql": "-- Reassign employees reporting to Robert King (EmployeeId=7) to report to Robert's manager (EmployeeId=6)\nUPDATE \"Employee\" SET \"ReportsTo\" = 6 WHERE \"ReportsTo\" = 7;"}
+| execute_sql {"sql": "-- Reassign customers supported by Robert King (EmployeeId=7) to Robert's manager (EmployeeId=6)\nUPDATE \"Customer\" SET \"SupportRepId\" = 6 WHERE \"SupportRepId\" = 7;"}
+| execute_sql {"sql": "-- Delete Robert King from Employee table\nDELETE FROM \"Employee\" WHERE \"EmployeeId\" = 7;"}
+| execute_sql {"sql": "-- 7. Promote Laura Callahan and manage salary\nALTER TABLE \"Employee\" ADD COLUMN IF NOT EXISTS salary DECIMAL;\n\nUPDATE \"Employee\" SET \"Title\" = 'Senior IT Specialist' WHERE \"EmployeeId\" = 8;\n\nUPDATE \"Employee\" SET salary = 50000.00;\nUPDATE \"Employee\" SET salary = 75000.00 WHERE \"EmployeeId\" = 8;"}
+| execute_sql {"sql": "-- 8. Final Verification Query\nSELECT \n    COUNT(*) as total_employees,\n    COUNT(CASE WHEN \"Title\" = 'CEO' THEN 1 END) as ceo_count,\n    COUNT(CASE WHEN \"Title\" = 'IT Specialist' THEN 1 END) as it_specialist_count,\n    COUNT(CASE WHEN \"ReportsTo\" = 1 THEN 1 END) as reports_to_ceo\nFROM \"Employee\";"}
+All tasks have been completed successfully:
+
+1. Added 2 new employees Sarah Johnson and Mike Chen.
+2. Updated Andrew Adams to CEO, Nancy Edwards' phone, and changed IT Staff to IT Specialist.
+3. Reassigned specific customers to Sarah Johnson and Mike Chen.
+4. Changed Sarah and Mike to report to Andrew Adams.
+5. Created employee_performance table and inserted performance data for Sarah and Mike.
+6. Deleted Robert King after reassigning his reports and customers to his manager.
+7. Promoted Laura Callahan and added a salary column, setting her salary and others accordingly.
+8. Verified final employee counts and hierarchy as expected.
+
+The final verification query results matched the expected outcome. Task completed.

@@ -1,0 +1,42 @@
+[07/18/26 09:58:08] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+[07/18/26 09:58:09] INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 09:58:12] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             MATERIALIZED VIEW                                  
+                             employees.exec_department_summary                  
+                             AS                                                 
+                             SELECT d.department_name,                          
+                                    COUNT(e.employee_id) AS                     
+                             total_employees,                                   
+                                    AVG(s.amount) AS                            
+                             avg_salary,                                        
+                                    SUM(s.amount)::bigint AS                    
+                             total_payroll,                                     
+                                    m.manager_name                              
+                             FROM employees.departments d                       
+                             LEFT JOIN employees.employees e                    
+                             ON d.department_id =                               
+                             e.department_id AND e.status =                     
+                             'active'                                           
+                             LEFT JOIN employees.salaries s ON                  
+                             e.employee_id = s.employee_id AND                  
+                             s.to_date = '9999-01-01'                           
+                             LEFT JOIN employees.managers m ON                  
+                             d.manager_id = m.manager_id                        
+                             GROUP BY d.department_name,                        
+                             m.manager_name;): relation                         
+                             "employees.departments" does not                   
+                             exist                                              
+                             LINE 7: FROM                                       
+                             employees.departments d                            
+                                          ^                                     
+                    ERROR    Error executing query: relation       server.py:401
+                             "employees.departments" does not                   
+                             exist                                              
+                             LINE 7: FROM employees.departments d               
+                                          ^                                     

@@ -1,0 +1,86 @@
+The files belonging to this database system will be owned by user "postgres".
+This user must also own the server process.
+
+The database cluster will be initialized with locale "en_US.utf8".
+The default database encoding has accordingly been set to "UTF8".
+The default text search configuration will be set to "english".
+
+Data page checksums are disabled.
+
+fixing permissions on existing directory /var/lib/postgresql/data ... ok
+creating subdirectories ... ok
+selecting dynamic shared memory implementation ... posix
+selecting default "max_connections" ... 100
+selecting default "shared_buffers" ... 128MB
+selecting default time zone ... Etc/UTC
+creating configuration files ... ok
+running bootstrap script ... ok
+performing post-bootstrap initialization ... ok
+syncing data to disk ... ok
+
+
+Success. You can now start the database server using:
+
+    pg_ctl -D /var/lib/postgresql/data -l logfile start
+
+waiting for server to start....2026-07-18 16:35:54.705 UTC [78] LOG:  starting PostgreSQL 17.6 (Debian 17.6-1.pgdg12+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-07-18 16:35:54.706 UTC [78] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-07-18 16:35:54.713 UTC [81] LOG:  database system was shut down at 2026-07-18 16:35:54 UTC
+2026-07-18 16:35:54.723 UTC [78] LOG:  database system is ready to accept connections
+ done
+server started
+CREATE DATABASE
+
+
+/usr/local/bin/docker-entrypoint.sh: ignoring /docker-entrypoint-initdb.d/*
+
+waiting for server to shut down....2026-07-18 16:35:54.936 UTC [78] LOG:  received fast shutdown request
+2026-07-18 16:35:54.937 UTC [78] LOG:  aborting any active transactions
+2026-07-18 16:35:54.945 UTC [78] LOG:  background worker "logical replication launcher" (PID 84) exited with exit code 1
+2026-07-18 16:35:54.945 UTC [79] LOG:  shutting down
+2026-07-18 16:35:54.947 UTC [79] LOG:  checkpoint starting: shutdown immediate
+2026-07-18 16:35:55.023 UTC [97] FATAL:  the database system is shutting down
+2026-07-18 16:35:55.036 UTC [79] LOG:  checkpoint complete: wrote 921 buffers (5.6%); 0 WAL file(s) added, 0 removed, 0 recycled; write=0.063 s, sync=0.023 s, total=0.091 s; sync files=301, longest=0.007 s, average=0.001 s; distance=4238 kB, estimate=4238 kB; lsn=0/1908958, redo lsn=0/1908958
+2026-07-18 16:35:55.041 UTC [78] LOG:  database system is shut down
+ done
+server stopped
+
+PostgreSQL init process complete; ready for start up.
+
+initdb: warning: enabling "trust" authentication for local connections
+initdb: hint: You can change this by editing pg_hba.conf or using the option -A, or --auth-local and --auth-host, the next time you run initdb.
+2026-07-18 16:35:55.175 UTC [1] LOG:  starting PostgreSQL 17.6 (Debian 17.6-1.pgdg12+1) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit
+2026-07-18 16:35:55.177 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+2026-07-18 16:35:55.177 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+2026-07-18 16:35:55.180 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+2026-07-18 16:35:55.184 UTC [101] LOG:  database system was shut down at 2026-07-18 16:35:55 UTC
+2026-07-18 16:35:55.191 UTC [1] LOG:  database system is ready to accept connections
+2026-07-18 16:36:13.009 UTC [112] ERROR:  function aurora_version() does not exist at character 8
+2026-07-18 16:36:13.009 UTC [112] HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+2026-07-18 16:36:13.009 UTC [112] STATEMENT:  SELECT aurora_version()
+2026-07-18 16:36:13.027 UTC [112] ERROR:  relation "migration_model" does not exist at character 25
+2026-07-18 16:36:13.027 UTC [112] STATEMENT:  SELECT ID, VERSION FROM MIGRATION_MODEL ORDER BY UPDATE_TIME DESC
+2026-07-18 16:36:14.125 UTC [113] ERROR:  relation "public.databasechangeloglock" does not exist at character 22
+2026-07-18 16:36:14.125 UTC [113] STATEMENT:  SELECT COUNT(*) FROM public.databasechangeloglock
+2026-07-18 16:40:55.571 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 16:42:04.714 UTC [99] LOG:  checkpoint complete: wrote 690 buffers (4.2%); 1 WAL file(s) added, 0 removed, 0 recycled; write=69.008 s, sync=0.042 s, total=69.144 s; sync files=679, longest=0.002 s, average=0.001 s; distance=4915 kB, estimate=4915 kB; lsn=0/1DDE438, redo lsn=0/1DD58E0
+2026-07-18 16:45:55.096 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 16:45:57.843 UTC [99] LOG:  checkpoint complete: wrote 28 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.736 s, sync=0.005 s, total=2.747 s; sync files=25, longest=0.004 s, average=0.001 s; distance=79 kB, estimate=4432 kB; lsn=0/1DE9798, redo lsn=0/1DE9740
+2026-07-18 16:50:55.897 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 16:50:58.789 UTC [99] LOG:  checkpoint complete: wrote 30 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.880 s, sync=0.005 s, total=2.893 s; sync files=26, longest=0.003 s, average=0.001 s; distance=84 kB, estimate=3997 kB; lsn=0/1E0B550, redo lsn=0/1DFE858
+2026-07-18 16:55:55.926 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 16:55:58.888 UTC [99] LOG:  checkpoint complete: wrote 31 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.951 s, sync=0.007 s, total=2.963 s; sync files=29, longest=0.004 s, average=0.001 s; distance=105 kB, estimate=3608 kB; lsn=0/1E19F60, redo lsn=0/1E18C58
+2026-07-18 17:00:55.946 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 17:00:58.477 UTC [99] LOG:  checkpoint complete: wrote 27 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.513 s, sync=0.008 s, total=2.532 s; sync files=25, longest=0.004 s, average=0.001 s; distance=98 kB, estimate=3257 kB; lsn=0/1E316F8, redo lsn=0/1E316A0
+2026-07-18 17:05:55.552 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 17:05:58.193 UTC [99] LOG:  checkpoint complete: wrote 27 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=2.629 s, sync=0.005 s, total=2.641 s; sync files=25, longest=0.003 s, average=0.001 s; distance=95 kB, estimate=2941 kB; lsn=0/1E49320, redo lsn=0/1E492C8
+2026-07-18 17:10:55.212 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 17:10:59.955 UTC [99] LOG:  checkpoint complete: wrote 49 buffers (0.3%); 0 WAL file(s) added, 0 removed, 0 recycled; write=4.726 s, sync=0.008 s, total=4.744 s; sync files=33, longest=0.003 s, average=0.001 s; distance=200 kB, estimate=2666 kB; lsn=0/1E7C7F8, redo lsn=0/1E7B4A0
+2026-07-18 17:15:55.874 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 17:16:02.048 UTC [99] LOG:  checkpoint complete: wrote 62 buffers (0.4%); 0 WAL file(s) added, 0 removed, 0 recycled; write=6.158 s, sync=0.009 s, total=6.175 s; sync files=35, longest=0.006 s, average=0.001 s; distance=270 kB, estimate=2427 kB; lsn=0/1EC91A8, redo lsn=0/1EBF050
+2026-07-18 17:20:55.887 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 17:20:59.330 UTC [99] LOG:  checkpoint complete: wrote 35 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.430 s, sync=0.005 s, total=3.446 s; sync files=26, longest=0.003 s, average=0.001 s; distance=152 kB, estimate=2199 kB; lsn=0/1EE54A8, redo lsn=0/1EE5418
+2026-07-18 17:25:55.672 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 17:25:58.936 UTC [99] LOG:  checkpoint complete: wrote 33 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.246 s, sync=0.005 s, total=3.270 s; sync files=26, longest=0.003 s, average=0.001 s; distance=149 kB, estimate=1994 kB; lsn=0/1F0BF10, redo lsn=0/1F0AC08
+2026-07-18 17:30:55.938 UTC [99] LOG:  checkpoint starting: time
+2026-07-18 17:30:59.087 UTC [99] LOG:  checkpoint complete: wrote 32 buffers (0.2%); 0 WAL file(s) added, 0 removed, 0 recycled; write=3.126 s, sync=0.009 s, total=3.150 s; sync files=26, longest=0.004 s, average=0.001 s; distance=106 kB, estimate=1806 kB; lsn=0/1F25788, redo lsn=0/1F25730

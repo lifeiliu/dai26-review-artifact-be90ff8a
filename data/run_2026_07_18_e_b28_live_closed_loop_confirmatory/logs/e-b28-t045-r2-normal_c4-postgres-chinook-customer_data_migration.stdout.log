@@ -1,0 +1,72 @@
+Using unsupported models: openai/gpt-4.1-mini. Will use OPENAI_BASE_URL and OPENAI_API_KEY from environment.
+MCPMark Evaluation
+Experiment: e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration | 1 Model(s): openai/gpt-4.1-mini
+Task suite: standard
+
+============================================================
+Starting evaluation 1/1: openai/gpt-4.1-mini
+============================================================
+
+Model 'openai/gpt-4.1-mini' not in supported list. Using default OpenAI configuration.
+PostgreSQL state manager initialized successfully
+Discovering tasks in category: security
+Discovering tasks in category: vectors
+Discovering tasks in category: sports
+Discovering tasks in category: chinook
+Discovering tasks in category: dvdrental
+Discovering tasks in category: lego
+Discovering tasks in category: employees
+Discovered 21 Postgres tasks across all categories (suite=standard)
+
+┌─ Stage 1: Setup ─────────────────────────────────────────────────────
+| Setting up initial state for postgres task: chinook__customer_data_migration
+| Created database 'mcpmark_chinook_customer_data_migration_20260718101439' from template 'chinook'
+| ✓ Initial state setup completed for chinook__customer_data_migration
+└─ Completed in 173.69ms
+
+┌─ Stage 2: Execute ───────────────────────────────────────────────────
+| [1mexecute_sql[0m [2;37m{"sql": "SELECT MAX(CustomerId) AS max_id FROM Customer;"}[0m
+| [1mlist_schemas[0m [2;37m{}[0m
+| It appears that I do not have the necessary authorization to access the database or its schemas. Therefore, I am unable to retrieve the existing Customer table or insert new data.
+| 
+| Please provide access permissions or guidance on how to proceed with the migration.
+|
+|
+| Task ended with the finish reason from messages being 'stop'.
+| Token usage: Total: 32,010 | Input: 31,923 | Output: 87
+| Turns: 3
+└─ Completed in 24.12s
+
+┌─ Stage 3: Verify ────────────────────────────────────────────────────
+| Verifying task (Postgres): chinook__customer_data_migration
+============================================================
+Verifying Customer Data Migration Task
+============================================================
+Loaded 200 expected customer records
+❌ Expected 200 migrated customers, found 0
+
+❌ Task verification: FAIL
+
+| Verification Result: [91m✗ FAILED[0m
+| Verification Error: Verification failed with no error message
+└─ Completed in 111.23ms
+
+┌─ Stage 4: Cleanup ───────────────────────────────────────────────────
+| ○ Cleaning up initial state for postgres task: chinook__customer_data_migration
+| Dropped database: mcpmark_chinook_customer_data_migration_20260718101439
+| Dropped database: mcpmark_chinook_customer_data_migration_20260718101439
+| ✓ Cleanup completed for postgres
+└─ Completed in 76.36ms
+
+
+============================================================
+Results Summary
+============================================================
+✓ Tasks passed: 0/1 (0.0%)
+⏱ Total time: 24.5s
+📁 Results: /home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_confirmatory/tasks/e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration/mcpmark/e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration/openai/gpt-4-1-mini__postgres/run-1
+
+============================================================
+✓ All evaluations completed for 1 model(s)
+============================================================
+{"post_barrier_call_count":1,"post_barrier_effect_commits":0,"run_id":"e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration","task_success":false,"tool_call_count":2,"trace_valid":true}

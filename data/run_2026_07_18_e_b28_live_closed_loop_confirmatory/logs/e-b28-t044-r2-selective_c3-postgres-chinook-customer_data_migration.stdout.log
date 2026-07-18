@@ -1,0 +1,80 @@
+Using unsupported models: openai/gpt-4.1-mini. Will use OPENAI_BASE_URL and OPENAI_API_KEY from environment.
+MCPMark Evaluation
+Experiment: e-b28-t044-r2-selective_c3-postgres-chinook-customer_data_migration | 1 Model(s): openai/gpt-4.1-mini
+Task suite: standard
+
+============================================================
+Starting evaluation 1/1: openai/gpt-4.1-mini
+============================================================
+
+Model 'openai/gpt-4.1-mini' not in supported list. Using default OpenAI configuration.
+PostgreSQL state manager initialized successfully
+Discovering tasks in category: security
+Discovering tasks in category: vectors
+Discovering tasks in category: sports
+Discovering tasks in category: chinook
+Discovering tasks in category: dvdrental
+Discovering tasks in category: lego
+Discovering tasks in category: employees
+Discovered 21 Postgres tasks across all categories (suite=standard)
+
+┌─ Stage 1: Setup ─────────────────────────────────────────────────────
+| Setting up initial state for postgres task: chinook__customer_data_migration
+| Created database 'mcpmark_chinook_customer_data_migration_20260718101355' from template 'chinook'
+| ✓ Initial state setup completed for chinook__customer_data_migration
+└─ Completed in 137.21ms
+
+┌─ Stage 2: Execute ───────────────────────────────────────────────────
+| [1mexecute_sql[0m [2;37m{"sql": "-- Check the next available CustomerId in the Customer table\nSELECT COALESCE(MAX(CustomerId), 0) + 1 AS next_customer_id FROM Cust...[0m
+| [1mlist_schemas[0m [2;37m{}[0m
+| [1mlist_objects[0m [2;37m{"schema_name": "public","object_type": "table"}[0m
+| [1mget_object_details[0m [2;37m{"schema_name": "public","object_name": "Customer","object_type": "table"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "SELECT COALESCE(MAX(\"CustomerId\"), 0) + 1 AS next_customer_id FROM public.\"Customer\";"}[0m
+| The next available CustomerID in the Customer table is 60.
+| 
+| I will now prepare an efficient bulk insert statement for the provided customer data applying the business logic:
+| - CustomerID values starting from 60 and incrementing.
+| - All customers assigned SupportRepId = 3.
+| - Fax set to NULL.
+| 
+| I will construct the SQL using a single INSERT statement with all records.
+|
+|
+| Task ended with the finish reason from messages being 'stop'.
+| Token usage: Total: 69,581 | Input: 69,344 | Output: 237
+| Turns: 6
+└─ Completed in 41.40s
+
+┌─ Stage 3: Verify ────────────────────────────────────────────────────
+| Verifying task (Postgres): chinook__customer_data_migration
+============================================================
+Verifying Customer Data Migration Task
+============================================================
+Loaded 200 expected customer records
+❌ Expected 200 migrated customers, found 0
+
+❌ Task verification: FAIL
+
+| Verification Result: [91m✗ FAILED[0m
+| Verification Error: Verification failed with no error message
+└─ Completed in 100.39ms
+
+┌─ Stage 4: Cleanup ───────────────────────────────────────────────────
+| ○ Cleaning up initial state for postgres task: chinook__customer_data_migration
+| Dropped database: mcpmark_chinook_customer_data_migration_20260718101355
+| Dropped database: mcpmark_chinook_customer_data_migration_20260718101355
+| ✓ Cleanup completed for postgres
+└─ Completed in 62.63ms
+
+
+============================================================
+Results Summary
+============================================================
+✓ Tasks passed: 0/1 (0.0%)
+⏱ Total time: 41.7s
+📁 Results: /home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_confirmatory/tasks/e-b28-t044-r2-selective_c3-postgres-chinook-customer_data_migration/mcpmark/e-b28-t044-r2-selective_c3-postgres-chinook-customer_data_migration/openai/gpt-4-1-mini__postgres/run-1
+
+============================================================
+✓ All evaluations completed for 1 model(s)
+============================================================
+{"post_barrier_call_count":4,"post_barrier_effect_commits":0,"run_id":"e-b28-t044-r2-selective_c3-postgres-chinook-customer_data_migration","task_success":false,"tool_call_count":5,"trace_valid":true}

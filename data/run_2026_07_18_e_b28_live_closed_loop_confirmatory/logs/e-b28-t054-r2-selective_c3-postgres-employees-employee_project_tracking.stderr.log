@@ -1,0 +1,163 @@
+[07/18/26 10:21:42] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 10:21:48] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:21:58] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:02] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:05] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:06] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:08] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:11] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:20] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH       sql_driver.py:271
+                             project_data AS (                                  
+                               SELECT project_id, project_name                  
+                             FROM employees.employee_projects                   
+                             )                                                  
+                             INSERT INTO                                        
+                             employees.project_assignments                      
+                             (employee_id, project_id, role,                    
+                             allocation_percentage,                             
+                             assigned_date)                                     
+                             SELECT e.id, pd.project_id,                        
+                                    CASE e.department                           
+                                      WHEN 'Development' THEN                   
+                             'Developer'                                        
+                                      WHEN 'Human Resources'                    
+                             THEN 'Business Analyst'                            
+                                      WHEN 'Marketing' THEN                     
+                             'Marketing Specialist'                             
+                                      WHEN 'Finance' THEN                       
+                             'Financial Analyst'                                
+                                      WHEN 'Sales' THEN 'Sales                  
+                             Representative'                                    
+                                      WHEN 'Research' THEN                      
+                             'Research Analyst'                                 
+                                      WHEN 'Production' THEN                    
+                             'Production Coordinator'                           
+                                      WHEN 'Quality                             
+                             Management' THEN 'QA Specialist'                   
+                                      WHEN 'Customer Service'                   
+                             THEN 'Customer Success'                            
+                                      ELSE NULL                                 
+                                    END AS role,                                
+                                    CASE e.department                           
+                                      WHEN 'Development' THEN                   
+                             80                                                 
+                                      WHEN 'Human Resources'                    
+                             THEN 60                                            
+                                      WHEN 'Marketing' THEN 40                  
+                                      WHEN 'Finance' THEN 30                    
+                                      WHEN 'Sales' THEN 50                      
+                                      WHEN 'Research' THEN 70                   
+                                      WHEN 'Production' THEN                    
+                             45                                                 
+                                      WHEN 'Quality                             
+                             Management' THEN 85                                
+                                      WHEN 'Customer Service'                   
+                             THEN 35                                            
+                                      ELSE NULL                                 
+                                    END AS                                      
+                             allocation_percentage,                             
+                                    DATE '2024-01-01' AS                        
+                             assigned_date                                      
+                             FROM employees.employee e                          
+                             JOIN project_data pd ON (                          
+                               (e.department = 'Development'                    
+                             AND pd.project_name = 'Database                    
+                             Modernization') OR                                 
+                               (e.department = 'Human                           
+                             Resources' AND pd.project_name =                   
+                             'Employee Portal Upgrade') OR                      
+                               (e.department = 'Marketing' AND                  
+                             pd.project_name = 'HR Analytics                    
+                             Dashboard') OR                                     
+                               (e.department = 'Finance' AND                    
+                             pd.project_name = 'Database                        
+                             Modernization') OR                                 
+                               (e.department = 'Sales' AND                      
+                             pd.project_name = 'Employee                        
+                             Portal Upgrade') OR                                
+                               (e.department = 'Research' AND                   
+                             pd.project_name = 'HR Analytics                    
+                             Dashboard') OR                                     
+                               (e.department = 'Production'                     
+                             AND pd.project_name = 'Database                    
+                             Modernization') OR                                 
+                               (e.department = 'Quality                         
+                             Management' AND pd.project_name =                  
+                             'Employee Portal Upgrade') OR                      
+                               (e.department = 'Customer                        
+                             Service' AND pd.project_name =                     
+                             'HR Analytics Dashboard')                          
+                             )                                                  
+                             WHERE e.department IN                              
+                             ('Development', 'Human                             
+                             Resources', 'Marketing',                           
+                             'Finance', 'Sales', 'Research',                    
+                             'Production', 'Quality                             
+                             Management', 'Customer                             
+                             Service');): column e.department                   
+                             does not exist                                     
+                             LINE 33:   (e.department =                         
+                             'Development' AND pd.project_name                  
+                             = 'Datab...                                        
+                                         ^                                      
+                    ERROR    Error executing query: column         server.py:401
+                             e.department does not exist                        
+                             LINE 33:   (e.department =                         
+                             'Development' AND pd.project_name =                
+                             'Datab...                                          
+                                         ^                                      
+[07/18/26 10:22:22] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:23] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (SELECT     sql_driver.py:271
+                             DISTINCT department FROM                           
+                             employees.employee;): column                       
+                             "department" does not exist                        
+                             LINE 1: SELECT DISTINCT                            
+                             department FROM                                    
+                             employees.employee;                                
+                                                     ^                          
+                    ERROR    Error executing query: column         server.py:401
+                             "department" does not exist                        
+                             LINE 1: SELECT DISTINCT department                 
+                             FROM employees.employee;                           
+                                                     ^                          
+[07/18/26 10:22:24] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:26] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:28] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:37] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:46] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:47] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:49] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:51] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:22:53] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    

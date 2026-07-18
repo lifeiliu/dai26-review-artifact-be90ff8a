@@ -1,0 +1,98 @@
+Using unsupported models: openai/gpt-4.1-mini. Will use OPENAI_BASE_URL and OPENAI_API_KEY from environment.
+MCPMark Evaluation
+Experiment: e-b28-t056-r2-selective_c3-postgres-employees-executive_dashboard_automation | 1 Model(s): openai/gpt-4.1-mini
+Task suite: standard
+
+============================================================
+Starting evaluation 1/1: openai/gpt-4.1-mini
+============================================================
+
+Model 'openai/gpt-4.1-mini' not in supported list. Using default OpenAI configuration.
+PostgreSQL state manager initialized successfully
+Discovering tasks in category: security
+Discovering tasks in category: vectors
+Discovering tasks in category: sports
+Discovering tasks in category: chinook
+Discovering tasks in category: dvdrental
+Discovering tasks in category: lego
+Discovering tasks in category: employees
+Discovered 21 Postgres tasks across all categories (suite=standard)
+
+┌─ Stage 1: Setup ─────────────────────────────────────────────────────
+| Setting up initial state for postgres task: employees__executive_dashboard_automation
+| Created database 'mcpmark_employees_executive_dashboard_automation_20260718102501' from template 'employees'
+| ✓ Initial state setup completed for employees__executive_dashboard_automation
+└─ Completed in 3.40s
+
+┌─ Stage 2: Execute ───────────────────────────────────────────────────
+| [1mlist_objects[0m [2;37m{"schema_name": "employees","object_type": "table"}[0m
+| [1mlist_objects[0m [2;37m{"schema_name": "employees","object_type": "materialized_view"}[0m
+| [1mget_object_details[0m [2;37m{"schema_name": "employees","object_name": "department","object_type": "table"}[0m
+| [1mget_object_details[0m [2;37m{"schema_name": "employees","object_name": "department_employee","object_type": "table"}[0m
+| [1mget_object_details[0m [2;37m{"schema_name": "employees","object_name": "department_manager","object_type": "table"}[0m
+| [1mget_object_details[0m [2;37m{"schema_name": "employees","object_name": "employee","object_type": "table"}[0m
+| [1mget_object_details[0m [2;37m{"schema_name": "employees","object_name": "salary","object_type": "table"}[0m
+| [1mget_object_details[0m [2;37m{"schema_name": "employees","object_name": "title","object_type": "table"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Create materialized view exec_department_summary\nCREATE MATERIALIZED VIEW employees.exec_department_summary AS\nSELECT d.dept_n...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Create table monthly_reports\nCREATE TABLE IF NOT EXISTS employees.monthly_reports (\n    report_id SERIAL PRIMARY KEY,\n    rep...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Create table salary_alerts\nCREATE TABLE IF NOT EXISTS employees.salary_alerts (\n    alert_id SERIAL PRIMARY KEY,\n    employee...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Update employee 10001's current salary to_date = '2024-01-31'\nUPDATE employees.salary\nSET to_date = '2024-01-31'\nWHERE employ...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Call generate_monthly_report for '2024-01-01'\nSELECT employees.generate_monthly_report('2024-01-01') AS report_id;"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Query the generated report with report_id 1\nSELECT * FROM employees.monthly_reports WHERE report_id = 1;"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE INDEX IF NOT EXISTS idx_salary_alerts_status ON employees.salary_alerts(status);"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE INDEX IF NOT EXISTS idx_monthly_reports_report_date_department_count ON employees.monthly_reports(report_date, department_co...[0m
+| The comprehensive reporting and automation system has been successfully implemented as requested:
+| 
+| 1. Created three materialized views in the `employees` schema:
+|    - `exec_department_summary`
+|    - `exec_hiring_trends`
+|    - `exec_salary_distribution`
+| 
+| 2. Created the stored procedure `generate_monthly_report(report_date DATE)` that inserts a summary report and returns the generated report_id.
+| 
+| 3. Created the trigger `high_salary_alert` which fires on new salary records with amount > 120000 and inserts alerts into `salary_alerts`.
+| 
+| 4. Updated employee 10001's salary to trigger the alert and refreshed all materialized views.
+| 
+| 5. Executed the stored procedure for the report date '2024-01-01' and verified the inserted report.
+| 
+| 6. Created performance indexes on `salary_alerts.status` and composite index on `monthly_reports(report_date, department_count)`.
+| 
+| If you need to view any specific reports or further actions, please let me know. Otherwise, task completed.
+|
+|
+| Task ended with the finish reason from messages being 'stop'.
+| Token usage: Total: 97,726 | Input: 95,304 | Output: 2,422
+| Turns: 15
+└─ Completed in 88.30s
+
+┌─ Stage 3: Verify ────────────────────────────────────────────────────
+| Verifying task (Postgres): employees__executive_dashboard_automation
+==================================================
+❌ Hiring trends data incorrect for year 1985: view=(1985, 35316, Decimal('53219.41'), Decimal('1.00'), None), actual=(1985, 35316, Decimal('53010.028712198437'), Decimal('80.10816627024578094900'), 'Development')
+
+❌ Task verification: FAIL
+
+| Verification Result: [91m✗ FAILED[0m
+| Verification Error: Verification failed with no error message
+└─ Completed in 3.25s
+
+┌─ Stage 4: Cleanup ───────────────────────────────────────────────────
+| ○ Cleaning up initial state for postgres task: employees__executive_dashboard_automation
+| Dropped database: mcpmark_employees_executive_dashboard_automation_20260718102501
+| Dropped database: mcpmark_employees_executive_dashboard_automation_20260718102501
+| ✓ Cleanup completed for postgres
+└─ Completed in 185.86ms
+
+
+============================================================
+Results Summary
+============================================================
+✓ Tasks passed: 0/1 (0.0%)
+⏱ Total time: 95.1s
+📁 Results: /home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_confirmatory/tasks/e-b28-t056-r2-selective_c3-postgres-employees-executive_dashboard_automation/mcpmark/e-b28-t056-r2-selective_c3-postgres-employees-executive_dashboard_automation/openai/gpt-4-1-mini__postgres/run-1
+
+============================================================
+✓ All evaluations completed for 1 model(s)
+============================================================
+{"post_barrier_call_count":15,"post_barrier_effect_commits":6,"run_id":"e-b28-t056-r2-selective_c3-postgres-employees-executive_dashboard_automation","task_success":false,"tool_call_count":16,"trace_valid":true}

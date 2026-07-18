@@ -10,7 +10,9 @@ evidence for the mechanism/workload boundaries (E-B17--E-B20), real Keycloak
 PUSH/POLL paths (E-B22/E-B23), two 16-host AWS executions with real
 Filesystem/PostgreSQL effects (E-B24), an OPA/Toxiproxy replication (E-B25), a
 live model-to-MCP execution (E-B26), and the version-2 completion-monitor fault
-and scaling evaluation (E-B27). Secondary E-B1--E-B16 material remains for
+and scaling evaluation (E-B27). E-B28 adds an unmodified external MCPMarkAgent
+running the frozen Filesystem/PostgreSQL tasks in a live closed loop across
+normal C4 and selective C3. Secondary E-B1--E-B16 material remains for
 auditability but is not the paper's main evidence.
 
 ## Quick start
@@ -44,8 +46,8 @@ scaling trials, all 11 configurations, and every reported median. Its
 
 - `src/revocation_propagation/`: propagation, receiver, gateway, and C0--C5
   monitor implementations.
-- `tests/unit/`: 98 unit and integration-boundary tests in the release state.
-- `experiments/`: experiment runners, including E-B24--E-B27.
+- `tests/unit/`: 101 unit and integration-boundary tests in the release state.
+- `experiments/`: experiment runners, including E-B24--E-B28.
 - `protocols/`: frozen study and completion-contract definitions.
 - `data/`: saved portable evidence and validators' reports.
 - `scripts/`: integrity, claim-boundary, release, and anonymization tools.

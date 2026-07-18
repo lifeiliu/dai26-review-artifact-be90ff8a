@@ -1,0 +1,24 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| execute_sql {"sql": "CREATE TABLE employees.employee_projects (\n  project_id SERIAL PRIMARY KEY,\n  project_name VARCHAR(100) NOT NULL,\n  start_date DATE NOT NULL,\n  end_date DATE,\n  budget DECIMAL(10,2),\n  status VARCHAR(20) DEFAULT 'active'\n);\n\nCREATE TABLE employees.project_assignments (\n  assignment_id SERIAL PRIMARY KEY,\n  employee_id BIGINT NOT NULL,\n  project_id INTEGER NOT NULL,\n  role VARCHAR(50) NOT NULL,\n  allocation_percentage INTEGER CHECK (allocation_percentage BETWEEN 1 AND 100),\n  assigned_date DATE NOT NULL\n);\n\nCREATE TABLE employees.project_milestones (\n  milestone_id SERIAL PRIMARY KEY,\n  project_id INTEGER NOT NULL,\n  milestone_name VARCHAR(100) NOT NULL,\n  due_date DATE NOT NULL,\n  completed BOOLEAN DEFAULT FALSE\n);"}
+| execute_sql {"sql": "ALTER TABLE employees.project_assignments\nADD CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employees.employee(id);\n\nALTER TABLE employees.project_assignments\nADD CONSTRAINT fk_project_assignments_project FOREIGN KEY (project_id) REFERENCES employees.employee_projects(project_id);\n\nALTER TABLE employees.project_milestones\nADD CONSTRAINT fk_project_milestones_project FOREIGN KEY (project_id) REFERENCES employees.employee_projects(project_id);"}
+It seems I encountered a permissions issue when trying to add foreign key constraints referencing the employees.employee table. Could you please confirm if I have the necessary permissions to reference that table, or if there is an alternative way to proceed? Alternatively, I can continue adding other constraints and indexes that do not involve that table.

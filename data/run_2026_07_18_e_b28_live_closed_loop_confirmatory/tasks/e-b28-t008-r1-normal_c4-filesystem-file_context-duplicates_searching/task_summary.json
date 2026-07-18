@@ -1,0 +1,291 @@
+{
+  "agent_execution_time": 20.440953731536865,
+  "agent_implementation": "unmodified MCPMarkAgent",
+  "arm": "normal_c4",
+  "benchmark_execution_result": {
+    "error_message": null,
+    "success": false,
+    "verification_error": "Traceback (most recent call last):\n  File \"/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/tasks/filesystem/standard/file_context/duplicates_searching/verify.py\", line 218, in <module>\n    main()\n  File \"/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/tasks/filesystem/standard/file_context/duplicates_searching/verify.py\", line 204, in main\n    if not verify_func(test_dir):\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/tasks/filesystem/standard/file_context/duplicates_searching/verify.py\", line 170, in verify_total_file_count\n    duplicate_files = [f for f in duplicates_dir.iterdir() if f.is_file()]\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/tasks/filesystem/standard/file_context/duplicates_searching/verify.py\", line 170, in <listcomp>\n    duplicate_files = [f for f in duplicates_dir.iterdir() if f.is_file()]\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py\", line 931, in iterdir\n    for name in os.listdir(self):\n                ^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: '/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/.mcpmark_backups/backup_filesystem_file_context_duplicates_searching_61467/duplicates'\n",
+    "verification_output": "\ud83d\udd0d Verifying File Duplicates Detection and Organization Task...\n\n--- Duplicates Directory Exists ---\n\u274c 'duplicates' directory not found\n\n--- Duplicate Files Moved ---\n\u274c Missing duplicate files in 'duplicates' directory: ['file_01.txt', 'file_02.txt', 'file_03.txt', 'file_04.txt', 'file_07.txt', 'file_08.txt', 'file_10.txt', 'file_11.txt', 'file_13.txt', 'file_14.txt', 'file_15.txt', 'file_16.txt', 'file_18.txt', 'file_19.txt']\n\n--- Unique Files Remain ---\n\u2705 All expected unique files remain in the original location\n\n--- No Duplicates in Original ---\n\u274c Duplicate files still exist in original location: ['file_01.txt', 'file_02.txt', 'file_03.txt', 'file_04.txt', 'file_07.txt', 'file_08.txt', 'file_10.txt', 'file_11.txt', 'file_13.txt', 'file_14.txt', 'file_15.txt', 'file_16.txt', 'file_18.txt', 'file_19.txt']\n\n--- Content Integrity ---\n\u274c First file of group group1 not found: file_01.txt\n\n--- Duplicates Count ---\n"
+  },
+  "completion_monitor": {
+    "event_jti": "187edee0-7fac-b138-a95c-49f5c7073391",
+    "note": "The unchanged agent made no later MCP call, so the nonempty-vector monitor was not instantiated.",
+    "post_barrier_vectors": 0,
+    "status": "NO_EXPOSURE"
+  },
+  "experiment": "E-B28",
+  "exposure_status": "EXPOSED",
+  "finished_unix_ns": 1784392950489053000,
+  "infrastructure_error": false,
+  "intervention": {
+    "arm": "normal_c4",
+    "barrier_completed_unix_ns": 1784392948437244000,
+    "barrier_started_unix_ns": 1784392932105699000,
+    "c2_transport_acknowledged": true,
+    "c3_receiver_persisted": true,
+    "c4_gateway_enforced": true,
+    "category_id": "file_context",
+    "event_jti": "187edee0-7fac-b138-a95c-49f5c7073391",
+    "event_type": "revocation_intervention",
+    "event_unix_ns": 1784392948437313000,
+    "event_wall_time": "2026-07-18T16:42:28.437269+00:00",
+    "intervention_valid": true,
+    "logout_http_status": 204,
+    "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+    "protocol_version": "e-b28-live-closed-loop-v1",
+    "receiver_jtis": {
+      "receiver-a": "85eee44d-af09-2a1e-9f9a-3d8109f58b30",
+      "receiver-b": "187edee0-7fac-b138-a95c-49f5c7073391"
+    },
+    "receiver_state": {
+      "arm": "normal_c4",
+      "attempt_count": 2,
+      "attempts": [
+        {
+          "attempt_id": 9,
+          "authorization_valid": true,
+          "body_sha256": "4fc6ded86f19690a4c29b08bc8d81bc7b4e9ee22a2622275a9a66366eca5804e",
+          "content_type": "application/secevent+jwt",
+          "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJGZ3VFTldoSFh6bHVWSENmdHZfRnI4bmxvM2oxa0NOZGs2ak1fZWZEZWJNIn0.eyJqdGkiOiI4NWVlZTQ0ZC1hZjA5LTJhMWUtOWY5YS0zZDgxMDlmNThiMzAiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTI5MzIsImF1ZCI6InJlY2VpdmVyLWEvMDllNDkwMTktNmFjNy00MWVhLTgyMGYtZjVkMzBmMDBkYmM3IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyOTMyLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNzE3OTgwOWYtNTY1NC00ODQ4LWFkMTctNzNmYmJhN2NhOGIzIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJzN2tPeXJFbkxZY1hFVmJLTWxZOG9tQmMifX0sInR4biI6ImE5MzYzNjZjLWIzN2EtNGUwNy1hZTU0LTM2ZTMzYzRjMDFjMSJ9.n_VSclZX3hLHC-Mpg8yMAaqnrSXeERN1HXWRhWAbQuqLTQFaYG7hroc_ecm2bCddyn9LU56I-_vMYm2ZA0k22TyoHn1SZhLRXRbEwJdWjvFv7-nJQ7S_jKvwAoyYXx4oDWZ_ioFAqUwSdaLgdjv6H9zxjQ6MR6VNViUfkYhRzHJHCSwwW-OqfPmrjDYwV3HDzvyT8ecZZJbHSQfrvC-XXMgmmbtjySZvIfZSHqYMOMrkDqI9xP08X3X_fY-AISc4IksSRMCIcmuuAZnTvgYdTd1jCWjm69UNGTnXKHoEGgSxvfziIGfRyaygaVSQfTM3M5OlnLhLa-IXuv6CaY9vsA",
+          "forwarded": true,
+          "http_response": 202,
+          "is_session_revoked": true,
+          "jti": "85eee44d-af09-2a1e-9f9a-3d8109f58b30",
+          "jws_header": {
+            "alg": "RS256",
+            "kid": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+            "typ": "secevent+jwt"
+          },
+          "observed_at_ns": 1784392948282186000,
+          "payload": {
+            "aud": "receiver-a/09e49019-6ac7-41ea-820f-f5d30f00dbc7",
+            "events": {
+              "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                "event_timestamp": 1784392932,
+                "initiating_entity": "user",
+                "reason_admin": {
+                  "en": "User logout"
+                }
+              }
+            },
+            "iat": 1784392932,
+            "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+            "jti": "85eee44d-af09-2a1e-9f9a-3d8109f58b30",
+            "sub_id": {
+              "format": "complex",
+              "session": {
+                "format": "opaque",
+                "id": "s7kOyrEnLYcXEVbKMlY8omBc"
+              },
+              "user": {
+                "format": "iss_sub",
+                "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                "sub": "7179809f-5654-4848-ad17-73fbba7ca8b3"
+              }
+            },
+            "txn": "a936366c-b37a-4e07-ae54-36e33c4c01c1"
+          },
+          "receiver": "receiver-a",
+          "run_id": "e-b28-t008-r1-normal_c4-filesystem-file_context-duplicates_searching",
+          "session_id": "s7kOyrEnLYcXEVbKMlY8omBc"
+        },
+        {
+          "attempt_id": 10,
+          "authorization_valid": true,
+          "body_sha256": "3f7e6258369ec4e4605f8d05331450e4b01db8339555c11e2a322595b8692dd6",
+          "content_type": "application/secevent+jwt",
+          "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJGZ3VFTldoSFh6bHVWSENmdHZfRnI4bmxvM2oxa0NOZGs2ak1fZWZEZWJNIn0.eyJqdGkiOiIxODdlZGVlMC03ZmFjLWIxMzgtYTk1Yy00OWY1YzcwNzMzOTEiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTI5MzIsImF1ZCI6InJlY2VpdmVyLWIvZmIyMWQwNzYtMTA5My00NGMzLTgwNjItYTc4NDVjNjg5MTVlIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyOTMyLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNzE3OTgwOWYtNTY1NC00ODQ4LWFkMTctNzNmYmJhN2NhOGIzIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJzN2tPeXJFbkxZY1hFVmJLTWxZOG9tQmMifX0sInR4biI6IjA1NTU1NWQwLTA5MDItNGRhZC1hMmYyLTFiNTc2MzlkYzczMyJ9.MHTybgWxNi447mSvDkuvwX7LusBu6ikB4CeVB-tq4woTuDxoh_sbPyZgLDoKY-NaInxSHUC63pya1-7-L3s7t0hz0p3QVdWpTTv8VEboFgF1QyddDMNcSkLWaMF0zTeFVscajim0nFsBgo62PHWTAEV8YmxjjbqFMBs325I7f6MXSgm6t4kb_G705Oy34zm-YWEqZvPMh6mWhcB_LmJCatoQjs4puUFPghj2-0nGmWOimRk5r7YKKzsmRkSpZPuaBsHE0Jv0XMdI-6wP0hXqVGs9OlCqwOkTvtiC2h8xSAWXPT6kuO17qI8OyEIvyegbU3jcDk2stOyGT5O6_3FwDQ",
+          "forwarded": true,
+          "http_response": 202,
+          "is_session_revoked": true,
+          "jti": "187edee0-7fac-b138-a95c-49f5c7073391",
+          "jws_header": {
+            "alg": "RS256",
+            "kid": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+            "typ": "secevent+jwt"
+          },
+          "observed_at_ns": 1784392948300225000,
+          "payload": {
+            "aud": "receiver-b/fb21d076-1093-44c3-8062-a7845c68915e",
+            "events": {
+              "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                "event_timestamp": 1784392932,
+                "initiating_entity": "user",
+                "reason_admin": {
+                  "en": "User logout"
+                }
+              }
+            },
+            "iat": 1784392932,
+            "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+            "jti": "187edee0-7fac-b138-a95c-49f5c7073391",
+            "sub_id": {
+              "format": "complex",
+              "session": {
+                "format": "opaque",
+                "id": "s7kOyrEnLYcXEVbKMlY8omBc"
+              },
+              "user": {
+                "format": "iss_sub",
+                "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                "sub": "7179809f-5654-4848-ad17-73fbba7ca8b3"
+              }
+            },
+            "txn": "055555d0-0902-4dad-a2f2-1b57639dc733"
+          },
+          "receiver": "receiver-b",
+          "run_id": "e-b28-t008-r1-normal_c4-filesystem-file_context-duplicates_searching",
+          "session_id": "s7kOyrEnLYcXEVbKMlY8omBc"
+        }
+      ],
+      "matching_attempts": {
+        "receiver-a": {
+          "attempt_id": 9,
+          "authorization_valid": true,
+          "body_sha256": "4fc6ded86f19690a4c29b08bc8d81bc7b4e9ee22a2622275a9a66366eca5804e",
+          "content_type": "application/secevent+jwt",
+          "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJGZ3VFTldoSFh6bHVWSENmdHZfRnI4bmxvM2oxa0NOZGs2ak1fZWZEZWJNIn0.eyJqdGkiOiI4NWVlZTQ0ZC1hZjA5LTJhMWUtOWY5YS0zZDgxMDlmNThiMzAiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTI5MzIsImF1ZCI6InJlY2VpdmVyLWEvMDllNDkwMTktNmFjNy00MWVhLTgyMGYtZjVkMzBmMDBkYmM3IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyOTMyLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNzE3OTgwOWYtNTY1NC00ODQ4LWFkMTctNzNmYmJhN2NhOGIzIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJzN2tPeXJFbkxZY1hFVmJLTWxZOG9tQmMifX0sInR4biI6ImE5MzYzNjZjLWIzN2EtNGUwNy1hZTU0LTM2ZTMzYzRjMDFjMSJ9.n_VSclZX3hLHC-Mpg8yMAaqnrSXeERN1HXWRhWAbQuqLTQFaYG7hroc_ecm2bCddyn9LU56I-_vMYm2ZA0k22TyoHn1SZhLRXRbEwJdWjvFv7-nJQ7S_jKvwAoyYXx4oDWZ_ioFAqUwSdaLgdjv6H9zxjQ6MR6VNViUfkYhRzHJHCSwwW-OqfPmrjDYwV3HDzvyT8ecZZJbHSQfrvC-XXMgmmbtjySZvIfZSHqYMOMrkDqI9xP08X3X_fY-AISc4IksSRMCIcmuuAZnTvgYdTd1jCWjm69UNGTnXKHoEGgSxvfziIGfRyaygaVSQfTM3M5OlnLhLa-IXuv6CaY9vsA",
+          "forwarded": true,
+          "http_response": 202,
+          "is_session_revoked": true,
+          "jti": "85eee44d-af09-2a1e-9f9a-3d8109f58b30",
+          "jws_header": {
+            "alg": "RS256",
+            "kid": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+            "typ": "secevent+jwt"
+          },
+          "observed_at_ns": 1784392948282186000,
+          "payload": {
+            "aud": "receiver-a/09e49019-6ac7-41ea-820f-f5d30f00dbc7",
+            "events": {
+              "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                "event_timestamp": 1784392932,
+                "initiating_entity": "user",
+                "reason_admin": {
+                  "en": "User logout"
+                }
+              }
+            },
+            "iat": 1784392932,
+            "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+            "jti": "85eee44d-af09-2a1e-9f9a-3d8109f58b30",
+            "sub_id": {
+              "format": "complex",
+              "session": {
+                "format": "opaque",
+                "id": "s7kOyrEnLYcXEVbKMlY8omBc"
+              },
+              "user": {
+                "format": "iss_sub",
+                "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                "sub": "7179809f-5654-4848-ad17-73fbba7ca8b3"
+              }
+            },
+            "txn": "a936366c-b37a-4e07-ae54-36e33c4c01c1"
+          },
+          "receiver": "receiver-a",
+          "run_id": "e-b28-t008-r1-normal_c4-filesystem-file_context-duplicates_searching",
+          "session_id": "s7kOyrEnLYcXEVbKMlY8omBc"
+        },
+        "receiver-b": {
+          "attempt_id": 10,
+          "authorization_valid": true,
+          "body_sha256": "3f7e6258369ec4e4605f8d05331450e4b01db8339555c11e2a322595b8692dd6",
+          "content_type": "application/secevent+jwt",
+          "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJGZ3VFTldoSFh6bHVWSENmdHZfRnI4bmxvM2oxa0NOZGs2ak1fZWZEZWJNIn0.eyJqdGkiOiIxODdlZGVlMC03ZmFjLWIxMzgtYTk1Yy00OWY1YzcwNzMzOTEiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTI5MzIsImF1ZCI6InJlY2VpdmVyLWIvZmIyMWQwNzYtMTA5My00NGMzLTgwNjItYTc4NDVjNjg5MTVlIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MzkyOTMyLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNzE3OTgwOWYtNTY1NC00ODQ4LWFkMTctNzNmYmJhN2NhOGIzIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJzN2tPeXJFbkxZY1hFVmJLTWxZOG9tQmMifX0sInR4biI6IjA1NTU1NWQwLTA5MDItNGRhZC1hMmYyLTFiNTc2MzlkYzczMyJ9.MHTybgWxNi447mSvDkuvwX7LusBu6ikB4CeVB-tq4woTuDxoh_sbPyZgLDoKY-NaInxSHUC63pya1-7-L3s7t0hz0p3QVdWpTTv8VEboFgF1QyddDMNcSkLWaMF0zTeFVscajim0nFsBgo62PHWTAEV8YmxjjbqFMBs325I7f6MXSgm6t4kb_G705Oy34zm-YWEqZvPMh6mWhcB_LmJCatoQjs4puUFPghj2-0nGmWOimRk5r7YKKzsmRkSpZPuaBsHE0Jv0XMdI-6wP0hXqVGs9OlCqwOkTvtiC2h8xSAWXPT6kuO17qI8OyEIvyegbU3jcDk2stOyGT5O6_3FwDQ",
+          "forwarded": true,
+          "http_response": 202,
+          "is_session_revoked": true,
+          "jti": "187edee0-7fac-b138-a95c-49f5c7073391",
+          "jws_header": {
+            "alg": "RS256",
+            "kid": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+            "typ": "secevent+jwt"
+          },
+          "observed_at_ns": 1784392948300225000,
+          "payload": {
+            "aud": "receiver-b/fb21d076-1093-44c3-8062-a7845c68915e",
+            "events": {
+              "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                "event_timestamp": 1784392932,
+                "initiating_entity": "user",
+                "reason_admin": {
+                  "en": "User logout"
+                }
+              }
+            },
+            "iat": 1784392932,
+            "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+            "jti": "187edee0-7fac-b138-a95c-49f5c7073391",
+            "sub_id": {
+              "format": "complex",
+              "session": {
+                "format": "opaque",
+                "id": "s7kOyrEnLYcXEVbKMlY8omBc"
+              },
+              "user": {
+                "format": "iss_sub",
+                "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                "sub": "7179809f-5654-4848-ad17-73fbba7ca8b3"
+              }
+            },
+            "txn": "055555d0-0902-4dad-a2f2-1b57639dc733"
+          },
+          "receiver": "receiver-b",
+          "run_id": "e-b28-t008-r1-normal_c4-filesystem-file_context-duplicates_searching",
+          "session_id": "s7kOyrEnLYcXEVbKMlY8omBc"
+        }
+      },
+      "receiver_b_action": "forward",
+      "registered_at_ns": 1784392928202324000,
+      "run_id": "e-b28-t008-r1-normal_c4-filesystem-file_context-duplicates_searching"
+    },
+    "repetition": 1,
+    "run_id": "e-b28-t008-r1-normal_c4-filesystem-file_context-duplicates_searching",
+    "service": "filesystem",
+    "session_id": "s7kOyrEnLYcXEVbKMlY8omBc",
+    "signature_verification": {
+      "receiver-a": {
+        "algorithm": "RS256",
+        "jti": "85eee44d-af09-2a1e-9f9a-3d8109f58b30",
+        "key_id": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+        "verified": true
+      },
+      "receiver-b": {
+        "algorithm": "RS256",
+        "jti": "187edee0-7fac-b138-a95c-49f5c7073391",
+        "key_id": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+        "verified": true
+      }
+    },
+    "task_id": "duplicates_searching"
+  },
+  "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+  "messages_relative_path": "mcpmark/e-b28-t008-r1-normal_c4-filesystem-file_context-duplicates_searching/openai/gpt-4-1-mini__filesystem/run-1/file_context__duplicates_searching/messages.json",
+  "meta_relative_path": "mcpmark/e-b28-t008-r1-normal_c4-filesystem-file_context-duplicates_searching/openai/gpt-4-1-mini__filesystem/run-1/file_context__duplicates_searching/meta.json",
+  "model": "openai/gpt-4.1-mini",
+  "post_barrier_allowed_calls": 0,
+  "post_barrier_call_count": 0,
+  "post_barrier_denied_calls": 0,
+  "post_barrier_effect_commits": 0,
+  "post_barrier_mutating_attempts": 0,
+  "post_barrier_tool_switches": 0,
+  "protocol_version": "e-b28-live-closed-loop-v1",
+  "repetition": 1,
+  "run_id": "e-b28-t008-r1-normal_c4-filesystem-file_context-duplicates_searching",
+  "service": "filesystem",
+  "stop_reason": "final_role=assistant;has_tool_calls=false;content_present=true",
+  "target": "filesystem/file_context/duplicates_searching",
+  "task_success": false,
+  "token_usage": {
+    "input_tokens": 2899,
+    "output_tokens": 61,
+    "reasoning_tokens": 0,
+    "total_tokens": 2960
+  },
+  "tool_call_count": 1,
+  "trace_sha256": "0196352c3b09346ac1a2d7028211bab464b9cd875ecec8dbe9a919edbca19113",
+  "trace_valid": true,
+  "turn_count": 2
+}

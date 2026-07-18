@@ -1,0 +1,34 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| execute_sql {"sql": "-- Check the next available CustomerId in the Customer table\nSELECT COALESCE(MAX(CustomerId), 0) + 1 AS next_customer_id FROM Customer;"}
+| list_schemas {}
+| list_objects {"schema_name": "public","object_type": "table"}
+| get_object_details {"schema_name": "public","object_name": "Customer","object_type": "table"}
+| execute_sql {"sql": "SELECT COALESCE(MAX(\"CustomerId\"), 0) + 1 AS next_customer_id FROM public.\"Customer\";"}
+The next available CustomerID in the Customer table is 60.
+
+I will now prepare an efficient bulk insert statement for the provided customer data applying the business logic:
+- CustomerID values starting from 60 and incrementing.
+- All customers assigned SupportRepId = 3.
+- Fax set to NULL.
+
+I will construct the SQL using a single INSERT statement with all records.

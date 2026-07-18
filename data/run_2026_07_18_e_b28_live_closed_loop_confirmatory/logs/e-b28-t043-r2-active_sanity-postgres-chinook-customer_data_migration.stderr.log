@@ -1,0 +1,53 @@
+[07/18/26 10:12:58] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 10:13:00] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (SELECT     sql_driver.py:271
+                             COALESCE(MAX(CustomerId), 0) AS                    
+                             max_id FROM Customer;): relation                   
+                             "customer" does not exist                          
+                             LINE 1: SELECT                                     
+                             COALESCE(MAX(CustomerId), 0) AS                    
+                             max_id FROM Customer;                              
+                                                                                
+                                                       ^                        
+                    ERROR    Error executing query: relation       server.py:401
+                             "customer" does not exist                          
+                             LINE 1: SELECT                                     
+                             COALESCE(MAX(CustomerId), 0) AS                    
+                             max_id FROM Customer;                              
+                                                                                
+                                                   ^                            
+[07/18/26 10:13:01] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:13:02] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:13:04] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:13:05] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (SELECT     sql_driver.py:271
+                             MAX(CustomerId) FROM                               
+                             public."Customer";): column                        
+                             "customerid" does not exist                        
+                             LINE 1: SELECT MAX(CustomerId)                     
+                             FROM public."Customer";                            
+                                                ^                               
+                             HINT:  Perhaps you meant to                        
+                             reference the column                               
+                             "Customer.CustomerId".                             
+                    ERROR    Error executing query: column         server.py:401
+                             "customerid" does not exist                        
+                             LINE 1: SELECT MAX(CustomerId) FROM                
+                             public."Customer";                                 
+                                                ^                               
+                             HINT:  Perhaps you meant to reference              
+                             the column "Customer.CustomerId".                  
+[07/18/26 10:13:07] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:13:50] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    

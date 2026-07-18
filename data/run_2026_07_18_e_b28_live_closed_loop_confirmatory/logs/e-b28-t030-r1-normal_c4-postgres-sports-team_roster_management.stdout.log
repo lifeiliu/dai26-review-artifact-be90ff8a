@@ -1,0 +1,72 @@
+Using unsupported models: openai/gpt-4.1-mini. Will use OPENAI_BASE_URL and OPENAI_API_KEY from environment.
+MCPMark Evaluation
+Experiment: e-b28-t030-r1-normal_c4-postgres-sports-team_roster_management | 1 Model(s): openai/gpt-4.1-mini
+Task suite: standard
+
+============================================================
+Starting evaluation 1/1: openai/gpt-4.1-mini
+============================================================
+
+Model 'openai/gpt-4.1-mini' not in supported list. Using default OpenAI configuration.
+PostgreSQL state manager initialized successfully
+Discovering tasks in category: security
+Discovering tasks in category: vectors
+Discovering tasks in category: sports
+Discovering tasks in category: chinook
+Discovering tasks in category: dvdrental
+Discovering tasks in category: lego
+Discovering tasks in category: employees
+Discovered 21 Postgres tasks across all categories (suite=standard)
+
+┌─ Stage 1: Setup ─────────────────────────────────────────────────────
+| Setting up initial state for postgres task: sports__team_roster_management
+| Created database 'mcpmark_sports_team_roster_management_20260718100350' from template 'sports'
+| ✓ Initial state setup completed for sports__team_roster_management
+└─ Completed in 291.85ms
+
+┌─ Stage 2: Execute ───────────────────────────────────────────────────
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE TABLE player_evaluation (\n  performance_id SERIAL PRIMARY KEY,\n  person_id INTEGER NOT NULL REFERENCES persons(id),\n  bat...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE TABLE player_injury_status (\n  status_id SERIAL PRIMARY KEY,\n  person_id INTEGER UNIQUE NOT NULL,\n  injury_count INTEGER ...[0m
+| It seems there is an authorization issue preventing the creation of the tables due to reference constraints on the "persons" table. This issue must be resolved in order to proceed with creating tables and performing the required operations.
+| 
+| Would you like me to attempt the operations without foreign key constraints or assist you in resolving the authorization or schema issue?
+|
+|
+| Task ended with the finish reason from messages being 'stop'.
+| Token usage: Total: 3,981 | Input: 3,728 | Output: 253
+| Turns: 2
+└─ Completed in 9.07s
+
+┌─ Stage 3: Verify ────────────────────────────────────────────────────
+| Verifying task (Postgres): sports__team_roster_management
+==================================================
+Verifying Sports Task 2: Team Roster Management Operations
+==================================================
+❌ Database error: relation "player_evaluation" does not exist
+LINE 3:             FROM player_evaluation
+                         ^
+
+
+| Verification Result: [91m✗ FAILED[0m
+| Verification Error: Verification failed with no error message
+└─ Completed in 84.82ms
+
+┌─ Stage 4: Cleanup ───────────────────────────────────────────────────
+| ○ Cleaning up initial state for postgres task: sports__team_roster_management
+| Dropped database: mcpmark_sports_team_roster_management_20260718100350
+| Dropped database: mcpmark_sports_team_roster_management_20260718100350
+| ✓ Cleanup completed for postgres
+└─ Completed in 61.06ms
+
+
+============================================================
+Results Summary
+============================================================
+✓ Tasks passed: 0/1 (0.0%)
+⏱ Total time: 9.5s
+📁 Results: /home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_confirmatory/tasks/e-b28-t030-r1-normal_c4-postgres-sports-team_roster_management/mcpmark/e-b28-t030-r1-normal_c4-postgres-sports-team_roster_management/openai/gpt-4-1-mini__postgres/run-1
+
+============================================================
+✓ All evaluations completed for 1 model(s)
+============================================================
+{"post_barrier_call_count":1,"post_barrier_effect_commits":0,"run_id":"e-b28-t030-r1-normal_c4-postgres-sports-team_roster_management","task_success":false,"tool_call_count":2,"trace_valid":true}

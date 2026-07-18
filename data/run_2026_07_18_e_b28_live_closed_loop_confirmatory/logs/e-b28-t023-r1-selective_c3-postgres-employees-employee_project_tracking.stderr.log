@@ -1,0 +1,124 @@
+[07/18/26 09:54:57] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 09:55:09] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:55:31] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:55:34] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:55:37] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:55:45] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:55:55] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (-- Insert  sql_driver.py:271
+                             project assignments for all                        
+                             employees based on their                           
+                             department                                         
+                             INSERT INTO                                        
+                             employees.project_assignments                      
+                             (employee_id, project_id, role,                    
+                             allocation_percentage,                             
+                             assigned_date)                                     
+                             SELECT e.id, p.project_id,                         
+                                    CASE WHEN e.department =                    
+                             'Development' THEN 'Developer'                     
+                                         WHEN e.department =                    
+                             'Human Resources' THEN 'Business                   
+                             Analyst'                                           
+                                         WHEN e.department =                    
+                             'Marketing' THEN 'Marketing                        
+                             Specialist'                                        
+                                         WHEN e.department =                    
+                             'Finance' THEN 'Financial                          
+                             Analyst'                                           
+                                         WHEN e.department =                    
+                             'Sales' THEN 'Sales                                
+                             Representative'                                    
+                                         WHEN e.department =                    
+                             'Research' THEN 'Research                          
+                             Analyst'                                           
+                                         WHEN e.department =                    
+                             'Production' THEN 'Production                      
+                             Coordinator'                                       
+                                         WHEN e.department =                    
+                             'Quality Management' THEN 'QA                      
+                             Specialist'                                        
+                                         WHEN e.department =                    
+                             'Customer Service' THEN 'Customer                  
+                             Success'                                           
+                                         ELSE NULL END AS                       
+                             role,                                              
+                                    CASE WHEN e.department =                    
+                             'Development' THEN 80                              
+                                         WHEN e.department =                    
+                             'Human Resources' THEN 60                          
+                                         WHEN e.department =                    
+                             'Marketing' THEN 40                                
+                                         WHEN e.department =                    
+                             'Finance' THEN 30                                  
+                                         WHEN e.department =                    
+                             'Sales' THEN 50                                    
+                                         WHEN e.department =                    
+                             'Research' THEN 70                                 
+                                         WHEN e.department =                    
+                             'Production' THEN 45                               
+                                         WHEN e.department =                    
+                             'Quality Management' THEN 85                       
+                                         WHEN e.department =                    
+                             'Customer Service' THEN 35                         
+                                         ELSE NULL END AS                       
+                             allocation_percentage,                             
+                                    '2024-01-01' AS                             
+                             assigned_date                                      
+                             FROM employees.employee e                          
+                             JOIN employees.employee_projects                   
+                             p ON                                               
+                               (e.department = 'Development'                    
+                             AND p.project_name = 'Database                     
+                             Modernization') OR                                 
+                               (e.department = 'Human                           
+                             Resources' AND p.project_name =                    
+                             'Employee Portal Upgrade') OR                      
+                               (e.department = 'Marketing' AND                  
+                             p.project_name = 'HR Analytics                     
+                             Dashboard') OR                                     
+                               (e.department = 'Finance' AND                    
+                             p.project_name = 'Database                         
+                             Modernization') OR                                 
+                               (e.department = 'Sales' AND                      
+                             p.project_name = 'Employee Portal                  
+                             Upgrade') OR                                       
+                               (e.department = 'Research' AND                   
+                             p.project_name = 'HR Analytics                     
+                             Dashboard') OR                                     
+                               (e.department = 'Production'                     
+                             AND p.project_name = 'Database                     
+                             Modernization') OR                                 
+                               (e.department = 'Quality                         
+                             Management' AND p.project_name =                   
+                             'Employee Portal Upgrade') OR                      
+                               (e.department = 'Customer                        
+                             Service' AND p.project_name = 'HR                  
+                             Analytics Dashboard')                              
+                             WHERE role IS NOT NULL AND                         
+                             allocation_percentage IS NOT                       
+                             NULL;): column e.department does                   
+                             not exist                                          
+                             LINE 27:   (e.department =                         
+                             'Development' AND p.project_name                   
+                             = 'Databa...                                       
+                                         ^                                      
+                    ERROR    Error executing query: column         server.py:401
+                             e.department does not exist                        
+                             LINE 27:   (e.department =                         
+                             'Development' AND p.project_name =                 
+                             'Databa...                                         
+                                         ^                                      
+[07/18/26 09:55:56] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    

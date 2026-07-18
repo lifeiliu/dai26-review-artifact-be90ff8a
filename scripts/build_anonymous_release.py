@@ -113,7 +113,7 @@ def release_notes() -> str:
     return """# Anonymous Review Release Notes
 
 This directory is a generated release boundary. It contains source, protocols,
-tests, and saved JSON/JSONL/CSV/Markdown evidence, including E-B24--E-B27.
+tests, and saved JSON/JSONL/CSV/Markdown evidence, including E-B24--E-B28.
 
 The release builder deterministically replaces author emails, local user/home
 paths, hostnames, public IP addresses, cloud resource IDs, AWS account IDs,
@@ -166,6 +166,71 @@ def repair_portable_hash_locks(root: Path) -> int:
             replacements += 1
     module_path.write_text(source, encoding="utf-8")
     return replacements
+
+
+def repair_e_b28_release_hashes(root: Path) -> int:
+    """Rebind E-B28 hashes after release-side path sanitization.
+
+    The private run hashes the exact pre-execution bytes.  Commands in the
+    portable summary contain absolute checkout paths, so text sanitization
+    intentionally changes the summary/progress bytes.  The released manifest
+    is rebound to release-relative source paths and the portable audit records
+    hashes for the sanitized bytes.  The excluded SQLite hash is retained only
+    as an explicit exclusion note.
+    """
+
+    run = root / "data/run_2026_07_18_e_b28_live_closed_loop_confirmatory"
+    manifest_path = run / "pre_execution_manifest.json"
+    summary_path = run / "summary.json"
+    progress_path = run / "progress.jsonl"
+    schedule_path = run / "schedule.json"
+    validation_path = run / "analysis/e_b28_validation.json"
+    required = (manifest_path, summary_path, progress_path, schedule_path, validation_path)
+    if not any(path.exists() for path in required):
+        return 0
+    missing = [path for path in required if not path.is_file()]
+    if missing:
+        raise FileNotFoundError(f"incomplete released E-B28 evidence: {missing[0]}")
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    rebound_sources: dict[str, str] = {}
+    for private_relative in sorted(manifest["source_sha256"]):
+        released_relative = (
+            private_relative.removeprefix("artifact/")
+            if private_relative.startswith("artifact/")
+            else private_relative
+        )
+        source_path = root / released_relative
+        if not source_path.is_file():
+            raise FileNotFoundError(
+                f"released E-B28 frozen source is missing: {released_relative}"
+            )
+        rebound_sources[released_relative] = hashlib.sha256(source_path.read_bytes()).hexdigest()
+    manifest["source_sha256"] = rebound_sources
+    manifest["anonymous_release_rebound"] = True
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+    manifest_hash = hashlib.sha256(manifest_path.read_bytes()).hexdigest()
+    summary = json.loads(summary_path.read_text(encoding="utf-8"))
+    summary["manifest_sha256"] = manifest_hash
+    summary["anonymous_release_rebound"] = True
+    summary_path.write_text(json.dumps(summary, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+    validation = json.loads(validation_path.read_text(encoding="utf-8"))
+    validation["sha256"] = {
+        "pre_execution_manifest.json": manifest_hash,
+        "schedule.json": hashlib.sha256(schedule_path.read_bytes()).hexdigest(),
+        "summary.json": hashlib.sha256(summary_path.read_bytes()).hexdigest(),
+        "progress.jsonl": hashlib.sha256(progress_path.read_bytes()).hexdigest(),
+    }
+    validation["anonymous_release_exclusions"] = [
+        "receiver.sqlite3 and SQLite sidecars are excluded from the review release; receiver aggregates remain in this audited JSON and summary.json"
+    ]
+    validation["anonymous_release_rebound"] = True
+    validation_path.write_text(
+        json.dumps(validation, indent=2, sort_keys=True) + "\n", encoding="utf-8"
+    )
+    return len(rebound_sources) + 4
 
 
 def write_checksums(root: Path) -> int:
@@ -255,6 +320,7 @@ def build(
             copied += 1
 
     repaired_hash_locks = repair_portable_hash_locks(release_dir)
+    rebound_e_b28_hashes = repair_e_b28_release_hashes(release_dir)
     (release_dir / "ANONYMOUS_RELEASE_NOTES.md").write_text(release_notes(), encoding="utf-8")
     manifest = {
         "release": ARCHIVE_ROOT,
@@ -269,6 +335,7 @@ def build(
         "released_file_count_before_manifests": copied,
         "text_files_changed_by_sanitization": transformed,
         "portable_hash_locks_recomputed": repaired_hash_locks,
+        "e_b28_release_hashes_rebound": rebound_e_b28_hashes,
         "binary_files_copied": binary,
         "excluded_files": excluded,
         "transformations": [
@@ -276,6 +343,7 @@ def build(
             "AWS account, role, role-session, and resource identifiers",
             "public IPv4 addresses mapped to RFC 5737 documentation space",
             "portable workload byte locks recomputed after sanitization",
+            "E-B28 portable manifest and evidence hashes rebound to sanitized release bytes",
         ],
         "excluded_categories": [
             "SQLite databases and sidecars",

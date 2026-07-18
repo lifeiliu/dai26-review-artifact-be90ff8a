@@ -1,0 +1,99 @@
+Using unsupported models: openai/gpt-4.1-mini. Will use OPENAI_BASE_URL and OPENAI_API_KEY from environment.
+MCPMark Evaluation
+Experiment: e-b28-t054-r2-selective_c3-postgres-employees-employee_project_tracking | 1 Model(s): openai/gpt-4.1-mini
+Task suite: standard
+
+============================================================
+Starting evaluation 1/1: openai/gpt-4.1-mini
+============================================================
+
+Model 'openai/gpt-4.1-mini' not in supported list. Using default OpenAI configuration.
+PostgreSQL state manager initialized successfully
+Discovering tasks in category: security
+Discovering tasks in category: vectors
+Discovering tasks in category: sports
+Discovering tasks in category: chinook
+Discovering tasks in category: dvdrental
+Discovering tasks in category: lego
+Discovering tasks in category: employees
+Discovered 21 Postgres tasks across all categories (suite=standard)
+
+┌─ Stage 1: Setup ─────────────────────────────────────────────────────
+| Setting up initial state for postgres task: employees__employee_project_tracking
+| Created database 'mcpmark_employees_employee_project_tracking_20260718102137' from template 'employees'
+| ✓ Initial state setup completed for employees__employee_project_tracking
+└─ Completed in 3.18s
+
+┌─ Stage 2: Execute ───────────────────────────────────────────────────
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE TABLE employees.employee_projects (\n    project_id SERIAL PRIMARY KEY,\n    project_name VARCHAR(100) NOT NULL,\n    start_...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE TABLE employees.project_assignments (\n    assignment_id SERIAL PRIMARY KEY,\n    employee_id BIGINT NOT NULL,\n    project_...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE TABLE employees.project_milestones (\n    milestone_id SERIAL PRIMARY KEY,\n    project_id INTEGER NOT NULL,\n    milestone_...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "ALTER TABLE employees.project_assignments ADD CONSTRAINT fk_employee FOREIGN KEY (employee_id) REFERENCES employees.employee (id);"...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "ALTER TABLE employees.project_assignments ADD CONSTRAINT fk_project FOREIGN KEY (project_id) REFERENCES employees.employee_projects...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "ALTER TABLE employees.project_milestones ADD CONSTRAINT fk_project_milestone FOREIGN KEY (project_id) REFERENCES employees.employee...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE INDEX idx_projects_status ON employees.employee_projects(status);"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE INDEX idx_assignments_emp_proj ON employees.project_assignments(employee_id, project_id);"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE INDEX idx_milestones_due_date ON employees.project_milestones(due_date);"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "INSERT INTO employees.employee_projects (project_name, start_date, end_date, budget, status) VALUES\n('Database Modernization', '20...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "WITH project_data AS (\n  SELECT project_id, project_name FROM employees.employee_projects\n)\nINSERT INTO employees.project_assign...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = 'employees' AND table_name = 'employee';"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "SELECT DISTINCT department FROM employees.employee;"}[0m
+| [1mlist_objects[0m [2;37m{"schema_name": "employees","object_type": "table"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "SELECT * FROM employees.department_employee LIMIT 5;"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "SELECT * FROM employees.department LIMIT 15;"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "WITH project_data AS (\n  SELECT project_id, project_name FROM employees.employee_projects\n), dept_projects AS (\n  SELECT dept.id...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "INSERT INTO employees.project_milestones (project_id, milestone_name, due_date, completed)\nSELECT ep.project_id, 'Design Phase Com...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "UPDATE employees.employee_projects SET status = 'completed' WHERE project_name = 'HR Analytics Dashboard';"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "UPDATE employees.employee_projects SET budget = budget * 1.15 WHERE status = 'active';"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "UPDATE employees.project_milestones SET completed = TRUE WHERE milestone_name = 'Data Collection';"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "ALTER TABLE employees.employee_projects ADD COLUMN priority VARCHAR(10);\nALTER TABLE employees.employee_projects ADD CONSTRAINT ch...[0m
+| The comprehensive employee project tracking system has been created and managed as requested:
+| 
+| 1. The three tables (employee_projects, project_assignments, project_milestones) were created in the employees schema.
+| 2. Foreign key relationships were added between project_assignments and employees.employee, project_assignments and employee_projects, and project_milestones and employee_projects.
+| 3. Indexes for project status, composite index for assignments on employee and project, and index on milestone due date were created.
+| 4. Initial data was inserted into the employee_projects, project_assignments (assigned all current employees according to departments), and project_milestones tables.
+| 5. Updates were applied: Project 3 status set to completed, budgets increased by 15% for active projects, and milestone 'Data Collection' marked as completed.
+| 6. Added the priority column to employee_projects with the check constraint and updated existing rows with the appropriate priority values.
+| 
+| Task completed.
+|
+|
+| Task ended with the finish reason from messages being 'stop'.
+| Token usage: Total: 94,075 | Input: 91,626 | Output: 2,449
+| Turns: 19
+└─ Completed in 77.12s
+
+┌─ Stage 3: Verify ────────────────────────────────────────────────────
+| Verifying task (Postgres): employees__employee_project_tracking
+==================================================
+✅ Table structures are correct
+✅ All required indexes are present
+✅ Project data is correct
+✅ Assignment data is correct
+✅ Milestone data is correct
+
+🎉 Task verification: PASS
+
+| Verification Result: [92m✓ PASSED[0m
+└─ Completed in 421.20ms
+
+┌─ Stage 4: Cleanup ───────────────────────────────────────────────────
+| ○ Cleaning up initial state for postgres task: employees__employee_project_tracking
+| Dropped database: mcpmark_employees_employee_project_tracking_20260718102137
+| Dropped database: mcpmark_employees_employee_project_tracking_20260718102137
+| ✓ Cleanup completed for postgres
+└─ Completed in 237.57ms
+
+
+============================================================
+Results Summary
+============================================================
+✓ Tasks passed: 1/1 (100.0%)
+⏱ Total time: 81.0s
+📁 Results: /home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_confirmatory/tasks/e-b28-t054-r2-selective_c3-postgres-employees-employee_project_tracking/mcpmark/e-b28-t054-r2-selective_c3-postgres-employees-employee_project_tracking/openai/gpt-4-1-mini__postgres/run-1
+
+============================================================
+✓ All evaluations completed for 1 model(s)
+============================================================
+{"post_barrier_call_count":21,"post_barrier_effect_commits":15,"run_id":"e-b28-t054-r2-selective_c3-postgres-employees-employee_project_tracking","task_success":true,"tool_call_count":22,"trace_valid":true}

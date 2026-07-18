@@ -1,0 +1,26 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| execute_sql {"sql": "CREATE TABLE player_evaluation (\n  performance_id SERIAL PRIMARY KEY,\n  person_id INTEGER NOT NULL REFERENCES persons(id),\n  batting_avg DECIMAL CHECK (batting_avg BETWEEN 0 AND 1),\n  home_runs INTEGER,\n  rbis INTEGER,\n  games_played INTEGER,\n  performance_score DECIMAL,\n  evaluation_date DATE\n);"}
+| execute_sql {"sql": "CREATE TABLE player_injury_status (\n  status_id SERIAL PRIMARY KEY,\n  person_id INTEGER UNIQUE NOT NULL,\n  injury_count INTEGER DEFAULT 0,\n  last_injury_date DATE,\n  current_status VARCHAR CHECK (current_status IN ('healthy', 'injured', 'recovering'))\n);"}
+It seems there is an authorization issue preventing the creation of the tables due to reference constraints on the "persons" table. This issue must be resolved in order to proceed with creating tables and performing the required operations.
+
+Would you like me to attempt the operations without foreign key constraints or assist you in resolving the authorization or schema issue?

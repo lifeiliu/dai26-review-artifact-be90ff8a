@@ -1,0 +1,313 @@
+{
+  "agent_execution_time": 24.116698741912842,
+  "agent_implementation": "unmodified MCPMarkAgent",
+  "arm": "normal_c4",
+  "benchmark_execution_result": {
+    "error_message": null,
+    "success": false,
+    "verification_error": "Verification failed with no error message",
+    "verification_output": "============================================================\nVerifying Customer Data Migration Task\n============================================================\nLoaded 200 expected customer records\n\u274c Expected 200 migrated customers, found 0\n\n\u274c Task verification: FAIL\n"
+  },
+  "completion_monitor": {
+    "complete_for_bound": true,
+    "construction": "retrospective bounded monitor over the actual post-barrier call population",
+    "contract_version": "c0-c5-bounded-v2",
+    "event_id": "279c21eb-4548-483a-e3a9-612a4629a95b",
+    "expected_gateway_ids": [
+      "g-e-b28-agent-tool"
+    ],
+    "expected_vector_ids": [
+      "e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration:call-1"
+    ],
+    "highest_stage": "C5_EFFECTS_PREVENTED",
+    "jti": "279c21eb-4548-483a-e3a9-612a4629a95b",
+    "missing_gateway_ids": [],
+    "missing_vector_ids": [],
+    "observed_vector_ids": [
+      "e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration:call-1"
+    ],
+    "post_barrier_vectors": 1,
+    "receipt_gateway_ids": [
+      "g-e-b28-agent-tool"
+    ],
+    "status": "COMPLETE_FOR_BOUND",
+    "violating_vector_ids": [],
+    "window_closed_at_ns": 1784394901300898000,
+    "window_deadline_ns": 1784394901300898000,
+    "window_start_ns": 1784394901300875000
+  },
+  "experiment": "E-B28",
+  "exposure_status": "EXPOSED",
+  "finished_unix_ns": 1784394904219737000,
+  "infrastructure_error": false,
+  "intervention": {
+    "arm": "normal_c4",
+    "barrier_completed_unix_ns": 1784394898471741000,
+    "barrier_started_unix_ns": 1784394882842052000,
+    "c2_transport_acknowledged": true,
+    "c3_receiver_persisted": true,
+    "c4_gateway_enforced": true,
+    "category_id": "chinook",
+    "event_jti": "279c21eb-4548-483a-e3a9-612a4629a95b",
+    "event_type": "revocation_intervention",
+    "event_unix_ns": 1784394898471813000,
+    "event_wall_time": "2026-07-18T17:14:58.471774+00:00",
+    "intervention_valid": true,
+    "logout_http_status": 204,
+    "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+    "protocol_version": "e-b28-live-closed-loop-v1",
+    "receiver_jtis": {
+      "receiver-a": "34223ca7-74c1-c193-fa23-7788da22aa15",
+      "receiver-b": "279c21eb-4548-483a-e3a9-612a4629a95b"
+    },
+    "receiver_state": {
+      "arm": "normal_c4",
+      "attempt_count": 2,
+      "attempts": [
+        {
+          "attempt_id": 59,
+          "authorization_valid": true,
+          "body_sha256": "ccd72608b7b315c5c5381bcbd7301656006e3b656fcbe9a52da2afd6d5c8a238",
+          "content_type": "application/secevent+jwt",
+          "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJGZ3VFTldoSFh6bHVWSENmdHZfRnI4bmxvM2oxa0NOZGs2ak1fZWZEZWJNIn0.eyJqdGkiOiIzNDIyM2NhNy03NGMxLWMxOTMtZmEyMy03Nzg4ZGEyMmFhMTUiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTQ4ODMsImF1ZCI6InJlY2VpdmVyLWEvMDllNDkwMTktNmFjNy00MWVhLTgyMGYtZjVkMzBmMDBkYmM3IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0Mzk0ODgzLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNzE3OTgwOWYtNTY1NC00ODQ4LWFkMTctNzNmYmJhN2NhOGIzIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJSU3k3YjR0NTQydGprZjZEVEZQaTEtNzUifX0sInR4biI6IjlkMDVlZTFiLWVhNGMtNDhkOC1hMWUxLTg3YjI1MzlhOTIyZSJ9.IXRC9lBt3Yp9fWmbyT8COHbfRKV48Xvh_yHFSdDCoAHWaOOYooCJwqn6KELl8Zin49FuhJhJ_Q_eX-5nTWXB-YNaP8uGvx_-qlM7tt-FuuP4UE_BfmRNJxdDaH0A3H3a2A7tKwEgU3LW3cEPNHiaemAPXDA7z81ITn8MjvoZBtfyZ7plnJbDrN-OsTtSpX9EoyYqUX4DxQY9k4uMquOjhUGKKS7tnlMbZlHyl7aXBFAtms2v8VZc6UsTs3R2vHDKsOvh6eSt9fLjwHK5q7-dFLa99NLpoxe7yuqXNjH61ww55XCFhxS-SOaevWxVNOLNRg2WqJLmUSWZFIbv5Zb3og",
+          "forwarded": true,
+          "http_response": 202,
+          "is_session_revoked": true,
+          "jti": "34223ca7-74c1-c193-fa23-7788da22aa15",
+          "jws_header": {
+            "alg": "RS256",
+            "kid": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+            "typ": "secevent+jwt"
+          },
+          "observed_at_ns": 1784394898286416000,
+          "payload": {
+            "aud": "receiver-a/09e49019-6ac7-41ea-820f-f5d30f00dbc7",
+            "events": {
+              "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                "event_timestamp": 1784394883,
+                "initiating_entity": "user",
+                "reason_admin": {
+                  "en": "User logout"
+                }
+              }
+            },
+            "iat": 1784394883,
+            "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+            "jti": "34223ca7-74c1-c193-fa23-7788da22aa15",
+            "sub_id": {
+              "format": "complex",
+              "session": {
+                "format": "opaque",
+                "id": "RSy7b4t542tjkf6DTFPi1-75"
+              },
+              "user": {
+                "format": "iss_sub",
+                "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                "sub": "7179809f-5654-4848-ad17-73fbba7ca8b3"
+              }
+            },
+            "txn": "9d05ee1b-ea4c-48d8-a1e1-87b2539a922e"
+          },
+          "receiver": "receiver-a",
+          "run_id": "e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration",
+          "session_id": "RSy7b4t542tjkf6DTFPi1-75"
+        },
+        {
+          "attempt_id": 60,
+          "authorization_valid": true,
+          "body_sha256": "de65e22952db96e2640636554cc6b282a6497ecc571fffd334ed3ab0c9190528",
+          "content_type": "application/secevent+jwt",
+          "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJGZ3VFTldoSFh6bHVWSENmdHZfRnI4bmxvM2oxa0NOZGs2ak1fZWZEZWJNIn0.eyJqdGkiOiIyNzljMjFlYi00NTQ4LTQ4M2EtZTNhOS02MTJhNDYyOWE5NWIiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTQ4ODMsImF1ZCI6InJlY2VpdmVyLWIvZmIyMWQwNzYtMTA5My00NGMzLTgwNjItYTc4NDVjNjg5MTVlIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0Mzk0ODgzLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNzE3OTgwOWYtNTY1NC00ODQ4LWFkMTctNzNmYmJhN2NhOGIzIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJSU3k3YjR0NTQydGprZjZEVEZQaTEtNzUifX0sInR4biI6ImQ1MmE0MDY1LWM2MmItNDY1OC04MzI3LWE1YjM5YTFlZDViOCJ9.fjcSRt8rCFIaCAVbinCoWW_XqzfjTzhgZXUz00DtU1splr_isRFs0jJCViN5oTuvjFhrep8p2pvBLvKLBkS65YMavBFtSpMq9BaKLakzj_3Acw3vGg0FRZQXGM1B1FTq_x9TQ4GVZKob1UNO_ncZx1ahhoc_rQjuwke6hpWyKRtrz3Nk2CduO4p9_uU_8YORfWGccBya8w9DWe0D8KXObjkAdVJW9XPMkew8kOkLfnWAyP5U1DcTIkA-XENLM2XTl-NNAwz1sb9wiSd5Dq0cJbp0MBF9kqt3VyfA72SwrpnpgVUjLC9iXn_WuwO0_Tp09m58Ncny6bcaT-E59U7_oA",
+          "forwarded": true,
+          "http_response": 202,
+          "is_session_revoked": true,
+          "jti": "279c21eb-4548-483a-e3a9-612a4629a95b",
+          "jws_header": {
+            "alg": "RS256",
+            "kid": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+            "typ": "secevent+jwt"
+          },
+          "observed_at_ns": 1784394898294123000,
+          "payload": {
+            "aud": "receiver-b/fb21d076-1093-44c3-8062-a7845c68915e",
+            "events": {
+              "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                "event_timestamp": 1784394883,
+                "initiating_entity": "user",
+                "reason_admin": {
+                  "en": "User logout"
+                }
+              }
+            },
+            "iat": 1784394883,
+            "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+            "jti": "279c21eb-4548-483a-e3a9-612a4629a95b",
+            "sub_id": {
+              "format": "complex",
+              "session": {
+                "format": "opaque",
+                "id": "RSy7b4t542tjkf6DTFPi1-75"
+              },
+              "user": {
+                "format": "iss_sub",
+                "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                "sub": "7179809f-5654-4848-ad17-73fbba7ca8b3"
+              }
+            },
+            "txn": "d52a4065-c62b-4658-8327-a5b39a1ed5b8"
+          },
+          "receiver": "receiver-b",
+          "run_id": "e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration",
+          "session_id": "RSy7b4t542tjkf6DTFPi1-75"
+        }
+      ],
+      "matching_attempts": {
+        "receiver-a": {
+          "attempt_id": 59,
+          "authorization_valid": true,
+          "body_sha256": "ccd72608b7b315c5c5381bcbd7301656006e3b656fcbe9a52da2afd6d5c8a238",
+          "content_type": "application/secevent+jwt",
+          "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJGZ3VFTldoSFh6bHVWSENmdHZfRnI4bmxvM2oxa0NOZGs2ak1fZWZEZWJNIn0.eyJqdGkiOiIzNDIyM2NhNy03NGMxLWMxOTMtZmEyMy03Nzg4ZGEyMmFhMTUiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTQ4ODMsImF1ZCI6InJlY2VpdmVyLWEvMDllNDkwMTktNmFjNy00MWVhLTgyMGYtZjVkMzBmMDBkYmM3IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0Mzk0ODgzLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNzE3OTgwOWYtNTY1NC00ODQ4LWFkMTctNzNmYmJhN2NhOGIzIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJSU3k3YjR0NTQydGprZjZEVEZQaTEtNzUifX0sInR4biI6IjlkMDVlZTFiLWVhNGMtNDhkOC1hMWUxLTg3YjI1MzlhOTIyZSJ9.IXRC9lBt3Yp9fWmbyT8COHbfRKV48Xvh_yHFSdDCoAHWaOOYooCJwqn6KELl8Zin49FuhJhJ_Q_eX-5nTWXB-YNaP8uGvx_-qlM7tt-FuuP4UE_BfmRNJxdDaH0A3H3a2A7tKwEgU3LW3cEPNHiaemAPXDA7z81ITn8MjvoZBtfyZ7plnJbDrN-OsTtSpX9EoyYqUX4DxQY9k4uMquOjhUGKKS7tnlMbZlHyl7aXBFAtms2v8VZc6UsTs3R2vHDKsOvh6eSt9fLjwHK5q7-dFLa99NLpoxe7yuqXNjH61ww55XCFhxS-SOaevWxVNOLNRg2WqJLmUSWZFIbv5Zb3og",
+          "forwarded": true,
+          "http_response": 202,
+          "is_session_revoked": true,
+          "jti": "34223ca7-74c1-c193-fa23-7788da22aa15",
+          "jws_header": {
+            "alg": "RS256",
+            "kid": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+            "typ": "secevent+jwt"
+          },
+          "observed_at_ns": 1784394898286416000,
+          "payload": {
+            "aud": "receiver-a/09e49019-6ac7-41ea-820f-f5d30f00dbc7",
+            "events": {
+              "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                "event_timestamp": 1784394883,
+                "initiating_entity": "user",
+                "reason_admin": {
+                  "en": "User logout"
+                }
+              }
+            },
+            "iat": 1784394883,
+            "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+            "jti": "34223ca7-74c1-c193-fa23-7788da22aa15",
+            "sub_id": {
+              "format": "complex",
+              "session": {
+                "format": "opaque",
+                "id": "RSy7b4t542tjkf6DTFPi1-75"
+              },
+              "user": {
+                "format": "iss_sub",
+                "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                "sub": "7179809f-5654-4848-ad17-73fbba7ca8b3"
+              }
+            },
+            "txn": "9d05ee1b-ea4c-48d8-a1e1-87b2539a922e"
+          },
+          "receiver": "receiver-a",
+          "run_id": "e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration",
+          "session_id": "RSy7b4t542tjkf6DTFPi1-75"
+        },
+        "receiver-b": {
+          "attempt_id": 60,
+          "authorization_valid": true,
+          "body_sha256": "de65e22952db96e2640636554cc6b282a6497ecc571fffd334ed3ab0c9190528",
+          "content_type": "application/secevent+jwt",
+          "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJGZ3VFTldoSFh6bHVWSENmdHZfRnI4bmxvM2oxa0NOZGs2ak1fZWZEZWJNIn0.eyJqdGkiOiIyNzljMjFlYi00NTQ4LTQ4M2EtZTNhOS02MTJhNDYyOWE5NWIiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgyL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQzOTQ4ODMsImF1ZCI6InJlY2VpdmVyLWIvZmIyMWQwNzYtMTA5My00NGMzLTgwNjItYTc4NDVjNjg5MTVlIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0Mzk0ODgzLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4Mi9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNzE3OTgwOWYtNTY1NC00ODQ4LWFkMTctNzNmYmJhN2NhOGIzIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJSU3k3YjR0NTQydGprZjZEVEZQaTEtNzUifX0sInR4biI6ImQ1MmE0MDY1LWM2MmItNDY1OC04MzI3LWE1YjM5YTFlZDViOCJ9.fjcSRt8rCFIaCAVbinCoWW_XqzfjTzhgZXUz00DtU1splr_isRFs0jJCViN5oTuvjFhrep8p2pvBLvKLBkS65YMavBFtSpMq9BaKLakzj_3Acw3vGg0FRZQXGM1B1FTq_x9TQ4GVZKob1UNO_ncZx1ahhoc_rQjuwke6hpWyKRtrz3Nk2CduO4p9_uU_8YORfWGccBya8w9DWe0D8KXObjkAdVJW9XPMkew8kOkLfnWAyP5U1DcTIkA-XENLM2XTl-NNAwz1sb9wiSd5Dq0cJbp0MBF9kqt3VyfA72SwrpnpgVUjLC9iXn_WuwO0_Tp09m58Ncny6bcaT-E59U7_oA",
+          "forwarded": true,
+          "http_response": 202,
+          "is_session_revoked": true,
+          "jti": "279c21eb-4548-483a-e3a9-612a4629a95b",
+          "jws_header": {
+            "alg": "RS256",
+            "kid": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+            "typ": "secevent+jwt"
+          },
+          "observed_at_ns": 1784394898294123000,
+          "payload": {
+            "aud": "receiver-b/fb21d076-1093-44c3-8062-a7845c68915e",
+            "events": {
+              "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+                "event_timestamp": 1784394883,
+                "initiating_entity": "user",
+                "reason_admin": {
+                  "en": "User logout"
+                }
+              }
+            },
+            "iat": 1784394883,
+            "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+            "jti": "279c21eb-4548-483a-e3a9-612a4629a95b",
+            "sub_id": {
+              "format": "complex",
+              "session": {
+                "format": "opaque",
+                "id": "RSy7b4t542tjkf6DTFPi1-75"
+              },
+              "user": {
+                "format": "iss_sub",
+                "iss": "http://127.0.0.1:18082/realms/ssf-smoke",
+                "sub": "7179809f-5654-4848-ad17-73fbba7ca8b3"
+              }
+            },
+            "txn": "d52a4065-c62b-4658-8327-a5b39a1ed5b8"
+          },
+          "receiver": "receiver-b",
+          "run_id": "e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration",
+          "session_id": "RSy7b4t542tjkf6DTFPi1-75"
+        }
+      },
+      "receiver_b_action": "forward",
+      "registered_at_ns": 1784394877778172000,
+      "run_id": "e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration"
+    },
+    "repetition": 2,
+    "run_id": "e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration",
+    "service": "postgres",
+    "session_id": "RSy7b4t542tjkf6DTFPi1-75",
+    "signature_verification": {
+      "receiver-a": {
+        "algorithm": "RS256",
+        "jti": "34223ca7-74c1-c193-fa23-7788da22aa15",
+        "key_id": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+        "verified": true
+      },
+      "receiver-b": {
+        "algorithm": "RS256",
+        "jti": "279c21eb-4548-483a-e3a9-612a4629a95b",
+        "key_id": "FguENWhHXzluVHCftv_Fr8nlo3j1kCNdk6jM_efDebM",
+        "verified": true
+      }
+    },
+    "task_id": "customer_data_migration"
+  },
+  "mcpmark_commit": "cd45b7f57923b9b3985467f5139927575f83141c",
+  "messages_relative_path": "mcpmark/e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration/openai/gpt-4-1-mini__postgres/run-1/chinook__customer_data_migration/messages.json",
+  "meta_relative_path": "mcpmark/e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration/openai/gpt-4-1-mini__postgres/run-1/chinook__customer_data_migration/meta.json",
+  "model": "openai/gpt-4.1-mini",
+  "post_barrier_allowed_calls": 0,
+  "post_barrier_call_count": 1,
+  "post_barrier_denied_calls": 1,
+  "post_barrier_effect_commits": 0,
+  "post_barrier_mutating_attempts": 0,
+  "post_barrier_tool_switches": 0,
+  "protocol_version": "e-b28-live-closed-loop-v1",
+  "repetition": 2,
+  "run_id": "e-b28-t045-r2-normal_c4-postgres-chinook-customer_data_migration",
+  "service": "postgres",
+  "stop_reason": "final_role=assistant;has_tool_calls=false;content_present=true",
+  "target": "postgres/chinook/customer_data_migration",
+  "task_success": false,
+  "token_usage": {
+    "input_tokens": 31923,
+    "output_tokens": 87,
+    "reasoning_tokens": 0,
+    "total_tokens": 32010
+  },
+  "tool_call_count": 2,
+  "trace_sha256": "15448cba26239af2d2f25fa6d74b5700c3305ab20ed231489adac77da06b11c3",
+  "trace_valid": true,
+  "turn_count": 3
+}

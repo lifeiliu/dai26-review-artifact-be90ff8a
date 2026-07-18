@@ -131,6 +131,33 @@ The confirmatory matrix is fixed at 14 fault rows, 11 scaling configurations,
 three fresh databases per configuration, and 100 measured assessments after 10
 warm-ups. Performance has no pass threshold.
 
+E-B28 requires Docker, the clean external MCPMark checkout at commit
+`cd45b7f57923b9b3985467f5139927575f83141c`, its local `.venv`, the frozen
+MCPMark PostgreSQL fixture container, and an independently supplied
+`OPENROUTER_API_KEY`. Keycloak and its database are started from the digest-
+pinned images recorded in the pre-execution manifest. The 6-run readiness
+smoke is separate from the frozen 60-run formal schedule and two recovery
+qualifications:
+
+```bash
+OPENROUTER_API_KEY=... \
+python3 experiments/e_b28_live_closed_loop/run_gate.py \
+  --mode smoke \
+  --output-dir _outputs/e_b28_smoke \
+  --mcpmark-root ../external/MCPMark
+
+OPENROUTER_API_KEY=... \
+python3 experiments/e_b28_live_closed_loop/run_gate.py \
+  --mode formal \
+  --output-dir _outputs/e_b28_confirmatory \
+  --mcpmark-root ../external/MCPMark
+```
+
+Formal rows are never retried or replaced. The saved post-execution audit is
+`data/run_2026_07_18_e_b28_live_closed_loop_confirmatory/analysis/e_b28_validation.json`.
+E-B28 freezes E-B20's ten target identities but does not change its risk index,
+policies, or failed 30% threshold.
+
 The full E-B1 adversarial sweep is the longest run; the recorded run took about
 71 minutes on a local ARM64 workstation. Other run times depend on host load and
 the selected matrix. Use saved results for manuscript verification and smoke
@@ -145,4 +172,6 @@ production incidence, mechanism superiority, multi-vendor MCP/A2A
 interoperability, population-level LLM behavior, a distributed/Byzantine
 monitor, or a production SLO. E-B17's 50% message-budget cell and E-B20's 30%
 external-workload gates remain failures. E-B25/E-B26 stored C5 labels use
-monitor v1 and are retained as legacy evidence; E-B27 alone validates v2.
+monitor v1 and are retained as legacy evidence; E-B27 validates v2. E-B28 uses
+v2 retrospectively over each actual adaptive post-barrier call population, so
+its monitor labels are execution checks rather than a pre-known call-set claim.

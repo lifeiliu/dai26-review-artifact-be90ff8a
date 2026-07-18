@@ -1,0 +1,29 @@
+[07/18/26 10:31:21] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 10:31:25] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (-- Step 1: sql_driver.py:271
+                             Set Up Player Performance                          
+                             Tracking                                           
+                             CREATE TABLE player_evaluation (                   
+                                 performance_id SERIAL PRIMARY                  
+                             KEY,                                               
+                                 person_id INTEGER NOT NULL                     
+                             REFERENCES persons(id),                            
+                                 batting_avg DECIMAL CHECK                      
+                             (batting_avg BETWEEN 0 AND 1),                     
+                                 home_runs INTEGER,                             
+                                 rbis INTEGER,                                  
+                                 games_played INTEGER,                          
+                                 performance_score DECIMAL,                     
+                                 evaluation_date DATE                           
+                             );): there is no unique                            
+                             constraint matching given keys                     
+                             for referenced table "persons"                     
+                    ERROR    Error executing query: there is no    server.py:401
+                             unique constraint matching given keys              
+                             for referenced table "persons"                     

@@ -1,0 +1,95 @@
+[07/18/26 10:16:51] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 10:16:54] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:16:58] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH       sql_driver.py:271
+                             monthly_data AS (                                  
+                                 SELECT                                         
+                                     TO_CHAR(invoice_date,                      
+                             'YYYY-MM') AS year_month,                          
+                                     COUNT(DISTINCT invoiceid)                  
+                             AS total_invoices,                                 
+                                     SUM(total) AS                              
+                             total_revenue,                                     
+                                     SUM(                                       
+                                         (SELECT SUM(quantity)                  
+                             FROM invoice_line il WHERE                         
+                             il.invoiceid = i.invoiceid)                        
+                                     ) AS total_tracks_sold,                    
+                                     AVG(total) AS                              
+                             average_invoice_value,                             
+                                     COUNT(DISTINCT                             
+                             customerid) AS unique_customers                    
+                                 FROM invoice i                                 
+                                 GROUP BY year_month                            
+                                 HAVING COUNT(DISTINCT                          
+                             invoiceid) > 0                                     
+                             )                                                  
+                             INSERT INTO                                        
+                             public.monthly_sales_summary                       
+                             SELECT year_month,                                 
+                             total_invoices, total_revenue,                     
+                             total_tracks_sold,                                 
+                             average_invoice_value,                             
+                             unique_customers                                   
+                             FROM monthly_data;): relation                      
+                             "invoice" does not exist                           
+                             LINE 11:     FROM invoice i                        
+                                               ^                                
+                    ERROR    Error executing query: relation       server.py:401
+                             "invoice" does not exist                           
+                             LINE 11:     FROM invoice i                        
+                                               ^                                
+[07/18/26 10:16:59] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:17:03] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH       sql_driver.py:271
+                             monthly_data AS (                                  
+                                 SELECT                                         
+                                     TO_CHAR(i.invoicedate,                     
+                             'YYYY-MM') AS year_month,                          
+                                     COUNT(DISTINCT                             
+                             i.invoiceid) AS total_invoices,                    
+                                     SUM(i.total) AS                            
+                             total_revenue,                                     
+                                     SUM(il.quantity) AS                        
+                             total_tracks_sold,                                 
+                                     AVG(i.total) AS                            
+                             average_invoice_value,                             
+                                     COUNT(DISTINCT                             
+                             i.customerid) AS unique_customers                  
+                                 FROM public.invoice i                          
+                                 JOIN public.invoiceline il ON                  
+                             i.invoiceid = il.invoiceid                         
+                                 GROUP BY year_month                            
+                                 HAVING COUNT(DISTINCT                          
+                             i.invoiceid) > 0                                   
+                             )                                                  
+                             INSERT INTO                                        
+                             public.monthly_sales_summary                       
+                             SELECT year_month,                                 
+                             total_invoices, total_revenue,                     
+                             total_tracks_sold,                                 
+                             average_invoice_value,                             
+                             unique_customers                                   
+                             FROM monthly_data;): relation                      
+                             "public.invoice" does not exist                    
+                             LINE 9:     FROM public.invoice i                  
+                                              ^                                 
+                    ERROR    Error executing query: relation       server.py:401
+                             "public.invoice" does not exist                    
+                             LINE 9:     FROM public.invoice i                  
+                                              ^                                 
+[07/18/26 10:17:04] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:17:09] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:17:21] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    

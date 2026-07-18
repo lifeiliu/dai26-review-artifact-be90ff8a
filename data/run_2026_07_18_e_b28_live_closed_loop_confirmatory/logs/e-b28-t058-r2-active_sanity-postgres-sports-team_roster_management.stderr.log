@@ -1,0 +1,269 @@
+[07/18/26 10:27:18] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+[07/18/26 10:27:19] INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 10:27:22] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             TABLE player_evaluation (                          
+                               performance_id SERIAL PRIMARY                    
+                             KEY,                                               
+                               person_id INTEGER NOT NULL                       
+                             REFERENCES persons(id),                            
+                               batting_avg DECIMAL CHECK                        
+                             (batting_avg BETWEEN 0 AND 1),                     
+                               home_runs INTEGER,                               
+                               rbis INTEGER,                                    
+                               games_played INTEGER,                            
+                               performance_score DECIMAL,                       
+                               evaluation_date DATE                             
+                             );): there is no unique                            
+                             constraint matching given keys                     
+                             for referenced table "persons"                     
+                    ERROR    Error executing query: there is no    server.py:401
+                             unique constraint matching given keys              
+                             for referenced table "persons"                     
+[07/18/26 10:27:23] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:27:28] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (INSERT     sql_driver.py:271
+                             INTO player_evaluation                             
+                             (person_id, batting_avg,                           
+                             home_runs, rbis, games_played,                     
+                             performance_score,                                 
+                             evaluation_date)                                   
+                             SELECT                                             
+                               s.person_id,                                     
+                               CASE WHEN COALESCE(s.at_bats,                    
+                             0) = 0 THEN 0 ELSE                                 
+                             COALESCE(s.hits, 0)::DECIMAL /                     
+                             s.at_bats END AS batting_avg,                      
+                               COALESCE(s.home_runs, 0) AS                      
+                             home_runs,                                         
+                               COALESCE(s.rbi, 0) AS rbis,                      
+                               COALESCE(m.games_played, 0) AS                   
+                             games_played,                                      
+                               (CASE WHEN COALESCE(s.at_bats,                   
+                             0) = 0 THEN 0 ELSE                                 
+                             COALESCE(s.hits, 0)::DECIMAL /                     
+                             s.at_bats END * 1000) +                            
+                               (COALESCE(s.home_runs, 0) * 5)                   
+                             +                                                  
+                               (COALESCE(s.rbi, 0) * 2) AS                      
+                             performance_score,                                 
+                               DATE '2024-01-01' AS                             
+                             evaluation_date                                    
+                             FROM                                               
+                               baseball_offensive_stats s                       
+                             LEFT JOIN (                                        
+                               SELECT person_id,                                
+                             COUNT(DISTINCT event_id) AS                        
+                             games_played                                       
+                               FROM person_event_metadata                       
+                               GROUP BY person_id                               
+                             ) m ON s.person_id = m.person_id                   
+                             WHERE COALESCE(m.games_played, 0)                  
+                             >= 10;): relation                                  
+                             "player_evaluation" does not                       
+                             exist                                              
+                             LINE 1: INSERT INTO                                
+                             player_evaluation (person_id,                      
+                             batting_avg, home_...                              
+                                                 ^                              
+                    ERROR    Error executing query: relation       server.py:401
+                             "player_evaluation" does not exist                 
+                             LINE 1: INSERT INTO player_evaluation              
+                             (person_id, batting_avg, home_...                  
+                                                 ^                              
+[07/18/26 10:27:29] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             TABLE persons(id INTEGER PRIMARY                   
+                             KEY);): relation "persons"                         
+                             already exists                                     
+                    ERROR    Error executing query: relation       server.py:401
+                             "persons" already exists                           
+[07/18/26 10:27:34] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             TABLE player_evaluation (                          
+                               performance_id SERIAL PRIMARY                    
+                             KEY,                                               
+                               person_id INTEGER NOT NULL,                      
+                               batting_avg DECIMAL CHECK                        
+                             (batting_avg BETWEEN 0 AND 1),                     
+                               home_runs INTEGER,                               
+                               rbis INTEGER,                                    
+                               games_played INTEGER,                            
+                               performance_score DECIMAL,                       
+                               evaluation_date DATE                             
+                             );                                                 
+                                                                                
+                             ALTER TABLE player_evaluation ADD                  
+                             CONSTRAINT fk_person FOREIGN KEY                   
+                             (person_id) REFERENCES                             
+                             persons(id);): there is no unique                  
+                             constraint matching given keys                     
+                             for referenced table "persons"                     
+                    ERROR    Error executing query: there is no    server.py:401
+                             unique constraint matching given keys              
+                             for referenced table "persons"                     
+[07/18/26 10:27:36] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:27:42] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:27:51] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (INSERT     sql_driver.py:271
+                             INTO player_evaluation                             
+                             (person_id, batting_avg,                           
+                             home_runs, rbis, games_played,                     
+                             performance_score,                                 
+                             evaluation_date)                                   
+                             SELECT                                             
+                               s.person_id,                                     
+                               CASE WHEN COALESCE(s.at_bats,                    
+                             0) = 0 THEN 0 ELSE                                 
+                             COALESCE(s.hits, 0)::DECIMAL /                     
+                             s.at_bats END AS batting_avg,                      
+                               COALESCE(s.home_runs, 0) AS                      
+                             home_runs,                                         
+                               COALESCE(s.rbi, 0) AS rbis,                      
+                               COALESCE(m.games_played, 0) AS                   
+                             games_played,                                      
+                               (CASE WHEN COALESCE(s.at_bats,                   
+                             0) = 0 THEN 0 ELSE                                 
+                             COALESCE(s.hits, 0)::DECIMAL /                     
+                             s.at_bats END * 1000) +                            
+                               (COALESCE(s.home_runs, 0) * 5)                   
+                             +                                                  
+                               (COALESCE(s.rbi, 0) * 2) AS                      
+                             performance_score,                                 
+                               DATE '2024-01-01' AS                             
+                             evaluation_date                                    
+                             FROM                                               
+                               baseball_offensive_stats s                       
+                             LEFT JOIN (                                        
+                               SELECT person_id,                                
+                             COUNT(DISTINCT event_id) AS                        
+                             games_played                                       
+                               FROM person_event_metadata                       
+                               GROUP BY person_id                               
+                             ) m ON s.person_id = m.person_id                   
+                             WHERE COALESCE(m.games_played, 0)                  
+                             >= 10;): column s.person_id does                   
+                             not exist                                          
+                             LINE 18: ) m ON s.person_id =                      
+                             m.person_id                                        
+                                             ^                                  
+                             HINT:  Perhaps you meant to                        
+                             reference the column                               
+                             "m.person_id".                                     
+                    ERROR    Error executing query: column         server.py:401
+                             s.person_id does not exist                         
+                             LINE 18: ) m ON s.person_id =                      
+                             m.person_id                                        
+                                             ^                                  
+                             HINT:  Perhaps you meant to reference              
+                             the column "m.person_id".                          
+[07/18/26 10:27:53] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:27:59] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:30:51] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:30:53] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             TABLE player_injury_status (                       
+                               status_id SERIAL PRIMARY KEY,                    
+                               person_id INTEGER UNIQUE NOT                     
+                             NULL REFERENCES persons(id),                       
+                               injury_count INTEGER DEFAULT 0,                  
+                               last_injury_date DATE,                           
+                               current_status VARCHAR CHECK                     
+                             (current_status IN ('healthy',                     
+                             'injured', 'recovering'))                          
+                             );): relation                                      
+                             "player_injury_status" already                     
+                             exists                                             
+                    ERROR    Error executing query: relation       server.py:401
+                             "player_injury_status" already exists              
+[07/18/26 10:30:56] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (INSERT     sql_driver.py:271
+                             INTO player_injury_status                          
+                             (person_id, injury_count,                          
+                             last_injury_date, current_status)                  
+                             SELECT                                             
+                               p.person_id,                                     
+                               COALESCE(COUNT(i.phase_id), 0)                   
+                             AS injury_count,                                   
+                               MAX(i.start_date) AS                             
+                             last_injury_date,                                  
+                               CASE                                             
+                                 WHEN MAX(i.end_date) IS NULL                   
+                             THEN 'injured'                                     
+                                 ELSE 'healthy'                                 
+                               END AS current_status                            
+                             FROM                                               
+                               (SELECT DISTINCT person_id FROM                  
+                             player_evaluation) p                               
+                             LEFT JOIN injury_phases i ON                       
+                             p.person_id = i.person_id                          
+                             GROUP BY p.person_id;): column                     
+                             i.phase_id does not exist                          
+                             LINE 4:                                            
+                             COALESCE(COUNT(i.phase_id), 0) AS                  
+                             injury_count,                                      
+                                                      ^                         
+                    ERROR    Error executing query: column         server.py:401
+                             i.phase_id does not exist                          
+                             LINE 4:   COALESCE(COUNT(i.phase_id),              
+                             0) AS injury_count,                                
+                                                      ^                         
+[07/18/26 10:30:57] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:31:02] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:31:05] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (UPDATE     sql_driver.py:271
+                             player_evaluation                                  
+                             SET performance_score =                            
+                               GREATEST(                                        
+                                 performance_score *                            
+                                 CASE                                           
+                                   WHEN p.current_status =                      
+                             'injured' THEN 0.8                                 
+                                   ELSE 1                                       
+                                 END *                                          
+                                 CASE                                           
+                                   WHEN pis.injury_count > 2                    
+                             THEN 0.9                                           
+                                   ELSE 1                                       
+                                 END                                            
+                               , 0)                                             
+                             FROM player_injury_status pis                      
+                             JOIN player_evaluation p ON                        
+                             p.person_id = pis.person_id                        
+                             WHERE player_evaluation.person_id                  
+                             = pis.person_id;): column                          
+                             reference "performance_score" is                   
+                             ambiguous                                          
+                             LINE 4:     performance_score *                    
+                                         ^                                      
+                    ERROR    Error executing query: column         server.py:401
+                             reference "performance_score" is                   
+                             ambiguous                                          
+                             LINE 4:     performance_score *                    
+                                         ^                                      
+[07/18/26 10:31:08] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:31:09] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:31:13] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    

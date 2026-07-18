@@ -1,0 +1,607 @@
+[07/18/26 10:19:08] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 10:19:12] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:19:14] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:19:16] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:19:20] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:19:28] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH proj1 sql_driver.py:271
+                             AS (SELECT project_id FROM                         
+                             employees.employee_projects WHERE                  
+                             project_name = 'Database                           
+                             Modernization'),                                   
+                             proj2 AS (SELECT project_id FROM                   
+                             employees.employee_projects WHERE                  
+                             project_name = 'Employee Portal                    
+                             Upgrade'),                                         
+                             proj3 AS (SELECT project_id FROM                   
+                             employees.employee_projects WHERE                  
+                             project_name = 'HR Analytics                       
+                             Dashboard')                                        
+                                                                                
+                             INSERT INTO                                        
+                             employees.project_assignments                      
+                             (employee_id, project_id, role,                    
+                             allocation_percentage,                             
+                             assigned_date)                                     
+                             SELECT e.id, p.project_id,                         
+                             'Developer', 80, '2024-01-01'                      
+                             FROM employees.employee e, proj1                   
+                             p                                                  
+                             WHERE e.department =                               
+                             'Development'                                      
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT e.id, p.project_id,                         
+                             'Business Analyst', 60,                            
+                             '2024-01-01'                                       
+                             FROM employees.employee e, proj2                   
+                             p                                                  
+                             WHERE e.department = 'Human                        
+                             Resources'                                         
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT e.id, p.project_id,                         
+                             'Marketing Specialist', 40,                        
+                             '2024-01-01'                                       
+                             FROM employees.employee e, proj3                   
+                             p                                                  
+                             WHERE e.department = 'Marketing'                   
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT e.id, p.project_id,                         
+                             'Financial Analyst', 30,                           
+                             '2024-01-01'                                       
+                             FROM employees.employee e, proj1                   
+                             p                                                  
+                             WHERE e.department = 'Finance'                     
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT e.id, p.project_id, 'Sales                  
+                             Representative', 50, '2024-01-01'                  
+                             FROM employees.employee e, proj2                   
+                             p                                                  
+                             WHERE e.department = 'Sales'                       
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT e.id, p.project_id,                         
+                             'Research Analyst', 70,                            
+                             '2024-01-01'                                       
+                             FROM employees.employee e, proj3                   
+                             p                                                  
+                             WHERE e.department = 'Research'                    
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT e.id, p.project_id,                         
+                             'Production Coordinator', 45,                      
+                             '2024-01-01'                                       
+                             FROM employees.employee e, proj1                   
+                             p                                                  
+                             WHERE e.department = 'Production'                  
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT e.id, p.project_id, 'QA                     
+                             Specialist', 85, '2024-01-01'                      
+                             FROM employees.employee e, proj2                   
+                             p                                                  
+                             WHERE e.department = 'Quality                      
+                             Management'                                        
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT e.id, p.project_id,                         
+                             'Customer Success', 35,                            
+                             '2024-01-01'                                       
+                             FROM employees.employee e, proj3                   
+                             p                                                  
+                             WHERE e.department = 'Customer                     
+                             Service';): column e.department                    
+                             does not exist                                     
+                             LINE 8: WHERE e.department =                       
+                             'Development'                                      
+                                           ^                                    
+                    ERROR    Error executing query: column         server.py:401
+                             e.department does not exist                        
+                             LINE 8: WHERE e.department =                       
+                             'Development'                                      
+                                           ^                                    
+[07/18/26 10:19:29] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:19:31] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (SELECT     sql_driver.py:271
+                             DISTINCT d.name AS                                 
+                             department_name, e.id AS                           
+                             employee_id                                        
+                             FROM employees.employee e                          
+                             JOIN employees.department d ON                     
+                             e.id = d.manager_id                                
+                             LIMIT 5;): column d.manager_id                     
+                             does not exist                                     
+                             LINE 3: JOIN employees.department                  
+                             d ON e.id = d.manager_id                           
+                                                                                
+                                          ^                                     
+                    ERROR    Error executing query: column         server.py:401
+                             d.manager_id does not exist                        
+                             LINE 3: JOIN employees.department d                
+                             ON e.id = d.manager_id                             
+                                                                                
+                                      ^                                         
+[07/18/26 10:19:32] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:19:35] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:19:47] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH proj1 sql_driver.py:271
+                             AS (SELECT project_id FROM                         
+                             employees.employee_projects WHERE                  
+                             project_name = 'Database                           
+                             Modernization'),                                   
+                             proj2 AS (SELECT project_id FROM                   
+                             employees.employee_projects WHERE                  
+                             project_name = 'Employee Portal                    
+                             Upgrade'),                                         
+                             proj3 AS (SELECT project_id FROM                   
+                             employees.employee_projects WHERE                  
+                             project_name = 'HR Analytics                       
+                             Dashboard')                                        
+                                                                                
+                             INSERT INTO                                        
+                             employees.project_assignments                      
+                             (employee_id, project_id, role,                    
+                             allocation_percentage,                             
+                             assigned_date)                                     
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Developer', 80,                     
+                             '2024-01-01'                                       
+                             FROM                                               
+                             employees.department_employee de,                  
+                             proj1 p                                            
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id                                    
+                             WHERE d.name = 'Development'                       
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Business Analyst',                  
+                             60, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de,                  
+                             proj2 p                                            
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id                                    
+                             WHERE d.name = 'Human Resources'                   
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Marketing                           
+                             Specialist', 40, '2024-01-01'                      
+                             FROM                                               
+                             employees.department_employee de,                  
+                             proj3 p                                            
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id                                    
+                             WHERE d.name = 'Marketing'                         
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Financial                           
+                             Analyst', 30, '2024-01-01'                         
+                             FROM                                               
+                             employees.department_employee de,                  
+                             proj1 p                                            
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id                                    
+                             WHERE d.name = 'Finance'                           
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Sales                               
+                             Representative', 50, '2024-01-01'                  
+                             FROM                                               
+                             employees.department_employee de,                  
+                             proj2 p                                            
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id                                    
+                             WHERE d.name = 'Sales'                             
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Research Analyst',                  
+                             70, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de,                  
+                             proj3 p                                            
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id                                    
+                             WHERE d.name = 'Research'                          
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Production                          
+                             Coordinator', 45, '2024-01-01'                     
+                             FROM                                               
+                             employees.department_employee de,                  
+                             proj1 p                                            
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id                                    
+                             WHERE d.name = 'Production'                        
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'QA Specialist',                     
+                             85, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de,                  
+                             proj2 p                                            
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id                                    
+                             WHERE d.name = 'Quality                            
+                             Management'                                        
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Customer Success',                  
+                             35, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de,                  
+                             proj3 p                                            
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id                                    
+                             WHERE d.name = 'Customer                           
+                             Service';): invalid reference to                   
+                             FROM-clause entry for table "de"                   
+                             LINE 8: JOIN employees.department                  
+                             d ON de.department_id =                            
+                             d.departme...                                      
+                                                                                
+                                   ^                                            
+                             DETAIL:  There is an entry for                     
+                             table "de", but it cannot be                       
+                             referenced from this part of the                   
+                             query.                                             
+                    ERROR    Error executing query: invalid        server.py:401
+                             reference to FROM-clause entry for                 
+                             table "de"                                         
+                             LINE 8: JOIN employees.department d                
+                             ON de.department_id = d.departme...                
+                                                                                
+                               ^                                                
+                             DETAIL:  There is an entry for table               
+                             "de", but it cannot be referenced                  
+                             from this part of the query.                       
+[07/18/26 10:20:07] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH proj1 sql_driver.py:271
+                             AS (SELECT project_id FROM                         
+                             employees.employee_projects WHERE                  
+                             project_name = 'Database                           
+                             Modernization'),                                   
+                             proj2 AS (SELECT project_id FROM                   
+                             employees.employee_projects WHERE                  
+                             project_name = 'Employee Portal                    
+                             Upgrade'),                                         
+                             proj3 AS (SELECT project_id FROM                   
+                             employees.employee_projects WHERE                  
+                             project_name = 'HR Analytics                       
+                             Dashboard')                                        
+                                                                                
+                             INSERT INTO                                        
+                             employees.project_assignments                      
+                             (employee_id, project_id, role,                    
+                             allocation_percentage,                             
+                             assigned_date)                                     
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Developer', 80,                     
+                             '2024-01-01'                                       
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id, proj1 p                           
+                             WHERE d.name = 'Development'                       
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Business Analyst',                  
+                             60, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id, proj2 p                           
+                             WHERE d.name = 'Human Resources'                   
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Marketing                           
+                             Specialist', 40, '2024-01-01'                      
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id, proj3 p                           
+                             WHERE d.name = 'Marketing'                         
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Financial                           
+                             Analyst', 30, '2024-01-01'                         
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id, proj1 p                           
+                             WHERE d.name = 'Finance'                           
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Sales                               
+                             Representative', 50, '2024-01-01'                  
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id, proj2 p                           
+                             WHERE d.name = 'Sales'                             
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Research Analyst',                  
+                             70, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id, proj3 p                           
+                             WHERE d.name = 'Research'                          
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Production                          
+                             Coordinator', 45, '2024-01-01'                     
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id, proj1 p                           
+                             WHERE d.name = 'Production'                        
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'QA Specialist',                     
+                             85, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id, proj2 p                           
+                             WHERE d.name = 'Quality                            
+                             Management'                                        
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Customer Success',                  
+                             35, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id =                                 
+                             d.department_id, proj3 p                           
+                             WHERE d.name = 'Customer                           
+                             Service';): column                                 
+                             d.department_id does not exist                     
+                             LINE 8: JOIN employees.department                  
+                             d ON de.department_id =                            
+                             d.departme...                                      
+                                                                                
+                                                      ^                         
+                             HINT:  Perhaps you meant to                        
+                             reference the column                               
+                             "de.department_id".                                
+                    ERROR    Error executing query: column         server.py:401
+                             d.department_id does not exist                     
+                             LINE 8: JOIN employees.department d                
+                             ON de.department_id = d.departme...                
+                                                                                
+                                                  ^                             
+                             HINT:  Perhaps you meant to reference              
+                             the column "de.department_id".                     
+[07/18/26 10:20:09] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:20:24] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH proj1 sql_driver.py:271
+                             AS (SELECT project_id FROM                         
+                             employees.employee_projects WHERE                  
+                             project_name = 'Database                           
+                             Modernization'),                                   
+                             proj2 AS (SELECT project_id FROM                   
+                             employees.employee_projects WHERE                  
+                             project_name = 'Employee Portal                    
+                             Upgrade'),                                         
+                             proj3 AS (SELECT project_id FROM                   
+                             employees.employee_projects WHERE                  
+                             project_name = 'HR Analytics                       
+                             Dashboard')                                        
+                                                                                
+                             INSERT INTO                                        
+                             employees.project_assignments                      
+                             (employee_id, project_id, role,                    
+                             allocation_percentage,                             
+                             assigned_date)                                     
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Developer', 80,                     
+                             '2024-01-01'                                       
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id = d.id, proj1 p                   
+                             WHERE d.dept_name = 'Development'                  
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Business Analyst',                  
+                             60, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id = d.id, proj2 p                   
+                             WHERE d.dept_name = 'Human                         
+                             Resources'                                         
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Marketing                           
+                             Specialist', 40, '2024-01-01'                      
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id = d.id, proj3 p                   
+                             WHERE d.dept_name = 'Marketing'                    
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Financial                           
+                             Analyst', 30, '2024-01-01'                         
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id = d.id, proj1 p                   
+                             WHERE d.dept_name = 'Finance'                      
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Sales                               
+                             Representative', 50, '2024-01-01'                  
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id = d.id, proj2 p                   
+                             WHERE d.dept_name = 'Sales'                        
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Research Analyst',                  
+                             70, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id = d.id, proj3 p                   
+                             WHERE d.dept_name = 'Research'                     
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Production                          
+                             Coordinator', 45, '2024-01-01'                     
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id = d.id, proj1 p                   
+                             WHERE d.dept_name = 'Production'                   
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'QA Specialist',                     
+                             85, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id = d.id, proj2 p                   
+                             WHERE d.dept_name = 'Quality                       
+                             Management'                                        
+                                                                                
+                             UNION ALL                                          
+                                                                                
+                             SELECT de.employee_id,                             
+                             p.project_id, 'Customer Success',                  
+                             35, '2024-01-01'                                   
+                             FROM                                               
+                             employees.department_employee de                   
+                             JOIN employees.department d ON                     
+                             de.department_id = d.id, proj3 p                   
+                             WHERE d.dept_name = 'Customer                      
+                             Service';): column                                 
+                             "assigned_date" is of type date                    
+                             but expression is of type text                     
+                             LINE 6: ...CT de.employee_id,                      
+                             p.project_id, 'Developer', 80,                     
+                             '2024-01-0...                                      
+                                                                                
+                                                         ^                      
+                             HINT:  You will need to rewrite                    
+                             or cast the expression.                            
+                    ERROR    Error executing query: column         server.py:401
+                             "assigned_date" is of type date but                
+                             expression is of type text                         
+                             LINE 6: ...CT de.employee_id,                      
+                             p.project_id, 'Developer', 80,                     
+                             '2024-01-0...                                      
+                                                                                
+                                                     ^                          
+                             HINT:  You will need to rewrite or                 
+                             cast the expression.                               
+[07/18/26 10:20:40] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:20:50] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:20:52] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:20:53] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:20:55] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:20:57] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:20:58] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    

@@ -1,0 +1,72 @@
+Using unsupported models: openai/gpt-4.1-mini. Will use OPENAI_BASE_URL and OPENAI_API_KEY from environment.
+MCPMark Evaluation
+Experiment: e-b28-t023-r1-selective_c3-postgres-employees-employee_project_tracking | 1 Model(s): openai/gpt-4.1-mini
+Task suite: standard
+
+============================================================
+Starting evaluation 1/1: openai/gpt-4.1-mini
+============================================================
+
+Model 'openai/gpt-4.1-mini' not in supported list. Using default OpenAI configuration.
+PostgreSQL state manager initialized successfully
+Discovering tasks in category: security
+Discovering tasks in category: vectors
+Discovering tasks in category: sports
+Discovering tasks in category: chinook
+Discovering tasks in category: dvdrental
+Discovering tasks in category: lego
+Discovering tasks in category: employees
+Discovered 21 Postgres tasks across all categories (suite=standard)
+
+┌─ Stage 1: Setup ─────────────────────────────────────────────────────
+| Setting up initial state for postgres task: employees__employee_project_tracking
+| Created database 'mcpmark_employees_employee_project_tracking_20260718095452' from template 'employees'
+| ✓ Initial state setup completed for employees__employee_project_tracking
+└─ Completed in 3.67s
+
+┌─ Stage 2: Execute ───────────────────────────────────────────────────
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE TABLE employees.employee_projects (\n    project_id SERIAL PRIMARY KEY,\n    project_name VARCHAR(100) NOT NULL,\n    start_...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "ALTER TABLE employees.project_assignments\nADD CONSTRAINT fk_employee_id\nFOREIGN KEY (employee_id)\nREFERENCES employees.employee(...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE INDEX idx_projects_status ON employees.employee_projects(status);\nCREATE INDEX idx_assignments_emp_proj ON employees.projec...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "INSERT INTO employees.employee_projects (project_name, start_date, end_date, budget, status) VALUES\n('Database Modernization', '20...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Insert milestones\nINSERT INTO employees.project_milestones (project_id, milestone_name, due_date) VALUES\n((SELECT project_id F...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Insert project assignments for all employees based on their department\nINSERT INTO employees.project_assignments (employee_id, ...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Check the structure of employees.employee table to confirm department column\nSELECT column_name, data_type FROM information_sch...[0m
+| The employees.employee table does not have a department column. Could you please specify how the department information is stored or how to identify the department of each employee? This is necessary to assign employees to projects based on their departments as requested.
+|
+|
+| Task ended with the finish reason from messages being 'stop'.
+| Token usage: Total: 25,439 | Input: 24,076 | Output: 1,363
+| Turns: 8
+└─ Completed in 62.00s
+
+┌─ Stage 3: Verify ────────────────────────────────────────────────────
+| Verifying task (Postgres): employees__employee_project_tracking
+==================================================
+❌ Priority column was not added to employee_projects table
+
+❌ Task verification: FAIL
+
+| Verification Result: [91m✗ FAILED[0m
+| Verification Error: Verification failed with no error message
+└─ Completed in 102.13ms
+
+┌─ Stage 4: Cleanup ───────────────────────────────────────────────────
+| ○ Cleaning up initial state for postgres task: employees__employee_project_tracking
+| Dropped database: mcpmark_employees_employee_project_tracking_20260718095452
+| Dropped database: mcpmark_employees_employee_project_tracking_20260718095452
+| ✓ Cleanup completed for postgres
+└─ Completed in 228.91ms
+
+
+============================================================
+Results Summary
+============================================================
+✓ Tasks passed: 0/1 (0.0%)
+⏱ Total time: 66.0s
+📁 Results: /home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_confirmatory/tasks/e-b28-t023-r1-selective_c3-postgres-employees-employee_project_tracking/mcpmark/e-b28-t023-r1-selective_c3-postgres-employees-employee_project_tracking/openai/gpt-4-1-mini__postgres/run-1
+
+============================================================
+✓ All evaluations completed for 1 model(s)
+============================================================
+{"post_barrier_call_count":6,"post_barrier_effect_commits":4,"run_id":"e-b28-t023-r1-selective_c3-postgres-employees-employee_project_tracking","task_success":false,"tool_call_count":7,"trace_valid":true}

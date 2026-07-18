@@ -1,0 +1,304 @@
+[07/18/26 09:51:05] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 09:51:09] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:51:10] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:51:14] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH       sql_driver.py:271
+                             monthly_data AS (                                  
+                               SELECT                                           
+                                 TO_CHAR(invoicedate,                           
+                             'YYYY-MM') AS year_month,                          
+                                 COUNT(DISTINCT invoiceid) AS                   
+                             total_invoices,                                    
+                                 SUM(total) AS total_revenue,                   
+                                 SUM(quantity) AS                               
+                             total_tracks_sold,                                 
+                                 AVG(total) AS                                  
+                             average_invoice_value,                             
+                                 COUNT(DISTINCT customerid) AS                  
+                             unique_customers                                   
+                               FROM invoice                                     
+                               JOIN invoice_line USING                          
+                             (invoiceid)                                        
+                               GROUP BY year_month                              
+                               HAVING COUNT(DISTINCT                            
+                             invoiceid) > 0                                     
+                             )                                                  
+                             INSERT INTO                                        
+                             public.monthly_sales_summary                       
+                             SELECT year_month,                                 
+                             total_invoices, total_revenue,                     
+                             total_tracks_sold,                                 
+                             average_invoice_value,                             
+                             unique_customers                                   
+                             FROM monthly_data;): relation                      
+                             "invoice" does not exist                           
+                             LINE 9:   FROM invoice                             
+                                            ^                                   
+                    ERROR    Error executing query: relation       server.py:401
+                             "invoice" does not exist                           
+                             LINE 9:   FROM invoice                             
+                                            ^                                   
+[07/18/26 09:51:15] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:51:17] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:51:20] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH       sql_driver.py:271
+                             monthly_data AS (                                  
+                               SELECT                                           
+                                 TO_CHAR(Invoice.InvoiceDate,                   
+                             'YYYY-MM') AS year_month,                          
+                                 COUNT(DISTINCT                                 
+                             Invoice.InvoiceId) AS                              
+                             total_invoices,                                    
+                                 SUM(Invoice.Total) AS                          
+                             total_revenue,                                     
+                                 SUM(InvoiceLine.Quantity) AS                   
+                             total_tracks_sold,                                 
+                                 AVG(Invoice.Total) AS                          
+                             average_invoice_value,                             
+                                 COUNT(DISTINCT                                 
+                             Invoice.CustomerId) AS                             
+                             unique_customers                                   
+                               FROM public.Invoice                              
+                               JOIN public.InvoiceLine ON                       
+                             Invoice.InvoiceId =                                
+                             InvoiceLine.InvoiceId                              
+                               GROUP BY year_month                              
+                               HAVING COUNT(DISTINCT                            
+                             Invoice.InvoiceId) > 0                             
+                             )                                                  
+                             INSERT INTO                                        
+                             public.monthly_sales_summary                       
+                             SELECT year_month,                                 
+                             total_invoices, total_revenue,                     
+                             total_tracks_sold,                                 
+                             average_invoice_value,                             
+                             unique_customers                                   
+                             FROM monthly_data;): relation                      
+                             "public.invoice" does not exist                    
+                             LINE 9:   FROM public.Invoice                      
+                                            ^                                   
+                    ERROR    Error executing query: relation       server.py:401
+                             "public.invoice" does not exist                    
+                             LINE 9:   FROM public.Invoice                      
+                                            ^                                   
+[07/18/26 09:51:22] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:51:23] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:51:27] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH       sql_driver.py:271
+                             monthly_data AS (                                  
+                               SELECT                                           
+                                 TO_CHAR(Invoice.InvoiceDate,                   
+                             'YYYY-MM') AS year_month,                          
+                                 COUNT(DISTINCT                                 
+                             Invoice.InvoiceId) AS                              
+                             total_invoices,                                    
+                                 SUM(Invoice.Total) AS                          
+                             total_revenue,                                     
+                                 SUM(InvoiceLine.Quantity) AS                   
+                             total_tracks_sold,                                 
+                                 AVG(Invoice.Total) AS                          
+                             average_invoice_value,                             
+                                 COUNT(DISTINCT                                 
+                             Invoice.CustomerId) AS                             
+                             unique_customers                                   
+                               FROM public."Invoice" AS                         
+                             Invoice                                            
+                               JOIN public."InvoiceLine" AS                     
+                             InvoiceLine ON Invoice.InvoiceId                   
+                             = InvoiceLine.InvoiceId                            
+                               GROUP BY year_month                              
+                               HAVING COUNT(DISTINCT                            
+                             Invoice.InvoiceId) > 0                             
+                             )                                                  
+                             INSERT INTO                                        
+                             public.monthly_sales_summary                       
+                             SELECT year_month,                                 
+                             total_invoices, total_revenue,                     
+                             total_tracks_sold,                                 
+                             average_invoice_value,                             
+                             unique_customers                                   
+                             FROM monthly_data;): column                        
+                             invoice.invoiceid does not exist                   
+                             LINE 10:   JOIN                                    
+                             public."InvoiceLine" AS                            
+                             InvoiceLine ON Invoice.Invoic...                   
+                                                                                
+                                                   ^                            
+                             HINT:  Perhaps you meant to                        
+                             reference the column                               
+                             "invoice.InvoiceId".                               
+                    ERROR    Error executing query: column         server.py:401
+                             invoice.invoiceid does not exist                   
+                             LINE 10:   JOIN public."InvoiceLine"               
+                             AS InvoiceLine ON Invoice.Invoic...                
+                                                                                
+                                               ^                                
+                             HINT:  Perhaps you meant to reference              
+                             the column "invoice.InvoiceId".                    
+[07/18/26 09:51:32] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:51:33] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:51:42] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH       sql_driver.py:271
+                             TopTracks AS (                                     
+                               SELECT                                           
+                                 il.TrackId AS item_id,                         
+                                 t.Name AS item_name,                           
+                                 SUM(il.Quantity) AS                            
+                             total_quantity_sold,                               
+                                 SUM(il.UnitPrice *                             
+                             il.Quantity) AS total_revenue                      
+                               FROM public."InvoiceLine" il                     
+                               JOIN public."Track" t ON                         
+                             il.TrackId = t.TrackId                             
+                               GROUP BY il.TrackId, t.Name                      
+                               HAVING SUM(il.Quantity) > 0                      
+                               ORDER BY total_quantity_sold                     
+                             DESC, item_name ASC                                
+                               LIMIT 10                                         
+                             )                                                  
+                             INSERT INTO                                        
+                             public.top_music_charts                            
+                             (chart_type, rank_position,                        
+                             item_id, item_name,                                
+                             total_revenue)                                     
+                             SELECT 'top_tracks', ROW_NUMBER()                  
+                             OVER (ORDER BY                                     
+                             total_quantity_sold DESC,                          
+                             item_name ASC), item_id,                           
+                             item_name, total_revenue                           
+                             FROM TopTracks;): column                           
+                             il.trackid does not exist                          
+                             LINE 8:   JOIN public."Track" t                    
+                             ON il.TrackId = t.TrackId                          
+                                                                                
+                               ^                                                
+                             HINT:  Perhaps you meant to                        
+                             reference the column                               
+                             "il.TrackId".                                      
+                    ERROR    Error executing query: column         server.py:401
+                             il.trackid does not exist                          
+                             LINE 8:   JOIN public."Track" t ON                 
+                             il.TrackId = t.TrackId                             
+                                                                ^               
+                             HINT:  Perhaps you meant to reference              
+                             the column "il.TrackId".                           
+[07/18/26 09:51:43] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH       sql_driver.py:271
+                             AlbumRevenue AS (                                  
+                               SELECT                                           
+                                 al.AlbumId AS item_id,                         
+                                 al.Title AS item_name,                         
+                                 SUM(il.UnitPrice *                             
+                             il.Quantity) AS total_revenue                      
+                               FROM public."InvoiceLine" il                     
+                               JOIN public."Track" t ON                         
+                             il.TrackId = t.TrackId                             
+                               JOIN public."Album" al ON                        
+                             t.AlbumId = al.AlbumId                             
+                               GROUP BY al.AlbumId, al.Title                    
+                               HAVING SUM(il.UnitPrice *                        
+                             il.Quantity) > 0                                   
+                               ORDER BY total_revenue DESC,                     
+                             item_name ASC                                      
+                               LIMIT 10                                         
+                             )                                                  
+                             INSERT INTO                                        
+                             public.top_music_charts                            
+                             (chart_type, rank_position,                        
+                             item_id, item_name,                                
+                             total_revenue)                                     
+                             SELECT 'top_albums', ROW_NUMBER()                  
+                             OVER (ORDER BY total_revenue                       
+                             DESC, item_name ASC), item_id,                     
+                             item_name, total_revenue                           
+                             FROM AlbumRevenue;): column                        
+                             il.trackid does not exist                          
+                             LINE 7:   JOIN public."Track" t                    
+                             ON il.TrackId = t.TrackId                          
+                                                                                
+                               ^                                                
+                             HINT:  Perhaps you meant to                        
+                             reference the column                               
+                             "il.TrackId".                                      
+                    ERROR    Error executing query: column         server.py:401
+                             il.trackid does not exist                          
+                             LINE 7:   JOIN public."Track" t ON                 
+                             il.TrackId = t.TrackId                             
+                                                                ^               
+                             HINT:  Perhaps you meant to reference              
+                             the column "il.TrackId".                           
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH       sql_driver.py:271
+                             ArtistRevenue AS (                                 
+                               SELECT                                           
+                                 ar.ArtistId AS item_id,                        
+                                 ar.Name AS item_name,                          
+                                 SUM(il.UnitPrice *                             
+                             il.Quantity) AS total_revenue                      
+                               FROM public."InvoiceLine" il                     
+                               JOIN public."Track" t ON                         
+                             il.TrackId = t.TrackId                             
+                               JOIN public."Album" al ON                        
+                             t.AlbumId = al.AlbumId                             
+                               JOIN public."Artist" ar ON                       
+                             al.ArtistId = ar.ArtistId                          
+                               GROUP BY ar.ArtistId, ar.Name                    
+                               HAVING SUM(il.UnitPrice *                        
+                             il.Quantity) > 0                                   
+                               ORDER BY total_revenue DESC,                     
+                             item_name ASC                                      
+                               LIMIT 10                                         
+                             )                                                  
+                             INSERT INTO                                        
+                             public.top_music_charts                            
+                             (chart_type, rank_position,                        
+                             item_id, item_name,                                
+                             total_revenue)                                     
+                             SELECT 'top_artists',                              
+                             ROW_NUMBER() OVER (ORDER BY                        
+                             total_revenue DESC, item_name                      
+                             ASC), item_id, item_name,                          
+                             total_revenue                                      
+                             FROM ArtistRevenue;): column                       
+                             il.trackid does not exist                          
+                             LINE 7:   JOIN public."Track" t                    
+                             ON il.TrackId = t.TrackId                          
+                                                                                
+                               ^                                                
+                             HINT:  Perhaps you meant to                        
+                             reference the column                               
+                             "il.TrackId".                                      
+                    ERROR    Error executing query: column         server.py:401
+                             il.trackid does not exist                          
+                             LINE 7:   JOIN public."Track" t ON                 
+                             il.TrackId = t.TrackId                             
+                                                                ^               
+                             HINT:  Perhaps you meant to reference              
+                             the column "il.TrackId".                           
+[07/18/26 09:51:45] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:51:56] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    

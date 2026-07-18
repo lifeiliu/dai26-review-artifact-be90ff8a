@@ -1,0 +1,424 @@
+[07/18/26 10:23:05] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 10:23:22] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             MATERIALIZED VIEW                                  
+                             employees.exec_department_summary                  
+                             AS                                                 
+                             SELECT d.department_name,                          
+                                    COUNT(e.employee_id) AS                     
+                             total_employees,                                   
+                                    AVG(s.salary_amount) AS                     
+                             avg_salary,                                        
+                                    SUM(s.salary_amount) AS                     
+                             total_payroll,                                     
+                                    m.manager_name                              
+                             FROM employees.departments d                       
+                             JOIN employees.employees e ON                      
+                             d.department_id = e.department_id                  
+                             JOIN employees.salaries s ON                       
+                             e.employee_id = s.employee_id AND                  
+                             s.to_date = '9999-01-01'                           
+                             LEFT JOIN (                                        
+                                 SELECT department_id,                          
+                             manager_name                                       
+                                 FROM                                           
+                             employees.department_managers                      
+                                 WHERE to_date = '9999-01-01'                   
+                             ) m ON d.department_id =                           
+                             m.department_id                                    
+                             WHERE e.to_date = '9999-01-01'                     
+                             GROUP BY d.department_name,                        
+                             m.manager_name;): relation                         
+                             "employees.departments" does not                   
+                             exist                                              
+                             LINE 7: FROM                                       
+                             employees.departments d                            
+                                          ^                                     
+                    ERROR    Error executing query: relation       server.py:401
+                             "employees.departments" does not                   
+                             exist                                              
+                             LINE 7: FROM employees.departments d               
+                                          ^                                     
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             MATERIALIZED VIEW                                  
+                             employees.exec_hiring_trends AS                    
+                             WITH yearly_hires AS (                             
+                                 SELECT EXTRACT(YEAR FROM                       
+                             hire_date) AS hire_year,                           
+                                        COUNT(employee_id) AS                   
+                             employees_hired,                                   
+                                        AVG(start_salary) AS                    
+                             avg_starting_salary                                
+                                 FROM employees.employees                       
+                                 GROUP BY hire_year                             
+                             ),                                                 
+                             retention AS (                                     
+                                 SELECT EXTRACT(YEAR FROM                       
+                             hire_date) AS hire_year,                           
+                                        COUNT(employee_id)                      
+                             FILTER (WHERE to_date =                            
+                             '9999-01-01')::float /                             
+                             COUNT(employee_id) AS                              
+                             retention_rate                                     
+                                 FROM employees.employees                       
+                                 GROUP BY hire_year                             
+                             ),                                                 
+                             hiring_dept AS (                                   
+                                 SELECT EXTRACT(YEAR FROM                       
+                             hire_date) AS hire_year,                           
+                                        department_id,                          
+                                        COUNT(employee_id) AS                   
+                             dept_hires                                         
+                                 FROM employees.employees                       
+                                 GROUP BY hire_year,                            
+                             department_id                                      
+                             ),                                                 
+                             top_department AS (                                
+                                 SELECT hire_year,                              
+                                        (SELECT                                 
+                             department_name FROM                               
+                             employees.departments d WHERE                      
+                             d.department_id =                                  
+                             hd.department_id) AS                               
+                             top_hiring_department                              
+                                 FROM (                                         
+                                     SELECT hire_year,                          
+                             department_id,                                     
+                                            RANK() OVER                         
+                             (PARTITION BY hire_year ORDER BY                   
+                             dept_hires DESC) AS rnk                            
+                                     FROM hiring_dept                           
+                                 ) hd                                           
+                                 WHERE rnk = 1                                  
+                             )                                                  
+                             SELECT yh.hire_year,                               
+                                    yh.employees_hired,                         
+                                    yh.avg_starting_salary,                     
+                                    COALESCE(r.retention_rate,                  
+                             0) AS retention_rate,                              
+                                    td.top_hiring_department                    
+                             FROM yearly_hires yh                               
+                             LEFT JOIN retention r ON                           
+                             yh.hire_year = r.hire_year                         
+                             LEFT JOIN top_department td ON                     
+                             yh.hire_year = td.hire_year                        
+                             ORDER BY yh.hire_year;): relation                  
+                             "employees.employees" does not                     
+                             exist                                              
+                             LINE 6:     FROM                                   
+                             employees.employees                                
+                                              ^                                 
+                    ERROR    Error executing query: relation       server.py:401
+                             "employees.employees" does not exist               
+                             LINE 6:     FROM employees.employees               
+                                              ^                                 
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             MATERIALIZED VIEW                                  
+                             employees.exec_salary_distributio                  
+                             n AS                                               
+                             WITH salary_bands AS (                             
+                                 SELECT '30K-50K'::varchar AS                   
+                             salary_band, 30000 AS min_salary,                  
+                             49999 AS max_salary UNION ALL                      
+                                 SELECT '50K-70K', 50000,                       
+                             69999 UNION ALL                                    
+                                 SELECT '70K-90K', 70000,                       
+                             89999 UNION ALL                                    
+                                 SELECT '90K-110K', 90000,                      
+                             109999 UNION ALL                                   
+                                 SELECT '110K+', 110000,                        
+                             1000000000                                         
+                             ),                                                 
+                             band_counts AS (                                   
+                                 SELECT sb.salary_band,                         
+                                        COUNT(e.employee_id)                    
+                             AS employee_count,                                 
+                                        COUNT(e.employee_id)::                  
+                             decimal /                                          
+                             SUM(COUNT(e.employee_id)) OVER ()                  
+                             AS percentage_of_workforce                         
+                                 FROM salary_bands sb                           
+                                 LEFT JOIN employees.employees                  
+                             e ON (                                             
+                                     EXISTS (                                   
+                                         SELECT 1                               
+                                         FROM                                   
+                             employees.salaries s                               
+                                         WHERE s.employee_id =                  
+                             e.employee_id                                      
+                                           AND s.salary_amount                  
+                             BETWEEN sb.min_salary AND                          
+                             sb.max_salary                                      
+                                           AND s.to_date =                      
+                             '9999-01-01'                                       
+                                     )                                          
+                                     AND e.to_date =                            
+                             '9999-01-01'                                       
+                                 )                                              
+                                 GROUP BY sb.salary_band                        
+                             ),                                                 
+                             common_titles AS (                                 
+                                 SELECT sb.salary_band,                         
+                                        (SELECT jt.job_title                    
+                                         FROM                                   
+                             employees.job_titles jt                            
+                                         JOIN                                   
+                             employees.salaries s ON jt.job_id                  
+                             = s.job_id                                         
+                                         JOIN                                   
+                             employees.employees e ON                           
+                             s.employee_id = e.employee_id                      
+                                         WHERE s.salary_amount                  
+                             BETWEEN sb.min_salary AND                          
+                             sb.max_salary                                      
+                                           AND s.to_date =                      
+                             '9999-01-01'                                       
+                                           AND e.to_date =                      
+                             '9999-01-01'                                       
+                                         GROUP BY jt.job_title                  
+                                         ORDER BY COUNT(*)                      
+                             DESC                                               
+                                         LIMIT 1) AS                            
+                             most_common_title                                  
+                                 FROM salary_bands sb                           
+                             )                                                  
+                             SELECT bc.salary_band,                             
+                             bc.employee_count,                                 
+                             bc.percentage_of_workforce,                        
+                             ct.most_common_title                               
+                             FROM band_counts bc                                
+                             JOIN common_titles ct ON                           
+                             bc.salary_band = ct.salary_band                    
+                             ORDER BY bc.salary_band;):                         
+                             relation "employees.employees"                     
+                             does not exist                                     
+                             LINE 14:     LEFT JOIN                             
+                             employees.employees e ON (                         
+                                                    ^                           
+                    ERROR    Error executing query: relation       server.py:401
+                             "employees.employees" does not exist               
+                             LINE 14:     LEFT JOIN                             
+                             employees.employees e ON (                         
+                                                    ^                           
+[07/18/26 10:23:23] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:23:25] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:23:31] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:23:32] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:23:39] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:23:58] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             MATERIALIZED VIEW                                  
+                             employees.exec_hiring_trends AS                    
+                             WITH yearly_hires AS (                             
+                                 SELECT EXTRACT(YEAR FROM                       
+                             hire_date) AS hire_year,                           
+                                        COUNT(id) AS                            
+                             employees_hired,                                   
+                                        AVG(s.amount) AS                        
+                             avg_starting_salary                                
+                                 FROM employees.employee e                      
+                                 JOIN employees.salary s ON                     
+                             e.id = s.employee_id AND                           
+                             s.from_date = e.hire_date                          
+                                 GROUP BY hire_year                             
+                             ),                                                 
+                             retention AS (                                     
+                                 SELECT EXTRACT(YEAR FROM                       
+                             hire_date) AS hire_year,                           
+                                        COUNT(id) FILTER                        
+                             (WHERE e.to_date =                                 
+                             '9999-01-01')::float / COUNT(id)                   
+                             AS retention_rate                                  
+                                 FROM employees.employee e                      
+                                 LEFT JOIN                                      
+                             employees.department_employee de                   
+                             ON e.id = de.employee_id                           
+                                 GROUP BY hire_year                             
+                             ),                                                 
+                             hiring_dept AS (                                   
+                                 SELECT EXTRACT(YEAR FROM                       
+                             e.hire_date) AS hire_year,                         
+                                        de.department_id,                       
+                                        COUNT(e.id) AS                          
+                             dept_hires                                         
+                                 FROM employees.employee e                      
+                                 JOIN                                           
+                             employees.department_employee de                   
+                             ON e.id = de.employee_id                           
+                                 GROUP BY hire_year,                            
+                             de.department_id                                   
+                             ),                                                 
+                             top_department AS (                                
+                                 SELECT hire_year,                              
+                                        (SELECT dept_name FROM                  
+                             employees.department d WHERE d.id                  
+                             = hd.department_id) AS                             
+                             top_hiring_department                              
+                                 FROM (                                         
+                                     SELECT hire_year,                          
+                             department_id,                                     
+                                            RANK() OVER                         
+                             (PARTITION BY hire_year ORDER BY                   
+                             dept_hires DESC) AS rnk                            
+                                     FROM hiring_dept hd                        
+                                 ) hd                                           
+                                 WHERE rnk = 1                                  
+                             )                                                  
+                             SELECT yh.hire_year,                               
+                                    yh.employees_hired,                         
+                                    yh.avg_starting_salary,                     
+                                    COALESCE(r.retention_rate,                  
+                             0) AS retention_rate,                              
+                                    td.top_hiring_department                    
+                             FROM yearly_hires yh                               
+                             LEFT JOIN retention r ON                           
+                             yh.hire_year = r.hire_year                         
+                             LEFT JOIN top_department td ON                     
+                             yh.hire_year = td.hire_year                        
+                             ORDER BY yh.hire_year;): column                    
+                             e.to_date does not exist                           
+                             LINE 12:            COUNT(id)                      
+                             FILTER (WHERE e.to_date =                          
+                             '9999-01-01')...                                   
+                                                                                
+                                        ^                                       
+                             HINT:  Perhaps you meant to                        
+                             reference the column                               
+                             "de.to_date".                                      
+                    ERROR    Error executing query: column         server.py:401
+                             e.to_date does not exist                           
+                             LINE 12:            COUNT(id) FILTER               
+                             (WHERE e.to_date = '9999-01-01')...                
+                                                                                
+                                    ^                                           
+                             HINT:  Perhaps you meant to reference              
+                             the column "de.to_date".                           
+[07/18/26 10:24:05] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:24:16] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             MATERIALIZED VIEW                                  
+                             employees.exec_salary_distributio                  
+                             n AS                                               
+                             WITH salary_bands AS (                             
+                                 SELECT '30K-50K'::varchar AS                   
+                             salary_band, 30000 AS min_salary,                  
+                             49999 AS max_salary UNION ALL                      
+                                 SELECT '50K-70K', 50000,                       
+                             69999 UNION ALL                                    
+                                 SELECT '70K-90K', 70000,                       
+                             89999 UNION ALL                                    
+                                 SELECT '90K-110K', 90000,                      
+                             109999 UNION ALL                                   
+                                 SELECT '110K+', 110000,                        
+                             1000000000                                         
+                             ),                                                 
+                             current_salaries AS (                              
+                                 SELECT employee_id, amount                     
+                             FROM employees.salary                              
+                                 WHERE to_date = '9999-01-01'                   
+                             ),                                                 
+                             band_counts AS (                                   
+                                 SELECT sb.salary_band,                         
+                                        COUNT(e.id) AS                          
+                             employee_count,                                    
+                                        COUNT(e.id)::decimal /                  
+                             (SELECT COUNT(*) FROM                              
+                             employees.employee WHERE to_date                   
+                             = '9999-01-01') AS                                 
+                             percentage_of_workforce                            
+                                 FROM salary_bands sb                           
+                                 LEFT JOIN current_salaries s                   
+                             ON s.amount BETWEEN sb.min_salary                  
+                             AND sb.max_salary                                  
+                                 LEFT JOIN employees.employee                   
+                             e ON s.employee_id = e.id AND                      
+                             e.to_date = '9999-01-01'                           
+                                 GROUP BY sb.salary_band                        
+                             ),                                                 
+                             common_titles AS (                                 
+                                 SELECT sb.salary_band,                         
+                                     (SELECT t.title                            
+                                      FROM employees.title t                    
+                                      JOIN employees.salary s                   
+                             ON t.employee_id = s.employee_id                   
+                                      WHERE s.amount BETWEEN                    
+                             sb.min_salary AND sb.max_salary                    
+                                        AND s.to_date =                         
+                             '9999-01-01'                                       
+                                      GROUP BY t.title                          
+                                      ORDER BY COUNT(*) DESC                    
+                                      LIMIT 1) AS                               
+                             most_common_title                                  
+                                 FROM salary_bands sb                           
+                             )                                                  
+                             SELECT bc.salary_band,                             
+                             bc.employee_count,                                 
+                             bc.percentage_of_workforce,                        
+                             ct.most_common_title                               
+                             FROM band_counts bc                                
+                             JOIN common_titles ct ON                           
+                             bc.salary_band = ct.salary_band                    
+                             ORDER BY bc.salary_band;): column                  
+                             e.to_date does not exist                           
+                             LINE 19: ... employees.employee e                  
+                             ON s.employee_id = e.id AND                        
+                             e.to_date ...                                      
+                                                                                
+                                                          ^                     
+                    ERROR    Error executing query: column         server.py:401
+                             e.to_date does not exist                           
+                             LINE 19: ... employees.employee e ON               
+                             s.employee_id = e.id AND e.to_date                 
+                             ...                                                
+                                                                                
+                                                      ^                         
+[07/18/26 10:24:22] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:24:26] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:24:30] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:24:33] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:24:36] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:24:39] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:24:41] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:24:46] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:24:48] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:24:50] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    

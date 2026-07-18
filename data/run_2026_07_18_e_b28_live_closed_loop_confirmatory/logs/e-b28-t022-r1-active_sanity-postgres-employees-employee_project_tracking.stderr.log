@@ -1,0 +1,138 @@
+[07/18/26 09:53:45] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 09:53:49] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:53:52] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:53:54] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:53:57] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:07] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (WITH       sql_driver.py:271
+                             project_ids AS (                                   
+                               SELECT project_id, project_name                  
+                             FROM employees.employee_projects                   
+                             ),                                                 
+                             emp_dept AS (                                      
+                               SELECT id, department FROM                       
+                             employees.employee                                 
+                             )                                                  
+                             INSERT INTO                                        
+                             employees.project_assignments                      
+                             (employee_id, project_id, role,                    
+                             allocation_percentage,                             
+                             assigned_date)                                     
+                             SELECT e.id, p.project_id,                         
+                               CASE                                             
+                                 WHEN e.department =                            
+                             'Development' THEN 'Developer'                     
+                                 WHEN e.department = 'Human                     
+                             Resources' THEN 'Business                          
+                             Analyst'                                           
+                                 WHEN e.department =                            
+                             'Marketing' THEN 'Marketing                        
+                             Specialist'                                        
+                                 WHEN e.department = 'Finance'                  
+                             THEN 'Financial Analyst'                           
+                                 WHEN e.department = 'Sales'                    
+                             THEN 'Sales Representative'                        
+                                 WHEN e.department =                            
+                             'Research' THEN 'Research                          
+                             Analyst'                                           
+                                 WHEN e.department =                            
+                             'Production' THEN 'Production                      
+                             Coordinator'                                       
+                                 WHEN e.department = 'Quality                   
+                             Management' THEN 'QA Specialist'                   
+                                 WHEN e.department = 'Customer                  
+                             Service' THEN 'Customer Success'                   
+                               END as role,                                     
+                               CASE                                             
+                                 WHEN e.department =                            
+                             'Development' THEN 80                              
+                                 WHEN e.department = 'Human                     
+                             Resources' THEN 60                                 
+                                 WHEN e.department =                            
+                             'Marketing' THEN 40                                
+                                 WHEN e.department = 'Finance'                  
+                             THEN 30                                            
+                                 WHEN e.department = 'Sales'                    
+                             THEN 50                                            
+                                 WHEN e.department =                            
+                             'Research' THEN 70                                 
+                                 WHEN e.department =                            
+                             'Production' THEN 45                               
+                                 WHEN e.department = 'Quality                   
+                             Management' THEN 85                                
+                                 WHEN e.department = 'Customer                  
+                             Service' THEN 35                                   
+                               END as allocation_percentage,                    
+                               '2024-01-01'::date                               
+                             FROM emp_dept e                                    
+                             JOIN project_ids p ON                              
+                               (e.department = 'Development'                    
+                             AND p.project_name = 'Database                     
+                             Modernization') OR                                 
+                               (e.department = 'Human                           
+                             Resources' AND p.project_name =                    
+                             'Employee Portal Upgrade') OR                      
+                               (e.department = 'Marketing' AND                  
+                             p.project_name = 'HR Analytics                     
+                             Dashboard') OR                                     
+                               (e.department = 'Finance' AND                    
+                             p.project_name = 'Database                         
+                             Modernization') OR                                 
+                               (e.department = 'Sales' AND                      
+                             p.project_name = 'Employee Portal                  
+                             Upgrade') OR                                       
+                               (e.department = 'Research' AND                   
+                             p.project_name = 'HR Analytics                     
+                             Dashboard') OR                                     
+                               (e.department = 'Production'                     
+                             AND p.project_name = 'Database                     
+                             Modernization') OR                                 
+                               (e.department = 'Quality                         
+                             Management' AND p.project_name =                   
+                             'Employee Portal Upgrade') OR                      
+                               (e.department = 'Customer                        
+                             Service' AND p.project_name = 'HR                  
+                             Analytics Dashboard');): column                    
+                             "department" does not exist                        
+                             LINE 5:   SELECT id, department                    
+                             FROM employees.employee                            
+                                                  ^                             
+                    ERROR    Error executing query: column         server.py:401
+                             "department" does not exist                        
+                             LINE 5:   SELECT id, department FROM               
+                             employees.employee                                 
+                                                  ^                             
+[07/18/26 09:54:09] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:11] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:13] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:14] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:19] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:32] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:38] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:41] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:42] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:44] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:54:45] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    

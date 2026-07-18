@@ -1,0 +1,36 @@
+Secure MCP Filesystem Server running on stdio
+Client does not support MCP Roots, using allowed directories set from server args: [
+  '/home/anonymous/research/paper-b-revocation-propagation/external/mcpmark/.mcpmark_backups/backup_filesystem_desktop_project_management_59353'
+]
+Traceback (most recent call last):
+  File "/home/anonymous/research/paper-b-revocation-propagation/artifact/experiments/e_b28_live_closed_loop/run_task.py", line 351, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/anonymous/research/paper-b-revocation-propagation/artifact/experiments/e_b28_live_closed_loop/run_task.py", line 332, in main
+    mcpmark_main()
+  File "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/pipeline.py", line 199, in main
+    pipeline.run_evaluation(args.tasks)
+  File "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/src/evaluator.py", line 340, in run_evaluation
+    task_result = self._run_single_task(task)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anonymous/research/paper-b-revocation-propagation/artifact/src/revocation_propagation/e_b28_mcpmark_instrumentation.py", line 323, in traced_run_task
+    result = original_run_task(self, task)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/src/evaluator.py", line 237, in _run_single_task
+    agent_result = self.agent.execute_sync(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anonymous/research/paper-b-revocation-propagation/external/MCPMark/src/agents/mcpmark_agent.py", line 190, in execute_sync
+    return asyncio.run(self.execute(instruction, tool_call_log_file))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anonymous/research/paper-b-revocation-propagation/external/mcpmark/.venv/lib/python3.11/site-packages/nest_asyncio.py", line 30, in run
+    return loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/anonymous/research/paper-b-revocation-propagation/external/mcpmark/.venv/lib/python3.11/site-packages/nest_asyncio.py", line 92, in run_until_complete
+    self._run_once()
+  File "/home/anonymous/research/paper-b-revocation-propagation/external/mcpmark/.venv/lib/python3.11/site-packages/nest_asyncio.py", line 115, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/selectors.py", line 566, in select
+    kev_list = self._selector.control(None, max_ev, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

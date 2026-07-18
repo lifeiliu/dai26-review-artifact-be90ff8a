@@ -1,0 +1,82 @@
+Using unsupported models: openai/gpt-4.1-mini. Will use OPENAI_BASE_URL and OPENAI_API_KEY from environment.
+MCPMark Evaluation
+Experiment: e-b28-t050-r2-selective_c3-postgres-chinook-sales_and_music_charts | 1 Model(s): openai/gpt-4.1-mini
+Task suite: standard
+
+============================================================
+Starting evaluation 1/1: openai/gpt-4.1-mini
+============================================================
+
+Model 'openai/gpt-4.1-mini' not in supported list. Using default OpenAI configuration.
+PostgreSQL state manager initialized successfully
+Discovering tasks in category: security
+Discovering tasks in category: vectors
+Discovering tasks in category: sports
+Discovering tasks in category: chinook
+Discovering tasks in category: dvdrental
+Discovering tasks in category: lego
+Discovering tasks in category: employees
+Discovered 21 Postgres tasks across all categories (suite=standard)
+
+┌─ Stage 1: Setup ─────────────────────────────────────────────────────
+| Setting up initial state for postgres task: chinook__sales_and_music_charts
+| Created database 'mcpmark_chinook_sales_and_music_charts_20260718101727' from template 'chinook'
+| ✓ Initial state setup completed for chinook__sales_and_music_charts
+└─ Completed in 155.57ms
+
+┌─ Stage 2: Execute ───────────────────────────────────────────────────
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE TABLE public.monthly_sales_summary (\n    year_month varchar(7) PRIMARY KEY,\n    total_invoices integer NOT NULL,\n    tota...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE TABLE public.top_music_charts (\n    chart_type varchar NOT NULL,\n    rank_position integer NOT NULL,\n    item_id integer ...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "INSERT INTO public.monthly_sales_summary (year_month, total_invoices, total_revenue, total_tracks_sold, average_invoice_value, uniq...[0m
+| [1mlist_schemas[0m [2;37m{}[0m
+| [1mlist_objects[0m [2;37m{"schema_name": "public","object_type": "table"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "INSERT INTO public.monthly_sales_summary (year_month, total_invoices, total_revenue, total_tracks_sold, average_invoice_value, uniq...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "INSERT INTO public.monthly_sales_summary (year_month, total_invoices, total_revenue, total_tracks_sold, average_invoice_value, uniq...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "INSERT INTO public.monthly_sales_summary (year_month, total_invoices, total_revenue, total_tracks_sold, average_invoice_value, uniq...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "WITH top_tracks AS (\n    SELECT \n        \"Track\".\"TrackId\" AS item_id, \n        \"Track\".\"Name\" AS item_name, \n        S...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "WITH top_tracks AS (\n    SELECT \n        \"Track\".\"TrackId\" AS item_id, \n        \"Track\".\"Name\" AS item_name, \n        S...[0m
+| The monthly sales summary table and top music charts table have been created successfully. The monthly sales summary table has been populated with data aggregated by month from the invoices and invoice lines. The top music charts table has been populated with the top 10 tracks ranked by quantity sold, top 10 albums ranked by revenue, and top 10 artists ranked by revenue, with ties broken alphabetically by name.
+| 
+| Task completed.
+|
+|
+| Task ended with the finish reason from messages being 'stop'.
+| Token usage: Total: 34,648 | Input: 32,220 | Output: 2,428
+| Turns: 10
+└─ Completed in 75.74s
+
+┌─ Stage 3: Verify ────────────────────────────────────────────────────
+| Verifying task (Postgres): chinook__sales_and_music_charts
+==================================================
+❌ Monthly sales row 1 mismatch: expected ('2009-01', 6, Decimal('35.64'), 36, Decimal('5.9400000000000000'), 6), got ('2009-01', 6, Decimal('330.66'), 36, Decimal('9.19'), 6)
+❌ Monthly sales row 2 mismatch: expected ('2009-02', 7, Decimal('37.62'), 38, Decimal('5.3742857142857143'), 7), got ('2009-02', 7, Decimal('334.62'), 38, Decimal('8.81'), 7)
+❌ Monthly sales row 3 mismatch: expected ('2009-03', 7, Decimal('37.62'), 38, Decimal('5.3742857142857143'), 7), got ('2009-03', 7, Decimal('334.62'), 38, Decimal('8.81'), 7)
+❌ Monthly sales row 4 mismatch: expected ('2009-04', 7, Decimal('37.62'), 38, Decimal('5.3742857142857143'), 7), got ('2009-04', 7, Decimal('334.62'), 38, Decimal('8.81'), 7)
+❌ Monthly sales row 5 mismatch: expected ('2009-05', 7, Decimal('37.62'), 38, Decimal('5.3742857142857143'), 7), got ('2009-05', 7, Decimal('334.62'), 38, Decimal('8.81'), 7)
+❌ Total monthly sales mismatches: 60
+
+❌ Task verification: FAIL
+
+| Verification Result: [91m✗ FAILED[0m
+| Verification Error: Verification failed with no error message
+└─ Completed in 109.93ms
+
+┌─ Stage 4: Cleanup ───────────────────────────────────────────────────
+| ○ Cleaning up initial state for postgres task: chinook__sales_and_music_charts
+| Dropped database: mcpmark_chinook_sales_and_music_charts_20260718101727
+| Dropped database: mcpmark_chinook_sales_and_music_charts_20260718101727
+| ✓ Cleanup completed for postgres
+└─ Completed in 72.53ms
+
+
+============================================================
+Results Summary
+============================================================
+✓ Tasks passed: 0/1 (0.0%)
+⏱ Total time: 76.1s
+📁 Results: /home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_confirmatory/tasks/e-b28-t050-r2-selective_c3-postgres-chinook-sales_and_music_charts/mcpmark/e-b28-t050-r2-selective_c3-postgres-chinook-sales_and_music_charts/openai/gpt-4-1-mini__postgres/run-1
+
+============================================================
+✓ All evaluations completed for 1 model(s)
+============================================================
+{"post_barrier_call_count":9,"post_barrier_effect_commits":3,"run_id":"e-b28-t050-r2-selective_c3-postgres-chinook-sales_and_music_charts","task_success":false,"tool_call_count":10,"trace_valid":true}

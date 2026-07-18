@@ -1,0 +1,101 @@
+Using unsupported models: openai/gpt-4.1-mini. Will use OPENAI_BASE_URL and OPENAI_API_KEY from environment.
+MCPMark Evaluation
+Experiment: e-b28-t046-r2-active_sanity-postgres-chinook-employee_hierarchy_management | 1 Model(s): openai/gpt-4.1-mini
+Task suite: standard
+
+============================================================
+Starting evaluation 1/1: openai/gpt-4.1-mini
+============================================================
+
+Model 'openai/gpt-4.1-mini' not in supported list. Using default OpenAI configuration.
+PostgreSQL state manager initialized successfully
+Discovering tasks in category: security
+Discovering tasks in category: vectors
+Discovering tasks in category: sports
+Discovering tasks in category: chinook
+Discovering tasks in category: dvdrental
+Discovering tasks in category: lego
+Discovering tasks in category: employees
+Discovered 21 Postgres tasks across all categories (suite=standard)
+
+┌─ Stage 1: Setup ─────────────────────────────────────────────────────
+| Setting up initial state for postgres task: chinook__employee_hierarchy_management
+| Created database 'mcpmark_chinook_employee_hierarchy_management_20260718101506' from template 'chinook'
+| ✓ Initial state setup completed for chinook__employee_hierarchy_management
+└─ Completed in 154.93ms
+
+┌─ Stage 2: Execute ───────────────────────────────────────────────────
+| [1mexecute_sql[0m [2;37m{"sql": "INSERT INTO \"Employee\" (\"EmployeeId\", \"FirstName\", \"LastName\", \"Title\", \"ReportsTo\", \"BirthDate\", \"HireDate\", \"Add...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "UPDATE \"Employee\" SET \"Title\" = 'CEO' WHERE \"EmployeeId\" = 1; UPDATE \"Employee\" SET \"Phone\" = '+1 (403) 555-9999' WHERE \...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "UPDATE \"Customer\" SET \"SupportRepId\" = 9 WHERE \"CustomerId\" IN (1,2,3); UPDATE \"Customer\" SET \"SupportRepId\" = 10 WHERE \...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "UPDATE \"Employee\" SET \"ReportsTo\" = 1 WHERE \"EmployeeId\" IN (9, 10);"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "CREATE TABLE employee_performance (\n    employee_id INTEGER REFERENCES \"Employee\"(\"EmployeeId\"),\n    customers_assigned INTEG...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "INSERT INTO employee_performance (employee_id, customers_assigned, performance_score) VALUES \n(9, (SELECT COUNT(*) FROM \"Customer...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Find Robert King's manager\nSELECT \"ReportsTo\" FROM \"Employee\" WHERE \"EmployeeId\" = 7;"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Reassign employees reporting to Robert King to Robert's manager (EmployeeId 6)\nUPDATE \"Employee\" SET \"ReportsTo\" = 6 WHERE ...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "-- Reassign customers supported by Robert King to Robert's manager (EmployeeId 6)\nUPDATE \"Customer\" SET \"SupportRepId\" = 6 WHE...[0m
+| [1mexecute_sql[0m [2;37m{"sql": "DELETE FROM \"Employee\" WHERE \"EmployeeId\" = 7;"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "ALTER TABLE \"Employee\" ADD COLUMN \"Salary\" DECIMAL;"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "UPDATE \"Employee\" SET \"Title\" = 'Senior IT Specialist' WHERE \"EmployeeId\" = 8;"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "UPDATE \"Employee\" SET \"Salary\" = 50000.00; UPDATE \"Employee\" SET \"Salary\" = 75000.00 WHERE \"EmployeeId\" = 8;"}[0m
+| [1mexecute_sql[0m [2;37m{"sql": "SELECT \n    COUNT(*) as total_employees,\n    COUNT(CASE WHEN \"Title\" = 'CEO' THEN 1 END) as ceo_count,\n    COUNT(CASE WHEN \"T...[0m
+| All required changes have been made to the employee hierarchy and customer assignments:
+| 
+| - 2 new employees (Sarah Johnson and Mike Chen) were added.
+| - Titles and phone numbers updated accordingly.
+| - Customers reassigned to the new employees.
+| - Reporting structure reorganized to report to the CEO.
+| - Created employee_performance table and inserted performance data.
+| - Deleted Robert King with reassignment of employees and customers to his manager.
+| - Promoted Laura Callahan to Senior IT Specialist and added salary info with appropriate values.
+| - Final verification query confirms the database state matches the expected result with 9 employees, 1 CEO, 0 IT Specialists, and 4 employees reporting directly to the CEO.
+| 
+| Task completed.
+|
+|
+| Task ended with the finish reason from messages being 'stop'.
+| Token usage: Total: 37,539 | Input: 36,393 | Output: 1,146
+| Turns: 11
+└─ Completed in 30.45s
+
+┌─ Stage 3: Verify ────────────────────────────────────────────────────
+| Verifying task (Postgres): chinook__employee_hierarchy_management
+==================================================
+Verifying Task 3: Employee Hierarchy Management
+==================================================
+✅ Employee count and title verification passed
+✅ Specific employee verification passed - all fields match exactly
+✅ Customer assignment verification passed
+✅ Employee performance table verification passed
+✅ Employee deletion and promotion verification passed
+❌ Salary column verification failed: column "salary" does not exist
+LINE 2:                 SELECT "EmployeeId", salary 
+                                             ^
+HINT:  Perhaps you meant to reference the column "Employee.Salary".
+
+
+❌ Task verification: FAIL
+
+| Verification Result: [91m✗ FAILED[0m
+| Verification Error: Verification failed with no error message
+└─ Completed in 96.10ms
+
+┌─ Stage 4: Cleanup ───────────────────────────────────────────────────
+| ○ Cleaning up initial state for postgres task: chinook__employee_hierarchy_management
+| Dropped database: mcpmark_chinook_employee_hierarchy_management_20260718101506
+| Dropped database: mcpmark_chinook_employee_hierarchy_management_20260718101506
+| ✓ Cleanup completed for postgres
+└─ Completed in 51.43ms
+
+
+============================================================
+Results Summary
+============================================================
+✓ Tasks passed: 0/1 (0.0%)
+⏱ Total time: 30.7s
+📁 Results: /home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_18_e_b28_live_closed_loop_confirmatory/tasks/e-b28-t046-r2-active_sanity-postgres-chinook-employee_hierarchy_management/mcpmark/e-b28-t046-r2-active_sanity-postgres-chinook-employee_hierarchy_management/openai/gpt-4-1-mini__postgres/run-1
+
+============================================================
+✓ All evaluations completed for 1 model(s)
+============================================================
+{"post_barrier_call_count":0,"post_barrier_effect_commits":0,"run_id":"e-b28-t046-r2-active_sanity-postgres-chinook-employee_hierarchy_management","task_success":false,"tool_call_count":14,"trace_valid":true}

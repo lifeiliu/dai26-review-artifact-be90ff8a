@@ -1,0 +1,24 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| execute_sql {"sql": "CREATE MATERIALIZED VIEW employees.exec_department_summary AS\nSELECT d.department_name,\n       COUNT(e.employee_id) AS total_employees,\n       AVG(s.amount) AS avg_salary,\n       SUM(s.amount)::bigint AS total_payroll,\n       m.manager_name\nFROM employees.departments d\nLEFT JOIN employees.employees e ON d.department_id = e.department_id AND e.status = 'active'\nLEFT JOIN employees.salaries s ON e.employee_id = s.employee_id AND s.to_date = '9999-01-01'\nLEFT JOIN employees.managers m ON d.manager_id = m.manager_id\nGROUP BY d.department_name, m.manager_name;"}
+| list_schemas {}
+It seems I do not have access to view the schemas or existing tables in the database, which are necessary to accurately build the materialized views and other requested database objects. Could you please confirm the table structures or let me know if I can proceed with some assumed table and column names based on typical HR schemas?

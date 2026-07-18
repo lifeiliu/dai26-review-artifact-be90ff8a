@@ -1,0 +1,152 @@
+[07/18/26 10:01:03] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 10:01:07] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (-- Step 1: sql_driver.py:271
+                             Create player_evaluation table                     
+                             CREATE TABLE player_evaluation (                   
+                                 performance_id SERIAL PRIMARY                  
+                             KEY,                                               
+                                 person_id INTEGER NOT NULL                     
+                             REFERENCES persons(id),                            
+                                 batting_avg DECIMAL CHECK                      
+                             (batting_avg BETWEEN 0 AND 1),                     
+                                 home_runs INTEGER,                             
+                                 rbis INTEGER,                                  
+                                 games_played INTEGER,                          
+                                 performance_score DECIMAL,                     
+                                 evaluation_date DATE                           
+                             );): there is no unique                            
+                             constraint matching given keys                     
+                             for referenced table "persons"                     
+                    ERROR    Error executing query: there is no    server.py:401
+                             unique constraint matching given keys              
+                             for referenced table "persons"                     
+[07/18/26 10:01:08] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (-- Check   sql_driver.py:271
+                             schema for persons table to                        
+                             verify primary key                                 
+                             SELECT                                             
+                               tablename,                                       
+                               column_name,                                     
+                               column_default,                                  
+                               is_nullable                                      
+                             FROM                                               
+                               information_schema.columns                       
+                             WHERE                                              
+                               table_name = 'persons';):                        
+                             column "tablename" does not exist                  
+                             LINE 3:   tablename,                               
+                                       ^                                        
+                             HINT:  Perhaps you meant to                        
+                             reference the column                               
+                             "columns.table_name".                              
+                    ERROR    Error executing query: column         server.py:401
+                             "tablename" does not exist                         
+                             LINE 3:   tablename,                               
+                                       ^                                        
+                             HINT:  Perhaps you meant to reference              
+                             the column "columns.table_name".                   
+[07/18/26 10:01:10] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:15] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:17] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:19] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:21] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:27] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (-- Step 2: sql_driver.py:271
+                             Insert historical player                           
+                             statistics into player_evaluation                  
+                             INSERT INTO player_evaluation                      
+                             (person_id, batting_avg,                           
+                             home_runs, rbis, games_played,                     
+                             performance_score,                                 
+                             evaluation_date)                                   
+                             SELECT                                             
+                               pos.person_id,                                   
+                               CASE WHEN SUM(pos.at_bats) = 0                   
+                             THEN 0 ELSE CAST(SUM(pos.hits) AS                  
+                             DECIMAL) / SUM(pos.at_bats) END                    
+                             AS batting_avg,                                    
+                               COALESCE(SUM(pos.home_runs), 0)                  
+                             AS home_runs,                                      
+                               COALESCE(SUM(pos.rbi), 0) AS                     
+                             rbis,                                              
+                               COALESCE(COUNT(DISTINCT                          
+                             pem.game_id), 0) AS games_played,                  
+                               (CASE WHEN SUM(pos.at_bats) = 0                  
+                             THEN 0 ELSE CAST(SUM(pos.hits) AS                  
+                             DECIMAL) / SUM(pos.at_bats) END)                   
+                             * 1000 +                                           
+                               COALESCE(SUM(pos.home_runs), 0)                  
+                             * 5 +                                              
+                               COALESCE(SUM(pos.rbi), 0) * 2                    
+                             AS performance_score,                              
+                               DATE '2024-01-01' AS                             
+                             evaluation_date                                    
+                             FROM                                               
+                               baseball_offensive_stats pos                     
+                               LEFT JOIN person_event_metadata                  
+                             pem ON pos.person_id =                             
+                             pem.person_id                                      
+                             GROUP BY                                           
+                               pos.person_id                                    
+                             HAVING                                             
+                               COALESCE(COUNT(DISTINCT                          
+                             pem.game_id), 0) >= 10;): column                   
+                             pos.person_id does not exist                       
+                             LINE 15:   LEFT JOIN                               
+                             person_event_metadata pem ON                       
+                             pos.person_id = pem...                             
+                                                                                
+                                              ^                                 
+                             HINT:  Perhaps you meant to                        
+                             reference the column                               
+                             "pem.person_id".                                   
+                    ERROR    Error executing query: column         server.py:401
+                             pos.person_id does not exist                       
+                             LINE 15:   LEFT JOIN                               
+                             person_event_metadata pem ON                       
+                             pos.person_id = pem...                             
+                                                                                
+                                          ^                                     
+                             HINT:  Perhaps you meant to reference              
+                             the column "pem.person_id".                        
+[07/18/26 10:01:28] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:31] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:32] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:34] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:37] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:39] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:41] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:43] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:45] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:47] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:51] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:53] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:55] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 10:01:59] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    

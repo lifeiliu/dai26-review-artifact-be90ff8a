@@ -1,0 +1,48 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| execute_sql {"sql": "CREATE TABLE player_evaluation (\n  performance_id SERIAL PRIMARY KEY,\n  person_id INTEGER NOT NULL REFERENCES persons(id),\n  batting_avg DECIMAL CHECK (batting_avg BETWEEN 0 AND 1),\n  home_runs INTEGER,\n  rbis INTEGER,\n  games_played INTEGER,\n  performance_score DECIMAL,\n  evaluation_date DATE\n);"}
+| execute_sql {"sql": "CREATE TABLE player_injury_status (\n  status_id SERIAL PRIMARY KEY,\n  person_id INTEGER UNIQUE NOT NULL,\n  injury_count INTEGER DEFAULT 0,\n  last_injury_date DATE,\n  current_status VARCHAR CHECK (current_status IN ('healthy', 'injured', 'recovering'))\n);"}
+| execute_sql {"sql": "INSERT INTO player_evaluation (person_id, batting_avg, home_runs, rbis, games_played, performance_score, evaluation_date)\nSELECT\n  s.person_id,\n  CASE WHEN COALESCE(s.at_bats, 0) = 0 THEN 0 ELSE COALESCE(s.hits, 0)::DECIMAL / s.at_bats END AS batting_avg,\n  COALESCE(s.home_runs, 0) AS home_runs,\n  COALESCE(s.rbi, 0) AS rbis,\n  COALESCE(m.games_played, 0) AS games_played,\n  (CASE WHEN COALESCE(s.at_bats, 0) = 0 THEN 0 ELSE COALESCE(s.hits, 0)::DECIMAL / s.at_bats END * 1000) +\n  (COALESCE(s.home_runs, 0) * 5) +\n  (COALESCE(s.rbi, 0) * 2) AS performance_score,\n  DATE '2024-01-01' AS evaluation_date\nFROM\n  baseball_offensive_stats s\nLEFT JOIN (\n  SELECT person_id, COUNT(DISTINCT event_id) AS games_played\n  FROM person_event_metadata\n  GROUP BY person_id\n) m ON s.person_id = m.person_id\nWHERE COALESCE(m.games_played, 0) >= 10;"}
+| execute_sql {"sql": "CREATE TABLE persons(id INTEGER PRIMARY KEY);"}
+| execute_sql {"sql": "CREATE TABLE player_evaluation (\n  performance_id SERIAL PRIMARY KEY,\n  person_id INTEGER NOT NULL,\n  batting_avg DECIMAL CHECK (batting_avg BETWEEN 0 AND 1),\n  home_runs INTEGER,\n  rbis INTEGER,\n  games_played INTEGER,\n  performance_score DECIMAL,\n  evaluation_date DATE\n);\n\nALTER TABLE player_evaluation ADD CONSTRAINT fk_person FOREIGN KEY (person_id) REFERENCES persons(id);"}
+| execute_sql {"sql": "ALTER TABLE persons ADD CONSTRAINT persons_pkey PRIMARY KEY (id);"}
+| execute_sql {"sql": "CREATE TABLE player_evaluation (\n  performance_id SERIAL PRIMARY KEY,\n  person_id INTEGER NOT NULL REFERENCES persons(id),\n  batting_avg DECIMAL CHECK (batting_avg BETWEEN 0 AND 1),\n  home_runs INTEGER,\n  rbis INTEGER,\n  games_played INTEGER,\n  performance_score DECIMAL,\n  evaluation_date DATE\n);"}
+| execute_sql {"sql": "INSERT INTO player_evaluation (person_id, batting_avg, home_runs, rbis, games_played, performance_score, evaluation_date)\nSELECT\n  s.person_id,\n  CASE WHEN COALESCE(s.at_bats, 0) = 0 THEN 0 ELSE COALESCE(s.hits, 0)::DECIMAL / s.at_bats END AS batting_avg,\n  COALESCE(s.home_runs, 0) AS home_runs,\n  COALESCE(s.rbi, 0) AS rbis,\n  COALESCE(m.games_played, 0) AS games_played,\n  (CASE WHEN COALESCE(s.at_bats, 0) = 0 THEN 0 ELSE COALESCE(s.hits, 0)::DECIMAL / s.at_bats END * 1000) +\n  (COALESCE(s.home_runs, 0) * 5) +\n  (COALESCE(s.rbi, 0) * 2) AS performance_score,\n  DATE '2024-01-01' AS evaluation_date\nFROM\n  baseball_offensive_stats s\nLEFT JOIN (\n  SELECT person_id, COUNT(DISTINCT event_id) AS games_played\n  FROM person_event_metadata\n  GROUP BY person_id\n) m ON s.person_id = m.person_id\nWHERE COALESCE(m.games_played, 0) >= 10;"}
+| execute_sql {"sql": "SELECT * FROM baseball_offensive_stats LIMIT 1;"}
+| execute_sql {"sql": "SELECT * FROM person_event_metadata LIMIT 1;"}
+| execute_sql {"sql": "INSERT INTO player_evaluation (person_id, batting_avg, home_runs, rbis, games_played, performance_score, evaluation_date)\nSELECT\n  s.id AS person_id,\n  CASE WHEN COALESCE(s.at_bats, 0) = 0 THEN 0 ELSE COALESCE(s.hits, 0)::DECIMAL / s.at_bats END AS batting_avg,\n  COALESCE(s.home_runs, 0) AS home_runs,\n  COALESCE(s.rbi, 0) AS rbis,\n  COALESCE(m.games_played, 0) AS games_played,\n  (CASE WHEN COALESCE(s.at_bats, 0) = 0 THEN 0 ELSE COALESCE(s.hits, 0)::DECIMAL / s.at_bats END * 1000) +\n  (COALESCE(s.home_runs, 0) * 5) +\n  (COALESCE(s.rbi, 0) * 2) AS performance_score,\n  DATE '2024-01-01' AS evaluation_date\nFROM\n  baseball_offensive_stats s\nLEFT JOIN (\n  SELECT person_id, COUNT(DISTINCT event_id) AS games_played\n  FROM person_event_metadata\n  GROUP BY person_id\n) m ON s.id = m.person_id\nWHERE COALESCE(m.games_played, 0) >= 10;"}
+| execute_sql {"sql": "CREATE TABLE player_injury_status (\n  status_id SERIAL PRIMARY KEY,\n  person_id INTEGER UNIQUE NOT NULL REFERENCES persons(id),\n  injury_count INTEGER DEFAULT 0,\n  last_injury_date DATE,\n  current_status VARCHAR CHECK (current_status IN ('healthy', 'injured', 'recovering'))\n);"}
+| execute_sql {"sql": "INSERT INTO player_injury_status (person_id, injury_count, last_injury_date, current_status)\nSELECT\n  p.person_id,\n  COALESCE(COUNT(i.phase_id), 0) AS injury_count,\n  MAX(i.start_date) AS last_injury_date,\n  CASE\n    WHEN MAX(i.end_date) IS NULL THEN 'injured'\n    ELSE 'healthy'\n  END AS current_status\nFROM\n  (SELECT DISTINCT person_id FROM player_evaluation) p\nLEFT JOIN injury_phases i ON p.person_id = i.person_id\nGROUP BY p.person_id;"}
+| execute_sql {"sql": "SELECT * FROM injury_phases LIMIT 1;"}
+| execute_sql {"sql": "INSERT INTO player_injury_status (person_id, injury_count, last_injury_date, current_status)\nSELECT\n  p.person_id,\n  COALESCE(COUNT(i.id), 0) AS injury_count,\n  MAX(i.start_date_time) AS last_injury_date,\n  CASE\n    WHEN MAX(i.end_date_time) IS NULL THEN 'injured'\n    ELSE 'healthy'\n  END AS current_status\nFROM\n  (SELECT DISTINCT person_id FROM player_evaluation) p\nLEFT JOIN injury_phases i ON p.person_id = i.person_id\nGROUP BY p.person_id;"}
+| execute_sql {"sql": "UPDATE player_evaluation\nSET performance_score = \n  GREATEST(\n    performance_score * \n    CASE \n      WHEN p.current_status = 'injured' THEN 0.8\n      ELSE 1\n    END * \n    CASE \n      WHEN pis.injury_count > 2 THEN 0.9\n      ELSE 1\n    END\n  , 0)\nFROM player_injury_status pis\nJOIN player_evaluation p ON p.person_id = pis.person_id\nWHERE player_evaluation.person_id = pis.person_id;"}
+| execute_sql {"sql": "UPDATE player_evaluation p\nSET performance_score = \n  GREATEST(\n    p.performance_score * \n    CASE \n      WHEN pis.current_status = 'injured' THEN 0.8\n      ELSE 1\n    END * \n    CASE \n      WHEN pis.injury_count > 2 THEN 0.9\n      ELSE 1\n    END\n  , 0)\nFROM player_injury_status pis\nWHERE p.person_id = pis.person_id;"}
+| execute_sql {"sql": "CREATE TABLE team_performance_summary (\n  summary_id SERIAL PRIMARY KEY,\n  metric_name VARCHAR UNIQUE,\n  metric_value DECIMAL\n);"}
+| execute_sql {"sql": "INSERT INTO team_performance_summary (metric_name, metric_value) VALUES\n('total_players', (SELECT COUNT(*) FROM player_evaluation)),\n('avg_batting_average', (SELECT AVG(COALESCE(batting_avg, 0)) FROM player_evaluation)),\n('total_home_runs', (SELECT SUM(COALESCE(home_runs, 0)) FROM player_evaluation)),\n('avg_performance_score', (SELECT AVG(COALESCE(performance_score, 0)) FROM player_evaluation)),\n('injured_player_count', (SELECT COUNT(*) FROM player_injury_status WHERE current_status = 'injured')),\n('healthy_player_count', (SELECT COUNT(*) FROM player_injury_status WHERE current_status = 'healthy'));"}
+All operations have been completed successfully:
+1. Created the player_evaluation table with the specified structure and constraints.
+2. Loaded historical player statistics into player_evaluation, calculating batting average, home runs, RBIs, games played, and performance score.
+3. Created the player_injury_status table and inserted injury data for players including injury count, last injury date, and current status.
+4. Updated player performance scores based on health status, reducing scores for injured players and those with more than 2 injuries.
+5. Created a team_performance_summary table and inserted summary metrics including total players, average batting average, total home runs, average performance score, injured player count, and healthy player count.
+
+Task completed.

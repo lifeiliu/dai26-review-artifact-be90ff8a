@@ -1,0 +1,91 @@
+[07/18/26 09:56:41] INFO     Starting PostgreSQL MCP Server in     server.py:555
+                             UNRESTRICTED mode                                  
+                    INFO     Successfully connected to database    server.py:568
+                             and initialized connection pool                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[07/18/26 09:56:45] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    ERROR    Error executing query (CREATE     sql_driver.py:271
+                             MATERIALIZED VIEW                                  
+                             employees.exec_department_summary                  
+                             AS                                                 
+                             SELECT d.department_name,                          
+                                    COUNT(e.employee_id) AS                     
+                             total_employees,                                   
+                                    AVG(s.amount) AS                            
+                             avg_salary,                                        
+                                    SUM(s.amount)::bigint AS                    
+                             total_payroll,                                     
+                                    m.manager_name                              
+                             FROM employees.departments d                       
+                             LEFT JOIN employees.employees e                    
+                             ON e.department_id =                               
+                             d.department_id AND e.status =                     
+                             'active'                                           
+                             LEFT JOIN employees.salaries s ON                  
+                             s.employee_id = e.employee_id AND                  
+                             s.to_date = '9999-01-01'                           
+                             LEFT JOIN employees.managers m ON                  
+                             m.department_id = d.department_id                  
+                             AND m.is_current = true                            
+                             GROUP BY d.department_name,                        
+                             m.manager_name;): relation                         
+                             "employees.departments" does not                   
+                             exist                                              
+                             LINE 7: FROM                                       
+                             employees.departments d                            
+                                          ^                                     
+                    ERROR    Error executing query: relation       server.py:401
+                             "employees.departments" does not                   
+                             exist                                              
+                             LINE 7: FROM employees.departments d               
+                                          ^                                     
+[07/18/26 09:56:47] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:56:51] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:56:52] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:02] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:13] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:24] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:29] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:33] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:38] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:43] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:45] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:46] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:47] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:50] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:52] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+[07/18/26 09:57:54] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
