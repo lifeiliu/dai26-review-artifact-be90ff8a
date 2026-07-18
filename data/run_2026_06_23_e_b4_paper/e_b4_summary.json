@@ -1,0 +1,173 @@
+{
+  "aggregate_rows": 7,
+  "baseline_miss_rate": 1.0,
+  "below_threshold_rejection_rate": 1.0,
+  "benign_false_positive_rate": 0.0,
+  "claim_note": "E-B4 supports the root-quorum plus STH cross-observation story: below-threshold roots fail certificate verification, while quorum-certified split views are detected after honest observers compare same-size STHs. The result is conditional on eventual cross-observation after partitions heal.",
+  "experiment": "E-B4",
+  "max_detection_latency": 5.3,
+  "mean_evidence_bytes": 821.0,
+  "raw_rows": 360,
+  "run_config": {
+    "n_parties_values": [
+      1000
+    ],
+    "observation_delays": [
+      0.25,
+      0.5,
+      1.0,
+      2.0
+    ],
+    "partition_heal_delays": [
+      0.5,
+      2.0,
+      5.0
+    ],
+    "root_counts": [
+      5
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "thresholds": [
+      3
+    ]
+  },
+  "scenario_summaries": [
+    {
+      "baseline_miss_rate": 0.0,
+      "certificate_acceptance_rate": 0.0,
+      "corrupt_roots": 1,
+      "detection_latency_max": null,
+      "detection_latency_mean": null,
+      "equivocation_detection_rate": 0.0,
+      "evidence_bytes_mean": 0.0,
+      "false_positive_rate": 0.0,
+      "outcome_success_rate": 1.0,
+      "root_count": 5,
+      "runs": 30,
+      "scenario": "below-threshold-root-fork",
+      "threshold": 3
+    },
+    {
+      "baseline_miss_rate": 0.0,
+      "certificate_acceptance_rate": 1.0,
+      "corrupt_roots": 0,
+      "detection_latency_max": null,
+      "detection_latency_mean": null,
+      "equivocation_detection_rate": 0.0,
+      "evidence_bytes_mean": 0.0,
+      "false_positive_rate": 0.0,
+      "outcome_success_rate": 1.0,
+      "root_count": 5,
+      "runs": 30,
+      "scenario": "benign-sth-reordering",
+      "threshold": 3
+    },
+    {
+      "baseline_miss_rate": 0.0,
+      "certificate_acceptance_rate": 1.0,
+      "corrupt_roots": 3,
+      "detection_latency_max": 5.3,
+      "detection_latency_mean": 2.8,
+      "equivocation_detection_rate": 1.0,
+      "evidence_bytes_mean": 821.0,
+      "false_positive_rate": 0.0,
+      "outcome_success_rate": 1.0,
+      "root_count": 5,
+      "runs": 90,
+      "scenario": "partition-heal-split-view",
+      "threshold": 3
+    },
+    {
+      "baseline_miss_rate": 1.0,
+      "certificate_acceptance_rate": 1.0,
+      "corrupt_roots": 1,
+      "detection_latency_max": null,
+      "detection_latency_mean": null,
+      "equivocation_detection_rate": 0.0,
+      "evidence_bytes_mean": 0.0,
+      "false_positive_rate": 0.0,
+      "outcome_success_rate": 1.0,
+      "root_count": 1,
+      "runs": 30,
+      "scenario": "single-root-baseline",
+      "threshold": 1
+    },
+    {
+      "baseline_miss_rate": 0.0,
+      "certificate_acceptance_rate": 1.0,
+      "corrupt_roots": 3,
+      "detection_latency_max": 2.3,
+      "detection_latency_mean": 1.2375,
+      "equivocation_detection_rate": 1.0,
+      "evidence_bytes_mean": 821.0,
+      "false_positive_rate": 0.0,
+      "outcome_success_rate": 1.0,
+      "root_count": 5,
+      "runs": 120,
+      "scenario": "threshold-plus-split-view-log",
+      "threshold": 3
+    },
+    {
+      "baseline_miss_rate": 1.0,
+      "certificate_acceptance_rate": 1.0,
+      "corrupt_roots": 3,
+      "detection_latency_max": null,
+      "detection_latency_mean": null,
+      "equivocation_detection_rate": 0.0,
+      "evidence_bytes_mean": 0.0,
+      "false_positive_rate": 0.0,
+      "outcome_success_rate": 1.0,
+      "root_count": 5,
+      "runs": 30,
+      "scenario": "threshold-without-sth-cross-observation",
+      "threshold": 3
+    },
+    {
+      "baseline_miss_rate": 0.0,
+      "certificate_acceptance_rate": 0.0,
+      "corrupt_roots": 2,
+      "detection_latency_max": null,
+      "detection_latency_mean": null,
+      "equivocation_detection_rate": 0.0,
+      "evidence_bytes_mean": 0.0,
+      "false_positive_rate": 0.0,
+      "outcome_success_rate": 1.0,
+      "root_count": 5,
+      "runs": 30,
+      "scenario": "two-of-five-root-fork",
+      "threshold": 3
+    }
+  ],
+  "split_view_detection_rate": 1.0
+}

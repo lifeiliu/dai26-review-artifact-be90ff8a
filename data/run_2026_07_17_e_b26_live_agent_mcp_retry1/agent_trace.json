@@ -1,0 +1,191 @@
+{
+  "actions": [
+    {
+      "arguments": {
+        "action_id": "fs-live-action",
+        "agent_id": "worker-filesystem",
+        "content": "System check completed successfully.",
+        "delegation_id": "e-b26-shared-delegation",
+        "relative_path": "live_agent_note.txt"
+      },
+      "canonical_sha256": "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+      "gateway_id": "g-filesystem",
+      "tool": "write_file_effect",
+      "worker": "worker-filesystem"
+    },
+    {
+      "arguments": {
+        "action_id": "pg-live-action",
+        "agent_id": "worker-postgres",
+        "delegation_id": "e-b26-shared-delegation",
+        "payload": "The system is running smoothly without errors.",
+        "record_key": "live-agent-row"
+      },
+      "canonical_sha256": "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1",
+      "gateway_id": "g-postgres",
+      "tool": "insert_postgres_effect",
+      "worker": "worker-postgres"
+    }
+  ],
+  "assignments": [
+    {
+      "gateway": "g-filesystem",
+      "worker": "worker-filesystem"
+    },
+    {
+      "gateway": "g-postgres",
+      "worker": "worker-postgres"
+    }
+  ],
+  "delegation_graph": {
+    "edges": [
+      [
+        "principal",
+        "orchestrator"
+      ],
+      [
+        "orchestrator",
+        "worker-filesystem"
+      ],
+      [
+        "orchestrator",
+        "worker-postgres"
+      ]
+    ],
+    "nodes": [
+      "principal",
+      "orchestrator",
+      "worker-filesystem",
+      "worker-postgres"
+    ]
+  },
+  "generated_at": "2026-07-18T03:32:35.350264+00:00",
+  "model_calls": [
+    {
+      "actual_model": "openai/gpt-4.1-mini",
+      "configured_model": "openai/gpt-4.1-mini",
+      "latency_ms": 1117.902333,
+      "parsed": {
+        "assignments": [
+          {
+            "gateway": "g-filesystem",
+            "worker": "worker-filesystem"
+          },
+          {
+            "gateway": "g-postgres",
+            "worker": "worker-postgres"
+          }
+        ]
+      },
+      "prompt_sha256": "4e402a718a0c6509673c5caee5f0793c17eb765a465ab22156f7a3412709fd7f",
+      "response_id": "gen-1784345551-oFsSTbbG3vu1CJ3CPPAq",
+      "response_sha256": "a332ae5710b19e372fed1859dac7b2c32e1ba5ebcee1480fdb1be1e7d5f93905",
+      "role": "orchestrator",
+      "usage": {
+        "completion_tokens": 31,
+        "completion_tokens_details": {
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "cost": 7.64e-05,
+        "cost_details": {
+          "upstream_inference_completions_cost": 4.96e-05,
+          "upstream_inference_cost": 7.64e-05,
+          "upstream_inference_prompt_cost": 2.68e-05
+        },
+        "is_byok": false,
+        "prompt_tokens": 67,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "video_tokens": 0
+        },
+        "total_tokens": 98
+      }
+    },
+    {
+      "actual_model": "openai/gpt-4.1-mini",
+      "configured_model": "openai/gpt-4.1-mini",
+      "latency_ms": 1931.184,
+      "parsed": {
+        "arguments": {
+          "action_id": "fs-live-action",
+          "content": "System check completed successfully.",
+          "relative_path": "live_agent_note.txt"
+        },
+        "tool": "write_file_effect"
+      },
+      "prompt_sha256": "25bac69b025551da0b0ad5feaf0e67d2492de0d8d5b784c28be3711a5ecdb676",
+      "response_id": "gen-1784345553-QNipah1vzFAgS41MyOrT",
+      "response_sha256": "0861f3b7cdfebb34dc4f890d77f8a59eb3c3cc1a08a43f0fd2068d2baa4804c6",
+      "role": "worker-filesystem",
+      "usage": {
+        "completion_tokens": 32,
+        "completion_tokens_details": {
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "cost": 8.44e-05,
+        "cost_details": {
+          "upstream_inference_completions_cost": 5.12e-05,
+          "upstream_inference_cost": 8.44e-05,
+          "upstream_inference_prompt_cost": 3.32e-05
+        },
+        "is_byok": false,
+        "prompt_tokens": 83,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "video_tokens": 0
+        },
+        "total_tokens": 115
+      }
+    },
+    {
+      "actual_model": "openai/gpt-4.1-mini",
+      "configured_model": "openai/gpt-4.1-mini",
+      "latency_ms": 1074.515042,
+      "parsed": {
+        "arguments": {
+          "action_id": "pg-live-action",
+          "payload": "The system is running smoothly without errors.",
+          "record_key": "live-agent-row"
+        },
+        "tool": "insert_postgres_effect"
+      },
+      "prompt_sha256": "ab92dd5096a3e44149319271775a1bc89bba6b5389816994e59d92c24cd7b6c6",
+      "response_id": "gen-1784345554-AqlVyCg2Uds9yxPd7COW",
+      "response_sha256": "042264cc20f22ccc92cafc28df1b9635be68c1f741a9535365c3f7f326919995",
+      "role": "worker-postgres",
+      "usage": {
+        "completion_tokens": 35,
+        "completion_tokens_details": {
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "cost": 8.92e-05,
+        "cost_details": {
+          "upstream_inference_completions_cost": 5.6e-05,
+          "upstream_inference_cost": 8.92e-05,
+          "upstream_inference_prompt_cost": 3.32e-05
+        },
+        "is_byok": false,
+        "prompt_tokens": 83,
+        "prompt_tokens_details": {
+          "audio_tokens": 0,
+          "cache_write_tokens": 0,
+          "cached_tokens": 0,
+          "video_tokens": 0
+        },
+        "total_tokens": 118
+      }
+    }
+  ],
+  "protocol_version": "e-b26-live-agent-mcp-v1",
+  "trace_sha256": "92557bd03cf7fad145d882c6c8fb412f593101e32810986fec38fd9cfe1c891d"
+}

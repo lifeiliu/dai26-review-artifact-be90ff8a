@@ -1,0 +1,78 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| list_schemas {}
+| execute_sql {"sql": "SELECT extname, extversion FROM pg_extension WHERE extname = 'vector';"}
+| execute_sql {"sql": "SELECT n.nspname AS schema_name, c.relname AS table_name, a.attname AS column_name, format_type(a.atttypid, a.atttypmod) AS data_type, \n       CASE WHEN strpos(format_type(a.atttypid, a.atttypmod), 'vector') > 0 \n            THEN (substring(format_type(a.atttypid, a.atttypmod) from '\\[(\\d+)\\]'))::int\n            ELSE NULL\n       END AS dimensions\nFROM pg_attribute a\nJOIN pg_class c ON a.attrelid = c.oid\nJOIN pg_namespace n ON c.relnamespace = n.oid\nWHERE a.attnum > 0\n  AND NOT a.attisdropped\n  AND format_type(a.atttypid, a.atttypmod) LIKE 'vector%' ;"}
+| execute_sql {"sql": "CREATE TABLE vector_analysis_columns (\n    schema VARCHAR(50),\n    table_name VARCHAR(100),\n    column_name VARCHAR(100),\n    dimensions INTEGER,\n    data_type VARCHAR(50),\n    has_constraints BOOLEAN,\n    rows BIGINT\n);"}
+| execute_sql {"sql": "CREATE TABLE vector_analysis_storage_consumption (\n    schema VARCHAR(50),\n    table_name VARCHAR(100),\n    total_size_bytes BIGINT,\n    vector_data_bytes BIGINT,\n    regular_data_bytes BIGINT,\n    vector_storage_pct NUMERIC(5,2),\n    row_count BIGINT\n);"}
+| execute_sql {"sql": "CREATE TABLE vector_analysis_indices (\n    schema VARCHAR(50),\n    table_name VARCHAR(100),\n    column_name VARCHAR(100),\n    index_name VARCHAR(100),\n    index_type VARCHAR(50),\n    index_size_bytes BIGINT\n);"}
+| execute_sql {"sql": "SELECT a.attrelid::regclass AS table_name, a.attname AS column_name, format_type(a.atttypid, a.atttypmod) AS data_type, \n       (regexp_matches(format_type(a.atttypid, a.atttypmod), '\\d+'))[1]::int AS dimensions\nFROM pg_attribute a\nWHERE format_type(a.atttypid, a.atttypmod) LIKE 'vector%' \n  AND a.attnum > 0\n  AND NOT a.attisdropped;"}
+| execute_sql {"sql": "SELECT \n  schemaname AS schema,\n  tablename AS table_name,\n  pg_total_relation_size(schemaname || '.' || tablename) AS total_size_bytes,\n  pg_relation_size(schemaname || '.' || tablename) AS relation_size_bytes,\n  reltuples::bigint AS row_count\nFROM pg_stat_user_tables;"}
+| execute_sql {"sql": "SELECT\n  schemaname,\n  indexname,\n  tablename AS table_name,\n  pg_size_pretty(pg_relation_size(indexrelid::regclass)) AS index_size,\n  pg_relation_size(indexrelid::regclass) AS index_size_bytes\nFROM pg_stat_user_indexes;"}
+| execute_sql {"sql": "SELECT nsp.nspname AS schema_name, rel.relname AS table_name, att.attname AS column_name, \n       att.atttypid::regtype AS data_type, \n       att.atttypmod, \n       con.conname AS constraint_name, con.contype AS constraint_type\nFROM pg_constraint con \nJOIN pg_class rel ON rel.oid = con.conrelid\nJOIN pg_namespace nsp ON nsp.oid = rel.relnamespace\nJOIN pg_attribute att ON att.attrelid = rel.oid AND att.attnum = ANY (con.conkey)\nWHERE att.atttypid::regtype = 'vector';"}
+| execute_sql {"sql": "WITH vector_cols AS (\n    SELECT n.nspname AS schema,\n           c.relname AS table_name,\n           a.attname AS column_name,\n           format_type(a.atttypid, a.atttypmod) AS data_type,\n           (regexp_matches(format_type(a.atttypid, a.atttypmod), '\\d+'))[1]::int AS dimensions\n    FROM pg_attribute a\n    JOIN pg_class c ON a.attrelid = c.oid\n    JOIN pg_namespace n ON c.relnamespace = n.oid\n    WHERE format_type(a.atttypid, a.atttypmod) LIKE 'vector%'\n      AND a.attnum > 0\n      AND NOT a.attisdropped\n), constraints AS (\n    SELECT nsp.nspname AS schema_name, rel.relname AS table_name, att.attname AS column_name\n    FROM pg_constraint con\n    JOIN pg_class rel ON rel.oid = con.conrelid\n    JOIN pg_namespace nsp ON nsp.oid = rel.relnamespace\n    JOIN pg_attribute att ON att.attrelid = rel.oid AND att.attnum = ANY(con.conkey)\n), rows_counts AS (\n    SELECT relname AS table_name, nspname AS schema_name, reltuples::bigint AS rows\n    FROM pg_class\n    JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace\n    WHERE relkind = 'r'\n), merged AS (\n    SELECT v.schema, v.table_name, v.column_name, v.dimensions, v.data_type,\n           CASE WHEN c.column_name IS NOT NULL THEN true ELSE false END AS has_constraints,\n           rc.rows\n    FROM vector_cols v\n    LEFT JOIN constraints c ON v.schema = c.schema_name AND v.table_name = c.table_name AND v.column_name = c.column_name\n    LEFT JOIN rows_counts rc ON v.table_name = rc.table_name AND v.schema = rc.schema_name\n)\nSELECT * FROM merged;"}
+| execute_sql {"sql": "INSERT INTO vector_analysis_columns (schema, table_name, column_name, dimensions, data_type, has_constraints, rows) VALUES\n('public', 'documents', 'embedding', 1536, 'vector(1536)', false, 10),\n('public', 'document_chunks', 'embedding', 1536, 'vector(1536)', false, 47),\n('public', 'user_queries', 'embedding', 1536, 'vector(1536)', false, 10),\n('public', 'documents_embedding_idx', 'embedding', 1536, 'vector(1536)', false, NULL),\n('public', 'chunks_embedding_idx', 'embedding', 1536, 'vector(1536)', false, NULL),\n('public', 'queries_embedding_idx', 'embedding', 1536, 'vector(1536)', false, NULL);"}
+| execute_sql {"sql": "WITH vector_cols AS (\n    SELECT n.nspname AS schema,\n           c.relname AS table_name,\n           a.attname AS column_name\n    FROM pg_attribute a\n    JOIN pg_class c ON a.attrelid = c.oid\n    JOIN pg_namespace n ON c.relnamespace = n.oid\n    WHERE format_type(a.atttypid, a.atttypmod) LIKE 'vector%'\n      AND a.attnum > 0\n      AND NOT a.attisdropped\n), vector_storage AS (\n    SELECT schema, table_name, pg_relation_size(format('%I.%I', schema, table_name)) AS relation_size_bytes\n    FROM vector_cols\n    GROUP BY schema, table_name\n), total_sizes AS (\n    SELECT nspname as schema, relname as table_name, pg_total_relation_size(format('%I.%I', nspname, relname)) as total_size_bytes, reltuples::bigint as row_count\n    FROM pg_class\n    JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace\n    WHERE relkind = 'r'\n), vector_bytes AS (\n    SELECT vc.schema, vc.table_name, sum(o.relpages * 8192) as vector_data_bytes\n    FROM pg_class c\n    JOIN pg_namespace n ON c.relnamespace = n.oid\n    JOIN pg_attribute a ON a.attrelid = c.oid\n    JOIN vector_cols vc ON vc.schema = n.nspname AND vc.table_name = c.relname\n    JOIN pg_class o ON o.relname = vc.table_name || '_vector_data'\n    GROUP BY vc.schema, vc.table_name\n)\nSELECT ts.schema, ts.table_name, ts.total_size_bytes, COALESCE(vb.vector_data_bytes, 0) AS vector_data_bytes, (ts.total_size_bytes - COALESCE(vb.vector_data_bytes, 0)) AS regular_data_bytes, \n    CASE WHEN ts.total_size_bytes > 0 THEN (COALESCE(vb.vector_data_bytes, 0) * 100.0 / ts.total_size_bytes) ELSE 0 END AS vector_storage_pct, \n    ts.row_count\nFROM total_sizes ts\nLEFT JOIN vector_bytes vb ON ts.schema = vb.schema AND ts.table_name = vb.table_name\nWHERE ts.schema = 'public' AND ts.table_name IN ('documents', 'document_chunks', 'user_queries');"}
+| execute_sql {"sql": "INSERT INTO vector_analysis_storage_consumption (schema, table_name, total_size_bytes, vector_data_bytes, regular_data_bytes, vector_storage_pct, row_count) VALUES\n('public', 'documents', 286720, 0, 286720, 0.00, 10),\n('public', 'document_chunks', 909312, 0, 909312, 0.00, 47),\n('public', 'user_queries', 270336, 0, 270336, 0.00, 10);"}
+| execute_sql {"sql": "SELECT n.nspname AS schema_name, c.relname AS table_name, i.relname AS index_name, am.amname AS index_type\nFROM pg_index idx\nJOIN pg_class c ON c.oid = idx.indrelid\nJOIN pg_namespace n ON n.oid = c.relnamespace\nJOIN pg_class i ON i.oid = idx.indexrelid\nJOIN pg_am am ON am.oid = i.relam\nWHERE n.nspname = 'public' \n  AND c.relname IN ('documents', 'document_chunks', 'user_queries');"}
+| execute_sql {"sql": "SELECT c.relname AS index_name, pg_relation_size(c.oid) AS index_size_bytes\nFROM pg_class c\nWHERE c.relname IN ('documents_embedding_idx', 'chunks_embedding_idx', 'queries_embedding_idx');"}
+| execute_sql {"sql": "INSERT INTO vector_analysis_indices (schema, table_name, column_name, index_name, index_type, index_size_bytes) VALUES\n('public', 'documents', 'embedding', 'documents_embedding_idx', 'hnsw', 90112),\n('public', 'document_chunks', 'embedding', 'chunks_embedding_idx', 'hnsw', 393216),\n('public', 'user_queries', 'embedding', 'queries_embedding_idx', 'hnsw', 90112);"}
+| execute_sql {"sql": "SELECT schema, table_name, column_name, COUNT(*) FILTER (WHERE embedding IS NULL) AS null_vectors,\n       COUNT(*) AS total_rows,\n       BOOL_AND(dimensions = 1536) AS consistent_dimensions\nFROM (\n  SELECT n.nspname AS schema, c.relname AS table_name, a.attname AS column_name, v.embedding, \n         (SELECT (pg_column_size(embedding) - 4) / 4) AS dimensions\n  FROM public.documents d\n  JOIN pg_namespace n ON n.nspname = 'public'\n  JOIN pg_class c ON c.relname = 'documents'\n  JOIN pg_attribute a ON a.attrelid = c.oid AND a.attname = 'embedding'\n  LEFT JOIN LATERAL (SELECT d.embedding) v ON true\n) sub\nGROUP BY schema, table_name, column_name;"}
+| execute_sql {"sql": "SELECT schema, table_name, column_name, COUNT(*) FILTER (WHERE embedding IS NULL) AS null_vectors,\n       COUNT(*) AS total_rows,\n       BOOL_AND(dimensions = 1536) AS consistent_dimensions\nFROM (\n  SELECT n.nspname AS schema, c.relname AS table_name, a.attname AS column_name, v.embedding, \n         (SELECT (pg_column_size(embedding) - 4) / 4) AS dimensions\n  FROM public.document_chunks dc\n  JOIN pg_namespace n ON n.nspname = 'public'\n  JOIN pg_class c ON c.relname = 'document_chunks'\n  JOIN pg_attribute a ON a.attrelid = c.oid AND a.attname = 'embedding'\n  LEFT JOIN LATERAL (SELECT dc.embedding) v ON true\n) sub\nGROUP BY schema, table_name, column_name;"}
+| execute_sql {"sql": "SELECT schema, table_name, column_name, COUNT(*) FILTER (WHERE embedding IS NULL) AS null_vectors,\n       COUNT(*) AS total_rows,\n       BOOL_AND(dimensions = 1536) AS consistent_dimensions\nFROM (\n  SELECT n.nspname AS schema, c.relname AS table_name, a.attname AS column_name, v.embedding, \n         (SELECT (pg_column_size(embedding) - 4) / 4) AS dimensions\n  FROM public.user_queries uq\n  JOIN pg_namespace n ON n.nspname = 'public'\n  JOIN pg_class c ON c.relname = 'user_queries'\n  JOIN pg_attribute a ON a.attrelid = c.oid AND a.attname = 'embedding'\n  LEFT JOIN LATERAL (SELECT uq.embedding) v ON true\n) sub\nGROUP BY schema, table_name, column_name;"}
+| execute_sql {"sql": "SELECT 'public' AS schema, 'documents' AS table_name, 'embedding' AS column_name, \n       COUNT(*) FILTER (WHERE embedding IS NULL) AS null_vectors, \n       COUNT(*) AS total_rows, \n       BOOL_AND((pg_column_size(embedding) - 4)/4 = 1536) AS consistent_dimensions\nFROM public.documents\nUNION ALL\nSELECT 'public', 'document_chunks', 'embedding', \n       COUNT(*) FILTER (WHERE embedding IS NULL), \n       COUNT(*), \n       BOOL_AND((pg_column_size(embedding) - 4)/4 = 1536)\nFROM public.document_chunks\nUNION ALL\nSELECT 'public', 'user_queries', 'embedding', \n       COUNT(*) FILTER (WHERE embedding IS NULL), \n       COUNT(*), \n       BOOL_AND((pg_column_size(embedding) - 4)/4 = 1536)\nFROM public.user_queries;"}
+Analysis Summary:
+
+1. Vector Extension:
+- The 'vector' extension is installed with version 0.8.0.
+
+2. Vector Columns:
+- Found vector columns with 1536 dimensions in these tables: public.documents, public.document_chunks, and public.user_queries.
+- None of these vector columns have non-default constraints like NOT NULL, CHECK, or foreign keys.
+- Row counts: documents (10 rows), document_chunks (47 rows), user_queries (10 rows).
+
+3. Storage Consumption:
+- Total table sizes:
+  - documents: 286,720 bytes
+  - document_chunks: 909,312 bytes
+  - user_queries: 270,336 bytes
+- No separate vector storage observed with the method used; vector_data_bytes is zero for all tables.
+- The entire size is counted as regular data bytes.
+- Vector storage percentage: 0.00% (likely because vectors are stored inline).
+  
+4. Vector Indexes:
+- All vector indexes are HNSW type:
+  - documents_embedding_idx (90,112 bytes) on documents.embedding
+  - chunks_embedding_idx (393,216 bytes) on document_chunks.embedding
+  - queries_embedding_idx (90,112 bytes) on user_queries.embedding
+
+5. Data Quality:
+- No NULL vector values found in any of the embedding columns.
+- All vectors have consistent dimensions (1536) across rows in all three tables.
+
+Next Steps / Recommendations:
+- The zero vector_data_bytes suggests vectors might be stored inline and not as separate storage entities; verifying using specific pgvector internal storage functions could refine this.
+- Index usage and effectiveness can be investigated further by analyzing query plans or pg_stat usage.
+- Monitor the growth of tables and index sizes as row counts increase to plan for capacity.
+- Validate any external constraints or application-level validations if database constraints are absent on vector columns.
+
+Would you like me to proceed with analyzing query performance and index usage statistics or further checking for data outliers or anomalies?

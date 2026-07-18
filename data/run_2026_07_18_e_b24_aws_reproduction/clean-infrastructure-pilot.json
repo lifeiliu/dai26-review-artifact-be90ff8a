@@ -1,0 +1,139 @@
+{
+  "alb_target_readiness": {
+    "elapsed_seconds": 2.924,
+    "passed": true,
+    "target_groups": {
+      "paper-b-eb24-recv-a": true,
+      "paper-b-eb24-recv-b": true
+    }
+  },
+  "assertions": {
+    "all_five_service_waves_succeeded": true,
+    "both_alb_targets_are_healthy": true,
+    "driver_role_assertions_pass": true,
+    "gateway_reaches_both_effect_services": true,
+    "keycloak_reaches_both_alb_routes": true,
+    "readiness_gate_is_clean_sixteen_of_sixteen": true,
+    "receiver_reaches_all_eight_gateway_controls": true,
+    "sigpipe_safe_bootstrap_version_used": true,
+    "ssm_online_gate_is_sixteen_of_sixteen": true,
+    "strict_topology_has_sixteen_hosts": true
+  },
+  "bootstrap_assertions": {
+    "all_five_service_waves_succeeded": true,
+    "readiness_gate_is_clean_sixteen_of_sixteen": true,
+    "sigpipe_safe_bootstrap_version_used": true,
+    "ssm_online_gate_is_sixteen_of_sixteen": true,
+    "strict_topology_has_sixteen_hosts": true
+  },
+  "claim_boundary": "Infrastructure qualification only. No revocation event, workload replay, MCP tool invocation, gateway treatment contrast, Filesystem mutation, or PostgreSQL mutation is authorized or observed.",
+  "driver_report": {
+    "assertions": {
+      "all_eight_mcp_endpoints_reachable_without_tool_invocation": true,
+      "both_exact_push_urls_accepted": true,
+      "both_private_receiver_health_checks_pass": true,
+      "both_push_hostnames_resolve_only_global": true,
+      "keycloak_discovery_realm_matches": true
+    },
+    "claim_boundary": "Infrastructure qualification only. No revocation event, workload replay, tool invocation, gateway decision contrast, or effect mutation was executed.",
+    "experiment": "E-B24 strict outcome-blind infrastructure pilot",
+    "gateway_mcp_probe_http_status": {
+      "gateway-1": 406,
+      "gateway-2": 406,
+      "gateway-3": 406,
+      "gateway-4": 406,
+      "gateway-5": 406,
+      "gateway-6": 406,
+      "gateway-7": 406,
+      "gateway-8": 406
+    },
+    "generated_at": "2026-07-18T03:50:05.996697+00:00",
+    "keycloak_url": "https://keycloak:8443",
+    "passed": true,
+    "private_receiver_health": {
+      "receiver-a-private": {
+        "body": {
+          "status": "ok"
+        },
+        "http_status": 200
+      },
+      "receiver-b-private": {
+        "body": {
+          "status": "ok"
+        },
+        "http_status": 200
+      }
+    },
+    "push_endpoints": {
+      "receiver-a": "https://paper-b-eb24-push-792188370.us-east-1.elb.amazonaws.com:443/events",
+      "receiver-b": "https://paper-b-eb24-push-792188370.us-east-1.elb.amazonaws.com:8443/events"
+    },
+    "resolved_public_addresses": {
+      "receiver-a": [
+        "192.0.2.203",
+        "192.0.2.213"
+      ],
+      "receiver-b": [
+        "192.0.2.203",
+        "192.0.2.213"
+      ]
+    },
+    "stream_results": {
+      "receiver-a": {
+        "client_update_http_status": 204,
+        "delivery_method": "urn:ietf:rfc:8935",
+        "endpoint_url_matches": true,
+        "stream_config_http_status": 201,
+        "stream_id_present": true,
+        "stream_operation": "created"
+      },
+      "receiver-b": {
+        "client_update_http_status": 204,
+        "delivery_method": "urn:ietf:rfc:8935",
+        "endpoint_url_matches": true,
+        "stream_config_http_status": 201,
+        "stream_id_present": true,
+        "stream_operation": "created"
+      }
+    }
+  },
+  "experiment": "E-B24 clean strict outcome-blind infrastructure pilot",
+  "generated_at": "2026-07-18T03:50:00.122028+00:00",
+  "implementation_version": "strict-clean-pilot-v1-role-correct",
+  "passed": true,
+  "role_checks": {
+    "driver": {
+      "command_id": "654d35c1-000c-48eb-a83e-857d35d44a6e",
+      "instance_id": "i-5f4f737f3d8a4d4e1",
+      "output": "e-b24-driver-report={\"assertions\":{\"all_eight_mcp_endpoints_reachable_without_tool_invocation\":true,\"both_exact_push_urls_accepted\":true,\"both_private_receiver_health_checks_pass\":true,\"both_push_hostnames_resolve_only_global\":true,\"keycloak_discovery_realm_matches\":true},\"claim_boundary\":\"Infrastructure qualification only. No revocation event, workload replay, tool invocation, gateway decision contrast, or effect mutation was executed.\",\"experiment\":\"E-B24 strict outcome-blind infrastructure pilot\",\"gateway_mcp_probe_http_status\":{\"gateway-1\":406,\"gateway-2\":406,\"gateway-3\":406,\"gateway-4\":406,\"gateway-5\":406,\"gateway-6\":406,\"gateway-7\":406,\"gateway-8\":406},\"generated_at\":\"2026-07-18T03:50:05.996697+00:00\",\"keycloak_url\":\"https://keycloak:8443\",\"passed\":true,\"private_receiver_health\":{\"receiver-a-private\":{\"body\":{\"status\":\"ok\"},\"http_status\":200},\"receiver-b-private\":{\"body\":{\"status\":\"ok\"},\"http_status\":200}},\"push_endpoints\":{\"receiver-a\":\"https://paper-b-eb24-push-792188370.us-east-1.elb.amazonaws.com:443/events\",\"receiver-b\":\"https://paper-b-eb24-push-792188370.us-east-1.elb.amazonaws.com:8443/events\"},\"resolved_public_addresses\":{\"receiver-a\":[\"192.0.2.203\",\"192.0.2.213\"],\"receiver-b\":[\"192.0.2.203\",\"192.0.2.213\"]},\"stream_results\":{\"receiver-a\":{\"client_update_http_status\":204,\"delivery_method\":\"urn:ietf:rfc:8935\",\"endpoint_url_matches\":true,\"stream_config_http_status\":201,\"stream_id_present\":true,\"stream_operation\":\"created\"},\"receiver-b\":{\"client_update_http_status\":204,\"delivery_method\":\"urn:ietf:rfc:8935\",\"endpoint_url_matches\":true,\"stream_config_http_status\":201,\"stream_id_present\":true,\"stream_operation\":\"created\"}}}\ndriver-role-check=passed\n",
+      "response_code": 0,
+      "status": "Success",
+      "status_details": "Success"
+    },
+    "gateway": {
+      "command_id": "43a572f0-c09c-4a0f-be3e-a6db4e074519",
+      "instance_id": "i-b37179e68925e0382",
+      "output": "{\"status\":\"ok\"}\n\n{\"status\":\"ok\"}\n\ngateway-effect-health=passed\n",
+      "response_code": 0,
+      "status": "Success",
+      "status_details": "Success"
+    },
+    "keycloak": {
+      "command_id": "a09013d5-a329-4b93-a28b-49dcef87aa6e",
+      "instance_id": "i-652945c8b847516a0",
+      "output": "{\"status\":\"ok\"}\n\n{\"status\":\"ok\"}\n\nkeycloak-alb-health=passed\n",
+      "response_code": 0,
+      "status": "Success",
+      "status_details": "Success"
+    },
+    "receiver": {
+      "command_id": "29cac4fe-d538-4965-a2e6-39bcb85f8327",
+      "instance_id": "i-497b80ff8e36f9cd6",
+      "output": "{\"gateway_id\":\"gateway-1\",\"status\":\"ok\"}\n\n{\"gateway_id\":\"gateway-2\",\"status\":\"ok\"}\n\n{\"gateway_id\":\"gateway-3\",\"status\":\"ok\"}\n\n{\"gateway_id\":\"gateway-4\",\"status\":\"ok\"}\n\n{\"gateway_id\":\"gateway-5\",\"status\":\"ok\"}\n\n{\"gateway_id\":\"gateway-6\",\"status\":\"ok\"}\n\n{\"gateway_id\":\"gateway-7\",\"status\":\"ok\"}\n\n{\"gateway_id\":\"gateway-8\",\"status\":\"ok\"}\n\nreceiver-gateway-control-health=passed\n",
+      "response_code": 0,
+      "status": "Success",
+      "status_details": "Success"
+    }
+  },
+  "verification_status": "VERIFIED"
+}

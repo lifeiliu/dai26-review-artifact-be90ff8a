@@ -1,0 +1,339 @@
+{
+  "assertions": {
+    "healthy_receiver_not_blocked": true,
+    "keycloak_recorded_pending_failure": true,
+    "native_retry_delivered_same_set": true,
+    "normal_delivery_to_a": true,
+    "normal_delivery_to_b": true,
+    "selected_receiver_not_delivered": true,
+    "set_signatures_verified": true
+  },
+  "container_id": "7acb4698de1379c6db5dd2c7bb884fd36652a6c4794c32bc8d018a2b5c6a4427",
+  "delivery_method": "RFC 8935 PUSH",
+  "discovery": {
+    "add_subject_endpoint": "http://127.0.0.1:18080/realms/ssf-smoke/ssf/transmitter/subjects/add",
+    "authorization_schemes": [
+      {
+        "spec_urn": "urn:ietf:rfc:6749"
+      }
+    ],
+    "configuration_endpoint": "http://127.0.0.1:18080/realms/ssf-smoke/ssf/transmitter/streams",
+    "critical_subject_members": [
+      "user"
+    ],
+    "default_subjects": "NONE",
+    "delivery_methods_supported": [
+      "urn:ietf:rfc:8935",
+      "urn:ietf:rfc:8936",
+      "https://schemas.openid.net/secevent/risc/delivery-method/push",
+      "https://schemas.openid.net/secevent/risc/delivery-method/poll"
+    ],
+    "issuer": "http://127.0.0.1:18080/realms/ssf-smoke",
+    "jwks_uri": "http://127.0.0.1:18080/realms/ssf-smoke/protocol/openid-connect/certs",
+    "remove_subject_endpoint": "http://127.0.0.1:18080/realms/ssf-smoke/ssf/transmitter/subjects/remove",
+    "spec_version": "1_0",
+    "status_endpoint": "http://127.0.0.1:18080/realms/ssf-smoke/ssf/transmitter/streams/status",
+    "verification_endpoint": "http://127.0.0.1:18080/realms/ssf-smoke/ssf/transmitter/verify"
+  },
+  "event_type": "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+  "experiment": "E-B21 Keycloak SSF transmitter smoke",
+  "finished_unix_ns": 1784156166015088000,
+  "formal_latency_evidence": false,
+  "frozen_paper_risk_policy_or_threshold_changed": false,
+  "keycloak_image": "quay.io/keycloak/keycloak:26.7.0",
+  "keycloak_image_digest": "sha256:2eb3cd316835c990e69e26ade292ffa78f6fb0db7d5fc6377463c162e1979ac0",
+  "keycloak_max_attempts_changed": false,
+  "keycloak_retry_curve_changed": false,
+  "keycloak_source_tag_commit": "6c73e3027811d9c7b22683edd825e839272e9547",
+  "native_retry_recovery": {
+    "delivery": {
+      "aud": "receiver-b/9d6b7ae6-0911-4f5b-9f30-069b0d7b0c84",
+      "authorization": "Bearer receiver-b-smoke",
+      "blocked": false,
+      "body_sha256": "0e0e676fb17351ace83fa10a43808c79319d44592c7eb3764d56fbee7275ef51",
+      "content_type": "application/secevent+jwt",
+      "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJ4NVp2eC1OTEVNSGEyVDF3Unk3Y1lZTWJnakttTDV6MndxUFN2SndXNzJNIn0.eyJqdGkiOiJiZjcwMzFmZi05ZGFjLTY0M2EtZDg4NS1iODUyYTBmOTcxNGMiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgwL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQxNTYxNjQsImF1ZCI6InJlY2VpdmVyLWIvOWQ2YjdhZTYtMDkxMS00ZjViLTlmMzAtMDY5YjBkN2IwYzg0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MTU2MTY0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4MC9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNjA5MTAxODUtZWFiYi00YTNmLWJiMzAtN2ZlNTdhMTg4MGY2In0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiIzN1p0bndudEpKOVo5cjVRSm1ZMVVVNWwifX0sInR4biI6ImZmMTBkNWJkLWFlMjctNDJiZS1iMWI1LWNmZGQwMWQyOTUyNyJ9.gOXosjbzWmf-ltLoQ41a-ZXX8CemZDZy8cxivwzWYkOMsfHPUVarPRyz_0QgN2oB8SEFHX6iWDtVEOo6wE4To3W5e9hDHshtv0tobza7ixHOPTBPNovlKVrzDvL7UOGQpqWE7kxsUQqWdAYoM6qvMoBgKbA5lq4LG9DD3259A5hgYJeBl8U-HSRT3G6hz5-e4gfrasTlmlXQV0-eJNr8N5OGcuowifKHb_EcH-_Oqz-7KWzZX1NSOBhE61NLDXUgLBOzdy9bWDTHeOhFg_8Fx8HRYK3ZcFpc12WKTeQvgEJfVFgp4QOhObtTUhMQZqTj6iifZjXA88xw9NIWELR8dg",
+      "event_types": [
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+      ],
+      "http_response": 202,
+      "is_session_revoked": true,
+      "iss": "http://127.0.0.1:18080/realms/ssf-smoke",
+      "jti": "bf7031ff-9dac-643a-d885-b852a0f9714c",
+      "jws_header": {
+        "alg": "RS256",
+        "kid": "x5Zvx-NLEMHa2T1wRy7cYYMbgjKmL5z2wqPSvJwW72M",
+        "typ": "secevent+jwt"
+      },
+      "observed_unix_ns": 1784156165795527000,
+      "receiver": "receiver-b",
+      "sub_id": {
+        "format": "complex",
+        "session": {
+          "format": "opaque",
+          "id": "37ZtnwntJJ9Z9r5QJmY1UU5l"
+        },
+        "user": {
+          "format": "iss_sub",
+          "iss": "http://127.0.0.1:18080/realms/ssf-smoke",
+          "sub": "60910185-eabb-4a3f-bb30-7fe57a1880f6"
+        }
+      }
+    },
+    "recovered": true,
+    "same_body_sha256_as_failed_attempt": true,
+    "same_jti_as_failed_attempt": true,
+    "signature_verification": {
+      "alg": "RS256",
+      "kid": "x5Zvx-NLEMHa2T1wRy7cYYMbgjKmL5z2wqPSvJwW72M",
+      "verified": true
+    }
+  },
+  "normal_delivery": {
+    "receiver-a": {
+      "aud": "receiver-a/bf1df056-e2ae-4383-8b35-42726a6c88e0",
+      "authorization": "Bearer receiver-a-smoke",
+      "blocked": false,
+      "body_sha256": "5ade9081cc066427622f164b4fd012e699c5291ca7102e03a0b7f96a63f77228",
+      "content_type": "application/secevent+jwt",
+      "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJ4NVp2eC1OTEVNSGEyVDF3Unk3Y1lZTWJnakttTDV6MndxUFN2SndXNzJNIn0.eyJqdGkiOiI5MWJmOTZjNi1kZDVmLWNlYTUtYmVmMC03NTk5M2VmYzdlYmIiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgwL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQxNTYxNjQsImF1ZCI6InJlY2VpdmVyLWEvYmYxZGYwNTYtZTJhZS00MzgzLThiMzUtNDI3MjZhNmM4OGUwIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MTU2MTY0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4MC9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNjA5MTAxODUtZWFiYi00YTNmLWJiMzAtN2ZlNTdhMTg4MGY2In0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJxa2FsdGVQQngyd1hDNUtkSDhYRFEyOTMifX0sInR4biI6ImViZjJiYTUwLThlMzMtNGQ2ZS1iMjQ1LTIwYmFmMGY2YzA1YSJ9.gu2NMm6R0edm1aZtia8HHF-FR2uSB-ReDMGwI1sE-GgKL5mSat7XdKOalu2v0UqIpVbOaMX2yTZAYO88iacoe4aJ153UVGwKusFj7y0M7NM--zLzr3bEvHHrBNPps7Kg_BmLwbOE6q26EUsOLtntMOlUqXt16zzV3qXhp21ICRVr-Euw7Iw7VfOIZwo8IMqXOKnfhQRBEseMpNlHiHYDuXJUuKgS5C1NvZ4R2hcjpxoDX9xnq2fhr9wfK3H4WRnIGcbq9oY7nnyjtdWGnr2Mo4SjDM4yg6zJjM6vxVJsqDlq9xkZ-0lBpX40gbNneuNMO0lEC75JMvZ6ErsPapTDYw",
+      "event_types": [
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+      ],
+      "http_response": 202,
+      "is_session_revoked": true,
+      "iss": "http://127.0.0.1:18080/realms/ssf-smoke",
+      "jti": "91bf96c6-dd5f-cea5-bef0-75993efc7ebb",
+      "jws_header": {
+        "alg": "RS256",
+        "kid": "x5Zvx-NLEMHa2T1wRy7cYYMbgjKmL5z2wqPSvJwW72M",
+        "typ": "secevent+jwt"
+      },
+      "observed_unix_ns": 1784156164317959000,
+      "receiver": "receiver-a",
+      "sub_id": {
+        "format": "complex",
+        "session": {
+          "format": "opaque",
+          "id": "qkaltePBx2wXC5KdH8XDQ293"
+        },
+        "user": {
+          "format": "iss_sub",
+          "iss": "http://127.0.0.1:18080/realms/ssf-smoke",
+          "sub": "60910185-eabb-4a3f-bb30-7fe57a1880f6"
+        }
+      }
+    },
+    "receiver-b": {
+      "aud": "receiver-b/9d6b7ae6-0911-4f5b-9f30-069b0d7b0c84",
+      "authorization": "Bearer receiver-b-smoke",
+      "blocked": false,
+      "body_sha256": "5af9324abfbdadc4302ffd5a328538e5d8461675cce36b46f845dad32f94c5b5",
+      "content_type": "application/secevent+jwt",
+      "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJ4NVp2eC1OTEVNSGEyVDF3Unk3Y1lZTWJnakttTDV6MndxUFN2SndXNzJNIn0.eyJqdGkiOiIxZTU5YmMxNy0yYjY0LTI3NDctNzBlYy1kNWJiYTRmZWM4OGYiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgwL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQxNTYxNjQsImF1ZCI6InJlY2VpdmVyLWIvOWQ2YjdhZTYtMDkxMS00ZjViLTlmMzAtMDY5YjBkN2IwYzg0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MTU2MTY0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4MC9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNjA5MTAxODUtZWFiYi00YTNmLWJiMzAtN2ZlNTdhMTg4MGY2In0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJxa2FsdGVQQngyd1hDNUtkSDhYRFEyOTMifX0sInR4biI6IjJjZWMzN2Y0LTk4OWYtNDM0Zi1hNWU4LWJkNTA5MjNiNWM5NiJ9.NRq2T4Ikw766gKpZ8-OtOqdLHxYaHY2w5Kq0cyFBN569rMMMYe3do3BR-utcmYGP2cNlAZKN8eOp7-Ec1wiHv9I0kXu8l8CYaokVm3LQbulf-gke7KU6xZwgtiKEBxUnd_EqOjVjhRpzxC7uVmxKiwde0ArCAmnxcN6BcThojSgZsJqqDPzjFHV5zTf_OqtxB1DVfKYESzzmQ9oVkTQCYZCLvgqUWf92HyNH8A2uBKsp_0fJa1i7K5w57Jr8bNqc4mg4Q8loylGfMVOJpEefWk3h3H2iFOcasAT_Km8QwtLpIEw-8I2Adc77Wwz8526YuHl06gaTIGtMMiRDS2L_Gw",
+      "event_types": [
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+      ],
+      "http_response": 202,
+      "is_session_revoked": true,
+      "iss": "http://127.0.0.1:18080/realms/ssf-smoke",
+      "jti": "1e59bc17-2b64-2747-70ec-d5bba4fec88f",
+      "jws_header": {
+        "alg": "RS256",
+        "kid": "x5Zvx-NLEMHa2T1wRy7cYYMbgjKmL5z2wqPSvJwW72M",
+        "typ": "secevent+jwt"
+      },
+      "observed_unix_ns": 1784156164327242000,
+      "receiver": "receiver-b",
+      "sub_id": {
+        "format": "complex",
+        "session": {
+          "format": "opaque",
+          "id": "qkaltePBx2wXC5KdH8XDQ293"
+        },
+        "user": {
+          "format": "iss_sub",
+          "iss": "http://127.0.0.1:18080/realms/ssf-smoke",
+          "sub": "60910185-eabb-4a3f-bb30-7fe57a1880f6"
+        }
+      }
+    }
+  },
+  "normal_logout": {
+    "logout_http_status": 204,
+    "session_state": "qkaltePBx2wXC5KdH8XDQ293"
+  },
+  "outbox_stats_after_recovery": {
+    "statuses": {
+      "DELIVERED": {
+        "count": 4,
+        "oldestCreatedAt": 1784156164.247905
+      }
+    }
+  },
+  "outbox_stats_during_failure": {
+    "statuses": {
+      "DELIVERED": {
+        "count": 3,
+        "oldestCreatedAt": 1784156164.247905
+      },
+      "PENDING": {
+        "count": 1,
+        "oldestCreatedAt": 1784156164.646407
+      }
+    }
+  },
+  "passed": true,
+  "receiver_b_pending_event": {
+    "attempts": 1,
+    "createdAt": 1784156164,
+    "decodedSet": {
+      "aud": "receiver-b/9d6b7ae6-0911-4f5b-9f30-069b0d7b0c84",
+      "events": {
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked": {
+          "event_timestamp": 1784156164,
+          "initiating_entity": "user",
+          "reason_admin": {
+            "en": "User logout"
+          }
+        }
+      },
+      "iat": 1784156164,
+      "iss": "http://127.0.0.1:18080/realms/ssf-smoke",
+      "jti": "bf7031ff-9dac-643a-d885-b852a0f9714c",
+      "sub_id": {
+        "format": "complex",
+        "session": {
+          "format": "opaque",
+          "id": "37ZtnwntJJ9Z9r5QJmY1UU5l"
+        },
+        "user": {
+          "format": "iss_sub",
+          "iss": "http://127.0.0.1:18080/realms/ssf-smoke",
+          "sub": "60910185-eabb-4a3f-bb30-7fe57a1880f6"
+        }
+      },
+      "txn": "ff10d5bd-ae27-42be-b1b5-cfdd01d29527"
+    },
+    "deliveryMethod": "PUSH",
+    "eventType": "CaepSessionRevoked",
+    "jti": "bf7031ff-9dac-643a-d885-b852a0f9714c",
+    "lastError": "HTTP 503 http://host.docker.internal:19001/receiver-b: {\"accepted\": false}",
+    "nextAttemptAt": 1784156165,
+    "status": "PENDING",
+    "streamId": "9d6b7ae6-0911-4f5b-9f30-069b0d7b0c84",
+    "userId": "60910185-eabb-4a3f-bb30-7fe57a1880f6"
+  },
+  "selective_logout": {
+    "logout_http_status": 204,
+    "session_state": "37ZtnwntJJ9Z9r5QJmY1UU5l"
+  },
+  "selective_non_delivery": {
+    "receiver_a_delivery_delta": 1,
+    "receiver_b_delivery_delta": 0,
+    "receiver_b_failed_attempt": {
+      "aud": "receiver-b/9d6b7ae6-0911-4f5b-9f30-069b0d7b0c84",
+      "authorization": "Bearer receiver-b-smoke",
+      "blocked": true,
+      "body_sha256": "0e0e676fb17351ace83fa10a43808c79319d44592c7eb3764d56fbee7275ef51",
+      "content_type": "application/secevent+jwt",
+      "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJ4NVp2eC1OTEVNSGEyVDF3Unk3Y1lZTWJnakttTDV6MndxUFN2SndXNzJNIn0.eyJqdGkiOiJiZjcwMzFmZi05ZGFjLTY0M2EtZDg4NS1iODUyYTBmOTcxNGMiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgwL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQxNTYxNjQsImF1ZCI6InJlY2VpdmVyLWIvOWQ2YjdhZTYtMDkxMS00ZjViLTlmMzAtMDY5YjBkN2IwYzg0IiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MTU2MTY0LCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4MC9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiNjA5MTAxODUtZWFiYi00YTNmLWJiMzAtN2ZlNTdhMTg4MGY2In0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiIzN1p0bndudEpKOVo5cjVRSm1ZMVVVNWwifX0sInR4biI6ImZmMTBkNWJkLWFlMjctNDJiZS1iMWI1LWNmZGQwMWQyOTUyNyJ9.gOXosjbzWmf-ltLoQ41a-ZXX8CemZDZy8cxivwzWYkOMsfHPUVarPRyz_0QgN2oB8SEFHX6iWDtVEOo6wE4To3W5e9hDHshtv0tobza7ixHOPTBPNovlKVrzDvL7UOGQpqWE7kxsUQqWdAYoM6qvMoBgKbA5lq4LG9DD3259A5hgYJeBl8U-HSRT3G6hz5-e4gfrasTlmlXQV0-eJNr8N5OGcuowifKHb_EcH-_Oqz-7KWzZX1NSOBhE61NLDXUgLBOzdy9bWDTHeOhFg_8Fx8HRYK3ZcFpc12WKTeQvgEJfVFgp4QOhObtTUhMQZqTj6iifZjXA88xw9NIWELR8dg",
+      "event_types": [
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+      ],
+      "http_response": 503,
+      "is_session_revoked": true,
+      "iss": "http://127.0.0.1:18080/realms/ssf-smoke",
+      "jti": "bf7031ff-9dac-643a-d885-b852a0f9714c",
+      "jws_header": {
+        "alg": "RS256",
+        "kid": "x5Zvx-NLEMHa2T1wRy7cYYMbgjKmL5z2wqPSvJwW72M",
+        "typ": "secevent+jwt"
+      },
+      "observed_unix_ns": 1784156164795165000,
+      "receiver": "receiver-b",
+      "sub_id": {
+        "format": "complex",
+        "session": {
+          "format": "opaque",
+          "id": "37ZtnwntJJ9Z9r5QJmY1UU5l"
+        },
+        "user": {
+          "format": "iss_sub",
+          "iss": "http://127.0.0.1:18080/realms/ssf-smoke",
+          "sub": "60910185-eabb-4a3f-bb30-7fe57a1880f6"
+        }
+      }
+    }
+  },
+  "signature_verification": {
+    "receiver-a": {
+      "alg": "RS256",
+      "kid": "x5Zvx-NLEMHa2T1wRy7cYYMbgjKmL5z2wqPSvJwW72M",
+      "verified": true
+    },
+    "receiver-b": {
+      "alg": "RS256",
+      "kid": "x5Zvx-NLEMHa2T1wRy7cYYMbgjKmL5z2wqPSvJwW72M",
+      "verified": true
+    }
+  },
+  "smoke_acceleration": {
+    "outbox_drainer_interval": "500ms",
+    "production_default": "30s"
+  },
+  "smoke_only": true,
+  "started_unix_ns": 1784156138815859000,
+  "streams": {
+    "receiver-a": {
+      "audience": [
+        "receiver-a/bf1df056-e2ae-4383-8b35-42726a6c88e0"
+      ],
+      "createdAt": 1784156164,
+      "delivery": {
+        "endpoint_url": "http://host.docker.internal:19001/receiver-a",
+        "method": "urn:ietf:rfc:8935"
+      },
+      "description": "E-B21 smoke stream for receiver-a",
+      "eventsDelivered": [
+        "CaepSessionRevoked"
+      ],
+      "eventsRequested": [
+        "CaepSessionRevoked"
+      ],
+      "eventsSupported": [
+        "CaepCredentialChange",
+        "CaepSessionRevoked"
+      ],
+      "managedBy": "KEYCLOAK",
+      "status": "enabled",
+      "streamId": "bf1df056-e2ae-4383-8b35-42726a6c88e0",
+      "updatedAt": 1784156164
+    },
+    "receiver-b": {
+      "audience": [
+        "receiver-b/9d6b7ae6-0911-4f5b-9f30-069b0d7b0c84"
+      ],
+      "createdAt": 1784156164,
+      "delivery": {
+        "endpoint_url": "http://host.docker.internal:19001/receiver-b",
+        "method": "urn:ietf:rfc:8935"
+      },
+      "description": "E-B21 smoke stream for receiver-b",
+      "eventsDelivered": [
+        "CaepSessionRevoked"
+      ],
+      "eventsRequested": [
+        "CaepSessionRevoked"
+      ],
+      "eventsSupported": [
+        "CaepCredentialChange",
+        "CaepSessionRevoked"
+      ],
+      "managedBy": "KEYCLOAK",
+      "status": "enabled",
+      "streamId": "9d6b7ae6-0911-4f5b-9f30-069b0d7b0c84",
+      "updatedAt": 1784156164
+    }
+  }
+}

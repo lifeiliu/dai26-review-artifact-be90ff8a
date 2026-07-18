@@ -1,0 +1,1106 @@
+{
+  "block": 29,
+  "categorical_pass": true,
+  "continued_without_phase_replay": false,
+  "latency_clock_valid": true,
+  "order": [
+    "normal",
+    "receiver_gateway_fault"
+  ],
+  "phases": {
+    "normal": {
+      "assertions": {
+        "driver_allowed_matches": true,
+        "driver_commits_match": true,
+        "driver_has_225_rows": true,
+        "filesystem_oracle_matches": true,
+        "postgres_oracle_matches": true,
+        "receiver_a_enforced": true,
+        "receiver_a_has_four_receipts": true,
+        "receiver_a_persisted": true,
+        "receiver_b_enforced": true,
+        "receiver_b_has_four_receipts": true,
+        "receiver_b_http_202_recorded": true,
+        "receiver_b_persisted": true
+      },
+      "evidence": {
+        "effect_oracle": {
+          "command_id": "110c3353-c98e-421d-836c-d99345d8425a",
+          "evidence": {
+            "arm": "normal",
+            "experiment_run": "eb24-cf-v1-b29-normal",
+            "filesystem": {
+              "count": 0,
+              "digest_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+              "effect_type": "filesystem",
+              "vector_count": 0
+            },
+            "postgres": {
+              "count": 0,
+              "digest_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+              "effect_type": "postgres",
+              "vector_count": 0
+            }
+          },
+          "s3_prefix": "confirmatory/raw/eb24-reproduction-v1-20260718/oracles/eb24-cf-v1-b29-normal"
+        },
+        "receiver-a": {
+          "command_id": "6bef280e-32cd-439f-9121-512b84da4866",
+          "evidence": {
+            "channel": "keycloak-push",
+            "delegation_id": "R-1C1N8yiTPy3b3lzQ4FDGzf",
+            "enforced_at_ns": 1784349515490378144,
+            "event_id": "b965048c-205b-248a-ceff-34bc719dc552",
+            "found": true,
+            "ingress_records": [
+              {
+                "algorithm": "RS256",
+                "audience": "receiver-a/742ca1f8-40fc-4fdb-9e2d-98113b77cfc9",
+                "delegation_id": "R-1C1N8yiTPy3b3lzQ4FDGzf",
+                "encoded_sha256": "4d59ed27aca4bf6ff00755c37858ac216b06cb40df7f38aa6070a4655be6c370",
+                "event_id": "b965048c-205b-248a-ceff-34bc719dc552",
+                "event_type": "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+                "http_response": 202,
+                "issued_at": 1784349508,
+                "issuer": "https://keycloak:8443/realms/ssf-smoke",
+                "jti": "b965048c-205b-248a-ceff-34bc719dc552",
+                "key_id": "ifT3YN3don8Y9LLo3FXo544OgD2wlOunc9bk8Q62siE",
+                "observed_at_ns": 1784349515315786008,
+                "receiver_status": "PERSISTED",
+                "sequence": 1784349508,
+                "target_gateway_ids": [
+                  "gateway-1",
+                  "gateway-2",
+                  "gateway-3",
+                  "gateway-4"
+                ]
+              }
+            ],
+            "jti": "b965048c-205b-248a-ceff-34bc719dc552",
+            "persisted_at_ns": 1784349515311913046,
+            "receipts": [
+              {
+                "gateway_id": "gateway-1",
+                "receipt_id": "12a5f1ebd25889c19c7f202a1261a9543b335fae0fc5dfa62cb338cf7d27c081",
+                "recorded_at_ns": 1784349515448806430
+              },
+              {
+                "gateway_id": "gateway-2",
+                "receipt_id": "a14735b98565915239622ebf81b4bba3aa35c8a9482d49d46653f24d72ec28df",
+                "recorded_at_ns": 1784349515462414938
+              },
+              {
+                "gateway_id": "gateway-3",
+                "receipt_id": "ba66d73c8eb61e250ba3e04f6a31f1ca1769b5549999b6de7e33fcfb10fe9a28",
+                "recorded_at_ns": 1784349515476854223
+              },
+              {
+                "gateway_id": "gateway-4",
+                "receipt_id": "c212df530bc034c01b1e3cd4b1287eb52cc762646ae6eb60f555932650c82fc4",
+                "recorded_at_ns": 1784349515490378144
+              }
+            ],
+            "sequence": 1784349508,
+            "set_sha256": "4d59ed27aca4bf6ff00755c37858ac216b06cb40df7f38aa6070a4655be6c370",
+            "status": "ENFORCED",
+            "targets": [
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-1",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-2",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-3",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-4",
+                "last_error": null
+              }
+            ]
+          }
+        },
+        "receiver-b": {
+          "command_id": "9088b263-e13c-4da0-aeda-6f5afe5eba21",
+          "evidence": {
+            "channel": "keycloak-push",
+            "delegation_id": "R-1C1N8yiTPy3b3lzQ4FDGzf",
+            "enforced_at_ns": 1784349515406007323,
+            "event_id": "8438245f-ac02-0da8-02b3-c2cfa2031ef9",
+            "found": true,
+            "ingress_records": [
+              {
+                "algorithm": "RS256",
+                "audience": "receiver-b/1a991518-fcba-4b2b-b72a-d346e67c938e",
+                "delegation_id": "R-1C1N8yiTPy3b3lzQ4FDGzf",
+                "encoded_sha256": "2e22bb894049a3314086aa25a4a2323d943bab3bbba78fd2645c616ab33465bc",
+                "event_id": "8438245f-ac02-0da8-02b3-c2cfa2031ef9",
+                "event_type": "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+                "http_response": 202,
+                "issued_at": 1784349508,
+                "issuer": "https://keycloak:8443/realms/ssf-smoke",
+                "jti": "8438245f-ac02-0da8-02b3-c2cfa2031ef9",
+                "key_id": "ifT3YN3don8Y9LLo3FXo544OgD2wlOunc9bk8Q62siE",
+                "observed_at_ns": 1784349515325883699,
+                "receiver_status": "PERSISTED",
+                "sequence": 1784349508,
+                "target_gateway_ids": [
+                  "gateway-5",
+                  "gateway-6",
+                  "gateway-7",
+                  "gateway-8"
+                ]
+              }
+            ],
+            "jti": "8438245f-ac02-0da8-02b3-c2cfa2031ef9",
+            "persisted_at_ns": 1784349515322240507,
+            "receipts": [
+              {
+                "gateway_id": "gateway-5",
+                "receipt_id": "90462aa8846c57d8bee88faf02b54e00f056d00d92aae571046b7efe7b3230bc",
+                "recorded_at_ns": 1784349515367434881
+              },
+              {
+                "gateway_id": "gateway-6",
+                "receipt_id": "9dd971e22a894281eba548944fce213b52d7de4de83f0c77060f9122ecb8dd36",
+                "recorded_at_ns": 1784349515378781240
+              },
+              {
+                "gateway_id": "gateway-7",
+                "receipt_id": "b70cd164e0fc44e5afeace81793b93bc5a7f2c5d75aa937d6c5ce8a1130d3ca1",
+                "recorded_at_ns": 1784349515393619226
+              },
+              {
+                "gateway_id": "gateway-8",
+                "receipt_id": "b1b4c6e1ee12d217be070c33722b9e3b6ffaf2ebe1fe1215b1119a5fd7516fb4",
+                "recorded_at_ns": 1784349515406007323
+              }
+            ],
+            "sequence": 1784349508,
+            "set_sha256": "2e22bb894049a3314086aa25a4a2323d943bab3bbba78fd2645c616ab33465bc",
+            "status": "ENFORCED",
+            "targets": [
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-5",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-6",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-7",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-8",
+                "last_error": null
+              }
+            ]
+          }
+        }
+      },
+      "result": {
+        "command_id": "d949824e-5ab6-46ec-91d7-86f51439074d",
+        "invocation": {
+          "command_id": "d949824e-5ab6-46ec-91d7-86f51439074d",
+          "instance_id": "i-5f4f737f3d8a4d4e1",
+          "output": "e-b24-outcome-phase={\"block\":29,\"counts\":{\"allowed\":0,\"denied\":225,\"effect_committed_reported\":0,\"rows\":225},\"delegation_id\":\"R-1C1N8yiTPy3b3lzQ4FDGzf\",\"experiment_run\":\"eb24-cf-v1-b29-normal\",\"phase\":\"normal\",\"protocol_version\":\"e-b24-prereg-v1\",\"trace_sha256\":\"7b217f6599f0262df304e29c4252fe975badad8b37594496dbe6fe3ff3752cae\"}\n",
+          "response_code": 0,
+          "status": "Success"
+        },
+        "phase_summary": {
+          "block": 29,
+          "counts": {
+            "allowed": 0,
+            "denied": 225,
+            "effect_committed_reported": 0,
+            "rows": 225
+          },
+          "delegation_id": "R-1C1N8yiTPy3b3lzQ4FDGzf",
+          "experiment_run": "eb24-cf-v1-b29-normal",
+          "phase": "normal",
+          "protocol_version": "e-b24-prereg-v1",
+          "trace_sha256": "7b217f6599f0262df304e29c4252fe975badad8b37594496dbe6fe3ff3752cae"
+        },
+        "s3_prefix": "confirmatory/raw/eb24-reproduction-v1-20260718/block-29/normal/driver"
+      }
+    },
+    "receiver_gateway_fault": {
+      "assertions": {
+        "driver_allowed_matches": true,
+        "driver_commits_match": true,
+        "driver_has_225_rows": true,
+        "filesystem_oracle_matches": true,
+        "postgres_oracle_matches": true,
+        "receiver_a_enforced": true,
+        "receiver_a_has_four_receipts": true,
+        "receiver_a_persisted": true,
+        "receiver_b_has_zero_receipts": true,
+        "receiver_b_http_202_recorded": true,
+        "receiver_b_persisted": true,
+        "receiver_b_remains_persisted": true
+      },
+      "evidence": {
+        "effect_oracle": {
+          "command_id": "e39218ec-9d0d-4937-aba9-45557bcf9432",
+          "evidence": {
+            "arm": "receiver_gateway_fault",
+            "experiment_run": "eb24-cf-v1-b29-receiver_gateway_fault",
+            "filesystem": {
+              "count": 56,
+              "digest_sha256": "d8e5e66d2c7e1db32c3b69f8f2836f3f48b0a5d9bc3a2fb26822e031a2d18dc2",
+              "effect_type": "filesystem",
+              "vector_count": 56
+            },
+            "postgres": {
+              "count": 56,
+              "digest_sha256": "eedce7e713c266e497fb84b1288dafefaff27b8edb7d9dcbf1b0e5c3b745da17",
+              "effect_type": "postgres",
+              "vector_count": 56
+            }
+          },
+          "s3_prefix": "confirmatory/raw/eb24-reproduction-v1-20260718/oracles/eb24-cf-v1-b29-receiver_gateway_fault"
+        },
+        "receiver-a": {
+          "command_id": "42915f8c-33ea-431d-9467-8ce2b74dac52",
+          "evidence": {
+            "channel": "keycloak-push",
+            "delegation_id": "VyF3bPjCHWyxpEIqzrMRQLqq",
+            "enforced_at_ns": 1784349545395389024,
+            "event_id": "5f198ae7-8fd7-8cba-7bf3-6c1972acdad2",
+            "found": true,
+            "ingress_records": [
+              {
+                "algorithm": "RS256",
+                "audience": "receiver-a/742ca1f8-40fc-4fdb-9e2d-98113b77cfc9",
+                "delegation_id": "VyF3bPjCHWyxpEIqzrMRQLqq",
+                "encoded_sha256": "a0d00405b4667ab143f0e08565f55beee7c71160fbad4579c8218f2a1720dc4f",
+                "event_id": "5f198ae7-8fd7-8cba-7bf3-6c1972acdad2",
+                "event_type": "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+                "http_response": 202,
+                "issued_at": 1784349534,
+                "issuer": "https://keycloak:8443/realms/ssf-smoke",
+                "jti": "5f198ae7-8fd7-8cba-7bf3-6c1972acdad2",
+                "key_id": "ifT3YN3don8Y9LLo3FXo544OgD2wlOunc9bk8Q62siE",
+                "observed_at_ns": 1784349545315964562,
+                "receiver_status": "PERSISTED",
+                "sequence": 1784349534,
+                "target_gateway_ids": [
+                  "gateway-1",
+                  "gateway-2",
+                  "gateway-3",
+                  "gateway-4"
+                ]
+              }
+            ],
+            "jti": "5f198ae7-8fd7-8cba-7bf3-6c1972acdad2",
+            "persisted_at_ns": 1784349545311587873,
+            "receipts": [
+              {
+                "gateway_id": "gateway-1",
+                "receipt_id": "98804fc85a8d1d85e61a2f8f24e30232803b1bfe6af2f578123647e7f19c34b8",
+                "recorded_at_ns": 1784349545351094350
+              },
+              {
+                "gateway_id": "gateway-2",
+                "receipt_id": "42704bba1463d09430348a939c7aa07810db11f16d395a83afac9f3470532280",
+                "recorded_at_ns": 1784349545365406818
+              },
+              {
+                "gateway_id": "gateway-3",
+                "receipt_id": "358f99e41dd131a0b256e271f758b15b306588943f4d64fed3d351b9753eddf7",
+                "recorded_at_ns": 1784349545379852091
+              },
+              {
+                "gateway_id": "gateway-4",
+                "receipt_id": "a278d6db2cbba1f5802441417a6421a6e31e7d682469b4c5b354c677479ac678",
+                "recorded_at_ns": 1784349545395389024
+              }
+            ],
+            "sequence": 1784349534,
+            "set_sha256": "a0d00405b4667ab143f0e08565f55beee7c71160fbad4579c8218f2a1720dc4f",
+            "status": "ENFORCED",
+            "targets": [
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-1",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-2",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-3",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-4",
+                "last_error": null
+              }
+            ]
+          }
+        },
+        "receiver-b": {
+          "command_id": "72bb4157-1723-441d-bbcc-1094340c269e",
+          "evidence": {
+            "channel": "keycloak-push",
+            "delegation_id": "VyF3bPjCHWyxpEIqzrMRQLqq",
+            "enforced_at_ns": null,
+            "event_id": "9b479cdf-3949-cb9f-b86f-22f01affbcc4",
+            "found": true,
+            "ingress_records": [
+              {
+                "algorithm": "RS256",
+                "audience": "receiver-b/1a991518-fcba-4b2b-b72a-d346e67c938e",
+                "delegation_id": "VyF3bPjCHWyxpEIqzrMRQLqq",
+                "encoded_sha256": "526fd03ae756f98712e1eb9823db23d3479372862cc81579d3ba225b93e81c41",
+                "event_id": "9b479cdf-3949-cb9f-b86f-22f01affbcc4",
+                "event_type": "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+                "http_response": 202,
+                "issued_at": 1784349534,
+                "issuer": "https://keycloak:8443/realms/ssf-smoke",
+                "jti": "9b479cdf-3949-cb9f-b86f-22f01affbcc4",
+                "key_id": "ifT3YN3don8Y9LLo3FXo544OgD2wlOunc9bk8Q62siE",
+                "observed_at_ns": 1784349545325894076,
+                "receiver_status": "PERSISTED",
+                "sequence": 1784349534,
+                "target_gateway_ids": [
+                  "gateway-5",
+                  "gateway-6",
+                  "gateway-7",
+                  "gateway-8"
+                ]
+              }
+            ],
+            "jti": "9b479cdf-3949-cb9f-b86f-22f01affbcc4",
+            "persisted_at_ns": 1784349545322417134,
+            "receipts": [],
+            "sequence": 1784349534,
+            "set_sha256": "526fd03ae756f98712e1eb9823db23d3479372862cc81579d3ba225b93e81c41",
+            "status": "PERSISTED",
+            "targets": [
+              {
+                "attempts": 0,
+                "gateway_id": "gateway-5",
+                "last_error": null
+              },
+              {
+                "attempts": 0,
+                "gateway_id": "gateway-6",
+                "last_error": null
+              },
+              {
+                "attempts": 0,
+                "gateway_id": "gateway-7",
+                "last_error": null
+              },
+              {
+                "attempts": 0,
+                "gateway_id": "gateway-8",
+                "last_error": null
+              }
+            ]
+          }
+        }
+      },
+      "fault_apply": {
+        "controller_command_id": "1b5a8032-ad1b-4a7c-83fc-b0242d94af8f",
+        "nested": {
+          "command_id": "007e4143-bb6e-41bf-bfc3-0b849a7c6e28",
+          "instance_id": "i-293532369ee4c05f4",
+          "mode": "apply",
+          "response_code": 0,
+          "status": "Success",
+          "stderr": "",
+          "stdout": "table inet e_b24_rx_fault { # handle 31\n\tchain output { # handle 1\n\t\ttype filter hook output priority -100; policy accept;\n\t\tip daddr { 10.24.1.11, 10.24.1.12, 10.24.1.13, 10.24.2.11, 10.24.2.12, 10.24.2.13, 10.24.3.11, 10.24.3.12 } tcp dport 9444 counter packets 0 bytes 0 drop # handle 3\n\t}\n}\n"
+        }
+      },
+      "result": {
+        "command_id": "65ce8876-e64c-400f-9b15-f91165546cff",
+        "invocation": {
+          "command_id": "65ce8876-e64c-400f-9b15-f91165546cff",
+          "instance_id": "i-5f4f737f3d8a4d4e1",
+          "output": "e-b24-outcome-phase={\"block\":29,\"counts\":{\"allowed\":112,\"denied\":113,\"effect_committed_reported\":112,\"rows\":225},\"delegation_id\":\"VyF3bPjCHWyxpEIqzrMRQLqq\",\"experiment_run\":\"eb24-cf-v1-b29-receiver_gateway_fault\",\"phase\":\"receiver_gateway_fault\",\"protocol_version\":\"e-b24-prereg-v1\",\"trace_sha256\":\"1fa6519cb4339d83123e4109c651df088da451b55950aace3bd13d72c418926f\"}\n",
+          "response_code": 0,
+          "status": "Success"
+        },
+        "phase_summary": {
+          "block": 29,
+          "counts": {
+            "allowed": 112,
+            "denied": 113,
+            "effect_committed_reported": 112,
+            "rows": 225
+          },
+          "delegation_id": "VyF3bPjCHWyxpEIqzrMRQLqq",
+          "experiment_run": "eb24-cf-v1-b29-receiver_gateway_fault",
+          "phase": "receiver_gateway_fault",
+          "protocol_version": "e-b24-prereg-v1",
+          "trace_sha256": "1fa6519cb4339d83123e4109c651df088da451b55950aace3bd13d72c418926f"
+        },
+        "s3_prefix": "confirmatory/raw/eb24-reproduction-v1-20260718/block-29/receiver_gateway_fault/driver"
+      }
+    },
+    "recovery": {
+      "assertions": {
+        "driver_allowed_matches": true,
+        "driver_commits_match": true,
+        "driver_has_225_rows": true,
+        "filesystem_oracle_matches": true,
+        "postgres_oracle_matches": true,
+        "receiver_a_enforced": true,
+        "receiver_a_has_four_receipts": true,
+        "receiver_a_persisted": true,
+        "receiver_b_enforced": true,
+        "receiver_b_has_four_receipts": true,
+        "receiver_b_http_202_recorded": true,
+        "receiver_b_persisted": true
+      },
+      "evidence": {
+        "effect_oracle": {
+          "command_id": "8978ab9d-8d5d-47d7-81ab-1273c8b0ab60",
+          "evidence": {
+            "arm": "recovery",
+            "experiment_run": "eb24-cf-v1-b29-recovery",
+            "filesystem": {
+              "count": 0,
+              "digest_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+              "effect_type": "filesystem",
+              "vector_count": 0
+            },
+            "postgres": {
+              "count": 0,
+              "digest_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+              "effect_type": "postgres",
+              "vector_count": 0
+            }
+          },
+          "s3_prefix": "confirmatory/raw/eb24-reproduction-v1-20260718/oracles/eb24-cf-v1-b29-recovery"
+        },
+        "receiver-a": {
+          "command_id": "580c706d-c1cb-4cdf-87ec-ef48d0a497c2",
+          "evidence": {
+            "channel": "keycloak-push",
+            "delegation_id": "VyF3bPjCHWyxpEIqzrMRQLqq",
+            "enforced_at_ns": 1784349545395389024,
+            "event_id": "5f198ae7-8fd7-8cba-7bf3-6c1972acdad2",
+            "found": true,
+            "ingress_records": [
+              {
+                "algorithm": "RS256",
+                "audience": "receiver-a/742ca1f8-40fc-4fdb-9e2d-98113b77cfc9",
+                "delegation_id": "VyF3bPjCHWyxpEIqzrMRQLqq",
+                "encoded_sha256": "a0d00405b4667ab143f0e08565f55beee7c71160fbad4579c8218f2a1720dc4f",
+                "event_id": "5f198ae7-8fd7-8cba-7bf3-6c1972acdad2",
+                "event_type": "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+                "http_response": 202,
+                "issued_at": 1784349534,
+                "issuer": "https://keycloak:8443/realms/ssf-smoke",
+                "jti": "5f198ae7-8fd7-8cba-7bf3-6c1972acdad2",
+                "key_id": "ifT3YN3don8Y9LLo3FXo544OgD2wlOunc9bk8Q62siE",
+                "observed_at_ns": 1784349545315964562,
+                "receiver_status": "PERSISTED",
+                "sequence": 1784349534,
+                "target_gateway_ids": [
+                  "gateway-1",
+                  "gateway-2",
+                  "gateway-3",
+                  "gateway-4"
+                ]
+              }
+            ],
+            "jti": "5f198ae7-8fd7-8cba-7bf3-6c1972acdad2",
+            "persisted_at_ns": 1784349545311587873,
+            "receipts": [
+              {
+                "gateway_id": "gateway-1",
+                "receipt_id": "98804fc85a8d1d85e61a2f8f24e30232803b1bfe6af2f578123647e7f19c34b8",
+                "recorded_at_ns": 1784349545351094350
+              },
+              {
+                "gateway_id": "gateway-2",
+                "receipt_id": "42704bba1463d09430348a939c7aa07810db11f16d395a83afac9f3470532280",
+                "recorded_at_ns": 1784349545365406818
+              },
+              {
+                "gateway_id": "gateway-3",
+                "receipt_id": "358f99e41dd131a0b256e271f758b15b306588943f4d64fed3d351b9753eddf7",
+                "recorded_at_ns": 1784349545379852091
+              },
+              {
+                "gateway_id": "gateway-4",
+                "receipt_id": "a278d6db2cbba1f5802441417a6421a6e31e7d682469b4c5b354c677479ac678",
+                "recorded_at_ns": 1784349545395389024
+              }
+            ],
+            "sequence": 1784349534,
+            "set_sha256": "a0d00405b4667ab143f0e08565f55beee7c71160fbad4579c8218f2a1720dc4f",
+            "status": "ENFORCED",
+            "targets": [
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-1",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-2",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-3",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-4",
+                "last_error": null
+              }
+            ]
+          }
+        },
+        "receiver-b": {
+          "command_id": "3af8285c-0b8a-4af0-999d-da127c7f9d4e",
+          "evidence": {
+            "channel": "keycloak-push",
+            "delegation_id": "VyF3bPjCHWyxpEIqzrMRQLqq",
+            "enforced_at_ns": 1784349563021520170,
+            "event_id": "9b479cdf-3949-cb9f-b86f-22f01affbcc4",
+            "found": true,
+            "ingress_records": [
+              {
+                "algorithm": "RS256",
+                "audience": "receiver-b/1a991518-fcba-4b2b-b72a-d346e67c938e",
+                "delegation_id": "VyF3bPjCHWyxpEIqzrMRQLqq",
+                "encoded_sha256": "526fd03ae756f98712e1eb9823db23d3479372862cc81579d3ba225b93e81c41",
+                "event_id": "9b479cdf-3949-cb9f-b86f-22f01affbcc4",
+                "event_type": "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+                "http_response": 202,
+                "issued_at": 1784349534,
+                "issuer": "https://keycloak:8443/realms/ssf-smoke",
+                "jti": "9b479cdf-3949-cb9f-b86f-22f01affbcc4",
+                "key_id": "ifT3YN3don8Y9LLo3FXo544OgD2wlOunc9bk8Q62siE",
+                "observed_at_ns": 1784349545325894076,
+                "receiver_status": "PERSISTED",
+                "sequence": 1784349534,
+                "target_gateway_ids": [
+                  "gateway-5",
+                  "gateway-6",
+                  "gateway-7",
+                  "gateway-8"
+                ]
+              }
+            ],
+            "jti": "9b479cdf-3949-cb9f-b86f-22f01affbcc4",
+            "persisted_at_ns": 1784349545322417134,
+            "receipts": [
+              {
+                "gateway_id": "gateway-5",
+                "receipt_id": "9ebf955337d3ad931bfdc4ce99d256c9b3b546dd3a5040ba5a6bef4795988446",
+                "recorded_at_ns": 1784349563021520170
+              },
+              {
+                "gateway_id": "gateway-6",
+                "receipt_id": "e7f3057c1c4a10c90b1ba0414018eb4ecef017aa4d96f4cd4234d151b5d25f59",
+                "recorded_at_ns": 1784349562734103269
+              },
+              {
+                "gateway_id": "gateway-7",
+                "receipt_id": "da1d300f074008c43954086b7f73d976fd3b74d02ad1dd92788769318cfb83b9",
+                "recorded_at_ns": 1784349562746518517
+              },
+              {
+                "gateway_id": "gateway-8",
+                "receipt_id": "01f03bf40198666568613d62fc66668dd893c1eefa01ebb580fdeac3fa20b97e",
+                "recorded_at_ns": 1784349562758127467
+              }
+            ],
+            "sequence": 1784349534,
+            "set_sha256": "526fd03ae756f98712e1eb9823db23d3479372862cc81579d3ba225b93e81c41",
+            "status": "ENFORCED",
+            "targets": [
+              {
+                "attempts": 2,
+                "gateway_id": "gateway-5",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-6",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-7",
+                "last_error": null
+              },
+              {
+                "attempts": 1,
+                "gateway_id": "gateway-8",
+                "last_error": null
+              }
+            ]
+          }
+        }
+      },
+      "fault_clear": {
+        "controller_command_id": "15c54906-f00a-45ba-93d5-873c280be2a1",
+        "nested": {
+          "command_id": "8a45d0de-0cf9-4159-8f8c-6e40efc921be",
+          "instance_id": "i-293532369ee4c05f4",
+          "mode": "clear",
+          "response_code": 0,
+          "status": "Success",
+          "stderr": "",
+          "stdout": "e-b24-receiver-gateway-fault=cleared\n"
+        }
+      },
+      "result": {
+        "command_id": "100d2094-87c4-460c-84fa-c81ba68531e8",
+        "invocation": {
+          "command_id": "100d2094-87c4-460c-84fa-c81ba68531e8",
+          "instance_id": "i-5f4f737f3d8a4d4e1",
+          "output": "e-b24-outcome-phase={\"block\":29,\"counts\":{\"allowed\":0,\"denied\":225,\"effect_committed_reported\":0,\"rows\":225},\"delegation_id\":\"VyF3bPjCHWyxpEIqzrMRQLqq\",\"experiment_run\":\"eb24-cf-v1-b29-recovery\",\"phase\":\"recovery\",\"protocol_version\":\"e-b24-prereg-v1\",\"trace_sha256\":\"86dab1daa8e4f2d21df5c9c3baa72cd2cba4a50b24f126baaf3ac83007f24751\"}\n",
+          "response_code": 0,
+          "status": "Success"
+        },
+        "phase_summary": {
+          "block": 29,
+          "counts": {
+            "allowed": 0,
+            "denied": 225,
+            "effect_committed_reported": 0,
+            "rows": 225
+          },
+          "delegation_id": "VyF3bPjCHWyxpEIqzrMRQLqq",
+          "experiment_run": "eb24-cf-v1-b29-recovery",
+          "phase": "recovery",
+          "protocol_version": "e-b24-prereg-v1",
+          "trace_sha256": "86dab1daa8e4f2d21df5c9c3baa72cd2cba4a50b24f126baaf3ac83007f24751"
+        },
+        "s3_prefix": "confirmatory/raw/eb24-reproduction-v1-20260718/block-29/recovery/driver"
+      }
+    }
+  },
+  "post_clock": {
+    "all_within_bound": true,
+    "clock_bound_seconds": 0.01,
+    "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+    "invocations": [
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-49f4f660bb7457c66",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:06 2026\nSystem time     : 0.000000747 seconds slow of NTP time\nLast offset     : -0.000001228 seconds\nRMS offset      : 0.000001336 seconds\nFrequency       : 12.411 ppm slow\nResidual freq   : -0.000 ppm\nSkew            : 0.030 ppm\nRoot delay      : 0.000420341 seconds\nRoot dispersion : 0.000346368 seconds\nUpdate interval : 16.3 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    30  -9399ns[  -11us] +/-  531us\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-3\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-00edfa51a4c8a8733",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:22 2026\nSystem time     : 0.000000135 seconds fast of NTP time\nLast offset     : +0.000002486 seconds\nRMS offset      : 0.000004351 seconds\nFrequency       : 5.327 ppm slow\nResidual freq   : +0.003 ppm\nSkew            : 0.228 ppm\nRoot delay      : 0.000448885 seconds\nRoot dispersion : 0.000421838 seconds\nUpdate interval : 16.0 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    14    +12us[  +15us] +/-  633us\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=fault-controller\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-a4fb73ecfd94c9e75",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:33 2026\nSystem time     : 0.000003482 seconds fast of NTP time\nLast offset     : +0.000002067 seconds\nRMS offset      : 0.000004232 seconds\nFrequency       : 7.813 ppm slow\nResidual freq   : +0.001 ppm\nSkew            : 0.093 ppm\nRoot delay      : 0.000541307 seconds\nRoot dispersion : 0.000186133 seconds\nUpdate interval : 16.2 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     3    +12us[  +14us] +/-  455us\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=postgres-effects\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-652945c8b847516a0",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:27 2026\nSystem time     : 0.000010195 seconds slow of NTP time\nLast offset     : -0.000016859 seconds\nRMS offset      : 0.000020927 seconds\nFrequency       : 16.831 ppm slow\nResidual freq   : -0.058 ppm\nSkew            : 1.148 ppm\nRoot delay      : 0.000424624 seconds\nRoot dispersion : 0.000275948 seconds\nUpdate interval : 16.2 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    10    -68us[  -85us] +/-  461us\n^? ec2-3-94-91-31.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=keycloak\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-497b80ff8e36f9cd6",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:22 2026\nSystem time     : 0.000001033 seconds slow of NTP time\nLast offset     : -0.000000160 seconds\nRMS offset      : 0.000001893 seconds\nFrequency       : 9.652 ppm slow\nResidual freq   : -0.000 ppm\nSkew            : 0.045 ppm\nRoot delay      : 0.000358304 seconds\nRoot dispersion : 0.000412924 seconds\nUpdate interval : 16.1 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    15  -1054ns[-1214ns] +/-  576us\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=receiver-a\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-293532369ee4c05f4",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:35 2026\nSystem time     : 0.000002131 seconds fast of NTP time\nLast offset     : +0.000002167 seconds\nRMS offset      : 0.000007705 seconds\nFrequency       : 14.734 ppm slow\nResidual freq   : +0.009 ppm\nSkew            : 0.360 ppm\nRoot delay      : 0.000474915 seconds\nRoot dispersion : 0.000401217 seconds\nUpdate interval : 16.1 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     1  +5642ns[+7809ns] +/-  660us\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=receiver-b\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-b773b07f3fbcabf0e",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:33 2026\nSystem time     : 0.000000666 seconds fast of NTP time\nLast offset     : +0.000000551 seconds\nRMS offset      : 0.000005405 seconds\nFrequency       : 7.794 ppm slow\nResidual freq   : +0.000 ppm\nSkew            : 0.070 ppm\nRoot delay      : 0.000407843 seconds\nRoot dispersion : 0.000397159 seconds\nUpdate interval : 16.1 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     3  +2353ns[+2904ns] +/-  603us\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-6\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-9cd0ff3128019d6c1",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:34 2026\nSystem time     : 0.000001773 seconds slow of NTP time\nLast offset     : -0.000001371 seconds\nRMS offset      : 0.000003856 seconds\nFrequency       : 12.866 ppm slow\nResidual freq   : -0.000 ppm\nSkew            : 0.067 ppm\nRoot delay      : 0.000395893 seconds\nRoot dispersion : 0.000281686 seconds\nUpdate interval : 48.5 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     2  -7357ns[-8728ns] +/-  499us\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-8\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-5f4f737f3d8a4d4e1",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:27 2026\nSystem time     : 0.000004910 seconds fast of NTP time\nLast offset     : +0.000003617 seconds\nRMS offset      : 0.000007970 seconds\nFrequency       : 2.139 ppm slow\nResidual freq   : +0.004 ppm\nSkew            : 0.249 ppm\nRoot delay      : 0.000418194 seconds\nRoot dispersion : 0.000209627 seconds\nUpdate interval : 16.1 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    10    +15us[  +19us] +/-  396us\n^? ec2-3-94-91-31.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=workload-driver\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-90e8e39a1c258fe96",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:22 2026\nSystem time     : 0.000004197 seconds slow of NTP time\nLast offset     : -0.000005884 seconds\nRMS offset      : 0.000009257 seconds\nFrequency       : 7.619 ppm slow\nResidual freq   : -0.054 ppm\nSkew            : 0.381 ppm\nRoot delay      : 0.000478281 seconds\nRoot dispersion : 0.000255196 seconds\nUpdate interval : 16.2 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    15   -129us[ -135us] +/-  620us\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-4\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-fe8bc30a065b38456",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:26 2026\nSystem time     : 0.000001312 seconds slow of NTP time\nLast offset     : +0.000000173 seconds\nRMS offset      : 0.000001134 seconds\nFrequency       : 3.787 ppm slow\nResidual freq   : -0.000 ppm\nSkew            : 0.023 ppm\nRoot delay      : 0.000343586 seconds\nRoot dispersion : 0.000181731 seconds\nUpdate interval : 16.1 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    11  +1319ns[+1492ns] +/-  364us\n^? ec2-54-210-225-137.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-2\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-81d34fdc22ee87ad1",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:32 2026\nSystem time     : 0.000000745 seconds fast of NTP time\nLast offset     : -0.000003848 seconds\nRMS offset      : 0.000005596 seconds\nFrequency       : 8.388 ppm slow\nResidual freq   : +0.001 ppm\nSkew            : 0.255 ppm\nRoot delay      : 0.000476312 seconds\nRoot dispersion : 0.000322340 seconds\nUpdate interval : 16.0 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     4    -79us[  -82us] +/-  636us\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-7\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-00938671dbc06c91d",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:36 2026\nSystem time     : 0.000003499 seconds fast of NTP time\nLast offset     : +0.000002777 seconds\nRMS offset      : 0.000003269 seconds\nFrequency       : 0.776 ppm slow\nResidual freq   : +0.003 ppm\nSkew            : 0.068 ppm\nRoot delay      : 0.000510120 seconds\nRoot dispersion : 0.000355330 seconds\nUpdate interval : 16.2 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     1  +4400ns[+7177ns] +/-  633us\n^? ec2-3-87-127-143.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=keycloak-postgres\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-9499677223e8394bf",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:35 2026\nSystem time     : 0.000001368 seconds fast of NTP time\nLast offset     : +0.000000699 seconds\nRMS offset      : 0.000001763 seconds\nFrequency       : 5.171 ppm slow\nResidual freq   : +0.000 ppm\nSkew            : 0.038 ppm\nRoot delay      : 0.000449351 seconds\nRoot dispersion : 0.000178916 seconds\nUpdate interval : 16.2 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     2  +5799ns[+6498ns] +/-  396us\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-5\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-b37179e68925e0382",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:22 2026\nSystem time     : 0.000001818 seconds slow of NTP time\nLast offset     : -0.000000507 seconds\nRMS offset      : 0.000007099 seconds\nFrequency       : 6.757 ppm slow\nResidual freq   : +0.001 ppm\nSkew            : 0.142 ppm\nRoot delay      : 0.000349290 seconds\nRoot dispersion : 0.000350463 seconds\nUpdate interval : 16.1 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    15  -2833ns[-3340ns] +/-  519us\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-1\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "8313156a-7c32-466d-80da-338cc985f717",
+        "instance_id": "i-33254ca343073924c",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:39:36 2026\nSystem time     : 0.000002697 seconds fast of NTP time\nLast offset     : +0.000000173 seconds\nRMS offset      : 0.000007846 seconds\nFrequency       : 13.581 ppm slow\nResidual freq   : +0.000 ppm\nSkew            : 0.104 ppm\nRoot delay      : 0.000410601 seconds\nRoot dispersion : 0.000396177 seconds\nUpdate interval : 16.1 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     1  +4517ns[+4690ns] +/-  652us\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=filesystem-effects\n",
+        "response_code": 0,
+        "status": "Success"
+      }
+    ],
+    "label": "block-29-post",
+    "offsets": {
+      "i-33254ca343073924c": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 2.697e-06,
+        "within_bound": true
+      },
+      "i-b37179e68925e0382": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -1.818e-06,
+        "within_bound": true
+      },
+      "i-9499677223e8394bf": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 1.368e-06,
+        "within_bound": true
+      },
+      "i-00938671dbc06c91d": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 3.499e-06,
+        "within_bound": true
+      },
+      "i-81d34fdc22ee87ad1": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 7.45e-07,
+        "within_bound": true
+      },
+      "i-fe8bc30a065b38456": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -1.312e-06,
+        "within_bound": true
+      },
+      "i-90e8e39a1c258fe96": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -4.197e-06,
+        "within_bound": true
+      },
+      "i-5f4f737f3d8a4d4e1": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 4.91e-06,
+        "within_bound": true
+      },
+      "i-9cd0ff3128019d6c1": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -1.773e-06,
+        "within_bound": true
+      },
+      "i-b773b07f3fbcabf0e": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 6.66e-07,
+        "within_bound": true
+      },
+      "i-293532369ee4c05f4": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 2.131e-06,
+        "within_bound": true
+      },
+      "i-497b80ff8e36f9cd6": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -1.033e-06,
+        "within_bound": true
+      },
+      "i-652945c8b847516a0": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -1.0195e-05,
+        "within_bound": true
+      },
+      "i-a4fb73ecfd94c9e75": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 3.482e-06,
+        "within_bound": true
+      },
+      "i-00edfa51a4c8a8733": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 1.35e-07,
+        "within_bound": true
+      },
+      "i-49f4f660bb7457c66": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -7.47e-07,
+        "within_bound": true
+      }
+    }
+  },
+  "pre_clock": {
+    "all_within_bound": true,
+    "clock_bound_seconds": 0.01,
+    "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+    "invocations": [
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-49f4f660bb7457c66",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:17 2026\nSystem time     : 0.000000188 seconds slow of NTP time\nLast offset     : -0.000000071 seconds\nRMS offset      : 0.000001477 seconds\nFrequency       : 12.407 ppm slow\nResidual freq   : -0.000 ppm\nSkew            : 0.033 ppm\nRoot delay      : 0.000442935 seconds\nRoot dispersion : 0.000327722 seconds\nUpdate interval : 16.1 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     3   -913ns[ -984ns] +/-  584us\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-3\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-00edfa51a4c8a8733",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:18 2026\nSystem time     : 0.000002669 seconds slow of NTP time\nLast offset     : -0.000002255 seconds\nRMS offset      : 0.000005177 seconds\nFrequency       : 5.313 ppm slow\nResidual freq   : -0.002 ppm\nSkew            : 0.131 ppm\nRoot delay      : 0.000472408 seconds\nRoot dispersion : 0.000390921 seconds\nUpdate interval : 16.0 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     3    -15us[  -18us] +/-  636us\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=fault-controller\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-a4fb73ecfd94c9e75",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:12 2026\nSystem time     : 0.000001763 seconds fast of NTP time\nLast offset     : -0.000001436 seconds\nRMS offset      : 0.000004597 seconds\nFrequency       : 7.837 ppm slow\nResidual freq   : +0.000 ppm\nSkew            : 0.109 ppm\nRoot delay      : 0.000541307 seconds\nRoot dispersion : 0.000186577 seconds\nUpdate interval : 16.0 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     8  -6387ns[-7823ns] +/-  449us\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=postgres-effects\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-652945c8b847516a0",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:06 2026\nSystem time     : 0.000000001 seconds slow of NTP time\nLast offset     : +0.000014268 seconds\nRMS offset      : 0.000024754 seconds\nFrequency       : 17.026 ppm slow\nResidual freq   : +0.973 ppm\nSkew            : 0.662 ppm\nRoot delay      : 0.000342479 seconds\nRoot dispersion : 0.000259234 seconds\nUpdate interval : 16.2 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    14   -154us[ -139us] +/-  515us\n^? ec2-3-94-91-31.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=keycloak\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-497b80ff8e36f9cd6",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:18 2026\nSystem time     : 0.000003079 seconds slow of NTP time\nLast offset     : -0.000001312 seconds\nRMS offset      : 0.000002229 seconds\nFrequency       : 9.649 ppm slow\nResidual freq   : -0.001 ppm\nSkew            : 0.057 ppm\nRoot delay      : 0.000358304 seconds\nRoot dispersion : 0.000399518 seconds\nUpdate interval : 16.3 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     3    -27us[  -29us] +/-  646us\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=receiver-a\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-293532369ee4c05f4",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:15 2026\nSystem time     : 0.000001995 seconds fast of NTP time\nLast offset     : +0.000001112 seconds\nRMS offset      : 0.000008427 seconds\nFrequency       : 14.900 ppm slow\nResidual freq   : +0.001 ppm\nSkew            : 0.139 ppm\nRoot delay      : 0.000512704 seconds\nRoot dispersion : 0.000402658 seconds\nUpdate interval : 16.2 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     5  +4904ns[+6016ns] +/-  655us\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=receiver-b\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-b773b07f3fbcabf0e",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:13 2026\nSystem time     : 0.000000050 seconds fast of NTP time\nLast offset     : +0.000001065 seconds\nRMS offset      : 0.000006659 seconds\nFrequency       : 7.798 ppm slow\nResidual freq   : +0.001 ppm\nSkew            : 0.103 ppm\nRoot delay      : 0.000485950 seconds\nRoot dispersion : 0.000385440 seconds\nUpdate interval : 16.1 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     8  +7045ns[+8110ns] +/-  613us\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-6\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-9cd0ff3128019d6c1",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:37:57 2026\nSystem time     : 0.000001601 seconds slow of NTP time\nLast offset     : +0.000000242 seconds\nRMS offset      : 0.000004419 seconds\nFrequency       : 12.865 ppm slow\nResidual freq   : -0.000 ppm\nSkew            : 0.070 ppm\nRoot delay      : 0.000395893 seconds\nRoot dispersion : 0.000297122 seconds\nUpdate interval : 16.2 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    23  +7694ns[+7936ns] +/-  524us\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-8\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-5f4f737f3d8a4d4e1",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:06 2026\nSystem time     : 0.000003324 seconds slow of NTP time\nLast offset     : -0.000005369 seconds\nRMS offset      : 0.000009844 seconds\nFrequency       : 2.204 ppm slow\nResidual freq   : -0.007 ppm\nSkew            : 0.455 ppm\nRoot delay      : 0.000348394 seconds\nRoot dispersion : 0.000288701 seconds\nUpdate interval : 16.2 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    14    -48us[  -53us] +/-  479us\n^? ec2-3-94-91-31.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=workload-driver\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-90e8e39a1c258fe96",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:16 2026\nSystem time     : 0.000004400 seconds slow of NTP time\nLast offset     : -0.000003647 seconds\nRMS offset      : 0.000001661 seconds\nFrequency       : 7.427 ppm slow\nResidual freq   : -0.001 ppm\nSkew            : 0.035 ppm\nRoot delay      : 0.000457156 seconds\nRoot dispersion : 0.000203754 seconds\nUpdate interval : 32.4 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     4    -37us[  -41us] +/-  441us\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-4\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-fe8bc30a065b38456",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:05 2026\nSystem time     : 0.000000440 seconds slow of NTP time\nLast offset     : +0.000000431 seconds\nRMS offset      : 0.000001110 seconds\nFrequency       : 3.783 ppm slow\nResidual freq   : +0.000 ppm\nSkew            : 0.026 ppm\nRoot delay      : 0.000343586 seconds\nRoot dispersion : 0.000185750 seconds\nUpdate interval : 16.3 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377    16  +4113ns[+4544ns] +/-  356us\n^? ec2-54-210-225-137.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-2\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-81d34fdc22ee87ad1",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:12 2026\nSystem time     : 0.000006960 seconds fast of NTP time\nLast offset     : +0.000010741 seconds\nRMS offset      : 0.000003844 seconds\nFrequency       : 8.520 ppm slow\nResidual freq   : +0.029 ppm\nSkew            : 0.058 ppm\nRoot delay      : 0.000476372 seconds\nRoot dispersion : 0.000337859 seconds\nUpdate interval : 16.0 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     9    +92us[ +102us] +/-  589us\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-7\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-00938671dbc06c91d",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:14 2026\nSystem time     : 0.000003142 seconds slow of NTP time\nLast offset     : -0.000003007 seconds\nRMS offset      : 0.000003658 seconds\nFrequency       : 0.770 ppm slow\nResidual freq   : -0.002 ppm\nSkew            : 0.080 ppm\nRoot delay      : 0.000510120 seconds\nRoot dispersion : 0.000357670 seconds\nUpdate interval : 16.2 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     6    -16us[  -19us] +/-  641us\n^? ec2-3-87-127-143.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=keycloak-postgres\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-9499677223e8394bf",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:14 2026\nSystem time     : 0.000000183 seconds fast of NTP time\nLast offset     : +0.000000702 seconds\nRMS offset      : 0.000002134 seconds\nFrequency       : 5.173 ppm slow\nResidual freq   : +0.000 ppm\nSkew            : 0.052 ppm\nRoot delay      : 0.000447208 seconds\nRoot dispersion : 0.000196999 seconds\nUpdate interval : 32.3 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     7  +5269ns[+5971ns] +/-  436us\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0   9     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-5\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-b37179e68925e0382",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:16 2026\nSystem time     : 0.000002486 seconds fast of NTP time\nLast offset     : +0.000000818 seconds\nRMS offset      : 0.000001357 seconds\nFrequency       : 6.873 ppm slow\nResidual freq   : +0.002 ppm\nSkew            : 0.040 ppm\nRoot delay      : 0.000371493 seconds\nRoot dispersion : 0.000295559 seconds\nUpdate interval : 16.0 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     4  +3728ns[+4546ns] +/-  523us\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-86-4-106.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-3-94-91-31.compute-1>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=gateway-1\n",
+        "response_code": 0,
+        "status": "Success"
+      },
+      {
+        "command_id": "43999d06-bfea-495c-b7db-30d180416eeb",
+        "instance_id": "i-33254ca343073924c",
+        "output": "Reference ID    : A9FEA97B (169.254.169.123)\nStratum         : 4\nRef time (UTC)  : Sat Jul 18 04:38:15 2026\nSystem time     : 0.000000936 seconds fast of NTP time\nLast offset     : -0.000002115 seconds\nRMS offset      : 0.000010010 seconds\nFrequency       : 13.613 ppm slow\nResidual freq   : -0.001 ppm\nSkew            : 0.145 ppm\nRoot delay      : 0.000425508 seconds\nRoot dispersion : 0.000424930 seconds\nUpdate interval : 16.3 seconds\nLeap status     : Normal\n\n  .-- Source mode  '^' = server, '=' = peer, '#' = local clock.\n / .- Source state '*' = current best, '+' = combined, '-' = not combined,\n| /             'x' = may be in error, '~' = too variable, '?' = unusable.\n||                                                 .- xxxx [ yyyy ] +/- zzzz\n||      Reachability register (octal) -.           |  xxxx = adjusted offset,\n||      Log2(Polling interval) --.      |          |  yyyy = measured offset,\n||                                \\     |          |  zzzz = estimated error.\n||                                 |    |           \\\nMS Name/IP address         Stratum Poll Reach LastRx Last sample               \n===============================================================================\n^* 169.254.169.123               3   4   377     6    -48us[  -50us] +/-  679us\n^? ec2-3-87-127-143.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-52-207-222-50.comput>     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-13-218-199-213.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-197-201-248.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-81-127-33.compute>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-90-191-9.compute->     0   9     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-44-201-148-133.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\n^? ec2-54-210-225-137.compu>     0  10     0     -     +0ns[   +0ns] +/-    0ns\ne-b24-clock-host=filesystem-effects\n",
+        "response_code": 0,
+        "status": "Success"
+      }
+    ],
+    "label": "block-29-pre",
+    "offsets": {
+      "i-33254ca343073924c": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 9.36e-07,
+        "within_bound": true
+      },
+      "i-b37179e68925e0382": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 2.486e-06,
+        "within_bound": true
+      },
+      "i-9499677223e8394bf": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 1.83e-07,
+        "within_bound": true
+      },
+      "i-00938671dbc06c91d": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -3.142e-06,
+        "within_bound": true
+      },
+      "i-81d34fdc22ee87ad1": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 6.96e-06,
+        "within_bound": true
+      },
+      "i-fe8bc30a065b38456": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -4.4e-07,
+        "within_bound": true
+      },
+      "i-90e8e39a1c258fe96": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -4.4e-06,
+        "within_bound": true
+      },
+      "i-5f4f737f3d8a4d4e1": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -3.324e-06,
+        "within_bound": true
+      },
+      "i-9cd0ff3128019d6c1": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -1.601e-06,
+        "within_bound": true
+      },
+      "i-b773b07f3fbcabf0e": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 5e-08,
+        "within_bound": true
+      },
+      "i-293532369ee4c05f4": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 1.995e-06,
+        "within_bound": true
+      },
+      "i-497b80ff8e36f9cd6": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -3.079e-06,
+        "within_bound": true
+      },
+      "i-652945c8b847516a0": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -1e-09,
+        "within_bound": true
+      },
+      "i-a4fb73ecfd94c9e75": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": 1.763e-06,
+        "within_bound": true
+      },
+      "i-00edfa51a4c8a8733": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -2.669e-06,
+        "within_bound": true
+      },
+      "i-49f4f660bb7457c66": {
+        "leap_status": "Normal",
+        "system_time_offset_seconds": -1.88e-07,
+        "within_bound": true
+      }
+    }
+  }
+}

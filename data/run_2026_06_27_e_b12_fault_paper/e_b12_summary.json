@@ -1,0 +1,168 @@
+{
+  "aggregate_rows": 8,
+  "claim_note": "E-B12 injects concrete failure paths in the local prototype: dropped push delivery, delayed log repair, partition healing, and gateway restart with log recovery. The evidence supports bounded recovery-path behavior for the prototype fault model; it does not claim production-grade chaos testing or large-scale distributed fault tolerance.",
+  "experiment": "E-B12",
+  "fault_scenarios": [
+    "gateway-restart",
+    "log-delay",
+    "partition-heal",
+    "push-drop-log-repair"
+  ],
+  "integration_success_rate": 1.0,
+  "loopback_service_boundary_rate": 1.0,
+  "max_fault_recovery_latency": 1.6494819562949743,
+  "max_revoked_tool_calls_allowed": 1082.490392436021,
+  "max_stale_capability_window": 3.649868356819255,
+  "mean_prevented_fraction": 0.964761901487649,
+  "post_repair_reject_rate": 1.0,
+  "pre_revocation_allowed_rate": 1.0,
+  "protocol_profiles": [
+    "raw-http-json"
+  ],
+  "protocol_schema_pass_rate": 1.0,
+  "raw_rows": 80,
+  "run_config": {
+    "fault_scenarios": [
+      "push-drop-log-repair",
+      "log-delay",
+      "partition-heal",
+      "gateway-restart"
+    ],
+    "gateway_restart_at": 0.25,
+    "log_delay": 1.0,
+    "n_parties_values": [
+      30
+    ],
+    "partition_duration": 2.0,
+    "protocol_profiles": [
+      "raw-http-json"
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "task_duration": 60.0,
+    "tool_call_rates": [
+      1.0,
+      10.0
+    ],
+    "tool_name": "repo-write",
+    "ttl": 60.0
+  },
+  "separate_os_process_rate": 0.0,
+  "surface_summaries": [
+    {
+      "allowed_calls_mean": 49.666883936749784,
+      "fault_scenario": "gateway-restart",
+      "n_parties": 30,
+      "p99_stale_window": 1.699728671807542,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.9724072867018057,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 1.0,
+      "transport_errors_mean": 0.0
+    },
+    {
+      "allowed_calls_mean": 496.6688393674978,
+      "fault_scenario": "gateway-restart",
+      "n_parties": 30,
+      "p99_stale_window": 1.699728671807542,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.9724072867018057,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 10.0,
+      "transport_errors_mean": 0.0
+    },
+    {
+      "allowed_calls_mean": 48.01580845072553,
+      "fault_scenario": "log-delay",
+      "n_parties": 30,
+      "p99_stale_window": 1.6430499751404344,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.973324550860708,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 1.0,
+      "transport_errors_mean": 0.0
+    },
+    {
+      "allowed_calls_mean": 480.15808450725524,
+      "fault_scenario": "log-delay",
+      "n_parties": 30,
+      "p99_stale_window": 1.6430499751404344,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.973324550860708,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 10.0,
+      "transport_errors_mean": 0.0
+    },
+    {
+      "allowed_calls_mean": 108.01580845072553,
+      "fault_scenario": "partition-heal",
+      "n_parties": 30,
+      "p99_stale_window": 3.643049975140434,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.9399912175273746,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 1.0,
+      "transport_errors_mean": 0.0
+    },
+    {
+      "allowed_calls_mean": 1080.1580845072551,
+      "fault_scenario": "partition-heal",
+      "n_parties": 30,
+      "p99_stale_window": 3.643049975140434,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.9399912175273746,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 10.0,
+      "transport_errors_mean": 0.0
+    },
+    {
+      "allowed_calls_mean": 48.01580845072553,
+      "fault_scenario": "push-drop-log-repair",
+      "n_parties": 30,
+      "p99_stale_window": 1.6430499751404344,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.973324550860708,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 1.0,
+      "transport_errors_mean": 0.0
+    },
+    {
+      "allowed_calls_mean": 480.15808450725524,
+      "fault_scenario": "push-drop-log-repair",
+      "n_parties": 30,
+      "p99_stale_window": 1.6430499751404344,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.973324550860708,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 10.0,
+      "transport_errors_mean": 0.0
+    }
+  ],
+  "transport_error_count": 0
+}

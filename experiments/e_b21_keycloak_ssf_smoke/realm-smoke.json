@@ -1,0 +1,69 @@
+{
+  "realm": "ssf-smoke",
+  "enabled": true,
+  "attributes": {
+    "ssf.transmitterEnabled": "true"
+  },
+  "eventsEnabled": true,
+  "adminEventsEnabled": true,
+  "eventsListeners": [
+    "jboss-logging",
+    "ssf-events"
+  ],
+  "clients": [
+    {
+      "clientId": "receiver-a",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "receiver-a-smoke-secret",
+      "serviceAccountsEnabled": true,
+      "attributes": {
+        "ssf.enabled": "true",
+        "ssf.autoVerifyStream": "false",
+        "ssf.defaultSubjects": "ALL",
+        "ssf.validPushUrls": "http://host.docker.internal:19001/receiver-a"
+      }
+    },
+    {
+      "clientId": "receiver-b",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "receiver-b-smoke-secret",
+      "serviceAccountsEnabled": true,
+      "attributes": {
+        "ssf.enabled": "true",
+        "ssf.autoVerifyStream": "false",
+        "ssf.defaultSubjects": "ALL",
+        "ssf.validPushUrls": "http://host.docker.internal:19001/receiver-b"
+      }
+    },
+    {
+      "clientId": "workload-client",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": false
+    }
+  ],
+  "users": [
+    {
+      "username": "alice",
+      "email": "anon-30c967fb3f@example.invalid",
+      "firstName": "Alice",
+      "lastName": "Smoke",
+      "emailVerified": true,
+      "enabled": true,
+      "requiredActions": [],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "alice-smoke-password",
+          "temporary": false
+        }
+      ]
+    }
+  ]
+}

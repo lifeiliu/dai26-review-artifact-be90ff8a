@@ -1,0 +1,49 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| execute_sql {"sql": "CREATE TABLE employees.employee_retention_analysis (\n  department_name VARCHAR,\n  total_employees_ever INTEGER,\n  current_employees INTEGER,\n  former_employees INTEGER,\n  retention_rate DECIMAL\n);"}
+| execute_sql {"sql": "CREATE TABLE employees.high_risk_employees (\n  employee_id BIGINT,\n  full_name VARCHAR,\n  current_department VARCHAR,\n  tenure_days INTEGER,\n  current_salary INTEGER,\n  risk_category VARCHAR\n);"}
+| execute_sql {"sql": "CREATE TABLE employees.turnover_trend_analysis (\n  departure_year INTEGER,\n  departures_count INTEGER,\n  avg_tenure_days DECIMAL,\n  avg_final_salary DECIMAL\n);"}
+| list_schemas {}
+| list_objects {"schema_name": "employees","object_type": "table"}
+| get_object_details {"schema_name": "employees","object_name": "department_employee","object_type": "table"}
+| get_object_details {"schema_name": "employees","object_name": "employee","object_type": "table"}
+| get_object_details {"schema_name": "employees","object_name": "salary","object_type": "table"}
+| execute_sql {"sql": "INSERT INTO employees.employee_retention_analysis (department_name, total_employees_ever, current_employees, former_employees, retention_rate)\nSELECT d.dept_name AS department_name,\n       COUNT(DISTINCT de.employee_id) AS total_employees_ever,\n       COUNT(DISTINCT CASE WHEN de.to_date = '9999-01-01' THEN de.employee_id END) AS current_employees,\n       COUNT(DISTINCT CASE WHEN de.to_date <> '9999-01-01' THEN de.employee_id END) AS former_employees,\n       ROUND(100.0 * COUNT(DISTINCT CASE WHEN de.to_date = '9999-01-01' THEN de.employee_id END) / NULLIF(COUNT(DISTINCT de.employee_id), 0), 2) AS retention_rate\nFROM employees.department_employee de\nJOIN employees.department d ON de.department_id = d.dept_no\nGROUP BY d.dept_name\nORDER BY d.dept_name;"}
+| execute_sql {"sql": "SELECT * FROM employees.department LIMIT 5;"}
+| execute_sql {"sql": "INSERT INTO employees.employee_retention_analysis (department_name, total_employees_ever, current_employees, former_employees, retention_rate)\nSELECT d.dept_name AS department_name,\n       COUNT(DISTINCT de.employee_id) AS total_employees_ever,\n       COUNT(DISTINCT CASE WHEN de.to_date = '9999-01-01' THEN de.employee_id END) AS current_employees,\n       COUNT(DISTINCT CASE WHEN de.to_date <> '9999-01-01' THEN de.employee_id END) AS former_employees,\n       ROUND(100.0 * COUNT(DISTINCT CASE WHEN de.to_date = '9999-01-01' THEN de.employee_id END) / NULLIF(COUNT(DISTINCT de.employee_id), 0), 2) AS retention_rate\nFROM employees.department_employee de\nJOIN employees.department d ON de.department_id = d.id\nGROUP BY d.dept_name\nORDER BY d.dept_name;"}
+| execute_sql {"sql": "WITH current_employees AS (\n  SELECT employee_id, department_id\n  FROM employees.department_employee\n  WHERE to_date = '9999-01-01'\n), total_employees AS (\n  SELECT department_id, COUNT(DISTINCT employee_id) AS total\n  FROM employees.department_employee\n  GROUP BY department_id\n), former_employees AS (\n  SELECT department_id, COUNT(DISTINCT employee_id) AS former\n  FROM employees.department_employee\n  WHERE to_date <> '9999-01-01'\n  GROUP BY department_id\n)\nINSERT INTO employees.employee_retention_analysis (department_name, total_employees_ever, current_employees, former_employees, retention_rate)\nSELECT d.dept_name AS department_name,\n       COALESCE(te.total, 0) AS total_employees_ever,\n       COALESCE(ce.current, 0) AS current_employees,\n       COALESCE(fe.former, 0) AS former_employees,\n       CASE WHEN COALESCE(te.total, 0) = 0 THEN 0\n            ELSE ROUND(100.0 * COALESCE(ce.current, 0) / COALESCE(te.total, 0), 2) END AS retention_rate\nFROM employees.department d\nLEFT JOIN total_employees te ON d.id = te.department_id\nLEFT JOIN (SELECT department_id, COUNT(DISTINCT employee_id) AS current FROM current_employees GROUP BY department_id) ce ON d.id = ce.department_id\nLEFT JOIN former_employees fe ON d.id = fe.department_id\nORDER BY d.dept_name;"}
+| execute_sql {"sql": "SELECT * FROM employees.employee_retention_analysis;"}
+| execute_sql {"sql": "DELETE FROM employees.high_risk_employees;"}
+| execute_sql {"sql": "WITH current_emp AS (\n    SELECT e.id AS employee_id,\n           e.first_name || ' ' || e.last_name AS full_name,\n           d.dept_name AS current_department,\n           ('2002-08-01'::date - e.hire_date) AS tenure_days,\n           s.amount AS current_salary\n    FROM employees.employee e\n    JOIN employees.department_employee de ON e.id = de.employee_id\n    JOIN employees.department d ON de.department_id = d.id\n    JOIN employees.salary s ON e.id = s.employee_id\n    WHERE de.to_date = '9999-01-01' AND s.to_date = '9999-01-01'\n), dept_retention AS (\n    SELECT department_name, retention_rate\n    FROM employees.employee_retention_analysis\n)\nINSERT INTO employees.high_risk_employees (employee_id, full_name, current_department, tenure_days, current_salary, risk_category)\nSELECT ce.employee_id,\n       ce.full_name,\n       ce.current_department,\n       ce.tenure_days,\n       ce.current_salary,\n       CASE\n           WHEN dr.retention_rate < 80 AND ce.tenure_days < 1095 THEN 'high_risk'\n           WHEN dr.retention_rate < 85 AND ce.tenure_days < 1825 THEN 'medium_risk'\n           ELSE 'low_risk'\n       END AS risk_category\nFROM current_emp ce\nJOIN dept_retention dr ON ce.current_department = dr.department_name;"}
+| execute_sql {"sql": "DELETE FROM employees.turnover_trend_analysis;"}
+| execute_sql {"sql": "WITH departed_employees AS (\n  SELECT e.id AS employee_id, e.hire_date, s.to_date AS departure_date\n  FROM employees.employee e\n  JOIN employees.salary s ON e.id = s.employee_id\n  WHERE s.to_date <> '9999-01-01' AND s.to_date BETWEEN '1985-01-01' AND '2002-08-01'\n), ranked_salaries AS (\n  SELECT s.employee_id, s.amount, s.from_date, s.to_date,\n         ROW_NUMBER() OVER (PARTITION BY s.employee_id, s.to_date ORDER BY s.from_date DESC, s.amount DESC) AS rn\n  FROM employees.salary s\n  JOIN departed_employees de ON s.employee_id = de.employee_id AND s.to_date = de.departure_date\n)\nINSERT INTO employees.turnover_trend_analysis (departure_year, departures_count, avg_tenure_days, avg_final_salary)\nSELECT EXTRACT(YEAR FROM departure_date)::INTEGER AS departure_year,\n       COUNT(*) AS departures_count,\n       AVG(departure_date - e.hire_date) AS avg_tenure_days,\n       AVG(rs.amount) AS avg_final_salary\nFROM departed_employees e\nJOIN ranked_salaries rs ON e.employee_id = rs.employee_id AND e.departure_date = rs.to_date AND rs.rn = 1\nGROUP BY departure_year\nORDER BY departure_year;"}
+The three requested tables for retention analysis, high-risk employee identification, and turnover trend analysis have been created and populated as per the specifications:
+
+1. The employee_retention_analysis table shows department-wise retention metrics, including total employees ever, current employees, former employees, and retention rates.
+
+2. The high_risk_employees table identifies current employees at high, medium, and low risk of leaving, based on department retention rates and tenure as of 2002-08-01.
+
+3. The turnover_trend_analysis table summarizes yearly departure counts, average tenure, and average final salary for employees who left between 1985 and 2002.
+
+These insights should provide the HR leadership team with a comprehensive view of employee retention patterns and help develop targeted retention strategies.
+
+Task completed.

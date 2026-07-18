@@ -1,0 +1,175 @@
+{
+  "experiment": "E-B17",
+  "fallacy_coverage": "11/11",
+  "fallacy_scan": [
+    {
+      "detail": "The two frozen suppression strata are reported separately: 20% passes and 50% fails the cost gate; they are not pooled into a rescue claim.",
+      "fallacy": "Simpson's paradox",
+      "recommendation": "Keep both stratum decisions visible.",
+      "severity": "NOTE"
+    },
+    {
+      "detail": "The estimand is a mechanism-by-cell gateway aggregate; no claim about an individual gateway or human population is inferred.",
+      "fallacy": "Ecological fallacy",
+      "recommendation": "Retain mechanism/cell-level language.",
+      "severity": "NOTE"
+    },
+    {
+      "detail": "All preregistered mechanism, cell, and seed rows are retained; feasibility filtering is part of the frozen estimand and not post-outcome sampling.",
+      "fallacy": "Berkson's bias",
+      "recommendation": "Do not drop infeasible or unfavorable rows.",
+      "severity": "NOTE"
+    },
+    {
+      "detail": "No regression or covariate adjustment conditions on a common effect of mechanism and outcome.",
+      "fallacy": "Collider bias",
+      "recommendation": "No action required.",
+      "severity": "NOTE"
+    },
+    {
+      "detail": "The 10 calls/s/gateway workload and one revocation event are synthetic; they do not estimate field prevalence or predictive value.",
+      "fallacy": "Base-rate neglect",
+      "recommendation": "Scope damage magnitudes to the frozen workload and add production-trace calibration as future work.",
+      "severity": "CAUTION"
+    },
+    {
+      "detail": "Seeds 0--29 and cells were frozen before results; no extreme pilot run was selected for confirmation.",
+      "fallacy": "Regression to the mean",
+      "recommendation": "Preserve the preregistration commits.",
+      "severity": "NOTE"
+    },
+    {
+      "detail": "Non-delivery is right-censored at 60 seconds and remains in completeness and damage denominators; 3,000/3,000 rows survive.",
+      "fallacy": "Survivorship bias",
+      "recommendation": "Keep censoring explicit in tables.",
+      "severity": "NOTE"
+    },
+    {
+      "detail": "Only two cells are confirmatory and Holm correction covers four recorded comparisons, but DRP-60 and DRP-300 collapse to the same 10-second matched parameterization.",
+      "fallacy": "Look-elsewhere effect",
+      "recommendation": "Treat the duplicate DRP rows as one mechanism family in interpretation; report both only for protocol traceability.",
+      "severity": "CAUTION"
+    },
+    {
+      "detail": "Thresholds and verdict rules were committed before E-B17 implementation, and E-B18 was committed before its first inference.",
+      "fallacy": "Forking paths / HARKing",
+      "recommendation": "Label any later sweep exploratory.",
+      "severity": "NOTE"
+    },
+    {
+      "detail": "Common random traces support a within-model causal comparison of mechanism choices, not a causal claim about production deployments.",
+      "fallacy": "Correlation implies causation",
+      "recommendation": "Use 'in the matched simulation' and pair it with E-B18's directional check.",
+      "severity": "CAUTION"
+    },
+    {
+      "detail": "Mechanism assignment and the revocation fault precede all enforcement and stale-call outcomes by construction.",
+      "fallacy": "Reverse causality",
+      "recommendation": "No action required.",
+      "severity": "NOTE"
+    }
+  ],
+  "file_comparisons": [
+    {
+      "file": "e_b17_p0_matched_baselines.csv",
+      "original_sha256": "d9ca0aaa9baa443da31c5239f595dc2200171f78be4eef984b34226e0df4ec61",
+      "rerun_sha256": "d9ca0aaa9baa443da31c5239f595dc2200171f78be4eef984b34226e0df4ec61",
+      "status": "MATCH"
+    },
+    {
+      "file": "e_b17_aggregate.csv",
+      "original_sha256": "d242d5681f5b8f019933aa3883aa1bb60c098b9e5ad6009d0531763428416803",
+      "rerun_sha256": "d242d5681f5b8f019933aa3883aa1bb60c098b9e5ad6009d0531763428416803",
+      "status": "MATCH"
+    },
+    {
+      "file": "e_b17_summary.json",
+      "original_sha256": "606f7b81ba3f83cb2c81099b67568d3faf2103b3f8e11de23ad5bf53b8bee516",
+      "rerun_sha256": "606f7b81ba3f83cb2c81099b67568d3faf2103b3f8e11de23ad5bf53b8bee516",
+      "status": "MATCH"
+    },
+    {
+      "file": "e_b17_decision.json",
+      "original_sha256": "a5521a6adfb9d9ba2bae45d9a141b0ab57662b80260a8948287dda34bd891949",
+      "rerun_sha256": "a5521a6adfb9d9ba2bae45d9a141b0ab57662b80260a8948287dda34bd891949",
+      "status": "MATCH"
+    },
+    {
+      "file": "e_b17_report.md",
+      "original_sha256": "e3b7a8b27b7ea9733b1cd6565d98351d7e6296a90a0f8a4f613c0e6c3bc1f2c6",
+      "rerun_sha256": "e3b7a8b27b7ea9733b1cd6565d98351d7e6296a90a0f8a4f613c0e6c3bc1f2c6",
+      "status": "MATCH"
+    }
+  ],
+  "independent_checks": [
+    {
+      "baseline": "drp-10-300",
+      "baseline_feasible": true,
+      "exact_two_sided_sign_p": 1.862645149230957e-09,
+      "mean_difference": -49.67243333333333,
+      "mean_exact_match": true,
+      "negative_differences": 30,
+      "paired_seeds": 30,
+      "positive_differences": 0,
+      "relative_reduction": 0.9826545341604257,
+      "revprop_feasible": true,
+      "saved_mean_difference": -49.67243333333333,
+      "suppression_fraction": 0.2,
+      "zero_differences": 0
+    },
+    {
+      "baseline": "drp-10-60",
+      "baseline_feasible": true,
+      "exact_two_sided_sign_p": 1.862645149230957e-09,
+      "mean_difference": -49.67243333333333,
+      "mean_exact_match": true,
+      "negative_differences": 30,
+      "paired_seeds": 30,
+      "positive_differences": 0,
+      "relative_reduction": 0.9826545341604257,
+      "revprop_feasible": true,
+      "saved_mean_difference": -49.67243333333333,
+      "suppression_fraction": 0.2,
+      "zero_differences": 0
+    },
+    {
+      "baseline": "drp-10-300",
+      "baseline_feasible": true,
+      "exact_two_sided_sign_p": 1.862645149230957e-09,
+      "mean_difference": -48.88656666666667,
+      "mean_exact_match": true,
+      "negative_differences": 30,
+      "paired_seeds": 30,
+      "positive_differences": 0,
+      "relative_reduction": 0.967107974601659,
+      "revprop_feasible": false,
+      "saved_mean_difference": -48.88656666666667,
+      "suppression_fraction": 0.5,
+      "zero_differences": 0
+    },
+    {
+      "baseline": "drp-10-60",
+      "baseline_feasible": true,
+      "exact_two_sided_sign_p": 1.862645149230957e-09,
+      "mean_difference": -48.88656666666667,
+      "mean_exact_match": true,
+      "negative_differences": 30,
+      "paired_seeds": 30,
+      "positive_differences": 0,
+      "relative_reduction": 0.967107974601659,
+      "revprop_feasible": false,
+      "saved_mean_difference": -48.88656666666667,
+      "suppression_fraction": 0.5,
+      "zero_differences": 0
+    }
+  ],
+  "interpretation": "constrained within-model advantage at 20% selective suppression; no universal superiority",
+  "overall_confidence": "CAUTION",
+  "protocol_version": "e-b17-prereg-v1",
+  "raw_rows": 3000,
+  "reproducibility_verdict": "REPRODUCIBLE",
+  "saved_verdict": "E_B17_CONSTRAINED_ADVANTAGE",
+  "saved_verdict_preserved": true,
+  "validated_at": "2026-07-14T14:42:16-07:00",
+  "validation_version": "e-b17-validation-v1"
+}

@@ -1,0 +1,838 @@
+{
+  "agent_trace": {
+    "actions": [
+      {
+        "arguments": {
+          "action_id": "fs-live-action",
+          "agent_id": "worker-filesystem",
+          "content": "System check completed successfully.",
+          "delegation_id": "e-b26-shared-delegation",
+          "relative_path": "live_agent_note.txt"
+        },
+        "canonical_sha256": "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+        "gateway_id": "g-filesystem",
+        "tool": "write_file_effect",
+        "worker": "worker-filesystem"
+      },
+      {
+        "arguments": {
+          "action_id": "pg-live-action",
+          "agent_id": "worker-postgres",
+          "delegation_id": "e-b26-shared-delegation",
+          "payload": "The system is running smoothly without errors.",
+          "record_key": "live-agent-row"
+        },
+        "canonical_sha256": "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1",
+        "gateway_id": "g-postgres",
+        "tool": "insert_postgres_effect",
+        "worker": "worker-postgres"
+      }
+    ],
+    "assignments": [
+      {
+        "gateway": "g-filesystem",
+        "worker": "worker-filesystem"
+      },
+      {
+        "gateway": "g-postgres",
+        "worker": "worker-postgres"
+      }
+    ],
+    "delegation_graph": {
+      "edges": [
+        [
+          "principal",
+          "orchestrator"
+        ],
+        [
+          "orchestrator",
+          "worker-filesystem"
+        ],
+        [
+          "orchestrator",
+          "worker-postgres"
+        ]
+      ],
+      "nodes": [
+        "principal",
+        "orchestrator",
+        "worker-filesystem",
+        "worker-postgres"
+      ]
+    },
+    "generated_at": "2026-07-18T03:32:35.350264+00:00",
+    "model_calls": [
+      {
+        "actual_model": "openai/gpt-4.1-mini",
+        "configured_model": "openai/gpt-4.1-mini",
+        "latency_ms": 1117.902333,
+        "parsed": {
+          "assignments": [
+            {
+              "gateway": "g-filesystem",
+              "worker": "worker-filesystem"
+            },
+            {
+              "gateway": "g-postgres",
+              "worker": "worker-postgres"
+            }
+          ]
+        },
+        "prompt_sha256": "4e402a718a0c6509673c5caee5f0793c17eb765a465ab22156f7a3412709fd7f",
+        "response_id": "gen-1784345551-oFsSTbbG3vu1CJ3CPPAq",
+        "response_sha256": "a332ae5710b19e372fed1859dac7b2c32e1ba5ebcee1480fdb1be1e7d5f93905",
+        "role": "orchestrator",
+        "usage": {
+          "completion_tokens": 31,
+          "completion_tokens_details": {
+            "audio_tokens": 0,
+            "image_tokens": 0,
+            "reasoning_tokens": 0
+          },
+          "cost": 7.64e-05,
+          "cost_details": {
+            "upstream_inference_completions_cost": 4.96e-05,
+            "upstream_inference_cost": 7.64e-05,
+            "upstream_inference_prompt_cost": 2.68e-05
+          },
+          "is_byok": false,
+          "prompt_tokens": 67,
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0,
+            "video_tokens": 0
+          },
+          "total_tokens": 98
+        }
+      },
+      {
+        "actual_model": "openai/gpt-4.1-mini",
+        "configured_model": "openai/gpt-4.1-mini",
+        "latency_ms": 1931.184,
+        "parsed": {
+          "arguments": {
+            "action_id": "fs-live-action",
+            "content": "System check completed successfully.",
+            "relative_path": "live_agent_note.txt"
+          },
+          "tool": "write_file_effect"
+        },
+        "prompt_sha256": "25bac69b025551da0b0ad5feaf0e67d2492de0d8d5b784c28be3711a5ecdb676",
+        "response_id": "gen-1784345553-QNipah1vzFAgS41MyOrT",
+        "response_sha256": "0861f3b7cdfebb34dc4f890d77f8a59eb3c3cc1a08a43f0fd2068d2baa4804c6",
+        "role": "worker-filesystem",
+        "usage": {
+          "completion_tokens": 32,
+          "completion_tokens_details": {
+            "audio_tokens": 0,
+            "image_tokens": 0,
+            "reasoning_tokens": 0
+          },
+          "cost": 8.44e-05,
+          "cost_details": {
+            "upstream_inference_completions_cost": 5.12e-05,
+            "upstream_inference_cost": 8.44e-05,
+            "upstream_inference_prompt_cost": 3.32e-05
+          },
+          "is_byok": false,
+          "prompt_tokens": 83,
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0,
+            "video_tokens": 0
+          },
+          "total_tokens": 115
+        }
+      },
+      {
+        "actual_model": "openai/gpt-4.1-mini",
+        "configured_model": "openai/gpt-4.1-mini",
+        "latency_ms": 1074.515042,
+        "parsed": {
+          "arguments": {
+            "action_id": "pg-live-action",
+            "payload": "The system is running smoothly without errors.",
+            "record_key": "live-agent-row"
+          },
+          "tool": "insert_postgres_effect"
+        },
+        "prompt_sha256": "ab92dd5096a3e44149319271775a1bc89bba6b5389816994e59d92c24cd7b6c6",
+        "response_id": "gen-1784345554-AqlVyCg2Uds9yxPd7COW",
+        "response_sha256": "042264cc20f22ccc92cafc28df1b9635be68c1f741a9535365c3f7f326919995",
+        "role": "worker-postgres",
+        "usage": {
+          "completion_tokens": 35,
+          "completion_tokens_details": {
+            "audio_tokens": 0,
+            "image_tokens": 0,
+            "reasoning_tokens": 0
+          },
+          "cost": 8.92e-05,
+          "cost_details": {
+            "upstream_inference_completions_cost": 5.6e-05,
+            "upstream_inference_cost": 8.92e-05,
+            "upstream_inference_prompt_cost": 3.32e-05
+          },
+          "is_byok": false,
+          "prompt_tokens": 83,
+          "prompt_tokens_details": {
+            "audio_tokens": 0,
+            "cache_write_tokens": 0,
+            "cached_tokens": 0,
+            "video_tokens": 0
+          },
+          "total_tokens": 118
+        }
+      }
+    ],
+    "protocol_version": "e-b26-live-agent-mcp-v1",
+    "trace_sha256": "92557bd03cf7fad145d882c6c8fb412f593101e32810986fec38fd9cfe1c891d"
+  },
+  "agent_trace_file_sha256": "4f2c94e31359d4ef440849c8d6d15d603908b4bd44cab017dd13031d233b00df",
+  "agent_trace_path": "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_17_e_b26_live_agent_mcp_retry1/agent_trace.json",
+  "argument_hashes_by_arm": {
+    "active": [
+      "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+      "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1"
+    ],
+    "normal": [
+      "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+      "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1"
+    ],
+    "post_persist_fault": [
+      "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+      "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1"
+    ],
+    "recovery": [
+      "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+      "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1"
+    ]
+  },
+  "arms": {
+    "active": {
+      "counts": {
+        "allowed": 2,
+        "denied": 0,
+        "effect_commits": 2
+      },
+      "monitor": null,
+      "oracles": {
+        "filesystem": {
+          "count": 1,
+          "digest": "6b119aeae8a385ff13591f45b6669bb335d8aa97284e755265d67c3164c72c49",
+          "records": [
+            {
+              "path": "live_agent_note.txt",
+              "sha256": "1c9be7070103788e4eff545f865541811d87798c468aa43c57e051141ac92ead"
+            }
+          ]
+        },
+        "postgres": {
+          "count": 1,
+          "rows_sha256": "44e216401a08c9baac732cdbae5d5a47528534831d373509dc801c45a4dbd07c"
+        }
+      },
+      "receiver": null,
+      "receiver_persisted_before_fault": null,
+      "results": [
+        {
+          "arguments_sha256": "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "gateway_id": "g-filesystem",
+          "result": {
+            "action_id": "fs-live-action",
+            "agent_id": "worker-filesystem",
+            "allowed": true,
+            "decided_at_ns": 1784345559247044000,
+            "decision_id": "56706388b7e98da332929c21ad55058db64593b67e961971e179fb0bb9cc8570",
+            "delegation_id": "e-b26-shared-delegation",
+            "effect_committed": true,
+            "effect_type": "filesystem",
+            "gateway_id": "g-filesystem",
+            "path": "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_17_e_b26_live_agent_mcp_retry1/active/filesystem-effects/live_agent_note.txt"
+          },
+          "source_arguments_sha256": "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "tool": "write_file_effect",
+          "worker": "worker-filesystem"
+        },
+        {
+          "arguments_sha256": "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1",
+          "gateway_id": "g-postgres",
+          "result": {
+            "action_id": "pg-live-action",
+            "agent_id": "worker-postgres",
+            "allowed": true,
+            "decided_at_ns": 1784345559270238000,
+            "decision_id": "af283a22499a1015a5239df3285e42676c5edd257c41b23966b68ff2f3a4beab",
+            "delegation_id": "e-b26-shared-delegation",
+            "effect_committed": true,
+            "effect_type": "postgres",
+            "gateway_id": "g-postgres",
+            "record_key": "live-agent-row"
+          },
+          "source_arguments_sha256": "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1",
+          "tool": "insert_postgres_effect",
+          "worker": "worker-postgres"
+        }
+      ],
+      "worker": null
+    },
+    "normal": {
+      "counts": {
+        "allowed": 0,
+        "denied": 2,
+        "effect_commits": 0
+      },
+      "monitor": {
+        "complete_for_bound": true,
+        "contract_version": "c0-c5-bounded-v1",
+        "event_id": "e-b26-shared-event",
+        "expected_gateway_ids": [
+          "g-filesystem",
+          "g-postgres"
+        ],
+        "expected_vector_ids": [
+          "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1"
+        ],
+        "highest_stage": "C5_EFFECTS_PREVENTED",
+        "jti": "e-b26-shared-event",
+        "missing_gateway_ids": [],
+        "missing_vector_ids": [],
+        "observed_vector_ids": [
+          "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1"
+        ],
+        "receipt_gateway_ids": [
+          "g-filesystem",
+          "g-postgres"
+        ],
+        "status": "COMPLETE_FOR_BOUND",
+        "violating_vector_ids": [],
+        "window_closed_at_ns": 1784345561828396000,
+        "window_deadline_ns": 1784345620327330000,
+        "window_start_ns": 1784345560327330000
+      },
+      "oracles": {
+        "filesystem": {
+          "count": 0,
+          "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "records": []
+        },
+        "postgres": {
+          "count": 0,
+          "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "receiver": {
+        "channel": "e-b26-opa-control",
+        "delegation_id": "e-b26-shared-delegation",
+        "enforced_at_ns": 1784345560326791000,
+        "event_id": "e-b26-shared-event",
+        "jti": "e-b26-shared-event",
+        "metadata": {
+          "algorithm": "RS256",
+          "audience": "e-b26/receiver",
+          "delegation_id": "e-b26-shared-delegation",
+          "encoded_sha256": "72ddfc6ab4cdacf323978bd883e1f22e674b95f6394ffe771a9eab3b02ad2be8",
+          "event_id": "e-b26-shared-event",
+          "event_type": "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+          "issued_at": 26,
+          "issuer": "e-b26-live-agent-issuer",
+          "jti": "e-b26-shared-event",
+          "key_id": "e-b26-fixture",
+          "sequence": 26
+        },
+        "persisted_at_ns": 1784345560311050000,
+        "receipts": {
+          "g-filesystem": {
+            "applied": true,
+            "applied_at_ns": 1784345560312495000,
+            "channel": "e-b26-opa-control",
+            "delegation_id": "e-b26-shared-delegation",
+            "event_id": "e-b26-shared-event",
+            "gateway_id": "g-filesystem",
+            "opa_decision": {
+              "result": false
+            },
+            "opa_readback": {
+              "applied_at_ns": 1784345560312495000,
+              "channel": "e-b26-opa-control",
+              "event_id": "e-b26-shared-event",
+              "policy_version": "e-b25-opa-policy-v1",
+              "sequence": 26
+            },
+            "policy_version": "e-b25-opa-policy-v1",
+            "receipt_id": "581186fdeeed1c2a90d78cb96dfd2b7918a662609336585383d373498393f2a3",
+            "sequence": 26
+          },
+          "g-postgres": {
+            "applied": true,
+            "applied_at_ns": 1784345560321366000,
+            "channel": "e-b26-opa-control",
+            "delegation_id": "e-b26-shared-delegation",
+            "event_id": "e-b26-shared-event",
+            "gateway_id": "g-postgres",
+            "opa_decision": {
+              "result": false
+            },
+            "opa_readback": {
+              "applied_at_ns": 1784345560321366000,
+              "channel": "e-b26-opa-control",
+              "event_id": "e-b26-shared-event",
+              "policy_version": "e-b25-opa-policy-v1",
+              "sequence": 26
+            },
+            "policy_version": "e-b25-opa-policy-v1",
+            "receipt_id": "715150e826489cb64856d80918f12567dff8302230d835131fc58e70e994ce66",
+            "sequence": 26
+          }
+        },
+        "sequence": 26,
+        "set_sha256": "72ddfc6ab4cdacf323978bd883e1f22e674b95f6394ffe771a9eab3b02ad2be8",
+        "status": "ENFORCED",
+        "targets": [
+          {
+            "attempts": 1,
+            "gateway_id": "g-filesystem",
+            "gateway_url": "http://127.0.0.1:49497",
+            "last_error": null
+          },
+          {
+            "attempts": 1,
+            "gateway_id": "g-postgres",
+            "gateway_url": "http://127.0.0.1:49498",
+            "last_error": null
+          }
+        ]
+      },
+      "receiver_persisted_before_fault": true,
+      "results": [
+        {
+          "arguments_sha256": "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "gateway_id": "g-filesystem",
+          "result": {
+            "action_id": "fs-live-action",
+            "agent_id": "worker-filesystem",
+            "allowed": false,
+            "decided_at_ns": 1784345561201223000,
+            "decision_id": "1560b8b3d140af871517dc0245a85a4d06a259c7f689249524b878a5e2a3f0a9",
+            "delegation_id": "e-b26-shared-delegation",
+            "effect_committed": false,
+            "effect_type": "filesystem",
+            "gateway_id": "g-filesystem",
+            "path": "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_17_e_b26_live_agent_mcp_retry1/normal/filesystem-effects/live_agent_note.txt"
+          },
+          "source_arguments_sha256": "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "tool": "write_file_effect",
+          "worker": "worker-filesystem"
+        },
+        {
+          "arguments_sha256": "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1",
+          "gateway_id": "g-postgres",
+          "result": {
+            "action_id": "pg-live-action",
+            "agent_id": "worker-postgres",
+            "allowed": false,
+            "decided_at_ns": 1784345561213692000,
+            "decision_id": "d744fe62d1230789ad1a43bb51d6a956bd0c2dcfadd8430c73809411556a6378",
+            "delegation_id": "e-b26-shared-delegation",
+            "effect_committed": false,
+            "effect_type": "postgres",
+            "gateway_id": "g-postgres",
+            "record_key": "live-agent-row"
+          },
+          "source_arguments_sha256": "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1",
+          "tool": "insert_postgres_effect",
+          "worker": "worker-postgres"
+        }
+      ],
+      "worker": {
+        "attempted": 2,
+        "enforced": 1,
+        "failed": 0
+      }
+    },
+    "post_persist_fault": {
+      "counts": {
+        "allowed": 1,
+        "denied": 1,
+        "effect_commits": 1
+      },
+      "monitor": {
+        "complete_for_bound": false,
+        "contract_version": "c0-c5-bounded-v1",
+        "event_id": "e-b26-shared-event",
+        "expected_gateway_ids": [
+          "g-filesystem",
+          "g-postgres"
+        ],
+        "expected_vector_ids": [
+          "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1"
+        ],
+        "highest_stage": "C3_RECEIVER_PERSISTED",
+        "jti": "e-b26-shared-event",
+        "missing_gateway_ids": [
+          "g-filesystem"
+        ],
+        "missing_vector_ids": [],
+        "observed_vector_ids": [
+          "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1"
+        ],
+        "receipt_gateway_ids": [
+          "g-postgres"
+        ],
+        "status": "VIOLATED",
+        "violating_vector_ids": [
+          "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe"
+        ],
+        "window_closed_at_ns": 1784345563525836000,
+        "window_deadline_ns": 1784345622027421000,
+        "window_start_ns": 1784345562027421000
+      },
+      "oracles": {
+        "filesystem": {
+          "count": 1,
+          "digest": "6b119aeae8a385ff13591f45b6669bb335d8aa97284e755265d67c3164c72c49",
+          "records": [
+            {
+              "path": "live_agent_note.txt",
+              "sha256": "1c9be7070103788e4eff545f865541811d87798c468aa43c57e051141ac92ead"
+            }
+          ]
+        },
+        "postgres": {
+          "count": 0,
+          "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "receiver": {
+        "channel": "e-b26-opa-control",
+        "delegation_id": "e-b26-shared-delegation",
+        "enforced_at_ns": null,
+        "event_id": "e-b26-shared-event",
+        "jti": "e-b26-shared-event",
+        "metadata": {
+          "algorithm": "RS256",
+          "audience": "e-b26/receiver",
+          "delegation_id": "e-b26-shared-delegation",
+          "encoded_sha256": "72ddfc6ab4cdacf323978bd883e1f22e674b95f6394ffe771a9eab3b02ad2be8",
+          "event_id": "e-b26-shared-event",
+          "event_type": "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+          "issued_at": 26,
+          "issuer": "e-b26-live-agent-issuer",
+          "jti": "e-b26-shared-event",
+          "key_id": "e-b26-fixture",
+          "sequence": 26
+        },
+        "persisted_at_ns": 1784345562013643000,
+        "receipts": {
+          "g-postgres": {
+            "applied": true,
+            "applied_at_ns": 1784345562020057000,
+            "channel": "e-b26-opa-control",
+            "delegation_id": "e-b26-shared-delegation",
+            "event_id": "e-b26-shared-event",
+            "gateway_id": "g-postgres",
+            "opa_decision": {
+              "result": false
+            },
+            "opa_readback": {
+              "applied_at_ns": 1784345562020057000,
+              "channel": "e-b26-opa-control",
+              "event_id": "e-b26-shared-event",
+              "policy_version": "e-b25-opa-policy-v1",
+              "sequence": 26
+            },
+            "policy_version": "e-b25-opa-policy-v1",
+            "receipt_id": "09f85a28a8a0c0eacabb12c0e633ea4fa5449007df86a5b5539be44a12bd06c3",
+            "sequence": 26
+          }
+        },
+        "sequence": 26,
+        "set_sha256": "72ddfc6ab4cdacf323978bd883e1f22e674b95f6394ffe771a9eab3b02ad2be8",
+        "status": "PERSISTED",
+        "targets": [
+          {
+            "attempts": 1,
+            "gateway_id": "g-filesystem",
+            "gateway_url": "http://127.0.0.1:49533",
+            "last_error": "RuntimeError: gateway control returned 500: {\"detail\":\"Remote end closed connection without response\",\"error\":\"RemoteDisconnected\"}\n"
+          },
+          {
+            "attempts": 1,
+            "gateway_id": "g-postgres",
+            "gateway_url": "http://127.0.0.1:49534",
+            "last_error": null
+          }
+        ]
+      },
+      "receiver_persisted_before_fault": true,
+      "results": [
+        {
+          "arguments_sha256": "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "gateway_id": "g-filesystem",
+          "result": {
+            "action_id": "fs-live-action",
+            "agent_id": "worker-filesystem",
+            "allowed": true,
+            "decided_at_ns": 1784345562941385000,
+            "decision_id": "f4754b83008d8120785d74b050342c8a57cf801d5b782cf21324448a3b263b76",
+            "delegation_id": "e-b26-shared-delegation",
+            "effect_committed": true,
+            "effect_type": "filesystem",
+            "gateway_id": "g-filesystem",
+            "path": "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_17_e_b26_live_agent_mcp_retry1/post_persist_fault/filesystem-effects/live_agent_note.txt"
+          },
+          "source_arguments_sha256": "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "tool": "write_file_effect",
+          "worker": "worker-filesystem"
+        },
+        {
+          "arguments_sha256": "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1",
+          "gateway_id": "g-postgres",
+          "result": {
+            "action_id": "pg-live-action",
+            "agent_id": "worker-postgres",
+            "allowed": false,
+            "decided_at_ns": 1784345562960089000,
+            "decision_id": "de5e08d51becb092dad1434bbbf490788f9b3605dc5bb6c310e21de9df1496a7",
+            "delegation_id": "e-b26-shared-delegation",
+            "effect_committed": false,
+            "effect_type": "postgres",
+            "gateway_id": "g-postgres",
+            "record_key": "live-agent-row"
+          },
+          "source_arguments_sha256": "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1",
+          "tool": "insert_postgres_effect",
+          "worker": "worker-postgres"
+        }
+      ],
+      "worker": {
+        "attempted": 2,
+        "enforced": 0,
+        "failed": 1
+      }
+    },
+    "recovery": {
+      "counts": {
+        "allowed": 0,
+        "denied": 2,
+        "effect_commits": 0
+      },
+      "monitor": {
+        "complete_for_bound": true,
+        "contract_version": "c0-c5-bounded-v1",
+        "event_id": "e-b26-shared-event",
+        "expected_gateway_ids": [
+          "g-filesystem",
+          "g-postgres"
+        ],
+        "expected_vector_ids": [
+          "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1"
+        ],
+        "highest_stage": "C5_EFFECTS_PREVENTED",
+        "jti": "e-b26-shared-event",
+        "missing_gateway_ids": [],
+        "missing_vector_ids": [],
+        "observed_vector_ids": [
+          "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1"
+        ],
+        "receipt_gateway_ids": [
+          "g-filesystem",
+          "g-postgres"
+        ],
+        "status": "COMPLETE_FOR_BOUND",
+        "violating_vector_ids": [],
+        "window_closed_at_ns": 1784345565219550000,
+        "window_deadline_ns": 1784345623722307000,
+        "window_start_ns": 1784345563722307000
+      },
+      "oracles": {
+        "filesystem": {
+          "count": 0,
+          "digest": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+          "records": []
+        },
+        "postgres": {
+          "count": 0,
+          "rows_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      },
+      "receiver": {
+        "channel": "e-b26-opa-control",
+        "delegation_id": "e-b26-shared-delegation",
+        "enforced_at_ns": 1784345563721810000,
+        "event_id": "e-b26-shared-event",
+        "jti": "e-b26-shared-event",
+        "metadata": {
+          "algorithm": "RS256",
+          "audience": "e-b26/receiver",
+          "delegation_id": "e-b26-shared-delegation",
+          "encoded_sha256": "72ddfc6ab4cdacf323978bd883e1f22e674b95f6394ffe771a9eab3b02ad2be8",
+          "event_id": "e-b26-shared-event",
+          "event_type": "https://schemas.openid.net/secevent/caep/event-type/session-revoked",
+          "issued_at": 26,
+          "issuer": "e-b26-live-agent-issuer",
+          "jti": "e-b26-shared-event",
+          "key_id": "e-b26-fixture",
+          "sequence": 26
+        },
+        "persisted_at_ns": 1784345563706773000,
+        "receipts": {
+          "g-filesystem": {
+            "applied": true,
+            "applied_at_ns": 1784345563708289000,
+            "channel": "e-b26-opa-control",
+            "delegation_id": "e-b26-shared-delegation",
+            "event_id": "e-b26-shared-event",
+            "gateway_id": "g-filesystem",
+            "opa_decision": {
+              "result": false
+            },
+            "opa_readback": {
+              "applied_at_ns": 1784345563708289000,
+              "channel": "e-b26-opa-control",
+              "event_id": "e-b26-shared-event",
+              "policy_version": "e-b25-opa-policy-v1",
+              "sequence": 26
+            },
+            "policy_version": "e-b25-opa-policy-v1",
+            "receipt_id": "11babda394f7c74d5c5d5ce4cb776224eac170605ad10539d9dd5f3f5347d29e",
+            "sequence": 26
+          },
+          "g-postgres": {
+            "applied": true,
+            "applied_at_ns": 1784345563715549000,
+            "channel": "e-b26-opa-control",
+            "delegation_id": "e-b26-shared-delegation",
+            "event_id": "e-b26-shared-event",
+            "gateway_id": "g-postgres",
+            "opa_decision": {
+              "result": false
+            },
+            "opa_readback": {
+              "applied_at_ns": 1784345563715549000,
+              "channel": "e-b26-opa-control",
+              "event_id": "e-b26-shared-event",
+              "policy_version": "e-b25-opa-policy-v1",
+              "sequence": 26
+            },
+            "policy_version": "e-b25-opa-policy-v1",
+            "receipt_id": "1ea35e6308119f5e33fde0504d668572d80fd8b158b628b1227ef0a296acf53f",
+            "sequence": 26
+          }
+        },
+        "sequence": 26,
+        "set_sha256": "72ddfc6ab4cdacf323978bd883e1f22e674b95f6394ffe771a9eab3b02ad2be8",
+        "status": "ENFORCED",
+        "targets": [
+          {
+            "attempts": 1,
+            "gateway_id": "g-filesystem",
+            "gateway_url": "http://127.0.0.1:49566",
+            "last_error": null
+          },
+          {
+            "attempts": 1,
+            "gateway_id": "g-postgres",
+            "gateway_url": "http://127.0.0.1:49567",
+            "last_error": null
+          }
+        ]
+      },
+      "receiver_persisted_before_fault": true,
+      "results": [
+        {
+          "arguments_sha256": "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "gateway_id": "g-filesystem",
+          "result": {
+            "action_id": "fs-live-action",
+            "agent_id": "worker-filesystem",
+            "allowed": false,
+            "decided_at_ns": 1784345564699339000,
+            "decision_id": "c1af6c17958932ded726708b7a11ed711f420a6bbad3269f8d5836875150d5ba",
+            "delegation_id": "e-b26-shared-delegation",
+            "effect_committed": false,
+            "effect_type": "filesystem",
+            "gateway_id": "g-filesystem",
+            "path": "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_17_e_b26_live_agent_mcp_retry1/recovery/filesystem-effects/live_agent_note.txt"
+          },
+          "source_arguments_sha256": "2f4eea4643306afa35d0b72677d25e74ec87e7585ba6add342f87ac1b4281fbe",
+          "tool": "write_file_effect",
+          "worker": "worker-filesystem"
+        },
+        {
+          "arguments_sha256": "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1",
+          "gateway_id": "g-postgres",
+          "result": {
+            "action_id": "pg-live-action",
+            "agent_id": "worker-postgres",
+            "allowed": false,
+            "decided_at_ns": 1784345564715960000,
+            "decision_id": "b8c1db54cc673d6e6ea5a8c6530e9687bf508772e508057dab5bf51de5ef9951",
+            "delegation_id": "e-b26-shared-delegation",
+            "effect_committed": false,
+            "effect_type": "postgres",
+            "gateway_id": "g-postgres",
+            "record_key": "live-agent-row"
+          },
+          "source_arguments_sha256": "ff2457cee6ef58138ed3a5c51a7734457b61364b2ce53dbe9eb021009b1fd2e1",
+          "tool": "insert_postgres_effect",
+          "worker": "worker-postgres"
+        }
+      ],
+      "worker": {
+        "attempted": 2,
+        "enforced": 1,
+        "failed": 0
+      }
+    }
+  },
+  "assertions": {
+    "active_two_real_effects": true,
+    "bit_identical_paired_arguments": true,
+    "e_b20_settings_unchanged": true,
+    "fault_commits_only_filesystem": true,
+    "fault_is_post_persistence": true,
+    "fault_missing_only_filesystem_receipt": true,
+    "fault_monitor_violated_at_c3": true,
+    "normal_reaches_c5": true,
+    "recovery_reaches_c5": true,
+    "three_live_model_calls": true,
+    "two_agent_actions": true
+  },
+  "generated_at": "2026-07-18T03:32:45.304679+00:00",
+  "infrastructure": {
+    "direct_urls": {
+      "g-filesystem": "http://127.0.0.1:49444",
+      "g-postgres": "http://127.0.0.1:49445"
+    },
+    "images": {
+      "opa": {
+        "digest": "sha256:94830e998dd9df8e49a61826f1ad03d8a68d3ecd52f105e06a2adb93b459ad46",
+        "image": "openpolicyagent/opa:1.17.0-static"
+      },
+      "postgres": {
+        "digest": "sha256:40b404964359299eefdd5f8518facf1886c562848cf4de13b6eaf91cb70c2b87",
+        "image": "pgvector/pgvector:0.8.0-pg17-bookworm"
+      },
+      "toxiproxy": {
+        "digest": "sha256:9378ed52a28bc50edc1350f936f518f31fa95f0d15917d6eb40b8e376d1a214e",
+        "image": "ghcr.io/shopify/toxiproxy:2.12.0"
+      }
+    },
+    "proxy_urls": {
+      "g-filesystem": "http://127.0.0.1:49450",
+      "g-postgres": "http://127.0.0.1:49451"
+    }
+  },
+  "pass": true,
+  "protocol_version": "e-b26-live-agent-mcp-v1",
+  "verification_status": "CONFIRMATORY"
+}

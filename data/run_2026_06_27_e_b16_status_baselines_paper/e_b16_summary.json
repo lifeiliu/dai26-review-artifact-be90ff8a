@@ -1,0 +1,277 @@
+{
+  "aggregate_rows": 24,
+  "claim_note": "E-B16 compares RevProp against synchronous status-check baselines under local status-service outages. Fail-closed minimizes stale authorization but loses availability during outages; fail-open preserves availability but admits stale authority until recovery; TTL cache remains bounded by the token lifetime.",
+  "experiment": "E-B16",
+  "fault_scenarios": [
+    "none",
+    "status-outage",
+    "status-partition"
+  ],
+  "integration_success_rate": 1.0,
+  "max_availability_loss_rate": 1.0,
+  "max_stale_capability_window": 60.0,
+  "mean_outage_prevented_fraction": 0.7344791666666666,
+  "raw_rows": 240,
+  "run_config": {
+    "n_parties_values": [
+      30
+    ],
+    "outage_duration": 2.0,
+    "output_dir": "data/run_2026_06_27_e_b16_status_baselines_paper",
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "status_baseline_strategies": [
+      "sync-fail-closed",
+      "sync-fail-open",
+      "sync-status-cache-ttl",
+      "revprop-hybrid"
+    ],
+    "status_fault_scenarios": [
+      "none",
+      "status-outage",
+      "status-partition"
+    ],
+    "status_latency": 0.05,
+    "task_duration": 60.0,
+    "tool_call_rates": [
+      1.0,
+      10.0
+    ],
+    "ttl": 60.0
+  },
+  "status_error_count": 2400,
+  "strategies": [
+    "revprop-hybrid",
+    "sync-fail-closed",
+    "sync-fail-open",
+    "sync-status-cache-ttl"
+  ],
+  "surface_summaries": [
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "none",
+      "n_gateways": 30,
+      "prevented_fraction": 0.9991666666666668,
+      "stale_window": 0.05,
+      "strategy": "revprop-hybrid",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "none",
+      "n_gateways": 30,
+      "prevented_fraction": 0.9991666666666668,
+      "stale_window": 0.05,
+      "strategy": "revprop-hybrid",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-outage",
+      "n_gateways": 30,
+      "prevented_fraction": 0.9908333333333333,
+      "stale_window": 0.55,
+      "strategy": "revprop-hybrid",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-outage",
+      "n_gateways": 30,
+      "prevented_fraction": 0.9908333333333333,
+      "stale_window": 0.55,
+      "strategy": "revprop-hybrid",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-partition",
+      "n_gateways": 30,
+      "prevented_fraction": 0.985,
+      "stale_window": 0.9,
+      "strategy": "revprop-hybrid",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-partition",
+      "n_gateways": 30,
+      "prevented_fraction": 0.985,
+      "stale_window": 0.9,
+      "strategy": "revprop-hybrid",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "none",
+      "n_gateways": 30,
+      "prevented_fraction": 1.0,
+      "stale_window": 0.0,
+      "strategy": "sync-fail-closed",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "none",
+      "n_gateways": 30,
+      "prevented_fraction": 1.0,
+      "stale_window": 0.0,
+      "strategy": "sync-fail-closed",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 1.0,
+      "fault_scenario": "status-outage",
+      "n_gateways": 30,
+      "prevented_fraction": 1.0,
+      "stale_window": 0.0,
+      "strategy": "sync-fail-closed",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 1.0,
+      "fault_scenario": "status-outage",
+      "n_gateways": 30,
+      "prevented_fraction": 1.0,
+      "stale_window": 0.0,
+      "strategy": "sync-fail-closed",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 1.0,
+      "fault_scenario": "status-partition",
+      "n_gateways": 30,
+      "prevented_fraction": 1.0,
+      "stale_window": 0.0,
+      "strategy": "sync-fail-closed",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 1.0,
+      "fault_scenario": "status-partition",
+      "n_gateways": 30,
+      "prevented_fraction": 1.0,
+      "stale_window": 0.0,
+      "strategy": "sync-fail-closed",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "none",
+      "n_gateways": 30,
+      "prevented_fraction": 1.0,
+      "stale_window": 0.0,
+      "strategy": "sync-fail-open",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "none",
+      "n_gateways": 30,
+      "prevented_fraction": 1.0,
+      "stale_window": 0.0,
+      "strategy": "sync-fail-open",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-outage",
+      "n_gateways": 30,
+      "prevented_fraction": 0.9666666666666666,
+      "stale_window": 2.0,
+      "strategy": "sync-fail-open",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-outage",
+      "n_gateways": 30,
+      "prevented_fraction": 0.9666666666666666,
+      "stale_window": 2.0,
+      "strategy": "sync-fail-open",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-partition",
+      "n_gateways": 30,
+      "prevented_fraction": 0.9333333333333333,
+      "stale_window": 4.0,
+      "strategy": "sync-fail-open",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-partition",
+      "n_gateways": 30,
+      "prevented_fraction": 0.9333333333333333,
+      "stale_window": 4.0,
+      "strategy": "sync-fail-open",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "none",
+      "n_gateways": 30,
+      "prevented_fraction": 0.0,
+      "stale_window": 60.0,
+      "strategy": "sync-status-cache-ttl",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "none",
+      "n_gateways": 30,
+      "prevented_fraction": 0.0,
+      "stale_window": 60.0,
+      "strategy": "sync-status-cache-ttl",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-outage",
+      "n_gateways": 30,
+      "prevented_fraction": 0.0,
+      "stale_window": 60.0,
+      "strategy": "sync-status-cache-ttl",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-outage",
+      "n_gateways": 30,
+      "prevented_fraction": 0.0,
+      "stale_window": 60.0,
+      "strategy": "sync-status-cache-ttl",
+      "tool_call_rate": 10.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-partition",
+      "n_gateways": 30,
+      "prevented_fraction": 0.0,
+      "stale_window": 60.0,
+      "strategy": "sync-status-cache-ttl",
+      "tool_call_rate": 1.0
+    },
+    {
+      "availability_loss": 0.0,
+      "fault_scenario": "status-partition",
+      "n_gateways": 30,
+      "prevented_fraction": 0.0,
+      "stale_window": 60.0,
+      "strategy": "sync-status-cache-ttl",
+      "tool_call_rate": 10.0
+    }
+  ]
+}

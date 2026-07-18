@@ -1,0 +1,27 @@
+{
+  "task_name": "desktop__timeline_extraction",
+  "model_name": "openai/gpt-4.1-mini",
+  "litellm_run_model_name": "gpt-4.1-mini",
+  "reasoning_effort": "default",
+  "mcp": "filesystem",
+  "timeout": 3600,
+  "time": {
+    "start": "2026-07-14T20:02:51.837745",
+    "end": "2026-07-14T20:03:43.643889"
+  },
+  "agent_execution_time": 51.726510763168335,
+  "task_execution_time": 51.80569005012512,
+  "execution_result": {
+    "success": false,
+    "error_message": null,
+    "verification_error": "Verification failed with no error message",
+    "verification_output": "🔍 Verifying Desktop Timeline Extraction Task...\n\n--- Timeline File Exists ---\n✅ 'timeline.txt' file exists in main directory\n\n--- File is Readable ---\n✅ 'timeline.txt' file is readable\n\n--- Correct Line Count ---\n❌ Expected 43 lines, but found 19 lines\n\n--- Line Format ---\n✅ All lines contain both file path and date time information\n\n--- Date Format ---\n✅ All dates are in valid YYYY-MM-DD format\n\n--- Chronological Order ---\n❌ Date order violation: 2024-01-15 comes after 2024-01-01\n\n--- Expected Entries ---\n❌ Missing 31 expected entries\n   Examples: ['learning/2024/learning_progress.csv:2024-09-01', 'learning/2024/learning_progress.csv:2024-01-01', 'learning/2024/learning_progress.csv:2024-02-01']\n\n--- No Duplicates ---\n✅ No duplicate entries found\n\n--- File Paths Exist ---\n❌ 7 referenced files do not exist\n   Examples: ['./exp_logs/september_summary.csv', './exp_logs/september_summary.csv', './exp_logs/september_summary.csv']\n\n==================================================\n❌ Task verification: FAIL\n"
+  },
+  "token_usage": {
+    "input_tokens": 228465,
+    "output_tokens": 2787,
+    "total_tokens": 231252,
+    "reasoning_tokens": 0
+  },
+  "turn_count": 22
+}

@@ -1,0 +1,60 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| execute_sql {"sql": "-- Enable RLS on all tables\nALTER TABLE public.users ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.channels ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.posts ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.comments ENABLE ROW LEVEL SECURITY;\nALTER TABLE public.channel_moderators ENABLE ROW LEVEL SECURITY;"}
+| execute_sql {"sql": "-- Policies for users table\n-- SELECT: Users can read all public user profiles (username, created_at)\nCREATE POLICY users_select_public ON public.users\nFOR SELECT USING (true);\n\n-- UPDATE: Users can only modify their own profile\nCREATE POLICY users_update_own ON public.users\nFOR UPDATE USING (id = app_current_user_id());\n\n-- DELETE: Users can only delete their own account\nCREATE POLICY users_delete_own ON public.users\nFOR DELETE USING (id = app_current_user_id());"}
+| execute_sql {"sql": "-- Policies for channels table\n-- SELECT: Everyone can read public channel information\nCREATE POLICY channels_select_public ON public.channels\nFOR SELECT USING (true);\n\n-- INSERT: Any authenticated user can create a channel (becomes owner)\nCREATE POLICY channels_insert_auth ON public.channels\nFOR INSERT WITH CHECK (app_current_user_id() IS NOT NULL);\n\n-- UPDATE: Only channel owners can modify channel details\nCREATE POLICY channels_update_owner ON public.channels\nFOR UPDATE USING (is_channel_owner(id, app_current_user_id()));\n\n-- DELETE: Only channel owners can delete channels\nCREATE POLICY channels_delete_owner ON public.channels\nFOR DELETE USING (is_channel_owner(id, app_current_user_id()));"}
+| execute_sql {"sql": "-- Policies for posts table\n-- SELECT: Users can read all posts in channels they have access to\nCREATE POLICY posts_select_access ON public.posts\nFOR SELECT USING (\n  EXISTS (\n    SELECT 1 FROM public.channels c\n    WHERE c.id = public.posts.channel_id\n    AND (c.is_public OR is_channel_owner(c.id, app_current_user_id()) OR is_channel_moderator(c.id, app_current_user_id()))\n  )\n);\n\n-- INSERT: Authenticated users can create posts in any channel\nCREATE POLICY posts_insert_auth ON public.posts\nFOR INSERT WITH CHECK (app_current_user_id() IS NOT NULL);\n\n-- UPDATE: Post authors OR channel moderators OR channel owners can edit posts\nCREATE POLICY posts_update_auth ON public.posts\nFOR UPDATE USING (\n  author_id = app_current_user_id()\n  OR is_channel_moderator(channel_id, app_current_user_id())\n  OR is_channel_owner(channel_id, app_current_user_id())\n);\n\n-- DELETE: Post authors OR channel moderators OR channel owners can delete posts\nCREATE POLICY posts_delete_auth ON public.posts\nFOR DELETE USING (\n  author_id = app_current_user_id()\n  OR is_channel_moderator(channel_id, app_current_user_id())\n  OR is_channel_owner(channel_id, app_current_user_id())\n);"}
+| execute_sql {"sql": "-- Policies for comments table\n-- SELECT: Users can read comments on posts they can access\nCREATE POLICY comments_select_access ON public.comments\nFOR SELECT USING (\n  EXISTS (\n    SELECT 1 FROM public.posts p\n    JOIN public.channels c ON p.channel_id = c.id\n    WHERE p.id = public.comments.post_id\n    AND (c.is_public OR is_channel_owner(c.id, app_current_user_id()) OR is_channel_moderator(c.id, app_current_user_id()))\n  )\n);\n\n-- INSERT: Authenticated users can comment on posts they can see\nCREATE POLICY comments_insert_auth ON public.comments\nFOR INSERT WITH CHECK (\n  app_current_user_id() IS NOT NULL\n  AND EXISTS (\n    SELECT 1 FROM public.posts p\n    JOIN public.channels c ON p.channel_id = c.id\n    WHERE p.id = public.comments.post_id\n    AND (c.is_public OR is_channel_owner(c.id, app_current_user_id()) OR is_channel_moderator(c.id, app_current_user_id()))\n  )\n);\n\n-- UPDATE: Comment authors OR post authors OR channel moderators OR channel owners can edit comments\nCREATE POLICY comments_update_auth ON public.comments\nFOR UPDATE USING (\n  author_id = app_current_user_id()\n  OR EXISTS (\n    SELECT 1 FROM public.posts p\n    WHERE p.id = public.comments.post_id\n    AND p.author_id = app_current_user_id()\n  )\n  OR EXISTS (\n    SELECT 1 FROM public.posts p\n    JOIN public.channels c ON p.channel_id = c.id\n    WHERE p.id = public.comments.post_id\n    AND (is_channel_moderator(c.id, app_current_user_id()) OR is_channel_owner(c.id, app_current_user_id()))\n  )\n);\n\n-- DELETE: Comment authors OR post authors OR channel moderators OR channel owners can delete comments\nCREATE POLICY comments_delete_auth ON public.comments\nFOR DELETE USING (\n  author_id = app_current_user_id()\n  OR EXISTS (\n    SELECT 1 FROM public.posts p\n    WHERE p.id = public.comments.post_id\n    AND p.author_id = app_current_user_id()\n  )\n  OR EXISTS (\n    SELECT 1 FROM public.posts p\n    JOIN public.channels c ON p.channel_id = c.id\n    WHERE p.id = public.comments.post_id\n    AND (is_channel_moderator(c.id, app_current_user_id()) OR is_channel_owner(c.id, app_current_user_id()))\n  )\n);"}
+| execute_sql {"sql": "-- Policies for channel_moderators table\n-- SELECT: Users can see moderator lists for channels\nCREATE POLICY channel_moderators_select_all ON public.channel_moderators\nFOR SELECT USING (true);\n\n-- INSERT: Only channel owners can add moderators\nCREATE POLICY channel_moderators_insert_owner ON public.channel_moderators\nFOR INSERT WITH CHECK (is_channel_owner(channel_id, app_current_user_id()));\n\n-- DELETE: Channel owners can remove moderators; moderators can remove themselves\nCREATE POLICY channel_moderators_delete_owner_or_self ON public.channel_moderators\nFOR DELETE USING (\n  is_channel_owner(channel_id, app_current_user_id())\n  OR (user_id = app_current_user_id())\n);"}
+I have enabled Row Level Security (RLS) on all five tables (users, channels, posts, comments, and channel_moderators) and created the corresponding policies according to your RLS requirements:
+
+1. Users Table:
+   - SELECT: All users can read public profiles.
+   - UPDATE: Users can update only their own profile.
+   - DELETE: Users can delete only their own account.
+
+2. Channels Table:
+   - SELECT: Everyone can read public channel info.
+   - INSERT: Authenticated users can create channels.
+   - UPDATE: Only channel owners can update.
+   - DELETE: Only channel owners can delete.
+
+3. Posts Table:
+   - SELECT: Users can read posts in channels they have access to (public channels or they are owner/moderator).
+   - INSERT: Authenticated users can create posts.
+   - UPDATE: Post authors or channel moderators/owners can edit.
+   - DELETE: Post authors or channel moderators/owners can delete.
+
+4. Comments Table:
+   - SELECT: Users can read comments on accessible posts.
+   - INSERT: Authenticated users can comment on posts they can see.
+   - UPDATE: Comment authors, post authors, or channel moderators/owners can edit.
+   - DELETE: Comment authors, post authors, or channel moderators/owners can delete.
+
+5. Channel Moderators Table:
+   - SELECT: Everyone can view moderator lists.
+   - INSERT: Only channel owners can add moderators.
+   - DELETE: Channel owners can remove moderators; moderators can remove themselves.
+
+All policies leverage the provided helper functions (app_current_user_id(), is_channel_owner(), is_channel_moderator()) and follow the schema and performance constraints you outlined.
+
+Task completed.

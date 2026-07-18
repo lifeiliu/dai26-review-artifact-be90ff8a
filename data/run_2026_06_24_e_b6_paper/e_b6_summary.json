@@ -1,0 +1,90 @@
+{
+  "aggregate_rows": 12,
+  "claim_note": "E-B6 upgrades the evidence type from an in-process simulator to a real loopback JSONL transport prototype. Services still run in one asyncio process, so this is not a production deployment, but every propagation step crosses TCP and JSON serialization boundaries.",
+  "comparisons": [
+    {
+      "hybrid_completeness_mean": 1.0,
+      "hybrid_minus_log_p99": -0.0013901537982746737,
+      "hybrid_minus_push_completeness": 0.19999999999999996,
+      "hybrid_minus_push_gossip_p99": -0.002275903965346493,
+      "hybrid_p99_delta_mean": 0.16896960423327984,
+      "hybrid_transport_errors_mean": 0.0,
+      "log_p99_delta_mean": 0.1703597580315545,
+      "n_parties": 10,
+      "push_completeness_mean": 0.8,
+      "push_gossip_p99_delta_mean": 0.17124550819862633
+    },
+    {
+      "hybrid_completeness_mean": 1.0,
+      "hybrid_minus_log_p99": 0.11864549994934351,
+      "hybrid_minus_push_completeness": 0.19999999999999996,
+      "hybrid_minus_push_gossip_p99": -0.09486659190151842,
+      "hybrid_p99_delta_mean": 0.30676659154705704,
+      "hybrid_transport_errors_mean": 0.0,
+      "log_p99_delta_mean": 0.18812109159771354,
+      "n_parties": 30,
+      "push_completeness_mean": 0.8,
+      "push_gossip_p99_delta_mean": 0.40163318344857546
+    },
+    {
+      "hybrid_completeness_mean": 1.0,
+      "hybrid_minus_log_p99": 0.3400428376393393,
+      "hybrid_minus_push_completeness": 0.19999999999999996,
+      "hybrid_minus_push_gossip_p99": -0.6735439914977178,
+      "hybrid_p99_delta_mean": 0.5778094418114051,
+      "hybrid_transport_errors_mean": 0.0,
+      "log_p99_delta_mean": 0.23776660417206585,
+      "n_parties": 100,
+      "push_completeness_mean": 0.8,
+      "push_gossip_p99_delta_mean": 1.251353433309123
+    }
+  ],
+  "experiment": "E-B6",
+  "max_p99_delta": 1.7696882081218064,
+  "mean_root_certificate_verified_rate": 1.0,
+  "mean_signature_verified_rate": 1.0,
+  "mean_transport_errors": 0.0,
+  "min_completeness": 0.8,
+  "n_parties_values": [
+    10,
+    30,
+    100
+  ],
+  "raw_rows": 120,
+  "run_config": {
+    "duration": 1.5,
+    "gossip_fanout": 4,
+    "n_parties_values": [
+      10,
+      30,
+      100
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "strategies": [
+      "push",
+      "log",
+      "push-gossip",
+      "hybrid"
+    ]
+  },
+  "service_models": [
+    "asyncio-tcp-jsonl"
+  ],
+  "strategies": [
+    "hybrid",
+    "log",
+    "push",
+    "push-gossip"
+  ]
+}

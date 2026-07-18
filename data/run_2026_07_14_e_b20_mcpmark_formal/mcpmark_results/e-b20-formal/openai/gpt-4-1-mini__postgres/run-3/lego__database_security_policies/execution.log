@@ -1,0 +1,124 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| list_objects {"schema_name": "public","object_type": "table"}
+| execute_sql {"sql": "SELECT set_name FROM lego_sets WHERE theme_id = 18;"}
+| execute_sql {"sql": "SELECT set_name FROM lego_sets WHERE theme_id = 1;"}
+| get_object_details {"schema_name": "public","object_name": "lego_sets","object_type": "table"}
+| get_object_details {"schema_name": "public","object_name": "lego_inventories","object_type": "table"}
+| get_object_details {"schema_name": "public","object_name": "lego_inventory_parts","object_type": "table"}
+| execute_sql {"sql": "-- Step 1: Create the 'theme_analyst' role\nCREATE ROLE theme_analyst NOINHERIT LOGIN;\n\n-- Grant SELECT on reference tables\nGRANT SELECT ON lego_themes TO theme_analyst;\nGRANT SELECT ON lego_colors TO theme_analyst;\nGRANT SELECT ON lego_parts TO theme_analyst;\nGRANT SELECT ON lego_part_categories TO theme_analyst;\n\n-- Grant SELECT on main data tables\nGRANT SELECT ON lego_sets TO theme_analyst;\nGRANT SELECT ON lego_inventories TO theme_analyst;\nGRANT SELECT ON lego_inventory_parts TO theme_analyst;\n\n-- No permissions for data modification (INSERT, UPDATE, DELETE) are granted, so no actions needed for that\n\n-- Step 2: Enable Row-Level Security (RLS) on data tables\nALTER TABLE lego_sets ENABLE ROW LEVEL SECURITY;\nALTER TABLE lego_inventories ENABLE ROW LEVEL SECURITY;\nALTER TABLE lego_inventory_parts ENABLE ROW LEVEL SECURITY;"}
+| execute_sql {"sql": "-- Step 2 continued: Create function get_user_theme_id that returns theme_id based on current_user\nCREATE OR REPLACE FUNCTION get_user_theme_id() RETURNS integer AS $$\nBEGIN\n  IF current_user = 'theme_analyst' THEN\n    RETURN 18; -- Star Wars theme\n  ELSE\n    RETURN NULL; -- No theme assigned\n  END IF;\nEND;\n$$ LANGUAGE plpgsql SECURITY DEFINER;\n\n-- Step 3: Create RLS policies\n\n-- Policy 1: theme_sets_policy on lego_sets\nCREATE POLICY theme_sets_policy ON lego_sets\nUSING (theme_id = get_user_theme_id());\n\n-- Policy 2: theme_inventories_policy on lego_inventories\nCREATE POLICY theme_inventories_policy ON lego_inventories\nUSING (\n  EXISTS (\n    SELECT 1 FROM lego_sets s WHERE s.set_num = lego_inventories.set_num AND s.theme_id = get_user_theme_id()\n  )\n);\n\n-- Policy 3: theme_inventory_parts_policy on lego_inventory_parts\nCREATE POLICY theme_inventory_parts_policy ON lego_inventory_parts\nUSING (\n  EXISTS (\n    SELECT 1 FROM lego_inventories i\n    JOIN lego_sets s ON i.set_num = s.set_num\n    WHERE i.id = lego_inventory_parts.inventory_id AND s.theme_id = get_user_theme_id()\n  )\n);"}
+| execute_sql {"sql": "-- Verification queries\n\n-- Query 1: Star Wars theme sets (theme_id=18) should return exactly 2 sets with set_num '65081-1' and 'K8008-1'\nSET ROLE theme_analyst;\nSELECT set_num, name FROM lego_sets WHERE theme_id = 18 ORDER BY set_num;\n\nRESET ROLE;"}
+| execute_sql {"sql": "-- Query 2: Technic theme sets (theme_id=1) should return 0 sets for theme_analyst\nSET ROLE theme_analyst;\nSELECT set_num, name FROM lego_sets WHERE theme_id = 1 ORDER BY set_num;\n\nRESET ROLE;"}
+| execute_sql {"sql": "-- Query 3: Check lego_inventories access for theme_analyst (should only have inventories for sets with theme_id=18)\nSET ROLE theme_analyst;\nSELECT * FROM lego_inventories ORDER BY id LIMIT 10;\n\nRESET ROLE;"}
+| execute_sql {"sql": "-- Query 4: Check lego_inventory_parts access for theme_analyst (should only have parts for inventories of sets with theme_id=18)\nSET ROLE theme_analyst;\nSELECT * FROM lego_inventory_parts ORDER BY inventory_id LIMIT 10;\n\nRESET ROLE;"}
+| execute_sql {"sql": "-- Query 5: All reference tables accessible for theme_analyst\nSET ROLE theme_analyst;\nSELECT * FROM lego_themes ORDER BY id LIMIT 10;\nSELECT * FROM lego_colors ORDER BY id LIMIT 10;\nSELECT * FROM lego_parts ORDER BY part_num LIMIT 10;\nSELECT * FROM lego_part_categories ORDER BY id LIMIT 10;\n\nRESET ROLE;"}
+| execute_sql {"sql": "-- Revoke any explicit deny and grant select explicitly again for theme_analyst\nREVOKE ALL ON ALL TABLES IN SCHEMA public FROM theme_analyst;\n\nGRANT SELECT ON lego_themes TO theme_analyst;\nGRANT SELECT ON lego_colors TO theme_analyst;\nGRANT SELECT ON lego_parts TO theme_analyst;\nGRANT SELECT ON lego_part_categories TO theme_analyst;\nGRANT SELECT ON lego_sets TO theme_analyst;\nGRANT SELECT ON lego_inventories TO theme_analyst;\nGRANT SELECT ON lego_inventory_parts TO theme_analyst;"}
+| execute_sql {"sql": "-- Retrying a verification query with role setting\nSET ROLE theme_analyst;\nSELECT set_num, name FROM lego_sets WHERE theme_id = 18 ORDER BY set_num;\nRESET ROLE;"}
+| execute_sql {"sql": "-- Checking content of lego_sets for theme_id = 18 as admin to confirm data presence\nSELECT set_num, name FROM lego_sets WHERE theme_id = 18 ORDER BY set_num;"}
+| execute_sql {"sql": "-- We need to alter the function to SECURITY DEFINER to allow proper RLS\nDROP FUNCTION IF EXISTS get_user_theme_id();\n\nCREATE OR REPLACE FUNCTION get_user_theme_id() RETURNS integer AS $$\nBEGIN\n  IF current_user = 'theme_analyst' THEN\n    RETURN 18; -- Star Wars theme\n  ELSE\n    RETURN NULL; -- No theme assigned\n  END IF;\nEND;\n$$ LANGUAGE plpgsql SECURITY DEFINER;\n\n-- Recreate the RLS policies\nDROP POLICY IF EXISTS theme_sets_policy ON lego_sets;\nDROP POLICY IF EXISTS theme_inventories_policy ON lego_inventories;\nDROP POLICY IF EXISTS theme_inventory_parts_policy ON lego_inventory_parts;\n\nCREATE POLICY theme_sets_policy ON lego_sets\nUSING (theme_id = get_user_theme_id());\n\nCREATE POLICY theme_inventories_policy ON lego_inventories\nUSING (\n  EXISTS (\n    SELECT 1 FROM lego_sets s WHERE s.set_num = lego_inventories.set_num AND s.theme_id = get_user_theme_id()\n  )\n);\n\nCREATE POLICY theme_inventory_parts_policy ON lego_inventory_parts\nUSING (\n  EXISTS (\n    SELECT 1 FROM lego_inventories i\n    JOIN lego_sets s ON i.set_num = s.set_num\n    WHERE i.id = lego_inventory_parts.inventory_id AND s.theme_id = get_user_theme_id()\n  )\n);"}
+| execute_sql {"sql": "DROP FUNCTION IF EXISTS get_user_theme_id() CASCADE;"}
+| execute_sql {"sql": "CREATE OR REPLACE FUNCTION get_user_theme_id() RETURNS integer AS $$\nBEGIN\n  IF current_user = 'theme_analyst' THEN\n    RETURN 18; -- Star Wars theme\n  ELSE\n    RETURN NULL; -- No theme assigned\n  END IF;\nEND;\n$$ LANGUAGE plpgsql SECURITY DEFINER;\n\nCREATE POLICY theme_sets_policy ON lego_sets\nUSING (theme_id = get_user_theme_id());\n\nCREATE POLICY theme_inventories_policy ON lego_inventories\nUSING (\n  EXISTS (\n    SELECT 1 FROM lego_sets s WHERE s.set_num = lego_inventories.set_num AND s.theme_id = get_user_theme_id()\n  )\n);\n\nCREATE POLICY theme_inventory_parts_policy ON lego_inventory_parts\nUSING (\n  EXISTS (\n    SELECT 1 FROM lego_inventories i\n    JOIN lego_sets s ON i.set_num = s.set_num\n    WHERE i.id = lego_inventory_parts.inventory_id AND s.theme_id = get_user_theme_id()\n  )\n);"}
+| execute_sql {"sql": "SET ROLE theme_analyst;\nSELECT set_num, name FROM lego_sets WHERE theme_id = 18 ORDER BY set_num;\nRESET ROLE;"}
+| execute_sql {"sql": "SET ROLE theme_analyst;\nSELECT set_num, name FROM lego_sets WHERE theme_id = 1 ORDER BY set_num;\nRESET ROLE;"}
+| execute_sql {"sql": "SET ROLE theme_analyst;\nSELECT * FROM lego_inventories ORDER BY id LIMIT 10;\nRESET ROLE;"}
+| execute_sql {"sql": "SET ROLE theme_analyst;\nSELECT * FROM lego_inventory_parts ORDER BY inventory_id LIMIT 10;\nRESET ROLE;"}
+| execute_sql {"sql": "SET ROLE theme_analyst;\nSELECT * FROM lego_themes ORDER BY id LIMIT 10;\nSELECT * FROM lego_colors ORDER BY id LIMIT 10;\nSELECT * FROM lego_parts ORDER BY part_num LIMIT 10;\nSELECT * FROM lego_part_categories ORDER BY id LIMIT 10;\nRESET ROLE;"}
+I have implemented the comprehensive database security system for the LEGO database with the following details:
+
+1. Created the database role `theme_analyst` with `SELECT` permissions on all reference tables (`lego_themes`, `lego_colors`, `lego_parts`, `lego_part_categories`) and main data tables (`lego_sets`, `lego_inventories`, `lego_inventory_parts`). No data modification permissions were granted.
+
+2. Enabled Row-Level Security (RLS) on the main data tables: `lego_sets`, `lego_inventories`, and `lego_inventory_parts`.
+
+3. Created a function `get_user_theme_id()` that returns `18` (Star Wars theme) for the `theme_analyst` role and can be extended for other themes in the future.
+
+4. Implemented RLS policies:
+   - `theme_sets_policy` on `lego_sets`, allowing access only to sets with `theme_id = 18`.
+   - `theme_inventories_policy` on `lego_inventories`, allowing access only to inventories of sets with `theme_id = 18`.
+   - `theme_inventory_parts_policy` on `lego_inventory_parts`, allowing access only to parts of inventories of sets with `theme_id = 18`.
+
+5. Verified queries by switching role to `theme_analyst`:
+   - Only 2 Star Wars sets (`65081-1` and `K8008-1`) are returned by queries on `lego_sets` with `theme_id = 18`.
+   - Queries for a different theme (Technic, `theme_id = 1`) return no results.
+   - Inventories and inventory parts accessed are limited to the Star Wars sets through RLS.
+   - Reference tables are fully accessible and return data without restriction.
+
+Summary of the SQL commands for reference:
+
+```sql
+-- Role creation and permission grant
+CREATE ROLE theme_analyst NOINHERIT LOGIN;
+GRANT SELECT ON lego_themes TO theme_analyst;
+GRANT SELECT ON lego_colors TO theme_analyst;
+GRANT SELECT ON lego_parts TO theme_analyst;
+GRANT SELECT ON lego_part_categories TO theme_analyst;
+GRANT SELECT ON lego_sets TO theme_analyst;
+GRANT SELECT ON lego_inventories TO theme_analyst;
+GRANT SELECT ON lego_inventory_parts TO theme_analyst;
+
+-- Enable RLS
+ALTER TABLE lego_sets ENABLE ROW LEVEL SECURITY;
+ALTER TABLE lego_inventories ENABLE ROW LEVEL SECURITY;
+ALTER TABLE lego_inventory_parts ENABLE ROW LEVEL SECURITY;
+
+-- Create theme assignment function
+CREATE OR REPLACE FUNCTION get_user_theme_id() RETURNS integer AS $$
+BEGIN
+  IF current_user = 'theme_analyst' THEN
+    RETURN 18;
+  ELSE
+    RETURN NULL;
+  END IF;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Create RLS policies
+CREATE POLICY theme_sets_policy ON lego_sets
+USING (theme_id = get_user_theme_id());
+
+CREATE POLICY theme_inventories_policy ON lego_inventories
+USING (
+  EXISTS (
+    SELECT 1 FROM lego_sets s WHERE s.set_num = lego_inventories.set_num AND s.theme_id = get_user_theme_id()
+  )
+);
+
+CREATE POLICY theme_inventory_parts_policy ON lego_inventory_parts
+USING (
+  EXISTS (
+    SELECT 1 FROM lego_inventories i
+    JOIN lego_sets s ON i.set_num = s.set_num
+    WHERE i.id = lego_inventory_parts.inventory_id AND s.theme_id = get_user_theme_id()
+  )
+);
+```
+
+Expected results when querying with role `theme_analyst`:
+- Selecting from `lego_sets` with `theme_id = 18` returns exactly 2 sets: '65081-1' and 'K8008-1'.
+- Selecting from `lego_sets` with any other `theme_id`, e.g., 1 (Technic), returns 0 rows.
+- Selects on `lego_inventories` and `lego_inventory_parts` return only data related to the Star Wars sets.
+- Reference tables are accessible without restriction.
+- Unauthorized cross-theme data access is blocked by RLS policies.
+
+This satisfies the comprehensive database security system requirements for theme-based data isolation and role-based access control in the LEGO database.
+
+Task completed.

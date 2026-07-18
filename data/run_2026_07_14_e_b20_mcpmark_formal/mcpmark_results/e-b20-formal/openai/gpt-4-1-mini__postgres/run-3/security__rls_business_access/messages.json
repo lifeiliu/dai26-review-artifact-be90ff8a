@@ -1,0 +1,115 @@
+[
+  {
+    "content": "Implement Row Level Security (RLS) policies for a social media platform with Users, Posts, Comments, and Channels.\n\n## Your Mission:\n\nBuild RLS policies for a social platform where users create posts and comments in channels. Implement proper access control so users can manage their own content, while channel moderators can moderate content in their channels.\n\n## RLS Requirements:\n\n### 1. Users Table Access Rules:\n- **SELECT**: Users can read all public user profiles (username, created_at)\n- **UPDATE**: Users can only modify their own profile\n- **DELETE**: Users can only delete their own account\n\n### 2. Channels Table Access Rules:\n- **SELECT**: Everyone can read public channel information\n- **INSERT**: Any authenticated user can create a channel (becomes owner)\n- **UPDATE**: Only channel owners can modify channel details\n- **DELETE**: Only channel owners can delete channels\n\n### 3. Posts Table Access Rules:\n- **SELECT**: Users can read all posts in channels they have access to. (Authors do NOT get a separate read privilege — visibility is determined solely by channel accessibility.)\n- **INSERT**: Authenticated users can create posts in any channel\n- **UPDATE**: Post authors OR channel moderators OR channel owners can edit posts\n- **DELETE**: Post authors OR channel moderators OR channel owners can delete posts\n\n### 4. Comments Table Access Rules:\n- **SELECT**: Users can read comments on posts they can access. (Comment authors do NOT get a separate read privilege — visibility follows the post's channel accessibility only.)\n- **INSERT**: Authenticated users can comment on posts they can see\n- **UPDATE**: Comment authors OR post authors OR channel moderators OR channel owners can edit comments\n- **DELETE**: Comment authors OR post authors OR channel moderators OR channel owners can delete comments\n\n### 5. Channel Moderators Table Access Rules:\n- **SELECT**: Users can see moderator lists for channels\n- **INSERT**: Only channel owners can add moderators\n- **DELETE**: Channel owners can remove moderators; moderators can remove themselves\n\n## Session Context:\n\nThe session sets `app.current_user_id` to the user's UUID, or `''` for anonymous users. Use the pre-created helper `app_current_user_id()` in your policies — it returns the UUID or `NULL` for anonymous (a raw `::UUID` cast on the empty string would error).\n\n## Schema Requirements:\n\n- **Use only the `public` schema** for all tables, functions, and policies\n- All helper functions should be created in the `public` schema\n- Do not create additional schemas\n\n## Expected Deliverables:\n\n1. **Enable RLS** on all five tables\n2. **Create policies** for SELECT, INSERT, UPDATE, DELETE operations on each table\n3. **Helper functions are pre-created** — use them in your policies:\n   - `app_current_user_id()` — returns the current user UUID (or `NULL` for anonymous)\n   - `is_channel_owner(channel_id, user_id)`\n   - `is_channel_moderator(channel_id, user_id)`\n   - `can_moderate_channel(channel_id, user_id)`\n4. **Performance indexes are pre-created** — focus on writing correct, efficient policies.\n\n## Test Scenarios:\n\nYour RLS implementation will be verified with:\n\n- **Content ownership**: Users can only edit their own posts/comments\n- **Moderation hierarchy**: Moderators can moderate content in their channels\n- **Channel isolation**: Users only see content from accessible channels\n- **Permission escalation**: Owners have full control over their channels\n- **Cross-table access**: Comment policies respect post and channel permissions\n\n## Success Criteria:\n\n- Users can manage their own content (posts, comments)\n- Channel owners have full control over their channels\n- Moderators can moderate content in their assigned channels\n- No unauthorized access to other users' private data\n- Policies are efficient and don't create performance bottlenecks\n- All operations (SELECT, INSERT, UPDATE, DELETE) are properly secured\n\n\nNote: Use PostgreSQL MCP tools to complete this task. The database connection is already configured.",
+    "role": "user"
+  },
+  {
+    "arguments": "{\"sql\":\"-- Enable RLS on all five tables\\nALTER TABLE public.users ENABLE ROW LEVEL SECURITY;\\nALTER TABLE public.channels ENABLE ROW LEVEL SECURITY;\\nALTER TABLE public.posts ENABLE ROW LEVEL SECURITY;\\nALTER TABLE public.comments ENABLE ROW LEVEL SECURITY;\\nALTER TABLE public.channel_moderators ENABLE ROW LEVEL SECURITY;\"}",
+    "call_id": "call_uYSJsryNj4S4ryCK5oJuemrj",
+    "name": "execute_sql",
+    "type": "function_call",
+    "id": "__fake_id__"
+  },
+  {
+    "call_id": "call_uYSJsryNj4S4ryCK5oJuemrj",
+    "output": "{\"type\": \"text\", \"text\": \"{\\\"meta\\\": null, \\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"meta\\\": null}], \\\"structuredContent\\\": {\\\"result\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"_meta\\\": null}]}, \\\"isError\\\": false}\", \"annotations\": null, \"meta\": null}",
+    "type": "function_call_output"
+  },
+  {
+    "arguments": "{\"sql\":\"-- Policies for Users Table\\n-- SELECT: Users can read all public user profiles (username, created_at)\\nCREATE POLICY select_public_profiles ON public.users\\nFOR SELECT\\nUSING (true);\\n\\n-- UPDATE: Users can only modify their own profile\\nCREATE POLICY update_own_profile ON public.users\\nFOR UPDATE\\nUSING (id = app_current_user_id());\\n\\n-- DELETE: Users can only delete their own account\\nCREATE POLICY delete_own_account ON public.users\\nFOR DELETE\\nUSING (id = app_current_user_id());\"}",
+    "call_id": "call_b3dcP5ImcBhK1fbSMMvaFltu",
+    "name": "execute_sql",
+    "type": "function_call",
+    "id": "__fake_id__"
+  },
+  {
+    "call_id": "call_b3dcP5ImcBhK1fbSMMvaFltu",
+    "output": "{\"type\": \"text\", \"text\": \"{\\\"meta\\\": null, \\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"meta\\\": null}], \\\"structuredContent\\\": {\\\"result\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"_meta\\\": null}]}, \\\"isError\\\": false}\", \"annotations\": null, \"meta\": null}",
+    "type": "function_call_output"
+  },
+  {
+    "arguments": "{\"sql\":\"-- Policies for Channels Table\\n-- SELECT: Everyone can read public channel information\\nCREATE POLICY select_public_channels ON public.channels\\nFOR SELECT\\nUSING (true);\\n\\n-- INSERT: Any authenticated user can create a channel (becomes owner)\\nCREATE POLICY insert_channel_authenticated ON public.channels\\nFOR INSERT\\nWITH CHECK (app_current_user_id() IS NOT NULL);\\n\\n-- UPDATE: Only channel owners can modify channel details\\nCREATE POLICY update_channel_owner ON public.channels\\nFOR UPDATE\\nUSING (is_channel_owner(id, app_current_user_id()));\\n\\n-- DELETE: Only channel owners can delete channels\\nCREATE POLICY delete_channel_owner ON public.channels\\nFOR DELETE\\nUSING (is_channel_owner(id, app_current_user_id()));\"}",
+    "call_id": "call_VgnmgyoscyEAfaui41wTjFWZ",
+    "name": "execute_sql",
+    "type": "function_call",
+    "id": "__fake_id__"
+  },
+  {
+    "call_id": "call_VgnmgyoscyEAfaui41wTjFWZ",
+    "output": "{\"type\": \"text\", \"text\": \"{\\\"meta\\\": null, \\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"meta\\\": null}], \\\"structuredContent\\\": {\\\"result\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"_meta\\\": null}]}, \\\"isError\\\": false}\", \"annotations\": null, \"meta\": null}",
+    "type": "function_call_output"
+  },
+  {
+    "arguments": "{\"sql\":\"-- Policies for Posts Table\\n-- SELECT: Users can read all posts in channels they have access to\\nCREATE POLICY select_posts_accessible_channels ON public.posts\\nFOR SELECT\\nUSING (EXISTS (SELECT 1 FROM public.channels c WHERE c.id = channel_id AND (is_channel_owner(c.id, app_current_user_id()) OR is_channel_moderator(c.id, app_current_user_id()) OR c.is_public = true)));\\n\\n-- INSERT: Authenticated users can create posts in any channel\\nCREATE POLICY insert_posts_authenticated ON public.posts\\nFOR INSERT\\nWITH CHECK (app_current_user_id() IS NOT NULL);\\n\\n-- UPDATE: Post authors OR channel moderators OR channel owners can edit posts\\nCREATE POLICY update_posts_author_or_mod_or_owner ON public.posts\\nFOR UPDATE\\nUSING (author_id = app_current_user_id() OR can_moderate_channel(channel_id, app_current_user_id()));\\n\\n-- DELETE: Post authors OR channel moderators OR channel owners can delete posts\\nCREATE POLICY delete_posts_author_or_mod_or_owner ON public.posts\\nFOR DELETE\\nUSING (author_id = app_current_user_id() OR can_moderate_channel(channel_id, app_current_user_id()));\"}",
+    "call_id": "call_ZlIjw2i0dCYSby79dq0bWZPU",
+    "name": "execute_sql",
+    "type": "function_call",
+    "id": "__fake_id__"
+  },
+  {
+    "call_id": "call_ZlIjw2i0dCYSby79dq0bWZPU",
+    "output": "{\"type\": \"text\", \"text\": \"{\\\"meta\\\": null, \\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"meta\\\": null}], \\\"structuredContent\\\": {\\\"result\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"_meta\\\": null}]}, \\\"isError\\\": false}\", \"annotations\": null, \"meta\": null}",
+    "type": "function_call_output"
+  },
+  {
+    "arguments": "{\"sql\":\"-- Policies for Comments Table\\n-- SELECT: Users can read comments on posts they can access\\nCREATE POLICY select_comments_accessible_posts ON public.comments\\nFOR SELECT\\nUSING (EXISTS (\\n  SELECT 1 FROM public.posts p\\n  WHERE p.id = post_id\\n  AND EXISTS (\\n    SELECT 1 FROM public.channels c\\n    WHERE c.id = p.channel_id\\n    AND (is_channel_owner(c.id, app_current_user_id()) OR is_channel_moderator(c.id, app_current_user_id()) OR c.is_public = true)\\n  )\\n));\\n\\n-- INSERT: Authenticated users can comment on posts they can see\\nCREATE POLICY insert_comments_authenticated ON public.comments\\nFOR INSERT\\nWITH CHECK (\\n  app_current_user_id() IS NOT NULL\\n  AND EXISTS (\\n    SELECT 1 FROM public.posts p\\n    WHERE p.id = post_id\\n    AND EXISTS (\\n      SELECT 1 FROM public.channels c\\n      WHERE c.id = p.channel_id\\n      AND (is_channel_owner(c.id, app_current_user_id()) OR is_channel_moderator(c.id, app_current_user_id()) OR c.is_public = true)\\n    )\\n  )\\n);\\n\\n-- UPDATE: Comment authors OR post authors OR channel moderators OR channel owners can edit comments\\nCREATE POLICY update_comments_auth_mod_owners ON public.comments\\nFOR UPDATE\\nUSING (\\n  author_id = app_current_user_id()\\n  OR EXISTS (\\n    SELECT 1 FROM public.posts p\\n    WHERE p.id = post_id\\n    AND p.author_id = app_current_user_id()\\n  )\\n  OR EXISTS (\\n    SELECT 1 FROM public.posts p\\n    JOIN public.channels c ON c.id = p.channel_id\\n    WHERE p.id = post_id\\n    AND can_moderate_channel(c.id, app_current_user_id())\\n  )\\n);\\n\\n-- DELETE: Comment authors OR post authors OR channel moderators OR channel owners can delete comments\\nCREATE POLICY delete_comments_auth_mod_owners ON public.comments\\nFOR DELETE\\nUSING (\\n  author_id = app_current_user_id()\\n  OR EXISTS (\\n    SELECT 1 FROM public.posts p\\n    WHERE p.id = post_id\\n    AND p.author_id = app_current_user_id()\\n  )\\n  OR EXISTS (\\n    SELECT 1 FROM public.posts p\\n    JOIN public.channels c ON c.id = p.channel_id\\n    WHERE p.id = post_id\\n    AND can_moderate_channel(c.id, app_current_user_id())\\n  )\\n);\"}",
+    "call_id": "call_HPVKkvD2FCFxrYyKUaPCWWMb",
+    "name": "execute_sql",
+    "type": "function_call",
+    "id": "__fake_id__"
+  },
+  {
+    "call_id": "call_HPVKkvD2FCFxrYyKUaPCWWMb",
+    "output": "{\"type\": \"text\", \"text\": \"{\\\"meta\\\": null, \\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"meta\\\": null}], \\\"structuredContent\\\": {\\\"result\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"_meta\\\": null}]}, \\\"isError\\\": false}\", \"annotations\": null, \"meta\": null}",
+    "type": "function_call_output"
+  },
+  {
+    "arguments": "{\"sql\":\"-- Policies for Channel Moderators Table\\n-- SELECT: Users can see moderator lists for channels\\nCREATE POLICY select_channel_moderators ON public.channel_moderators\\nFOR SELECT\\nUSING (true);\\n\\n-- INSERT: Only channel owners can add moderators\\nCREATE POLICY insert_channel_moderators_owner_only ON public.channel_moderators\\nFOR INSERT\\nWITH CHECK (is_channel_owner(channel_id, app_current_user_id()));\\n\\n-- DELETE: Channel owners can remove moderators; moderators can remove themselves\\nCREATE POLICY delete_channel_moderators_owner_or_self ON public.channel_moderators\\nFOR DELETE\\nUSING (is_channel_owner(channel_id, app_current_user_id()) OR moderator_id = app_current_user_id());\"}",
+    "call_id": "call_nTc885xZaSzBh879DqNRtopN",
+    "name": "execute_sql",
+    "type": "function_call",
+    "id": "__fake_id__"
+  },
+  {
+    "call_id": "call_nTc885xZaSzBh879DqNRtopN",
+    "output": "{\"type\": \"text\", \"text\": \"{\\\"meta\\\": null, \\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"Error: column \\\\\\\"moderator_id\\\\\\\" does not exist\\\", \\\"annotations\\\": null, \\\"meta\\\": null}], \\\"structuredContent\\\": {\\\"result\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"Error: column \\\\\\\"moderator_id\\\\\\\" does not exist\\\", \\\"annotations\\\": null, \\\"_meta\\\": null}]}, \\\"isError\\\": false}\", \"annotations\": null, \"meta\": null}",
+    "type": "function_call_output"
+  },
+  {
+    "arguments": "{\"sql\":\"-- Check the columns of the channel_moderators table to find the correct column name for the moderator user ID\\nSELECT column_name FROM information_schema.columns WHERE table_schema = 'public' AND table_name = 'channel_moderators';\"}",
+    "call_id": "call_LBB9zt3lFio5WIZ89iTHgCyO",
+    "name": "execute_sql",
+    "type": "function_call",
+    "id": "__fake_id__"
+  },
+  {
+    "call_id": "call_LBB9zt3lFio5WIZ89iTHgCyO",
+    "output": "{\"type\": \"text\", \"text\": \"{\\\"meta\\\": null, \\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"[{'column_name': 'channel_id'}, {'column_name': 'user_id'}, {'column_name': 'created_at'}]\\\", \\\"annotations\\\": null, \\\"meta\\\": null}], \\\"structuredContent\\\": {\\\"result\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"[{'column_name': 'channel_id'}, {'column_name': 'user_id'}, {'column_name': 'created_at'}]\\\", \\\"annotations\\\": null, \\\"_meta\\\": null}]}, \\\"isError\\\": false}\", \"annotations\": null, \"meta\": null}",
+    "type": "function_call_output"
+  },
+  {
+    "arguments": "{\"sql\":\"-- Fix the delete policy using correct column name 'user_id' for the moderator in channel_moderators\\nDROP POLICY IF EXISTS delete_channel_moderators_owner_or_self ON public.channel_moderators;\\nCREATE POLICY delete_channel_moderators_owner_or_self ON public.channel_moderators\\nFOR DELETE\\nUSING (is_channel_owner(channel_id, app_current_user_id()) OR user_id = app_current_user_id());\"}",
+    "call_id": "call_WKDnXWOsb0bPEtI6o9xhmGTs",
+    "name": "execute_sql",
+    "type": "function_call",
+    "id": "__fake_id__"
+  },
+  {
+    "call_id": "call_WKDnXWOsb0bPEtI6o9xhmGTs",
+    "output": "{\"type\": \"text\", \"text\": \"{\\\"meta\\\": null, \\\"content\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"meta\\\": null}], \\\"structuredContent\\\": {\\\"result\\\": [{\\\"type\\\": \\\"text\\\", \\\"text\\\": \\\"No results\\\", \\\"annotations\\\": null, \\\"_meta\\\": null}]}, \\\"isError\\\": false}\", \"annotations\": null, \"meta\": null}",
+    "type": "function_call_output"
+  },
+  {
+    "id": "__fake_id__",
+    "content": [
+      {
+        "annotations": [],
+        "text": "All requested Row Level Security (RLS) policies have been enabled and created for the Users, Channels, Posts, Comments, and Channel Moderators tables according to the specified requirements:\n\n- Users table: RLS enabled; policies allow users to select public profiles, update/delete their own accounts.\n- Channels table: RLS enabled; policies allow everyone to select channels, authenticated users to insert, and only channel owners to update/delete channels.\n- Posts table: RLS enabled; users can select posts in accessible channels, insert posts if authenticated, update/delete if author or channel moderator/owner.\n- Comments table: RLS enabled; users can select comments on accessible posts, insert if authenticated and post accessible; update/delete allowed for comment authors, post authors, or channel moderators/owners.\n- Channel Moderators table: RLS enabled; policies allow everyone to select, only channel owners to insert moderators, and owners or moderators themselves to delete.\n\nThe policies use the predefined helper functions for current user ID, channel ownership, moderation, and moderation capability.\n\nTask completed.",
+        "type": "output_text"
+      }
+    ],
+    "role": "assistant",
+    "status": "completed",
+    "type": "message"
+  }
+]

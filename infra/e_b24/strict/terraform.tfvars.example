@@ -1,0 +1,17 @@
+owner  = "researcher"
+expiry = "2026-07-20T23:59:59Z"
+
+# All gates remain false in the checked-in example. The front-door-only phase
+# sets enable_push_front_door=true while compute/listeners remain false. The
+# reviewed full pilot plan sets all three true.
+enable_compute         = false
+enable_push_front_door = false
+enable_push_listeners  = false
+
+# Supply the real account-scoped ECR URL only on the command line or in an
+# ignored local tfvars file. Mutable tags are rejected.
+runtime_image = "000000000000.dkr.ecr.us-east-1.amazonaws.com/paper-b-e-b24/runtime@sha256:0000000000000000000000000000000000000000000000000000000000000000"
+
+# Set only after prepare_strict_materials.py imports the exact-ALB-DNS leaf
+# certificate. This ARN is not secret, but account-scoped values stay local.
+push_certificate_arn = ""

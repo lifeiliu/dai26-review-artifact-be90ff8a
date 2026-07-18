@@ -1,0 +1,41 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| execute_sql {"sql": "-- Task 1: Identify Data Inconsistencies\n\nSELECT\n  s.set_num,\n  s.num_parts AS stored_num_parts,\n  COALESCE(actual_parts, 0) AS actual_parts\nFROM public.lego_sets s\nLEFT JOIN (\n  SELECT\n    i.set_num,\n    SUM(p.quantity) FILTER (WHERE p.is_spare = false) AS actual_parts\n  FROM public.lego_inventories i\n  LEFT JOIN public.lego_inventory_parts p ON p.inventory_id = i.id\n  WHERE (i.set_num, i.version) IN (\n    SELECT set_num, MAX(version)\n    FROM public.lego_inventories\n    GROUP BY set_num\n  )\n  GROUP BY i.set_num\n) AS latest_parts ON latest_parts.set_num = s.set_num\nWHERE s.num_parts <> COALESCE(actual_parts, 0);\n"}
+| execute_sql {"sql": "-- Task 2: Fix Existing Inconsistencies\n\n-- Step 1: Create a temporary table\nCREATE TEMPORARY TABLE correct_counts (\n  set_num TEXT PRIMARY KEY,\n  actual_parts INTEGER\n);\n\n-- Step 2: Populate the temporary table\nINSERT INTO correct_counts (set_num, actual_parts)\nSELECT\n  s.set_num,\n  COALESCE(latest_parts.actual_parts, 0) AS actual_parts\nFROM public.lego_sets s\nLEFT JOIN (\n  SELECT\n    i.set_num,\n    SUM(p.quantity) FILTER (WHERE p.is_spare = false) AS actual_parts\n  FROM public.lego_inventories i\n  LEFT JOIN public.lego_inventory_parts p ON p.inventory_id = i.id\n  WHERE (i.set_num, i.version) IN (\n    SELECT set_num, MAX(version)\n    FROM public.lego_inventories\n    GROUP BY set_num\n  )\n  GROUP BY i.set_num\n) AS latest_parts ON latest_parts.set_num = s.set_num;\n\n-- Step 3: Update lego_sets from the temporary table\nUPDATE public.lego_sets s\nSET num_parts = c.actual_parts\nFROM correct_counts c\nWHERE s.set_num = c.set_num AND s.num_parts <> c.actual_parts;\n"}
+| execute_sql {"sql": "-- Task 3 - Part A: Create the Trigger Function\nCREATE OR REPLACE FUNCTION check_set_parts_consistency()\nRETURNS trigger AS $$\nDECLARE\n  relevant_set_num TEXT;\n  stored_num_parts INTEGER;\n  actual_parts INTEGER;\nBEGIN\n  -- Identify the set_num depending on the triggering table\n  IF TG_TABLE_NAME = 'lego_sets' OR TG_TABLE_NAME = 'lego_inventories' THEN\n    relevant_set_num := NEW.set_num;\n  ELSIF TG_TABLE_NAME = 'lego_inventory_parts' THEN\n    SELECT i.set_num INTO relevant_set_num\n    FROM public.lego_inventories i\n    WHERE i.id = NEW.inventory_id;\n  ELSE\n    -- If triggered from other tables, skip check\n    RETURN NEW;\n  END IF;\n\n  -- Get stored num_parts for the relevant set\n  SELECT num_parts INTO stored_num_parts\n  FROM public.lego_sets\n  WHERE set_num = relevant_set_num;\n\n  -- Calculate actual parts from the latest inventory version\n  SELECT COALESCE(SUM(p.quantity) FILTER (WHERE p.is_spare = false), 0) INTO actual_parts\n  FROM public.lego_inventories i\n  LEFT JOIN public.lego_inventory_parts p ON p.inventory_id = i.id\n  WHERE i.set_num = relevant_set_num\n    AND i.version = (SELECT MAX(version) FROM public.lego_inventories WHERE set_num = relevant_set_num);\n\n  -- Check consistency\n  IF stored_num_parts IS NULL THEN\n    -- If set does not exist, raise exception\n    RAISE EXCEPTION 'Set % does not exist in lego_sets table', relevant_set_num;\n  ELSIF stored_num_parts <> actual_parts THEN\n    RAISE EXCEPTION 'Inconsistent part count for set %: stored % vs actual %', relevant_set_num, stored_num_parts, actual_parts;\n  END IF;\n\n  RETURN NEW;\nEND;\n$$ LANGUAGE plpgsql;\n"}
+| execute_sql {"sql": "-- Task 3 - Part B: Create Constraint Triggers\nCREATE CONSTRAINT TRIGGER lego_sets_parts_consistency_trigger\nAFTER INSERT OR UPDATE ON public.lego_sets\nDEFERRABLE INITIALLY IMMEDIATE\nFOR EACH ROW\nEXECUTE FUNCTION check_set_parts_consistency();"}
+| execute_sql {"sql": "CREATE CONSTRAINT TRIGGER lego_inventories_parts_consistency_trigger\nAFTER INSERT OR UPDATE ON public.lego_inventories\nDEFERRABLE INITIALLY IMMEDIATE\nFOR EACH ROW\nEXECUTE FUNCTION check_set_parts_consistency();"}
+| execute_sql {"sql": "CREATE CONSTRAINT TRIGGER lego_inventory_parts_parts_consistency_trigger\nAFTER INSERT OR UPDATE ON public.lego_inventory_parts\nDEFERRABLE INITIALLY IMMEDIATE\nFOR EACH ROW\nEXECUTE FUNCTION check_set_parts_consistency();"}
+Task 1: Identified data inconsistencies with the provided SELECT query. The query returns all sets where the stored `num_parts` does not match the actual calculated number of parts in the latest inventory.
+
+Task 2: Fixed existing inconsistencies by:
+- Creating a temporary table `correct_counts`
+- Populating it with correct counts for all sets
+- Updating the `lego_sets.num_parts` from the temporary table
+
+Task 3: Created a deferrable constraint enforcement system including:
+- A trigger function `check_set_parts_consistency()` that checks consistency for any changes on the involved tables (lego_sets, lego_inventories, lego_inventory_parts)
+- Three deferrable, initially immediate constraint triggers on the three tables to call this function after INSERT or UPDATE operations
+
+This ensures that future data changes will be validated to maintain the part count consistency invariant.
+
+Task completed.

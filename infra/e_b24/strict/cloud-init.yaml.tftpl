@@ -1,0 +1,51 @@
+#cloud-config
+hostname: ${host_name}
+manage_etc_hosts: false
+package_update: false
+write_files:
+  - path: /usr/local/sbin/e-b24-install-packages
+    owner: root:root
+    permissions: "0755"
+    content: |
+      #!/usr/bin/env bash
+      set -euo pipefail
+      max_attempts=12
+      for attempt in $(seq 1 "$max_attempts"); do
+        if dnf -y install docker jq chrony nftables; then
+          printf 'e-b24-package-bootstrap=passed attempt=%s\n' "$attempt"
+          exit 0
+        fi
+        if [[ "$attempt" -eq "$max_attempts" ]]; then
+          break
+        fi
+        sleep_seconds=$((attempt * 5))
+        printf 'e-b24-package-bootstrap=retry attempt=%s sleep=%s\n' "$attempt" "$sleep_seconds" >&2
+        sleep "$sleep_seconds"
+      done
+      printf 'e-b24-package-bootstrap=failed attempts=%s\n' "$max_attempts" >&2
+      exit 1
+  - path: /etc/e-b24/host.json
+    owner: root:root
+    permissions: "0644"
+    content: |
+      {"host":"${host_name}","role":"${role}","private_ip":"${private_ip}","runtime_image":"${runtime_image}","zone_id":"${zone_id}"}
+  - path: /etc/e-b24/runtime-image
+    owner: root:root
+    permissions: "0644"
+    content: |
+      ${runtime_image}
+  - path: /etc/e-b24/strict-hosts
+    owner: root:root
+    permissions: "0644"
+    content: |
+      ${indent(6, host_lines)}
+runcmd:
+  - [mkdir, -p, /opt/e-b24, /var/lib/e-b24, /var/log/e-b24]
+  - [bash, -lc, "cat /etc/e-b24/strict-hosts >> /etc/hosts"]
+  - [/usr/local/sbin/e-b24-install-packages]
+  - [systemctl, enable, --now, docker]
+  - [systemctl, enable, --now, chronyd]
+  - [systemctl, enable, --now, amazon-ssm-agent]
+  - [usermod, -aG, docker, ec2-user]
+  - [bash, -lc, "chronyc tracking > /var/log/e-b24/chrony-bootstrap.txt"]
+final_message: "E-B24 strict host bootstrap complete"

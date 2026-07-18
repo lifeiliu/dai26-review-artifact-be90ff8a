@@ -1,0 +1,127 @@
+[
+  {
+    "evidence": {
+      "complete_for_bound": false,
+      "highest_stage": "C3_RECEIVER_PERSISTED",
+      "status": "PARTIAL_ENFORCEMENT"
+    },
+    "id": "F01_PERSISTED_NO_RECEIPTS",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "complete_for_bound": false,
+      "highest_stage": "C3_RECEIVER_PERSISTED",
+      "status": "PARTIAL_ENFORCEMENT"
+    },
+    "id": "F02_PARTIAL_RECEIPTS",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "complete_for_bound": false,
+      "highest_stage": "C4_GATEWAYS_ENFORCED",
+      "status": "IN_PROGRESS"
+    },
+    "id": "F03_ALL_RECEIPTS_OPEN",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "complete_for_bound": false,
+      "highest_stage": "C4_GATEWAYS_ENFORCED",
+      "status": "INDETERMINATE_MISSING_EFFECT_EVIDENCE"
+    },
+    "id": "F04_CLOSED_MISSING_EFFECTS",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "complete_for_bound": true,
+      "highest_stage": "C5_EFFECTS_PREVENTED",
+      "status": "COMPLETE_FOR_BOUND"
+    },
+    "id": "F05_COMPLETE_BOUND",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "complete_for_bound": false,
+      "highest_stage": "C4_GATEWAYS_ENFORCED",
+      "status": "VIOLATED"
+    },
+    "id": "F06_ALLOWED_VIOLATION",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "complete_for_bound": false,
+      "highest_stage": "C4_GATEWAYS_ENFORCED",
+      "status": "VIOLATED"
+    },
+    "id": "F07_COMMITTED_VIOLATION",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "after_late_receipt": {
+        "complete_for_bound": false,
+        "highest_stage": "C4_GATEWAYS_ENFORCED",
+        "status": "VIOLATED"
+      },
+      "before_late_receipt": {
+        "complete_for_bound": false,
+        "highest_stage": "C3_RECEIVER_PERSISTED",
+        "status": "VIOLATED"
+      }
+    },
+    "id": "F08_LATE_RECEIPT_STICKY_VIOLATION",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "conflicting_effect": "ValueError: effect evidence for a vector is immutable",
+      "conflicting_receipt": "ValueError: enforcement receipt for a gateway is immutable",
+      "identical_duplicates": "accepted"
+    },
+    "id": "F09_DUPLICATE_IMMUTABILITY",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "exact_verdict_persisted": true,
+      "status": "COMPLETE_FOR_BOUND"
+    },
+    "id": "F10_RESTART_PERSISTENCE",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "contract_change": "ValueError: registered completion contract is immutable",
+      "target_change": "ValueError: receiver duplicate changed the frozen gateway target set"
+    },
+    "id": "F11_CONTRACT_TARGET_IMMUTABILITY",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "early_close": "ValueError: window cannot close before its frozen deadline",
+      "future_close": "ValueError: window cannot close in the future"
+    },
+    "id": "F12_WINDOW_CLOSURE_GUARD",
+    "passed": true
+  },
+  {
+    "evidence": {
+      "outside_set": "ValueError: effect observation is outside the frozen vector set",
+      "outside_time": "ValueError: effect observation is outside the frozen time window"
+    },
+    "id": "F13_EFFECT_BOUND_GUARD",
+    "passed": true
+  },
+  {
+    "evidence": "ValueError: C0--C2 evidence identifiers must be non-empty",
+    "id": "F14_C0_C2_EVIDENCE_REQUIRED",
+    "passed": true
+  }
+]

@@ -1,0 +1,84 @@
+{
+  "block_count": 30,
+  "clock_bound_seconds": 0.01,
+  "frozen_at": "2026-07-17T22:50:00Z",
+  "inherited_configuration": {
+    "effect_threshold": 0.3,
+    "mutation_labels_changed": false,
+    "risk_index_changed": false,
+    "target_fraction": 0.2,
+    "target_membership_changed": false,
+    "target_policy_changed": false
+  },
+  "material_sha256": {
+    "allowlist": "9e76d237213e899486bfd65fad817cedd500cd0820535aa8e953519a24b8e9b2",
+    "experiment_ca_fingerprint": "e69bfa4b47069c83e3fc10c589e07472e95562b25f1331f2a797543dd1bb29a7",
+    "keycloak_realm": "0f634357773b818b00c5eb2c2019881b318496362152c0bee28824233290a61e",
+    "post_partition_clean_pilot": "9372ac03e31c71484b792c46b5ff9c81143a2a64298263c43c09e3f7693d8654",
+    "push_alb_leaf_fingerprint": "9095ae21f4d70fc844062784701bd5c33a2779385ef9fa081cf84df8fd7f82f5",
+    "strict_materials_manifest": "0a8c950eb2e6bce69fc191a8a965139271a76b48aecd4407d05604848961ca8c",
+    "strict_service_bootstrap_report": "8a5e46a429780d674640bdeb03cb309270415f6679d2df9c2a9d9d4dc4038e82",
+    "topology_manifest_canonical": "44f70cdeacdd18698b779d4fbd5decdbe6d50002f7bf989e8cbef85c31a1f838"
+  },
+  "physical_assignment": {
+    "rule": "zero_based_vector_index_mod_8_plus_1",
+    "receiver-a": {
+      "filesystem": 56,
+      "gateways": [1, 2, 3, 4],
+      "postgres": 57,
+      "vectors": 113
+    },
+    "receiver-b": {
+      "filesystem": 56,
+      "gateways": [5, 6, 7, 8],
+      "postgres": 56,
+      "vectors": 112
+    }
+  },
+  "protocol_version": "e-b24-prereg-v1",
+  "run_id": "eb24-confirmatory-v1-20260717",
+  "runtime_image_digest": "sha256:63703056236d0bba22ad0d8673470469825cb2e27b28c1f5cc208e2b4a271d42",
+  "source_sha256": {
+    "artifact/data/run_2026_07_16_e_b24_local_real_effect_gate/frozen-vector-allowlist.json": "9e76d237213e899486bfd65fad817cedd500cd0820535aa8e953519a24b8e9b2",
+    "infra/e_b24/scripts/run_e_b24_confirmatory.py": "31d627c20857d93311fa24a0df605692457972547a24265460bf0861651d5ae3",
+    "infra/e_b24/strict/cloud-init.yaml.tftpl": "af590321bd83955f3873c060d05a2d6b5401f46a65c40d2b4e886e1777b9ad06",
+    "infra/e_b24/strict/e_b24_effect_oracle_export.py": "5cec8d12dcce0f56823d994788b11d8492c2c62f7eca6819b35e55de702a6306",
+    "infra/e_b24/strict/e_b24_fault_controller.py": "a5a97270745b1ac9af6f4c795cd4094cd1dfc27e2237ad7274bc739537b3589c",
+    "infra/e_b24/strict/e_b24_outcome_driver.py": "9757ad97aa9e09bff1623c9e66419d509fb4d009232c8995d7bd536fdbfd171b",
+    "infra/e_b24/strict/e_b24_receiver_export.py": "7bee4180f51d93584f0ce7a65c58ff43123ba83a9484986bed90a8004dde171d",
+    "infra/e_b24/strict/infrastructure_pilot.py": "79c7ea2dd71d1db1349017e7845574107f13d2afe72a52849b39c03a0cc3a280",
+    "infra/e_b24/strict/main.tf": "7361c3da16fdf01d574f9a2d36f138cdfca58868020c494f3652554572a5a7b1",
+    "infra/e_b24/strict/outputs.tf": "0fc39da5072d79ef96219cee0d257b158705caa845ccafa7ebef42eb6e9d2072",
+    "infra/e_b24/strict/service-bootstrap.sh": "4b41f140a47fdc21e8f2cdebddec3818568374a071c7aae3b9323bd4f246eb12",
+    "infra/e_b24/strict/variables.tf": "db55739d32088a39bd8720ae6fbd74eac9feca2a82a725d8124ea65948124fee"
+  },
+  "topology": {
+    "ami_id": "ami-ba555e3fa8ae1f57e",
+    "gateway_placement": {
+      "use1-az1": ["gateway-1", "gateway-2", "gateway-3"],
+      "use1-az2": ["gateway-4", "gateway-5", "gateway-6"],
+      "use1-az4": ["gateway-7", "gateway-8"]
+    },
+    "host_count": 16,
+    "instances": {
+      "fault-controller": "i-e8eb81689dc1bd6da",
+      "filesystem-effects": "i-f7fbf95e7cdacb27e",
+      "gateway-1": "i-c30f4de273a9061ad",
+      "gateway-2": "i-45ae04676d78031f4",
+      "gateway-3": "i-066f896dfeb0e9f5f",
+      "gateway-4": "i-8fba58cd3fc6bb55e",
+      "gateway-5": "i-85ebfdd68bf2bd9d6",
+      "gateway-6": "i-5d6e46d11a6fe444a",
+      "gateway-7": "i-0ed0094eb1979d264",
+      "gateway-8": "i-460291d1526bb15dc",
+      "keycloak": "i-d9af6971062a483dd",
+      "keycloak-postgres": "i-c41565b0ba84c2b91",
+      "postgres-effects": "i-ce48387a01f661216",
+      "receiver-a": "i-98175bc2534c2e853",
+      "receiver-b": "i-887adef8a1a420fbc",
+      "workload-driver": "i-246e211a1c3acffd4"
+    },
+    "push_alb_dns_name": "paper-b-eb24-push-1918302644.us-east-1.elb.amazonaws.com",
+    "region": "us-east-1"
+  }
+}

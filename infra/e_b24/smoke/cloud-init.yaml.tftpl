@@ -1,0 +1,28 @@
+#cloud-config
+hostname: ${host_name}
+manage_etc_hosts: true
+package_update: false
+packages:
+  - docker
+  - jq
+  - chrony
+  - nftables
+write_files:
+  - path: /etc/e-b24/host.json
+    owner: root:root
+    permissions: "0644"
+    content: |
+      {"host":"${host_name}","role":"${role}","runtime_image":"${runtime_image}","zone_id":"${zone_id}"}
+  - path: /etc/e-b24/runtime-image
+    owner: root:root
+    permissions: "0644"
+    content: |
+      ${runtime_image}
+runcmd:
+  - [mkdir, -p, /opt/e-b24, /var/lib/e-b24, /var/log/e-b24]
+  - [systemctl, enable, --now, docker]
+  - [systemctl, enable, --now, chronyd]
+  - [systemctl, enable, --now, amazon-ssm-agent]
+  - [usermod, -aG, docker, ec2-user]
+  - [bash, -lc, "chronyc tracking > /var/log/e-b24/chrony-bootstrap.txt"]
+final_message: "E-B24 smoke host bootstrap complete"

@@ -1,0 +1,107 @@
+{
+  "aggregate_rows": 4,
+  "claim_note": "E-B14 runs gateway, tool, and log roles in separate OS processes with a persisted log file. The deployment upgrades E-B10--E-B12 from single-process loopback to multi-process service isolation, but it remains a local artifact deployment, not a production multi-host cluster.",
+  "experiment": "E-B14",
+  "fault_scenarios": [
+    "none",
+    "push-drop-log-repair"
+  ],
+  "integration_success_rate": 1.0,
+  "loopback_service_boundary_rate": 1.0,
+  "max_fault_recovery_latency": 0.644782748705935,
+  "max_process_count": 10.0,
+  "max_revoked_tool_calls_allowed": 49.1195417248626,
+  "max_stale_capability_window": 0.6462295035834383,
+  "mean_prevented_fraction": 0.9944829344921006,
+  "persistent_log_rate": 1.0,
+  "post_repair_reject_rate": 1.0,
+  "pre_revocation_allowed_rate": 1.0,
+  "protocol_profiles": [
+    "raw-http-json"
+  ],
+  "protocol_schema_pass_rate": 1.0,
+  "raw_rows": 20,
+  "run_config": {
+    "fault_scenarios": [
+      "none",
+      "push-drop-log-repair"
+    ],
+    "n_parties_values": [
+      8
+    ],
+    "output_dir": "data/run_2026_06_27_e_b14_multiprocess_paper",
+    "protocol_profiles": [
+      "raw-http-json"
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "task_duration": 60.0,
+    "tool_call_rates": [
+      1.0,
+      10.0
+    ],
+    "tool_name": "repo-write",
+    "ttl": 60.0
+  },
+  "separate_os_process_rate": 1.0,
+  "surface_summaries": [
+    {
+      "allowed_calls_mean": 0.4374095101675078,
+      "fault_scenario": "none",
+      "n_parties": 8,
+      "p99_stale_window": 0.05735381081765556,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.9990887301871509,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 1.0,
+      "transport_errors_mean": 0.0
+    },
+    {
+      "allowed_calls_mean": 4.374095101675078,
+      "fault_scenario": "none",
+      "n_parties": 8,
+      "p99_stale_window": 0.05735381081765556,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.9990887301871509,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 10.0,
+      "transport_errors_mean": 0.0
+    },
+    {
+      "allowed_calls_mean": 4.858973377416168,
+      "fault_scenario": "push-drop-log-repair",
+      "n_parties": 8,
+      "p99_stale_window": 0.6377399359139078,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.9898771387970496,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 1.0,
+      "transport_errors_mean": 0.0
+    },
+    {
+      "allowed_calls_mean": 48.58973377416168,
+      "fault_scenario": "push-drop-log-repair",
+      "n_parties": 8,
+      "p99_stale_window": 0.6377399359139078,
+      "post_repair_reject_rate": 1.0,
+      "prevented_fraction_mean": 0.9898771387970496,
+      "protocol_profile": "raw-http-json",
+      "schema_pass_rate": 1.0,
+      "success_rate": 1.0,
+      "tool_call_rate": 10.0,
+      "transport_errors_mean": 0.0
+    }
+  ],
+  "transport_error_count": 0
+}

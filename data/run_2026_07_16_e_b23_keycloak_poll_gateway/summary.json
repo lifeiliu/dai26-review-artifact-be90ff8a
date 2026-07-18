@@ -1,0 +1,382 @@
+{
+  "assertions": {
+    "first_poll_exact_matching_set": true,
+    "frozen_configuration_unchanged": true,
+    "frozen_inputs_match": true,
+    "gateway_process_isolation": true,
+    "native_poll_only_for_b": true,
+    "pinned_postgres_used": true,
+    "poll_row_no_longer_pending": true,
+    "poll_token_scopes_present": true,
+    "post_delivery_a_denies_all": true,
+    "post_poll_b_denies_all": true,
+    "pre_poll_direction": true,
+    "pre_revocation_both_allow": true,
+    "push_a_valid_and_forwarded": true,
+    "second_poll_acks_and_empty": true,
+    "two_poll_requests_accounted": true
+  },
+  "delegation_id": "delegation-e-b23-zNubMhG4I2zeuK0fDX5yarhi",
+  "delivery_paths": {
+    "receiver-a": "urn:ietf:rfc:8935",
+    "receiver-b": "urn:ietf:rfc:8936"
+  },
+  "experiment": "E-B23",
+  "final_statuses": {
+    "receiver-a": {
+      "calls": {
+        "allowed": 1,
+        "control": 1,
+        "denied": 226
+      },
+      "delegation_id": "delegation-e-b23-zNubMhG4I2zeuK0fDX5yarhi",
+      "event_id": "9a26765c-fe4b-d8da-0f3d-3b948f3f59f2",
+      "gateway_id": "gateway-a",
+      "learned_via": "direct-push",
+      "revoked": true,
+      "server_pid": 42567
+    },
+    "receiver-b": {
+      "calls": {
+        "allowed": 2,
+        "control": 1,
+        "denied": 225
+      },
+      "delegation_id": "delegation-e-b23-zNubMhG4I2zeuK0fDX5yarhi",
+      "event_id": "f51fd98f-e6ff-ec36-ee61-02ae23c007af",
+      "gateway_id": "gateway-b",
+      "learned_via": "keycloak-poll",
+      "revoked": true,
+      "server_pid": 42569
+    }
+  },
+  "finished_unix_ns": 1784224168608251000,
+  "first_poll": {
+    "http_status": 200,
+    "is_session_revoked": true,
+    "jti": "f51fd98f-e6ff-ec36-ee61-02ae23c007af",
+    "more_available": false,
+    "request_bytes": 51,
+    "response_body_sha256": "82dce4eb3e807fbb398a97b116e08c9a674c1cfabdc67516294dfece8479f6fd",
+    "response_bytes": 1341,
+    "session_id": "zNubMhG4I2zeuK0fDX5yarhi",
+    "session_matches": true,
+    "set_count": 1,
+    "signature_alg": "RS256",
+    "signature_verified": true,
+    "token_scope": "profile ssf.read email ssf.manage"
+  },
+  "gateway_processes": {
+    "receiver-a": {
+      "gateway_id": "gateway-a",
+      "pid": 42567,
+      "port": 55111
+    },
+    "receiver-b": {
+      "gateway_id": "gateway-b",
+      "pid": 42569,
+      "port": 55120
+    }
+  },
+  "infrastructure": {
+    "gateway_process_isolation": true,
+    "harness_pid": 42562,
+    "pinned_postgres_used": true,
+    "server_pids": [
+      42567,
+      42569
+    ]
+  },
+  "keycloak_container_id": "a7c596a1207a70049c4b9b04ec679e0f13d21090bed34d775235ad6a13fa96ee",
+  "keycloak_image": "quay.io/keycloak/keycloak:26.7.0",
+  "keycloak_image_digest": "sha256:2eb3cd316835c990e69e26ade292ffa78f6fb0db7d5fc6377463c162e1979ac0",
+  "keycloak_max_attempts_changed": false,
+  "keycloak_retry_curve_changed": false,
+  "keycloak_source_tag_commit": "6c73e3027811d9c7b22683edd825e839272e9547",
+  "logout_http_status": 204,
+  "passed": true,
+  "path_audit": {
+    "poll_pending_after_ack": 0,
+    "poll_request_bytes": 140,
+    "poll_request_count": 2,
+    "poll_response_bytes": 1374,
+    "receiver_b_admin_event_read": false,
+    "receiver_b_log_repair": false,
+    "receiver_b_push_handoff": false,
+    "receiver_b_self_authored_event_store": false,
+    "receiver_b_state_source": "keycloak-rfc8936-poll",
+    "stats_after_ack": {
+      "statuses": {
+        "DELIVERED": {
+          "count": 2,
+          "oldestCreatedAt": 1784224141.729526
+        }
+      }
+    },
+    "stats_before_poll": {
+      "statuses": {
+        "DELIVERED": {
+          "count": 1,
+          "oldestCreatedAt": 1784224141.729526
+        },
+        "PENDING": {
+          "count": 1,
+          "oldestCreatedAt": 1784224141.813138
+        }
+      }
+    }
+  },
+  "poll_long_wait_used": false,
+  "postgres_container_id": "85806f423d80077ee4bd99a107a56f4bc12d1666d16e85760b4ba7cd76e5b299",
+  "postgres_image": "pgvector/pgvector:0.8.0-pg17-bookworm",
+  "postgres_image_digest": "sha256:40b404964359299eefdd5f8518facf1886c562848cf4de13b6eaf91cb70c2b87",
+  "pre_poll_controls": {
+    "receiver-a": {
+      "agent_id": "e-b23-pre-poll",
+      "allowed": false,
+      "delegation_id": "delegation-e-b23-zNubMhG4I2zeuK0fDX5yarhi",
+      "event_id": "9a26765c-fe4b-d8da-0f3d-3b948f3f59f2",
+      "gateway_id": "gateway-a",
+      "learned_via": "direct-push",
+      "payload_hash_input_length": 29,
+      "reason": "revoked-delegation",
+      "server_pid": 42567,
+      "server_processing_ms": 0.005167
+    },
+    "receiver-b": {
+      "agent_id": "e-b23-pre-poll",
+      "allowed": true,
+      "delegation_id": "delegation-e-b23-zNubMhG4I2zeuK0fDX5yarhi",
+      "event_id": null,
+      "gateway_id": "gateway-b",
+      "learned_via": null,
+      "payload_hash_input_length": 29,
+      "reason": "active-delegation",
+      "server_pid": 42569,
+      "server_processing_ms": 0.008292
+    }
+  },
+  "pre_revocation": {
+    "receiver-a": {
+      "agent_id": "e-b23-pre-revocation",
+      "allowed": true,
+      "delegation_id": "delegation-e-b23-zNubMhG4I2zeuK0fDX5yarhi",
+      "event_id": null,
+      "gateway_id": "gateway-a",
+      "learned_via": null,
+      "payload_hash_input_length": 35,
+      "reason": "active-delegation",
+      "server_pid": 42567,
+      "server_processing_ms": 0.006875
+    },
+    "receiver-b": {
+      "agent_id": "e-b23-pre-revocation",
+      "allowed": true,
+      "delegation_id": "delegation-e-b23-zNubMhG4I2zeuK0fDX5yarhi",
+      "event_id": null,
+      "gateway_id": "gateway-b",
+      "learned_via": null,
+      "payload_hash_input_length": 35,
+      "reason": "active-delegation",
+      "server_pid": 42569,
+      "server_processing_ms": 0.005083
+    }
+  },
+  "protocol_version": "e-b23-prereg-v1",
+  "push_event": {
+    "aud": "receiver-a/2bd6d0bf-cad8-4086-8097-86fa03f30832",
+    "authorization": "Bearer receiver-a-e-b23",
+    "body_sha256": "1d98c5a3a8e3808e8720801eeca07ac14ab322d9d17c2b3393cc1ba0a933b139",
+    "content_type": "application/secevent+jwt",
+    "encoded_set": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAic2VjZXZlbnQrand0Iiwia2lkIiA6ICJwQmpmRlRFZ2NWaVltbW44c0puYU0yeW03MkM5d1hLbXRTSHNuM2lWY3BZIn0.eyJqdGkiOiI5YTI2NzY1Yy1mZTRiLWQ4ZGEtMGYzZC0zYjk0OGYzZjU5ZjIiLCJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjE4MDgzL3JlYWxtcy9zc2Ytc21va2UiLCJpYXQiOjE3ODQyMjQxNDEsImF1ZCI6InJlY2VpdmVyLWEvMmJkNmQwYmYtY2FkOC00MDg2LTgwOTctODZmYTAzZjMwODMyIiwiZXZlbnRzIjp7Imh0dHBzOi8vc2NoZW1hcy5vcGVuaWQubmV0L3NlY2V2ZW50L2NhZXAvZXZlbnQtdHlwZS9zZXNzaW9uLXJldm9rZWQiOnsiZXZlbnRfdGltZXN0YW1wIjoxNzg0MjI0MTQxLCJpbml0aWF0aW5nX2VudGl0eSI6InVzZXIiLCJyZWFzb25fYWRtaW4iOnsiZW4iOiJVc2VyIGxvZ291dCJ9fX0sInN1Yl9pZCI6eyJmb3JtYXQiOiJjb21wbGV4IiwidXNlciI6eyJmb3JtYXQiOiJpc3Nfc3ViIiwiaXNzIjoiaHR0cDovLzEyNy4wLjAuMToxODA4My9yZWFsbXMvc3NmLXNtb2tlIiwic3ViIjoiZjJjM2U3ODctZWVkNi00NjRkLWI0OWItNTJiMGVhMDI5YTRkIn0sInNlc3Npb24iOnsiZm9ybWF0Ijoib3BhcXVlIiwiaWQiOiJ6TnViTWhHNEkyemV1SzBmRFg1eWFyaGkifX0sInR4biI6IjYzMmViNjgwLTIwZGYtNDFiYi1iMzNkLTJmMzBlYjk3YzZlZCJ9.Feuumx78oP5IIuGLtKwk91WcHlk6_qqMIqK3A673sfdRK5A9MYIzCQ3LzhMuccBdKHH5vkuQGDteomWwnNZndyj30jgsIcrm8LmUGJ3T9wg6l2S9BlgIKwEBnp_AQQY0ceABmwVznSkk0L1g_PcwsTkP-8gPhtXZbgwyV10jpm0g3ROIilLnmW1g-fiQZWoF0Ni68EL5Em0TgR1Y7rXzvrjpiHYjGy-WJlcWy0B0IEsCkO0KQtuRQSP_KthkQFUDMUWb_FuUfScc_mCLnDC4x3C8JGLKcDfKc96Vw-veTnI79mk4NsJMtNOECVldAWZwAsQRyb_WGSq0TclziM9Ufg",
+    "event_types": [
+      "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+    ],
+    "forwarded": true,
+    "http_response": 202,
+    "is_session_revoked": true,
+    "iss": "http://127.0.0.1:18083/realms/ssf-smoke",
+    "jti": "9a26765c-fe4b-d8da-0f3d-3b948f3f59f2",
+    "jws_header": {
+      "alg": "RS256",
+      "kid": "pBjfFTEgcViYmmn8sJnaM2ym72C9wXKmtSHsn3iVcpY",
+      "typ": "secevent+jwt"
+    },
+    "observed_unix_ns": 1784224166941731000,
+    "receiver": "receiver-a",
+    "signature_alg": "RS256",
+    "signature_verified": true,
+    "sub_id": {
+      "format": "complex",
+      "session": {
+        "format": "opaque",
+        "id": "zNubMhG4I2zeuK0fDX5yarhi"
+      },
+      "user": {
+        "format": "iss_sub",
+        "iss": "http://127.0.0.1:18083/realms/ssf-smoke",
+        "sub": "f2c3e787-eed6-464d-b49b-52b0ea029a4d"
+      }
+    },
+    "withheld": false
+  },
+  "receiver_token_scopes": {
+    "receiver-a": "profile ssf.read email ssf.manage",
+    "receiver-b": "profile ssf.read email ssf.manage"
+  },
+  "replay_counts": {
+    "receiver-a": {
+      "allowed": 0,
+      "denied": 225,
+      "total": 225
+    },
+    "receiver-b": {
+      "allowed": 0,
+      "denied": 225,
+      "total": 225
+    }
+  },
+  "replay_results_sha256": "6121b3889d5139b71f70105a165c3dce7f993b85a7b200e18ea45ce0a69cad95",
+  "scope_assignments": {
+    "receiver-a": {
+      "internal_id": "67843448-0f54-40d4-b16e-441e0edf150c",
+      "optional_scopes": [
+        "address",
+        "microprofile-jwt",
+        "offline_access",
+        "organization",
+        "phone",
+        "ssf.manage",
+        "ssf.read"
+      ]
+    },
+    "receiver-b": {
+      "internal_id": "e24f4545-be89-44ee-86c1-378ead97ed08",
+      "optional_scopes": [
+        "address",
+        "microprofile-jwt",
+        "offline_access",
+        "organization",
+        "phone",
+        "ssf.manage",
+        "ssf.read"
+      ]
+    }
+  },
+  "second_poll": {
+    "ack": [
+      "f51fd98f-e6ff-ec36-ee61-02ae23c007af"
+    ],
+    "ack_matches_first_jti": true,
+    "http_status": 200,
+    "more_available": false,
+    "request_bytes": 89,
+    "response_body_sha256": "e22d9ee44206159d43b04db6b459f498ce9771cd7f7741053558a3047d25cf7a",
+    "response_bytes": 33,
+    "set_count": 0
+  },
+  "session_id": "zNubMhG4I2zeuK0fDX5yarhi",
+  "started_unix_ns": 1784224109112059000,
+  "streams": {
+    "receiver-a": {
+      "aud": [
+        "receiver-a/2bd6d0bf-cad8-4086-8097-86fa03f30832"
+      ],
+      "default_subjects": "ALL",
+      "delivery": {
+        "authorization_header": "Bearer receiver-a-e-b23",
+        "endpoint_url": "http://host.docker.internal:19003/receiver-a",
+        "method": "urn:ietf:rfc:8935"
+      },
+      "description": "E-B23 receiver-A PUSH stream",
+      "events_delivered": [
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+      ],
+      "events_requested": [
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+      ],
+      "events_supported": [
+        "https://schemas.openid.net/secevent/caep/event-type/credential-change",
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+      ],
+      "iss": "http://127.0.0.1:18083/realms/ssf-smoke",
+      "min_verification_interval": 60,
+      "stream_id": "2bd6d0bf-cad8-4086-8097-86fa03f30832"
+    },
+    "receiver-b": {
+      "aud": [
+        "receiver-b/d792322a-a097-4659-b6f8-9e27fd75e406"
+      ],
+      "default_subjects": "ALL",
+      "delivery": {
+        "endpoint_url": "http://127.0.0.1:18083/realms/ssf-smoke/ssf/transmitter/receivers/receiver-b/streams/d792322a-a097-4659-b6f8-9e27fd75e406/poll",
+        "method": "urn:ietf:rfc:8936"
+      },
+      "description": "E-B23 receiver-B POLL stream",
+      "events_delivered": [
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+      ],
+      "events_requested": [
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+      ],
+      "events_supported": [
+        "https://schemas.openid.net/secevent/caep/event-type/credential-change",
+        "https://schemas.openid.net/secevent/caep/event-type/session-revoked"
+      ],
+      "iss": "http://127.0.0.1:18083/realms/ssf-smoke",
+      "min_verification_interval": 60,
+      "stream_id": "d792322a-a097-4659-b6f8-9e27fd75e406"
+    }
+  },
+  "workload": {
+    "effect_threshold_changed": false,
+    "input_sha256": {
+      "analysis/e_b20_targets.json": "e8dca8f08e86a43fd919fac8d142800077128bb647408dee9a412d30ad994a75",
+      "traces/e_b20_filesystem_run_3.jsonl": "04dfbfbdb1a006af63585b6e55bffa3e89091e5db995be95faa1cbcda4bef4e5",
+      "traces/e_b20_filesystem_run_4.jsonl": "5ea662765d19d513d5f8587e6afd31ad646eb48e5c5bd271d9b9b51b9221052d",
+      "traces/e_b20_postgres_run_3.jsonl": "7a833269a75502320ae7ee9b7cdced702b73be7d7eba0c9bb2e7fc1213b68b90",
+      "traces/e_b20_postgres_run_4.jsonl": "642524a70351884b58d9ebeafe636018771d7329bc1f0bf1f9b13900db7cd42c"
+    },
+    "mutation_labels_changed": false,
+    "protocol_version": "e-b22-prereg-v1",
+    "risk_index_changed": false,
+    "service_counts": {
+      "filesystem": 112,
+      "postgres": 113
+    },
+    "target_count": 10,
+    "target_fraction_changed": false,
+    "target_membership_changed": false,
+    "target_policy_changed": false,
+    "target_vector_counts": {
+      "filesystem/desktop/project_management": 49,
+      "filesystem/desktop_template/file_arrangement": 39,
+      "filesystem/file_context/duplicates_searching": 0,
+      "filesystem/file_context/uppercase": 24,
+      "postgres/chinook/customer_data_migration": 3,
+      "postgres/chinook/employee_hierarchy_management": 22,
+      "postgres/chinook/sales_and_music_charts": 21,
+      "postgres/employees/employee_project_tracking": 17,
+      "postgres/employees/executive_dashboard_automation": 29,
+      "postgres/sports/team_roster_management": 21
+    },
+    "targets": [
+      "filesystem/desktop/project_management",
+      "filesystem/desktop_template/file_arrangement",
+      "filesystem/file_context/duplicates_searching",
+      "filesystem/file_context/uppercase",
+      "postgres/chinook/customer_data_migration",
+      "postgres/chinook/employee_hierarchy_management",
+      "postgres/chinook/sales_and_music_charts",
+      "postgres/employees/employee_project_tracking",
+      "postgres/employees/executive_dashboard_automation",
+      "postgres/sports/team_roster_management"
+    ],
+    "vector_count": 225,
+    "workload_identity_sha256": "75ce415ae238fb0d973e9cbf25d13c81bbecf574d409cf782054e487c33027ae",
+    "workload_root": "/home/anonymous/research/paper-b-revocation-propagation/artifact/data/run_2026_07_14_e_b20_mcpmark_formal",
+    "zero_vector_targets": [
+      "filesystem/file_context/duplicates_searching"
+    ]
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "agent_runtime_models": [
+    "tool-gateway-cached-capability"
+  ],
+  "aggregate_rows": 10,
+  "claim_note": "E-B8 reframes revocation as an agent-tool gateway problem: a delegated tool capability continues to authorize tool calls until the gateway learns the revocation or the token TTL expires. The metric is revoked tool calls allowed/prevented, not generic network latency. The experiment is a gateway model over the existing propagation simulator; it is not a live LLM-agent benchmark.",
+  "comparisons": [
+    {
+      "hybrid_audit_evidence_available_rate": 1.0,
+      "hybrid_minus_log_p99_stale": -0.1619571054426142,
+      "hybrid_minus_push_gossip_p99_stale": 0.0030790974327295495,
+      "hybrid_minus_push_p99_stale": -59.61506721790013,
+      "hybrid_minus_ttl_rcc_p99_stale": -59.61506721790013,
+      "hybrid_over_log_allowed": 0.2245471338928239,
+      "hybrid_over_push_allowed": 0.009354354152814558,
+      "hybrid_over_push_gossip_allowed": 0.9961602942474166,
+      "hybrid_over_ttl_rcc_allowed": 0.0018771909358680627,
+      "hybrid_prevented_fraction_mean": 0.998122809064132,
+      "hybrid_revoked_tool_calls_allowed_mean": 4.505258246083351,
+      "hybrid_stale_capability_window_p99_mean": 0.3849327820998667,
+      "log_audit_evidence_available_rate": 1.0,
+      "n_parties": 40,
+      "push_audit_evidence_available_rate": 0.0,
+      "push_gossip_audit_evidence_available_rate": 0.0,
+      "push_suppression": 0.2,
+      "tool_call_rate": 1,
+      "ttl": 60,
+      "ttl_rcc_audit_evidence_available_rate": 0.0
+    },
+    {
+      "hybrid_audit_evidence_available_rate": 1.0,
+      "hybrid_minus_log_p99_stale": -0.1619571054426142,
+      "hybrid_minus_push_gossip_p99_stale": 0.0030790974327295495,
+      "hybrid_minus_push_p99_stale": -59.61506721790013,
+      "hybrid_minus_ttl_rcc_p99_stale": -59.61506721790013,
+      "hybrid_over_log_allowed": 0.22454713389282394,
+      "hybrid_over_push_allowed": 0.00935435415281456,
+      "hybrid_over_push_gossip_allowed": 0.9961602942474168,
+      "hybrid_over_ttl_rcc_allowed": 0.001877190935868063,
+      "hybrid_prevented_fraction_mean": 0.998122809064132,
+      "hybrid_revoked_tool_calls_allowed_mean": 45.05258246083351,
+      "hybrid_stale_capability_window_p99_mean": 0.3849327820998667,
+      "log_audit_evidence_available_rate": 1.0,
+      "n_parties": 40,
+      "push_audit_evidence_available_rate": 0.0,
+      "push_gossip_audit_evidence_available_rate": 0.0,
+      "push_suppression": 0.2,
+      "tool_call_rate": 10,
+      "ttl": 60,
+      "ttl_rcc_audit_evidence_available_rate": 0.0
+    }
+  ],
+  "experiment": "E-B8",
+  "hybrid_auditable_low_latency_cells": 2,
+  "hybrid_better_than_ttl_cells": 2,
+  "hybrid_max_stale_capability_window": 0.4013584362800272,
+  "hybrid_mean_prevented_fraction": 0.998122809064132,
+  "max_revoked_tool_calls_allowed": 24000.0,
+  "mean_prevented_fraction": 0.7574405705828386,
+  "raw_rows": 30,
+  "run_config": {},
+  "tool_names": [
+    "repo-write"
+  ]
+}

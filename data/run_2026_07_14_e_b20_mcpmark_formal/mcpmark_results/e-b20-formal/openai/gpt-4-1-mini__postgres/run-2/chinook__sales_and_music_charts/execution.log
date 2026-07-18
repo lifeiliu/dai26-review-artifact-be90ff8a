@@ -1,0 +1,42 @@
+===== Available Tools =====
+- ToolName: list_schemas             Description: List all schemas in the database
+- ToolName: list_objects             Description: List objects in a schema
+- ToolName: get_object_details       Description: Show detailed information about a database object
+- ToolName: explain_query            Description: Explains the execution plan for a SQL query, showing how the database will execute it and provides detailed cost estimates.
+- ToolName: analyze_workload_indexes Description: Analyze frequently executed queries in the database and recommend optimal indexes
+- ToolName: analyze_query_indexes    Description: Analyze a list of (up to 10) SQL queries and recommend optimal indexes
+- ToolName: analyze_db_health        Description: Analyzes database health. Here are the available health checks:
+- index - checks for invalid, duplicate, and bloated indexes
+- connection - checks the number of connection and their utilization
+- vacuum - checks vacuum health for transaction id wraparound
+- sequence - checks sequences at risk of exceeding their maximum value
+- replication - checks replication health including lag and slots
+- buffer - checks for buffer cache hit rates for indexes and tables
+- constraint - checks for invalid constraints
+- all - runs all checks
+You can optionally specify a single health check or a comma-separated list of health checks. The default is 'all' checks.
+- ToolName: get_top_queries          Description: Reports the slowest or most resource-intensive queries using data from the 'pg_stat_statements' extension.
+- ToolName: execute_sql              Description: Execute any SQL query
+
+===== Execution Logs =====
+| execute_sql {"sql": "CREATE TABLE public.monthly_sales_summary (\n  year_month VARCHAR NOT NULL,\n  total_invoices INTEGER NOT NULL,\n  total_revenue DECIMAL NOT NULL,\n  total_tracks_sold INTEGER NOT NULL,\n  average_invoice_value DECIMAL NOT NULL,\n  unique_customers INTEGER NOT NULL\n);"}
+| execute_sql {"sql": "CREATE TABLE public.top_music_charts (\n  chart_type VARCHAR NOT NULL,\n  rank_position INTEGER NOT NULL,\n  item_id INTEGER NOT NULL,\n  item_name VARCHAR NOT NULL,\n  total_revenue DECIMAL NOT NULL\n);"}
+| execute_sql {"sql": "INSERT INTO public.monthly_sales_summary (year_month, total_invoices, total_revenue, total_tracks_sold, average_invoice_value, unique_customers)\nSELECT\n  to_char(i.invoice_date, 'YYYY-MM') AS year_month,\n  COUNT(DISTINCT i.invoice_id) AS total_invoices,\n  SUM(i.total) AS total_revenue,\n  SUM(il.quantity) AS total_tracks_sold,\n  AVG(i.total) AS average_invoice_value,\n  COUNT(DISTINCT i.customer_id) AS unique_customers\nFROM invoice i\nJOIN invoice_line il ON i.invoice_id = il.invoice_id\nGROUP BY year_month\nORDER BY year_month;"}
+| list_schemas {}
+| list_objects {"schema_name": "public","object_type": "table"}
+| execute_sql {"sql": "INSERT INTO public.monthly_sales_summary (year_month, total_invoices, total_revenue, total_tracks_sold, average_invoice_value, unique_customers)\nSELECT\n  to_char(i.invoice_date, 'YYYY-MM') AS year_month,\n  COUNT(DISTINCT i.invoice_id) AS total_invoices,\n  SUM(i.total) AS total_revenue,\n  SUM(il.quantity) AS total_tracks_sold,\n  AVG(i.total) AS average_invoice_value,\n  COUNT(DISTINCT i.customer_id) AS unique_customers\nFROM public.\"Invoice\" i\nJOIN public.\"InvoiceLine\" il ON i.invoice_id = il.invoice_id\nGROUP BY year_month\nORDER BY year_month;"}
+| execute_sql {"sql": "INSERT INTO public.monthly_sales_summary (year_month, total_invoices, total_revenue, total_tracks_sold, average_invoice_value, unique_customers)\nSELECT\n  to_char(i.\"InvoiceDate\", 'YYYY-MM') AS year_month,\n  COUNT(DISTINCT i.\"InvoiceId\") AS total_invoices,\n  SUM(i.\"Total\") AS total_revenue,\n  SUM(il.\"Quantity\") AS total_tracks_sold,\n  AVG(i.\"Total\") AS average_invoice_value,\n  COUNT(DISTINCT i.\"CustomerId\") AS unique_customers\nFROM public.\"Invoice\" i\nJOIN public.\"InvoiceLine\" il ON i.\"InvoiceId\" = il.\"InvoiceId\"\nGROUP BY year_month\nORDER BY year_month;"}
+| execute_sql {"sql": "DELETE FROM public.top_music_charts;"}
+| execute_sql {"sql": "-- Top Tracks by quantity sold\nWITH track_sales AS (\n  SELECT\n    t.\"TrackId\" AS item_id,\n    t.\"Name\" AS item_name,\n    SUM(il.\"Quantity\") AS total_quantity,\n    SUM(il.\"UnitPrice\" * il.\"Quantity\") AS total_revenue\n  FROM public.\"Track\" t\n  JOIN public.\"InvoiceLine\" il ON t.\"TrackId\" = il.\"TrackId\"\n  GROUP BY t.\"TrackId\", t.\"Name\"\n  HAVING SUM(il.\"Quantity\") > 0\n)\nINSERT INTO public.top_music_charts (chart_type, rank_position, item_id, item_name, total_revenue)\nSELECT\n  'top_tracks' AS chart_type,\n  ROW_NUMBER() OVER (ORDER BY total_quantity DESC, item_name) AS rank_position,\n  item_id,\n  item_name,\n  total_revenue\nFROM track_sales\nWHERE ROW_NUMBER() OVER (ORDER BY total_quantity DESC, item_name) <= 10;"}
+| execute_sql {"sql": "WITH track_sales AS (\n  SELECT\n    t.\"TrackId\" AS item_id,\n    t.\"Name\" AS item_name,\n    SUM(il.\"Quantity\") AS total_quantity,\n    SUM(il.\"UnitPrice\" * il.\"Quantity\") AS total_revenue\n  FROM public.\"Track\" t\n  JOIN public.\"InvoiceLine\" il ON t.\"TrackId\" = il.\"TrackId\"\n  GROUP BY t.\"TrackId\", t.\"Name\"\n  HAVING SUM(il.\"Quantity\") > 0\n), ranked_tracks AS (\n  SELECT\n    'top_tracks' AS chart_type,\n    ROW_NUMBER() OVER (ORDER BY total_quantity DESC, item_name) AS rank_position,\n    item_id,\n    item_name,\n    total_revenue\n  FROM track_sales\n)\nINSERT INTO public.top_music_charts (chart_type, rank_position, item_id, item_name, total_revenue)\nSELECT chart_type, rank_position, item_id, item_name, total_revenue\nFROM ranked_tracks\nWHERE rank_position <= 10;"}
+| execute_sql {"sql": "-- Top Albums by total revenue\nWITH album_revenue AS (\n  SELECT\n    a.\"AlbumId\" AS item_id,\n    a.\"Title\" AS item_name,\n    SUM(il.\"UnitPrice\" * il.\"Quantity\") AS total_revenue\n  FROM public.\"Album\" a\n  JOIN public.\"Track\" t ON a.\"AlbumId\" = t.\"AlbumId\"\n  JOIN public.\"InvoiceLine\" il ON t.\"TrackId\" = il.\"TrackId\"\n  GROUP BY a.\"AlbumId\", a.\"Title\"\n  HAVING SUM(il.\"UnitPrice\" * il.\"Quantity\") > 0\n), ranked_albums AS (\n  SELECT\n    'top_albums' AS chart_type,\n    ROW_NUMBER() OVER (ORDER BY total_revenue DESC, item_name) AS rank_position,\n    item_id,\n    item_name,\n    total_revenue\n  FROM album_revenue\n)\nINSERT INTO public.top_music_charts (chart_type, rank_position, item_id, item_name, total_revenue)\nSELECT chart_type, rank_position, item_id, item_name, total_revenue\nFROM ranked_albums\nWHERE rank_position <= 10;"}
+| execute_sql {"sql": "-- Top Artists by total revenue\nWITH artist_revenue AS (\n  SELECT\n    ar.\"ArtistId\" AS item_id,\n    ar.\"Name\" AS item_name,\n    SUM(il.\"UnitPrice\" * il.\"Quantity\") AS total_revenue\n  FROM public.\"Artist\" ar\n  JOIN public.\"Album\" al ON ar.\"ArtistId\" = al.\"ArtistId\"\n  JOIN public.\"Track\" t ON al.\"AlbumId\" = t.\"AlbumId\"\n  JOIN public.\"InvoiceLine\" il ON t.\"TrackId\" = il.\"TrackId\"\n  GROUP BY ar.\"ArtistId\", ar.\"Name\"\n  HAVING SUM(il.\"UnitPrice\" * il.\"Quantity\") > 0\n), ranked_artists AS (\n  SELECT\n    'top_artists' AS chart_type,\n    ROW_NUMBER() OVER (ORDER BY total_revenue DESC, item_name) AS rank_position,\n    item_id,\n    item_name,\n    total_revenue\n  FROM artist_revenue\n)\nINSERT INTO public.top_music_charts (chart_type, rank_position, item_id, item_name, total_revenue)\nSELECT chart_type, rank_position, item_id, item_name, total_revenue\nFROM ranked_artists\nWHERE rank_position <= 10;"}
+The requested system is created:
+
+1. The `monthly_sales_summary` table is built and populated with monthly sales metrics.
+2. The `top_music_charts` table is created.
+3. The `top_music_charts` table is populated with top 10 rankings for tracks, albums, and artists based on sales and revenue using the specified business rules.
+
+This provides Chinook's management team with a monthly sales dashboard and top music charts to track business performance and identify trending content.
+
+Task completed.

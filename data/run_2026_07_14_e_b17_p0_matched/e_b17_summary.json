@@ -1,0 +1,215 @@
+{
+  "aggregate_rows": 100,
+  "bootstrap_samples": 10000,
+  "comparisons": [
+    {
+      "baseline": "drp-10-300",
+      "bootstrap_p": 0.00019998000199980003,
+      "ci95_high": -49.39133,
+      "ci95_low": -49.94150499999999,
+      "fault_scenario": "selective-operator",
+      "holm_adjusted_p": 0.0007999200079992001,
+      "mean_difference": -49.67243333333333,
+      "n_gateways": 1000,
+      "paired_seeds": 30,
+      "probability_revprop_better": 1.0,
+      "profile": "matched",
+      "relative_reduction": 0.9826545341604257,
+      "suppression_fraction": 0.2
+    },
+    {
+      "baseline": "drp-10-60",
+      "bootstrap_p": 0.00019998000199980003,
+      "ci95_high": -49.39599916666667,
+      "ci95_low": -49.940038333333334,
+      "fault_scenario": "selective-operator",
+      "holm_adjusted_p": 0.0007999200079992001,
+      "mean_difference": -49.67243333333333,
+      "n_gateways": 1000,
+      "paired_seeds": 30,
+      "probability_revprop_better": 1.0,
+      "profile": "matched",
+      "relative_reduction": 0.9826545341604257,
+      "suppression_fraction": 0.2
+    },
+    {
+      "baseline": "drp-10-300",
+      "bootstrap_p": 0.00019998000199980003,
+      "ci95_high": -48.60865583333333,
+      "ci95_low": -49.16067416666666,
+      "fault_scenario": "selective-operator",
+      "holm_adjusted_p": 0.0007999200079992001,
+      "mean_difference": -48.88656666666667,
+      "n_gateways": 1000,
+      "paired_seeds": 30,
+      "probability_revprop_better": 1.0,
+      "profile": "matched",
+      "relative_reduction": 0.967107974601659,
+      "suppression_fraction": 0.5
+    },
+    {
+      "baseline": "drp-10-60",
+      "bootstrap_p": 0.00019998000199980003,
+      "ci95_high": -48.60919583333334,
+      "ci95_low": -49.159076666666664,
+      "fault_scenario": "selective-operator",
+      "holm_adjusted_p": 0.0007999200079992001,
+      "mean_difference": -48.88656666666667,
+      "n_gateways": 1000,
+      "paired_seeds": 30,
+      "probability_revprop_better": 1.0,
+      "profile": "matched",
+      "relative_reduction": 0.967107974601659,
+      "suppression_fraction": 0.5
+    }
+  ],
+  "confirmatory_cells": [
+    {
+      "comparison_count": 2,
+      "e_b17_cell_pass": true,
+      "fault_scenario": "selective-operator",
+      "feasibility": {
+        "aip-03": false,
+        "caep-ssf": false,
+        "drp-10-300": true,
+        "drp-10-60": true,
+        "hbhc": false,
+        "revprop": true,
+        "status-list": false,
+        "sync-fail-closed": false,
+        "sync-fail-open": false,
+        "ttl-cache": false
+      },
+      "feasible_baselines": [
+        "drp-10-300",
+        "drp-10-60"
+      ],
+      "n_gateways": 1000,
+      "pareto_frontier": [
+        "caep-ssf",
+        "drp-10-300",
+        "drp-10-60",
+        "revprop",
+        "sync-fail-closed",
+        "ttl-cache"
+      ],
+      "profile": "matched",
+      "revprop_feasible": true,
+      "revprop_on_frontier": true,
+      "statistics_pass": true,
+      "suppression_fraction": 0.2
+    },
+    {
+      "comparison_count": 2,
+      "e_b17_cell_pass": false,
+      "fault_scenario": "selective-operator",
+      "feasibility": {
+        "aip-03": false,
+        "caep-ssf": false,
+        "drp-10-300": true,
+        "drp-10-60": true,
+        "hbhc": false,
+        "revprop": false,
+        "status-list": false,
+        "sync-fail-closed": false,
+        "sync-fail-open": false,
+        "ttl-cache": false
+      },
+      "feasible_baselines": [
+        "drp-10-300",
+        "drp-10-60"
+      ],
+      "n_gateways": 1000,
+      "pareto_frontier": [
+        "caep-ssf",
+        "drp-10-300",
+        "drp-10-60",
+        "revprop",
+        "sync-fail-closed",
+        "ttl-cache"
+      ],
+      "profile": "matched",
+      "revprop_feasible": false,
+      "revprop_on_frontier": true,
+      "statistics_pass": true,
+      "suppression_fraction": 0.5
+    }
+  ],
+  "e_b17_verdict": "E_B17_CONSTRAINED_ADVANTAGE",
+  "experiment": "E-B17",
+  "final_verdict_note": "E-B17 alone cannot produce SUPPORTED_CONSTRAINED_ADVANTAGE; the preregistration additionally requires E-B18, P0-3, and P0-5 gates.",
+  "multiple_comparison_correction": "Holm FWER over all confirmatory cell-by-baseline tests",
+  "protocol_version": "e-b17-prereg-v1",
+  "raw_rows": 3000,
+  "right_censoring": "non-delivery encoded at 60-second horizon",
+  "run_config": {
+    "bootstrap_samples": 10000,
+    "fault_scenarios": [
+      "none",
+      "selective-operator",
+      "correlated-all"
+    ],
+    "n_parties_values": [
+      1000
+    ],
+    "output_dir": "data/run_2026_07_14_e_b17_p0_matched",
+    "p0_mechanisms": [
+      "aip-03",
+      "drp-10-60",
+      "drp-10-300",
+      "hbhc",
+      "caep-ssf",
+      "status-list",
+      "ttl-cache",
+      "sync-fail-open",
+      "sync-fail-closed",
+      "revprop"
+    ],
+    "p0_profiles": [
+      "recommended",
+      "matched"
+    ],
+    "p0_suppression_values": [
+      0.0,
+      0.2,
+      0.5
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "task_duration": 60.0,
+    "tool_call_rates": [
+      10.0
+    ],
+    "ttl": 60.0
+  }
+}
