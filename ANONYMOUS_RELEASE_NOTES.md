@@ -15,7 +15,10 @@ identifiers and because text sanitization changes source bytes. Saved portable
 evidence remains in JSON/JSONL/CSV/Markdown form. `CHECKSUMS.sha256` is rebuilt
 over the released bytes. Workload hash locks are recomputed over the sanitized
 portable traces so release-side loaders still enforce exact byte identity.
-`RELEASE_MANIFEST.json` records exclusions and transformations.
+`RELEASE_MANIFEST.json` records exclusions and transformations. Private release
+construction and author-specific scanning tools are deliberately absent. The
+included scanner checks generic release-surface leaks without embedding any
+author-specific identifiers.
 
 This material is supplied solely for anonymous scholarly peer review. No
 copyright or patent license is granted by its availability. A publication

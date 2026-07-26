@@ -3,10 +3,10 @@ PYTHON ?= python3
 .PHONY: test audit claim-boundaries data-check checksums smoke p0-validate verify
 
 test:
-	$(PYTHON) -m pytest -q
+	PYTHONDONTWRITEBYTECODE=1 $(PYTHON) -m pytest -q -p no:cacheprovider
 
 audit:
-	$(PYTHON) scripts/check_anonymization.py
+	$(PYTHON) scripts/check_release_surface.py
 
 claim-boundaries:
 	$(PYTHON) scripts/check_claim_boundaries.py

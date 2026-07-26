@@ -50,7 +50,7 @@ scaling trials, all 11 configurations, and every reported median. Its
 - `experiments/`: experiment runners, including E-B24--E-B28.
 - `protocols/`: frozen study and completion-contract definitions.
 - `data/`: saved portable evidence and validators' reports.
-- `scripts/`: integrity, claim-boundary, release, and anonymization tools.
+- `scripts/`: integrity, claim-boundary, and anonymous-release verification tools.
 
 See `REPRODUCIBILITY.md` for study-specific commands and limits. The generated
 `ANONYMOUS_RELEASE_NOTES.md`, `RELEASE_MANIFEST.json`, and
