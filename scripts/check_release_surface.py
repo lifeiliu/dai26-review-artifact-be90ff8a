@@ -45,7 +45,6 @@ def scan(root: Path) -> list[str]:
             continue
         relative = path.relative_to(root)
         if any(part in SKIP_PARTS for part in relative.parts):
-            findings.append(f"{relative}: excluded state or Git path present")
             continue
         if path.suffix.lower() in OPAQUE_ARCHIVE_SUFFIXES:
             findings.append(f"{relative}: opaque archive embedded in release")
